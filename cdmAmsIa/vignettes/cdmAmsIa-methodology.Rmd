@@ -31,9 +31,16 @@ check_applicability_distributed_generation(fossil_fraction_baseline = 0.85)
 
 ```{r simulation}
 set.seed(123)
-example_data <- simulate_ams_ia_dataset(n_users = 10)
-head(example_data)
+example_data <- simulate_ams_ia_dataset(n_users = 6, n_periods = 4, start_year = 2024, start_month = 10)
+knitr::kable(
+  head(example_data),
+  format = "html",
+  digits = 2
+)
 ```
+
+The simulation now includes explicit monitoring metadata (`monitoring_period`, `year`, `month`,
+`day`, and `monitoring_label`) so that calculations can be aggregated over reporting periods.
 
 # Equation Walkthrough
 
@@ -42,7 +49,19 @@ baseline_gen <- calculate_baseline_generation(example_data, group_cols = "user_i
 baseline_emis <- calculate_baseline_emissions(baseline_gen, grid_emission_factor = 0.75)
 project_emis <- calculate_project_emissions(baseline_gen)
 emission_reductions <- calculate_emission_reductions(baseline_emis, project_emis)
-head(emission_reductions)
+knitr::kable(head(emission_reductions), format = "html", digits = 2)
+```
+
+# Monitoring Period Aggregation
+
+```{r monitoring}
+period_summary <- aggregate_monitoring_periods(
+  generation_data = example_data,
+  monitoring_cols = c("monitoring_label"),
+  group_cols = "user_id"
+)
+
+knitr::kable(head(period_summary), format = "html", digits = 2)
 ```
 
 # Meta-Function
@@ -57,14 +76,41 @@ estimate_emission_reductions_ams_ia(
 
 # Function Reference
 
-| Function | Purpose |
-|----------|---------|
-| `calculate_baseline_generation()` | Equation (1): Aggregates electricity generation |
-| `calculate_baseline_emissions()` | Equation (2): Baseline emissions |
-| `calculate_project_emissions()` | Equation (3): Project emissions |
-| `calculate_emission_reductions()` | Equation (4): Emission reductions |
-| `estimate_emission_reductions_ams_ia()` | Meta-calculation |
-| `simulate_ams_ia_dataset()` | DeclareDesign-based simulation |
+```{r reference}
+function_reference <- tibble::tribble(
+  ~Function, ~Signature, ~`Equation (LaTeX)`, ~Purpose,
+  "`calculate_baseline_generation()`",
+  "`calculate_baseline_generation(generation_data, generation_col = \"generation_kwh\", group_cols = NULL)`",
+  "\\(E_{BL,mp} = \\sum_{i} G_{i,mp}\\)",
+  "Summed baseline generation for each group or monitoring period.",
+  "`calculate_baseline_emissions()`",
+  "`calculate_baseline_emissions(baseline_generation, grid_emission_factor, output_col = \"baseline_emissions_tco2e\")`",
+  "\\(E_{BL,mp}^{CO2} = E_{BL,mp} \times EF_{grid}\\)",
+  "Baseline emissions using the applicable grid factor.",
+  "`calculate_project_emissions()`",
+  "`calculate_project_emissions(baseline_generation, project_emission_factor = 0, output_col = \"project_emissions_tco2e\")`",
+  "\\(E_{PR,mp}^{CO2} = E_{BL,mp} \times EF_{PR}\\)",
+  "Project emissions (typically zero for AMS-I.A).",
+  "`calculate_emission_reductions()`",
+  "`calculate_emission_reductions(baseline_emissions, project_emissions, baseline_col = \"baseline_emissions_tco2e\", project_col = \"project_emissions_tco2e\", output_col = \"emission_reductions_tco2e\")`",
+  "\\(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\\)",
+  "Emission reductions for each monitoring period.",
+  "`aggregate_monitoring_periods()`",
+  "`aggregate_monitoring_periods(generation_data, monitoring_cols = c(\"year\", \"month\"), group_cols = \"user_id\")`",
+  "\\(ER_{mp}^{agg} = \\sum_{i} ER_{i,mp}\\)",
+  "Aggregates monitoring data to reporting periods.",
+  "`estimate_emission_reductions_ams_ia()`",
+  "`estimate_emission_reductions_ams_ia(generation_data, grid_emission_factor, project_emission_factor = 0, group_cols = NULL)`",
+  "\\(ER_{total} = \\sum_{mp} ER_{mp}\\)",
+  "Meta-calculation composing the core equations.",
+  "`simulate_ams_ia_dataset()`",
+  "`simulate_ams_ia_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_generation_kwh = 15000, sd_generation_kwh = 2000, grid_emission_factor = 0.75)`",
+  "\\(G_{i,mp} \sim \mathcal{N}(\mu_{G}/P, \sigma_{G}/\\sqrt{P})\\)",
+  "DeclareDesign-based simulation with temporal monitoring metadata."
+)
+
+knitr::kable(function_reference, format = "html", escape = FALSE)
+```
 
 # Workflow Diagram
 
