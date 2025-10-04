@@ -23,17 +23,18 @@ simulate_ams_ia_dataset <- function(n_users = 20,
 
   if (requireNamespace("DeclareDesign", quietly = TRUE)) {
     design <- DeclareDesign::declare_model(
-      users = DeclareDesign::add_level(
+      users =
+        fabricatr::add_level(
         N = n_users,
         user_id = paste0("user_", 1:n_users),
-        generation_kwh = stats::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0),
+        generation_kwh = base::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0),
         grid_emission_factor = grid_emission_factor
       )
     )
     data <- design()
   } else {
     user_id <- paste0("user_", seq_len(n_users))
-    generation_kwh <- stats::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0)
+    generation_kwh <- base::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0)
     data <- tibble::tibble(
       user_id = user_id,
       generation_kwh = generation_kwh,

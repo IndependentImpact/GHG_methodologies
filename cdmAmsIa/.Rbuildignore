@@ -4,3 +4,5 @@
 ^\.github\/
 ^vignettes\/.*\.html$
 ^\.DS_Store$
+^.*\.Rproj$
+^\.Rproj\.user$
