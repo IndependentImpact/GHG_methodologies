@@ -68,3 +68,16 @@
 
 - **cdmAmsIa**: Implements AMS-I.A Electricity generation by the user, including equation-level
   helpers, applicability checks, simulation utilities, and documentation.
+
+## Development Workflow
+
+From the `cdmAmsIa` directory you can regenerate package documentation and ensure the vignette
+renders with the most recent code by running:
+
+```r
+devtools::document()
+devtools::build_vignettes()
+```
+
+The vignette is compiled into `doc/cdmAmsIa-methodology.html`, which includes the reference tables
+demonstrating the applicability checks, simulation outputs, and workflow summary.

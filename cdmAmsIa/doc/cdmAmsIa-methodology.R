@@ -1,35 +1,12 @@
-
----
-title: "AMS-I.A Methodology Walkthrough"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{AMS-I.A Methodology Walkthrough}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r setup, include = FALSE}
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
-```
 
-# Introduction
-
-This vignette demonstrates how to reproduce the AMS-I.A calculations using `cdmAmsIa`. The
-methodology covers on-site renewable electricity systems that displace fossil electricity
-consumption by the end user. The core steps involve calculating baseline generation, estimating
-emissions using a grid factor, and confirming negligible project emissions.
-
-# Applicability Checks
-
-```{r applicability}
+## ----applicability------------------------------------------------------------
 library(cdmAmsIa)
 check_applicability_installed_capacity(capacity_kw = 1000, renewable_fraction = 1)
 check_applicability_distributed_generation(fossil_fraction_baseline = 0.85)
-```
 
-# Simulated Dataset
-
-```{r simulation}
+## ----simulation---------------------------------------------------------------
 set.seed(123)
 example_data <- simulate_ams_ia_dataset(n_users = 6, n_periods = 4, start_year = 2024, start_month = 10)
 knitr::kable(
@@ -37,24 +14,15 @@ knitr::kable(
   format = "html",
   digits = 2
 )
-```
 
-The simulation now includes explicit monitoring metadata (`monitoring_period`, `year`, `month`,
-`day`, and `monitoring_label`) so that calculations can be aggregated over reporting periods.
-
-# Equation Walkthrough
-
-```{r calculations}
+## ----calculations-------------------------------------------------------------
 baseline_gen <- calculate_baseline_generation(example_data, group_cols = "user_id")
 baseline_emis <- calculate_baseline_emissions(baseline_gen, grid_emission_factor = 0.75)
 project_emis <- calculate_project_emissions(baseline_gen)
 emission_reductions <- calculate_emission_reductions(baseline_emis, project_emis)
 knitr::kable(head(emission_reductions), format = "html", digits = 2)
-```
 
-# Monitoring Period Aggregation
-
-```{r monitoring}
+## ----monitoring---------------------------------------------------------------
 period_summary <- aggregate_monitoring_periods(
   generation_data = example_data,
   monitoring_cols = c("monitoring_label"),
@@ -62,21 +30,15 @@ period_summary <- aggregate_monitoring_periods(
 )
 
 knitr::kable(head(period_summary), format = "html", digits = 2)
-```
 
-# Meta-Function
-
-```{r meta}
+## ----meta---------------------------------------------------------------------
 estimate_emission_reductions_ams_ia(
   generation_data = example_data,
   grid_emission_factor = 0.75,
   group_cols = "user_id"
 )
-```
 
-# Function Reference
-
-```{r reference}
+## ----reference----------------------------------------------------------------
 function_reference <- tibble::tibble(
   Function = c(
     "`calculate_baseline_generation()`",
@@ -117,11 +79,8 @@ function_reference <- tibble::tibble(
 )
 
 knitr::kable(function_reference, format = "html", escape = FALSE)
-```
 
-# Workflow Overview
-
-```{r workflow-overview, echo = FALSE}
+## ----workflow-overview, echo = FALSE------------------------------------------
 workflow_steps <- tibble::tibble(
   Step = c(
     "Input generation data",
@@ -142,4 +101,4 @@ workflow_steps <- tibble::tibble(
 )
 
 knitr::kable(workflow_steps, format = "html", escape = FALSE)
-```
+
