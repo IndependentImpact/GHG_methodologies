@@ -1,31 +1,65 @@
-# Top 10 CDM Methodologies by Number of Projects (with links to official documents)
+# Top 10 CDM Methodologies (currently valid) — official UNFCCC pages
 
-Below is a list of ten frequently used CDM baseline/monitoring methodologies, along with links to the latest official version of each (or best available).
+1. **ACM0002 — Grid-connected electricity generation from renewable sources**  
+   https://cdm.unfccc.int/methodologies/DB/XB1TX7TAZ6SLWM9B7BC67THHVD16JV
 
-| # | Methodology (code & name) | Official/latest version link |
-|---|-----------------------------|-------------------------------|
-| 1 | **AM0012** – Waste gas / heat utilization | [ACM0012 “Waste energy recovery” v6.0 (consolidated)](https://cdm.unfccc.int/methodologies/DB/FXBXLVGFF4DLI5WC1PKFW7KBRW62QB) :contentReference[oaicite:0]{index=0} |
-| 2 | **AM0059** – Methane / GHG reduction in aluminium smelters | [AM0059 “Reduction in GHGs emission from primary aluminium smelters” v2.0](https://cdm.unfccc.int/methodologies/DB/CHNLRVLNEAM438MR5400YQDS3CPC50) :contentReference[oaicite:1]{index=1} |
-| 3 | **AM0001** – HFC-23 destruction | (no direct link found to a “latest” version; see UNFCCC methodologies catalogue) |
-| 4 | **ACM0019** – N₂O abatement from nitric acid production (replacing AM0007) | [ACM0019 “N2O abatement from nitric acid production” v4.0](https://cdm.unfccc.int/methodologies/DB/HKCO7RKOQO748WNXJNDEW3BJT9XN8L) :contentReference[oaicite:1]{index=1} |
-| 5 | **AM0037** – N₂O from adipic acid plants | (no direct link readily located) |
-| 6 | **AM0003** – Methane recovery from biomass | (no direct link readily located) |
-| 7 | **AM0022** – Alternative waste treatment processes (or variant) | (this has been replaced/consolidated; see AM0025 or ACM0022) |
-| 8 | **AM0014** – Cogeneration / energy efficiency improvements | (no direct link readily located) |
-| 9 | **AM0034** – Wind power generation | (no direct link readily located) |
-| 10 | **AM0004** – N₂O abatement from nitric acid (alternate conditions) | (no direct link readily located) |
+2. **ACM0001 — Flaring or use of landfill gas**  
+   https://cdm.unfccc.int/methodologies/DB/JPYB4DYQUXQPZLBDVPHA87479EMY9M
+
+3. **ACM0012 — Waste energy recovery**  
+   https://cdm.unfccc.int/methodologies/DB/FXBXLVGFF4DLI5WC1PKFW7KBRW62QB
+
+4. **ACM0006 — Electricity and heat generation from biomass**  
+   https://cdm.unfccc.int/methodologies/DB/2IE2L3F73E90999CBVWXZ8WL40J819
+
+5. **ACM0008 — Abatement of methane from coal mines**  
+   https://cdm.unfccc.int/methodologies/DB/YSD3FQ5WR3VPC9Q64CDTLXHLFVKKKU
+
+6. **ACM0010 — GHG emission reductions from manure management systems**  
+   https://cdm.unfccc.int/methodologies/DB/99QRTE6N5QJEBOV2XP374B25SSIXBB
+
+7. **ACM0019 — N₂O abatement from nitric acid production**  
+   https://cdm.unfccc.int/methodologies/DB/HKCO7RKOQO748WNXJNDEW3BJT9XN8L
+
+8. **ACM0009 — Fuel switching from coal or petroleum fuel to natural gas**  
+   https://cdm.unfccc.int/methodologies/DB/CMUDOOMI7G7SYSDFXA75EIITKEVA4P
+
+9. **ACM0018 — Electricity generation from biomass in power-only plants**  
+   https://cdm.unfccc.int/methodologies/DB/4HISH6FQZNGKPAHOA6YVN9DJ5J97T3
+
+10. **ACM0013 — New grid-connected fossil fuel plants using a less GHG-intensive technology**  
+    https://cdm.unfccc.int/methodologies/DB/7E9VKG4RTU85IJ6HYJ3JTNLDHFDT2R
+
+
+# Approved Small-Scale CDM Methodologies (SSC / AMS) — Official UNFCCC links
+
+## Type I — Renewable energy / energy supply to users
+- **AMS-I.A: Electricity generation by the user** — https://cdm.unfccc.int/methodologies/DB/1TIFADHWTMIW25TAL778RLEFJ6AWBB  :contentReference[oaicite:1]{index=1}
+- **AMS-I.B: Mechanical energy for the user (with/without electricity)** — https://cdm.unfccc.int/methodologies/DB/MYQX85P3I7D9CLL577COJXPT18AVFL  :contentReference[oaicite:2]{index=2}
+- **AMS-I.C: Thermal energy production with or without electricity** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-I.C.  :contentReference[oaicite:3]{index=3}
+- **AMS-I.D: Grid-connected renewable electricity generation** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-I.D.  :contentReference[oaicite:4]{index=4}
+- **AMS-I.E: Switch from non-renewable biomass for thermal applications by the user** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-I.E.  :contentReference[oaicite:5]{index=5}
+- **AMS-I.F: Renewable electricity generation for captive use and mini-grid** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-I.F.  :contentReference[oaicite:6]{index=6}
+- **AMS-I.J: Solar water heating systems (SWH)** — https://cdm.unfccc.int/methodologies/DB/GX9DV8QFP9X8BNR5GI1UUJD55EJ03A  :contentReference[oaicite:7]{index=7}
+
+## Type II — Energy efficiency / demand-side
+- **AMS-II.C: Demand-side energy efficiency activities for specific technologies** — https://cdm.unfccc.int/methodologies/DB/WIDPJJX05EFJ1VWW8C37D8GG39CEPH  :contentReference[oaicite:8]{index=8}
+- **AMS-II.D: Energy efficiency and fuel switching measures for industrial facilities** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-II.D.  :contentReference[oaicite:9]{index=9}
+- **AMS-II.E: Energy efficiency and fuel switching measures for buildings** — https://cdm.unfccc.int/methodologies/DB/6R5OGZ6R2HF1HN3GDQOJ02TZRXA03R  :contentReference[oaicite:10]{index=10}
+- **AMS-II.F: Energy efficiency and fuel switching measures for agricultural facilities & activities** — https://cdm.unfccc.int/methodologies/DB/JBIGP7UXNB82DGLWTKENW64LZ5D8HD  :contentReference[oaicite:11]{index=11}
+- **AMS-II.G: Energy efficiency in thermal applications of non-renewable biomass** — https://cdm.unfccc.int/methodologies/view%3Fref%3DAMS-II.G.  :contentReference[oaicite:12]{index=12}
+- **AMS-II.H: Energy efficiency via centralization of utility provisions (industrial facilities)** — https://cdm.unfccc.int/methodologies/DB/LM7W0MFKXMP1F31EWWVUQMGZ73MNKN  :contentReference[oaicite:13]{index=13}
+- **AMS-II.Q: Energy efficiency and/or energy supply projects in commercial buildings** — https://cdm.unfccc.int/methodologies/DB/YCL1T3NURPHKSHBSR8TIHC2T543HTQ  :contentReference[oaicite:14]{index=14}
+
+## Type III — Other project activities / methane & waste
+- **AMS-III.A: Offsetting of synthetic nitrogen fertilizers by inoculant application …** — https://cdm.unfccc.int/methodologies/DB/5G3VVUHIXHA0OYIBYJKX7JV02LEUHH  :contentReference[oaicite:15]{index=15}
+- **AMS-III.D: Methane recovery in animal manure management systems** — https://cdm.unfccc.int/methodologies/DB/H9DVSB24O7GEZQYLYNWUX23YS6G4RC  :contentReference[oaicite:16]{index=16}
+- **AMS-III.E: Avoidance of methane production from decay of biomass (combustion / gasification / mechanical-thermal treatment)** — https://cdm.unfccc.int/methodologies/DB/AZB89EQ3FIRUIN1Q80MS80RXCLA2TS  :contentReference[oaicite:17]{index=17}
+- **AMS-III.F: Avoidance of methane emissions through composting** — https://cdm.unfccc.int/methodologies/DB/NZ83KB7YHBIA7HL2U1PCNAOCHPUQYX  :contentReference[oaicite:18]{index=18}
+- **AMS-III.G: Landfill methane recovery** — https://cdm.unfccc.int/methodologies/DB/0KHNES8D09H134V3TZDQ47C3LQL3H2  :contentReference[oaicite:19]{index=19}
+- **AMS-III.H: Methane recovery in wastewater treatment** — https://cdm.unfccc.int/methodologies/DB/K7FDTJ4FL3432I1UKRNKLDCUFAMBX7  :contentReference[oaicite:20]{index=20}
+- **AMS-III.AJ: Recovery and recycling of materials from solid wastes** — https://cdm.unfccc.int/methodologies/DB/LOWIXM9S6DVO7DGXB21DPVLE8N3VB9  :contentReference[oaicite:21]{index=21}
 
 ---
 
-## Notes & caveats
-
-- The **ACM0012 “Waste energy recovery” v6.0** is a consolidated methodology that supersedes several older “AM0012” variants and related methods. :contentReference[oaicite:2]{index=2}  
-- Some of the original “AM0xxx” methodologies have been withdrawn, superseded, or merged into consolidated methodologies, and therefore their “latest version” may be archived or not actively maintained.  
-- The UNFCCC CDM “Approved Baseline and Monitoring Methodologies” catalogue is the overarching repository for approved methodologies and their tools. :contentReference[oaicite:3]{index=3}  
-- For some methodologies, only older or historical versions can be found in the UNFCCC database, especially if they are no longer active.  
-- You may consult the **CDM Methodology Booklet (latest edition)** as a compiled reference for methodologies and their status. :contentReference[oaicite:4]{index=4}  
-
----
-
-If you like, I can dig further and retrieve pdfs or archived versions of missing methodologies (AM0001, AM0007, etc.), and give you a complete markdown file with all working links. Do you want me to do that?
-::contentReference[oaicite:5]{index=5}
+**Master index (official):** Approved SSC methodologies — https://cdm.unfccc.int/methodologies/SSCmethodologies/approved  :contentReference[oaicite:22]{index=22}
