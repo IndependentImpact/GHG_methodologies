@@ -30,7 +30,7 @@ simulate_ams_ia_dataset <- function(n_users = 20,
         grid_emission_factor = grid_emission_factor
       )
     )
-    data <- DeclareDesign::draw_data(design)
+    data <- design()
   } else {
     user_id <- paste0("user_", seq_len(n_users))
     generation_kwh <- stats::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0)
