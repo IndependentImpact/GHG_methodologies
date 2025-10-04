@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>AMS-I.A Methodology Walkthrough</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">AMS-I.A Methodology Walkthrough</h1>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This vignette demonstrates how to reproduce the AMS-I.A calculations
+using <code>cdmAmsIa</code>. The methodology covers on-site renewable
+electricity systems that displace fossil electricity consumption by the
+end user. The core steps involve calculating baseline generation,
+estimating emissions using a grid factor, and confirming negligible
+project emissions.</p>
+</div>
+<div id="applicability-checks" class="section level1">
+<h1>Applicability Checks</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(cdmAmsIa)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">check_applicability_installed_capacity</span>(<span class="at">capacity_kw =</span> <span class="dv">1000</span>, <span class="at">renewable_fraction =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">check_applicability_distributed_generation</span>(<span class="at">fossil_fraction_baseline =</span> <span class="fl">0.85</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="simulated-dataset" class="section level1">
+<h1>Simulated Dataset</h1>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>example_data <span class="ot">&lt;-</span> <span class="fu">simulate_ams_ia_dataset</span>(<span class="at">n_users =</span> <span class="dv">6</span>, <span class="at">n_periods =</span> <span class="dv">4</span>, <span class="at">start_year =</span> <span class="dv">2024</span>, <span class="at">start_month =</span> <span class="dv">10</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">head</span>(example_data),</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&quot;html&quot;</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+user_id
+</th>
+<th style="text-align:right;">
+monitoring_period
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+month
+</th>
+<th style="text-align:right;">
+day
+</th>
+<th style="text-align:left;">
+monitoring_date
+</th>
+<th style="text-align:left;">
+monitoring_label
+</th>
+<th style="text-align:right;">
+generation_kwh
+</th>
+<th style="text-align:right;">
+grid_emission_factor
+</th>
+<th style="text-align:right;">
+baseline_generation_kwh
+</th>
+<th style="text-align:right;">
+baseline_emissions_tco2e
+</th>
+<th style="text-align:right;">
+project_emissions_tco2e
+</th>
+<th style="text-align:right;">
+emission_reductions_tco2e
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2024
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+2024-10-15
+</td>
+<td style="text-align:left;">
+2024-10
+</td>
+<td style="text-align:right;">
+3988.21
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+3988.21
+</td>
+<td style="text-align:right;">
+2991.16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2991.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2024
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+2024-11-19
+</td>
+<td style="text-align:left;">
+2024-11
+</td>
+<td style="text-align:right;">
+2701.11
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+2701.11
+</td>
+<td style="text-align:right;">
+2025.83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2025.83
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2024
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+2024-12-14
+</td>
+<td style="text-align:left;">
+2024-12
+</td>
+<td style="text-align:right;">
+5044.76
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+5044.76
+</td>
+<td style="text-align:right;">
+3783.57
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3783.57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2025
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+2025-01-03
+</td>
+<td style="text-align:left;">
+2025-01
+</td>
+<td style="text-align:right;">
+4575.54
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+4575.54
+</td>
+<td style="text-align:right;">
+3431.65
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3431.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2024
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+2024-10-10
+</td>
+<td style="text-align:left;">
+2024-10
+</td>
+<td style="text-align:right;">
+3694.31
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+3694.31
+</td>
+<td style="text-align:right;">
+2770.74
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2770.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2024
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+2024-11-18
+</td>
+<td style="text-align:left;">
+2024-11
+</td>
+<td style="text-align:right;">
+2965.62
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+2965.62
+</td>
+<td style="text-align:right;">
+2224.21
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2224.21
+</td>
+</tr>
+</tbody>
+</table>
+<p>The simulation now includes explicit monitoring metadata
+(<code>monitoring_period</code>, <code>year</code>, <code>month</code>,
+<code>day</code>, and <code>monitoring_label</code>) so that
+calculations can be aggregated over reporting periods.</p>
+</div>
+<div id="equation-walkthrough" class="section level1">
+<h1>Equation Walkthrough</h1>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>baseline_gen <span class="ot">&lt;-</span> <span class="fu">calculate_baseline_generation</span>(example_data, <span class="at">group_cols =</span> <span class="st">&quot;user_id&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>baseline_emis <span class="ot">&lt;-</span> <span class="fu">calculate_baseline_emissions</span>(baseline_gen, <span class="at">grid_emission_factor =</span> <span class="fl">0.75</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>project_emis <span class="ot">&lt;-</span> <span class="fu">calculate_project_emissions</span>(baseline_gen)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>emission_reductions <span class="ot">&lt;-</span> <span class="fu">calculate_emission_reductions</span>(baseline_emis, project_emis)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(emission_reductions), <span class="at">format =</span> <span class="st">&quot;html&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+user_id
+</th>
+<th style="text-align:right;">
+baseline_generation_kwh
+</th>
+<th style="text-align:right;">
+baseline_emissions_tco2e
+</th>
+<th style="text-align:right;">
+project_emissions_tco2e
+</th>
+<th style="text-align:right;">
+emission_reductions_tco2e
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:right;">
+16309.62
+</td>
+<td style="text-align:right;">
+12232.22
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12232.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_2
+</td>
+<td style="text-align:right;">
+13210.56
+</td>
+<td style="text-align:right;">
+9907.92
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9907.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_3
+</td>
+<td style="text-align:right;">
+14564.58
+</td>
+<td style="text-align:right;">
+10923.43
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10923.43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_4
+</td>
+<td style="text-align:right;">
+13555.48
+</td>
+<td style="text-align:right;">
+10166.61
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10166.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_5
+</td>
+<td style="text-align:right;">
+12639.40
+</td>
+<td style="text-align:right;">
+9479.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9479.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_6
+</td>
+<td style="text-align:right;">
+12837.81
+</td>
+<td style="text-align:right;">
+9628.36
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9628.36
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monitoring-period-aggregation" class="section level1">
+<h1>Monitoring Period Aggregation</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>period_summary <span class="ot">&lt;-</span> <span class="fu">aggregate_monitoring_periods</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">generation_data =</span> example_data,</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">monitoring_cols =</span> <span class="fu">c</span>(<span class="st">&quot;monitoring_label&quot;</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="at">group_cols =</span> <span class="st">&quot;user_id&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(period_summary), <span class="at">format =</span> <span class="st">&quot;html&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+user_id
+</th>
+<th style="text-align:left;">
+monitoring_label
+</th>
+<th style="text-align:right;">
+baseline_emissions_tco2e
+</th>
+<th style="text-align:right;">
+project_emissions_tco2e
+</th>
+<th style="text-align:right;">
+emission_reductions_tco2e
+</th>
+<th style="text-align:right;">
+baseline_generation_kwh
+</th>
+<th style="text-align:right;">
+grid_emission_factor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:left;">
+2024-10
+</td>
+<td style="text-align:right;">
+2991.16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2991.16
+</td>
+<td style="text-align:right;">
+3988.21
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:left;">
+2024-11
+</td>
+<td style="text-align:right;">
+2025.83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2025.83
+</td>
+<td style="text-align:right;">
+2701.11
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:left;">
+2024-12
+</td>
+<td style="text-align:right;">
+3783.57
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3783.57
+</td>
+<td style="text-align:right;">
+5044.76
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_1
+</td>
+<td style="text-align:left;">
+2025-01
+</td>
+<td style="text-align:right;">
+3431.65
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3431.65
+</td>
+<td style="text-align:right;">
+4575.54
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_2
+</td>
+<td style="text-align:left;">
+2024-10
+</td>
+<td style="text-align:right;">
+2770.74
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2770.74
+</td>
+<td style="text-align:right;">
+3694.31
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user_2
+</td>
+<td style="text-align:left;">
+2024-11
+</td>
+<td style="text-align:right;">
+2224.21
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2224.21
+</td>
+<td style="text-align:right;">
+2965.62
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="meta-function" class="section level1">
+<h1>Meta-Function</h1>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">estimate_emission_reductions_ams_ia</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">generation_data =</span> example_data,</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">grid_emission_factor =</span> <span class="fl">0.75</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">group_cols =</span> <span class="st">&quot;user_id&quot;</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   user_id baseline_generation_kwh baseline_emissions_tc…¹ project_emissions_tc…²
+##   &lt;chr&gt;                     &lt;dbl&gt;                   &lt;dbl&gt;                  &lt;dbl&gt;
+## 1 user_1                   16310.                  12232.                      0
+## 2 user_2                   13211.                   9908.                      0
+## 3 user_3                   14565.                  10923.                      0
+## 4 user_4                   13555.                  10167.                      0
+## 5 user_5                   12639.                   9480.                      0
+## 6 user_6                   12838.                   9628.                      0
+## # ℹ abbreviated names: ¹​baseline_emissions_tco2e, ²​project_emissions_tco2e
+## # ℹ 1 more variable: emission_reductions_tco2e &lt;dbl&gt;</code></pre>
+</div>
+<div id="function-reference" class="section level1">
+<h1>Function Reference</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>function_reference <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">Function =</span> <span class="fu">c</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    <span class="st">&quot;`calculate_baseline_generation()`&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    <span class="st">&quot;`calculate_baseline_emissions()`&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    <span class="st">&quot;`calculate_project_emissions()`&quot;</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    <span class="st">&quot;`calculate_emission_reductions()`&quot;</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    <span class="st">&quot;`aggregate_monitoring_periods()`&quot;</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    <span class="st">&quot;`estimate_emission_reductions_ams_ia()`&quot;</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    <span class="st">&quot;`simulate_ams_ia_dataset()`&quot;</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  ),</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  <span class="at">Signature =</span> <span class="fu">c</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    <span class="st">&quot;`calculate_baseline_generation(generation_data, generation_col = </span><span class="sc">\&quot;</span><span class="st">generation_kwh</span><span class="sc">\&quot;</span><span class="st">, group_cols = NULL)`&quot;</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>    <span class="st">&quot;`calculate_baseline_emissions(baseline_generation, grid_emission_factor, output_col = </span><span class="sc">\&quot;</span><span class="st">baseline_emissions_tco2e</span><span class="sc">\&quot;</span><span class="st">)`&quot;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>    <span class="st">&quot;`calculate_project_emissions(baseline_generation, project_emission_factor = 0, output_col = </span><span class="sc">\&quot;</span><span class="st">project_emissions_tco2e</span><span class="sc">\&quot;</span><span class="st">)`&quot;</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>    <span class="st">&quot;`calculate_emission_reductions(baseline_emissions, project_emissions, baseline_col = </span><span class="sc">\&quot;</span><span class="st">baseline_emissions_tco2e</span><span class="sc">\&quot;</span><span class="st">, project_col = </span><span class="sc">\&quot;</span><span class="st">project_emissions_tco2e</span><span class="sc">\&quot;</span><span class="st">, output_col = </span><span class="sc">\&quot;</span><span class="st">emission_reductions_tco2e</span><span class="sc">\&quot;</span><span class="st">)`&quot;</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>    <span class="st">&quot;`aggregate_monitoring_periods(generation_data, monitoring_cols = c(</span><span class="sc">\&quot;</span><span class="st">year</span><span class="sc">\&quot;</span><span class="st">, </span><span class="sc">\&quot;</span><span class="st">month</span><span class="sc">\&quot;</span><span class="st">), group_cols = </span><span class="sc">\&quot;</span><span class="st">user_id</span><span class="sc">\&quot;</span><span class="st">)`&quot;</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    <span class="st">&quot;`estimate_emission_reductions_ams_ia(generation_data, grid_emission_factor, project_emission_factor = 0, group_cols = NULL)`&quot;</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>    <span class="st">&quot;`simulate_ams_ia_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_generation_kwh = 15000, sd_generation_kwh = 2000, grid_emission_factor = 0.75)`&quot;</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>  ),</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>  <span class="st">`</span><span class="at">Equation (LaTeX)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(E_{BL,mp} = </span><span class="sc">\\</span><span class="st">sum_{i} G_{i,mp}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(E_{BL,mp}^{CO2} = E_{BL,mp} </span><span class="sc">\\</span><span class="st">times EF_{grid}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(E_{PR,mp}^{CO2} = E_{BL,mp} </span><span class="sc">\\</span><span class="st">times EF_{PR}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(ER_{mp}^{agg} = </span><span class="sc">\\</span><span class="st">sum_{i} ER_{i,mp}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(ER_{total} = </span><span class="sc">\\</span><span class="st">sum_{mp} ER_{mp}</span><span class="sc">\\</span><span class="st">)&quot;</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(G_{i,mp} </span><span class="sc">\\</span><span class="st">sim </span><span class="sc">\\</span><span class="st">mathcal{N}(</span><span class="sc">\\</span><span class="st">mu_{G}/P, </span><span class="sc">\\</span><span class="st">sigma_{G}/</span><span class="sc">\\</span><span class="st">sqrt{P})</span><span class="sc">\\</span><span class="st">)&quot;</span></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>  ),</span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>  <span class="at">Purpose =</span> <span class="fu">c</span>(</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>    <span class="st">&quot;Summed baseline generation for each group or monitoring period.&quot;</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>    <span class="st">&quot;Baseline emissions using the applicable grid factor.&quot;</span>,</span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>    <span class="st">&quot;Project emissions (typically zero for AMS-I.A).&quot;</span>,</span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>    <span class="st">&quot;Emission reductions for each monitoring period.&quot;</span>,</span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>    <span class="st">&quot;Aggregates monitoring data to reporting periods.&quot;</span>,</span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>    <span class="st">&quot;Meta-calculation composing the core equations.&quot;</span>,</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a>    <span class="st">&quot;DeclareDesign-based simulation with temporal monitoring metadata.&quot;</span></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a>  )</span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>)</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(function_reference, <span class="at">format =</span> <span class="st">&quot;html&quot;</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Signature
+</th>
+<th style="text-align:left;">
+Equation (LaTeX)
+</th>
+<th style="text-align:left;">
+Purpose
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>calculate_baseline_generation()</code>
+</td>
+<td style="text-align:left;">
+<code>calculate_baseline_generation(generation_data, generation_col = &quot;generation_kwh&quot;, group_cols = NULL)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(E_{BL,mp} = \sum_{i} G_{i,mp}\)</span>
+</td>
+<td style="text-align:left;">
+Summed baseline generation for each group or monitoring period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>calculate_baseline_emissions()</code>
+</td>
+<td style="text-align:left;">
+<code>calculate_baseline_emissions(baseline_generation, grid_emission_factor, output_col = &quot;baseline_emissions_tco2e&quot;)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(E_{BL,mp}^{CO2} = E_{BL,mp} \times
+EF_{grid}\)</span>
+</td>
+<td style="text-align:left;">
+Baseline emissions using the applicable grid factor.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>calculate_project_emissions()</code>
+</td>
+<td style="text-align:left;">
+<code>calculate_project_emissions(baseline_generation, project_emission_factor = 0, output_col = &quot;project_emissions_tco2e&quot;)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(E_{PR,mp}^{CO2} = E_{BL,mp} \times
+EF_{PR}\)</span>
+</td>
+<td style="text-align:left;">
+Project emissions (typically zero for AMS-I.A).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>calculate_emission_reductions()</code>
+</td>
+<td style="text-align:left;">
+<code>calculate_emission_reductions(baseline_emissions, project_emissions, baseline_col = &quot;baseline_emissions_tco2e&quot;, project_col = &quot;project_emissions_tco2e&quot;, output_col = &quot;emission_reductions_tco2e&quot;)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(ER_{mp} = E_{BL,mp}^{CO2} -
+E_{PR,mp}^{CO2}\)</span>
+</td>
+<td style="text-align:left;">
+Emission reductions for each monitoring period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>aggregate_monitoring_periods()</code>
+</td>
+<td style="text-align:left;">
+<code>aggregate_monitoring_periods(generation_data, monitoring_cols = c(&quot;year&quot;, &quot;month&quot;), group_cols = &quot;user_id&quot;)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(ER_{mp}^{agg} = \sum_{i} ER_{i,mp}\)</span>
+</td>
+<td style="text-align:left;">
+Aggregates monitoring data to reporting periods.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>estimate_emission_reductions_ams_ia()</code>
+</td>
+<td style="text-align:left;">
+<code>estimate_emission_reductions_ams_ia(generation_data, grid_emission_factor, project_emission_factor = 0, group_cols = NULL)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(ER_{total} = \sum_{mp} ER_{mp}\)</span>
+</td>
+<td style="text-align:left;">
+Meta-calculation composing the core equations.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>simulate_ams_ia_dataset()</code>
+</td>
+<td style="text-align:left;">
+<code>simulate_ams_ia_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_generation_kwh = 15000, sd_generation_kwh = 2000, grid_emission_factor = 0.75)</code>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(G_{i,mp} \sim \mathcal{N}(\mu_{G}/P,
+\sigma_{G}/\sqrt{P})\)</span>
+</td>
+<td style="text-align:left;">
+DeclareDesign-based simulation with temporal monitoring metadata.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="workflow-overview" class="section level1">
+<h1>Workflow Overview</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Step
+</th>
+<th style="text-align:left;">
+Purpose
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Input generation data
+</td>
+<td style="text-align:left;">
+Collect user-level generation and monitoring metadata.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calculate_baseline_generation
+</td>
+<td style="text-align:left;">
+Aggregate electricity delivered to each user or period.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calculate_baseline_emissions
+</td>
+<td style="text-align:left;">
+Apply the grid emission factor to baseline generation.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calculate_project_emissions
+</td>
+<td style="text-align:left;">
+Account for any residual project emissions (often zero).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calculate_emission_reductions
+</td>
+<td style="text-align:left;">
+Compute emission reductions by differencing baselines and project
+values.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+estimate_emission_reductions_ams_ia
+</td>
+<td style="text-align:left;">
+Provide a single wrapper returning reductions and supporting columns.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
