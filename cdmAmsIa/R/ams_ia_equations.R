@@ -39,7 +39,8 @@ calculate_baseline_generation <- function(generation_data,
 #' the applicable grid emission factor.
 #'
 #' @param baseline_generation A tibble produced by [calculate_baseline_generation()].
-#' @param grid_emission_factor Grid emission factor in tCO2e/kWh.
+#' @param grid_emission_factor Grid emission factor in tCO2e/kWh. Provide either a single value
+#'   applied to all rows or a vector matching the number of rows in `baseline_generation`.
 #' @param output_col Name of the resulting emission column.
 #' @return The input tibble with a new column named `output_col` containing baseline emissions in tCO2e.
 #' @examples
@@ -53,13 +54,24 @@ calculate_baseline_emissions <- function(baseline_generation,
   if (!"baseline_generation_kwh" %in% names(baseline_generation)) {
     stop("`baseline_generation` must contain `baseline_generation_kwh`.", call. = FALSE)
   }
-  if (!is.numeric(grid_emission_factor) || length(grid_emission_factor) != 1) {
-    stop("`grid_emission_factor` must be a single numeric value.", call. = FALSE)
+  if (!is.numeric(grid_emission_factor)) {
+    stop("`grid_emission_factor` must be numeric.", call. = FALSE)
+  }
+
+  n_rows <- nrow(baseline_generation)
+  if (!length(grid_emission_factor) %in% c(1L, n_rows)) {
+    stop("`grid_emission_factor` must be length 1 or match the number of rows in `baseline_generation`.", call. = FALSE)
   }
 
   output_col <- rlang::ensym(output_col)
+  factors <- if (length(grid_emission_factor) == 1L) {
+    rep(grid_emission_factor, n_rows)
+  } else {
+    grid_emission_factor
+  }
+
   dplyr::as_tibble(baseline_generation) |>
-    dplyr::mutate(!!output_col := baseline_generation_kwh * grid_emission_factor)
+    dplyr::mutate(!!output_col := baseline_generation_kwh * factors)
 }
 
 #' Calculate project emissions (Equation 3)

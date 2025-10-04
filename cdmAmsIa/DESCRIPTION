@@ -10,8 +10,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
-Imports: tidyverse, rlang
-Suggests: testthat (>= 3.0.0), roxygen2, devtools, DeclareDesign
+Imports:
+    DeclareDesign,
+    dplyr,
+    fabricatr,
+    rlang,
+    stats,
+    tibble
+Suggests: testthat (>= 3.0.0), roxygen2, devtools
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
