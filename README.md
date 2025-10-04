@@ -7,7 +7,7 @@ Below is a list of ten frequently used CDM baseline/monitoring methodologies, al
 | 1 | **AM0012** – Waste gas / heat utilization | [ACM0012 “Waste energy recovery” v6.0 (consolidated)](https://cdm.unfccc.int/methodologies/DB/FXBXLVGFF4DLI5WC1PKFW7KBRW62QB) :contentReference[oaicite:0]{index=0} |
 | 2 | **AM0059** – Methane / GHG reduction in aluminium smelters | [AM0059 “Reduction in GHGs emission from primary aluminium smelters” v2.0](https://cdm.unfccc.int/methodologies/DB/CHNLRVLNEAM438MR5400YQDS3CPC50) :contentReference[oaicite:1]{index=1} |
 | 3 | **AM0001** – HFC-23 destruction | (no direct link found to a “latest” version; see UNFCCC methodologies catalogue) |
-| 4 | **AM0007** – N₂O abatement from nitric acid production | (no direct link readily located) |
+| 4 | **ACM0019** – N₂O abatement from nitric acid production (replacing AM0007) | [ACM0019 “N2O abatement from nitric acid production” v4.0](https://cdm.unfccc.int/methodologies/DB/HKCO7RKOQO748WNXJNDEW3BJT9XN8L) :contentReference[oaicite:1]{index=1} |
 | 5 | **AM0037** – N₂O from adipic acid plants | (no direct link readily located) |
 | 6 | **AM0003** – Methane recovery from biomass | (no direct link readily located) |
 | 7 | **AM0022** – Alternative waste treatment processes (or variant) | (this has been replaced/consolidated; see AM0025 or ACM0022) |
