@@ -17,6 +17,8 @@ This repository hosts a collection of R packages implementing CDM methodologies.
 - Translate **every numbered equation** in the methodology documentation into a dedicated R function stored under `R/`.
 - Provide **meta-functions** that orchestrate the full calculation by composing the equation-level functions.
 - Implement helper functions that evaluate **quantitative applicability conditions** described in the methodology.
+- Include monitoring-period aggregation helpers that roll simulated or observed data up to reporting periods using the
+  equation-level functions.
 - All functions must:
   - Accept tidy data frames (tibbles) as appropriate and return tidyverse-compatible structures.
   - Be vectorised where possible and avoid hidden state.
@@ -35,14 +37,17 @@ This repository hosts a collection of R packages implementing CDM methodologies.
 
 ## 6. Simulation Utilities
 - Each package must expose at least one `simulate_*()` function that creates a test dataset using `DeclareDesign` reflecting the methodology's data requirements.
+- Simulations must emit temporal monitoring metadata (e.g. day, month, and year) so that reporting-period summaries can be reproduced in tests and documentation.
 - Document simulation parameters and default values, emphasising tidyverse compatibility.
 
 ## 7. Vignettes
 - Create a vignette (`vignettes/<package>-methodology.Rmd`) that includes:
   - A narrative description of the methodology and its data requirements.
   - A walkthrough using the simulated dataset and all equation-level functions plus the meta-function.
+  - A section demonstrating monitoring-period aggregation and the accompanying helper function.
   - A diagram (e.g. Mermaid flowchart) showing function interdependencies and data flow.
-  - A function reference table linking to documentation.
+  - A function reference table linking to documentation. Format tabular output using `knitr::kable()` or `gt::gt()` and pair
+    each numbered equation with its LaTeX form alongside the function signature that implements it.
 
 ## 8. Workflow Checklist
 1. Generate the package skeleton with `usethis::create_package()`.
