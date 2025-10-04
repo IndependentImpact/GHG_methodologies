@@ -17,7 +17,14 @@
 calculate_baseline_generation <- function(generation_data,
                                           generation_col = "generation_kwh",
                                           group_cols = NULL) {
-  generation_col <- rlang::ensym(generation_col)
+  if (is.character(generation_col)) {
+    if (length(generation_col) != 1) {
+      stop("`generation_col` must be a single column name.", call. = FALSE)
+    }
+    generation_col <- rlang::sym(generation_col)
+  } else {
+    generation_col <- rlang::ensym(generation_col)
+  }
   generation_data <- dplyr::as_tibble(generation_data)
   if (!rlang::as_string(generation_col) %in% names(generation_data)) {
     stop("`generation_col` must be present in `generation_data`.", call. = FALSE)
@@ -124,9 +131,32 @@ calculate_emission_reductions <- function(baseline_emissions,
                                           baseline_col = "baseline_emissions_tco2e",
                                           project_col = "project_emissions_tco2e",
                                           output_col = "emission_reductions_tco2e") {
-  baseline_col <- rlang::ensym(baseline_col)
-  project_col <- rlang::ensym(project_col)
-  output_col <- rlang::ensym(output_col)
+  baseline_col <- if (is.character(baseline_col)) {
+    if (length(baseline_col) != 1) {
+      stop("`baseline_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(baseline_col)
+  } else {
+    rlang::ensym(baseline_col)
+  }
+
+  project_col <- if (is.character(project_col)) {
+    if (length(project_col) != 1) {
+      stop("`project_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(project_col)
+  } else {
+    rlang::ensym(project_col)
+  }
+
+  output_col <- if (is.character(output_col)) {
+    if (length(output_col) != 1) {
+      stop("`output_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(output_col)
+  } else {
+    rlang::ensym(output_col)
+  }
 
   by_cols <- intersect(names(baseline_emissions), names(project_emissions))
   if (length(by_cols) == 0) {
