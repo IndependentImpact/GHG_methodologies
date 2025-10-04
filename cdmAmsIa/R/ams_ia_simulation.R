@@ -21,9 +21,10 @@ simulate_ams_ia_dataset <- function(n_users = 20,
     stop("`n_users` must be a positive numeric value.", call. = FALSE)
   }
 
-  if (requireNamespace("DeclareDesign", quietly = TRUE)) {
+  if (requireNamespace("DeclareDesign", quietly = TRUE) &&
+      requireNamespace("fabricatr", quietly = TRUE)) {
     design <- DeclareDesign::declare_model(
-      users = DeclareDesign::add_level(
+      users = fabricatr::add_level(
         N = n_users,
         user_id = paste0("user_", 1:n_users),
         generation_kwh = stats::pmax(stats::rnorm(n_users, mean_generation_kwh, sd_generation_kwh), 0),
