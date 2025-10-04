@@ -63,3 +63,8 @@
 ---
 
 **Master index (official):** Approved SSC methodologies — https://cdm.unfccc.int/methodologies/SSCmethodologies/approved  :contentReference[oaicite:22]{index=22}
+
+## Repository Packages
+
+- **cdmAmsIa**: Implements AMS-I.A Electricity generation by the user, including equation-level
+  helpers, applicability checks, simulation utilities, and documentation.

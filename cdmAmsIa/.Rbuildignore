@@ -1,0 +1,6 @@
+^README\.Rmd$
+^README\.md$
+^pkgdown\/
+^\.github\/
+^vignettes\/.*\.html$
+^\.DS_Store$
