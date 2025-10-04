@@ -1,9 +1,10 @@
 
 #' Simulate a dataset compliant with AMS-I.A
 #'
-#' Generates a tidy dataset representing user-level electricity generation using DeclareDesign.
-#' The simulation reflects renewable generation that displaces fossil baseline
-#' electricity use.
+#' Generates a tidy dataset representing user-level electricity generation. The
+#' simulation reflects renewable generation that displaces fossil baseline
+#' electricity use and produces monitoring period metadata suitable for
+#' downstream aggregation helpers.
 #'
 #' @param n_users Number of end users to simulate.
 #' @param n_periods Number of monitoring periods (default monthly observations across a year).
@@ -15,11 +16,8 @@
 #' @return A tibble containing simulated user identifiers, monitoring period metadata, generation, and emissions.
 #' @examples
 #' simulate_ams_ia_dataset(n_users = 5)
-#' @importFrom DeclareDesign declare_model
-#' @importFrom fabricatr add_level
 #' @importFrom stats rnorm
 #' @importFrom tibble as_tibble
-#' @importFrom dplyr mutate
 #' @export
 
 simulate_ams_ia_dataset <- function(n_users = 20,
@@ -41,39 +39,37 @@ simulate_ams_ia_dataset <- function(n_users = 20,
     stop("`start_month` must be between 1 and 12.", call. = FALSE)
   }
 
-  design <- declare_model(
-    users = add_level(
-      N = n_users,
-      user_id = paste0("user_", seq_len(n_users)),
-      grid_emission_factor = grid_emission_factor
-    ),
-    monitoring_periods = add_level(
-      N = n_periods,
-      monitoring_period = seq_len(N),
-      period_index = seq_len(N),
-      year = start_year + ((start_month - 1L + period_index - 1L) %/% 12L),
-      month = ((start_month - 1L + period_index - 1L) %% 12L) + 1L,
-      day = sample.int(28L, size = N, replace = TRUE),
-      monitoring_date = as.Date(sprintf("%04d-%02d-%02d", year, month, day)),
-      monitoring_label = sprintf("%04d-%02d", year, month),
-      generation_kwh = pmax(
-        stats::rnorm(
-          n = N,
-          mean = mean_generation_kwh / n_periods,
-          sd = sd_generation_kwh / sqrt(n_periods)
-        ),
-        0
-      )
-    )
+  user_ids <- paste0("user_", seq_len(n_users))
+  period_index <- seq_len(n_periods)
+
+  grid <- expand.grid(
+    user_id = user_ids,
+    monitoring_period = period_index,
+    KEEP.OUT.ATTRS = FALSE,
+    stringsAsFactors = FALSE
   )
 
-  design() |>
-    as_tibble() |>
-    dplyr::select(-period_index) |>
-    mutate(
-      baseline_generation_kwh = generation_kwh,
-      baseline_emissions_tco2e = baseline_generation_kwh * grid_emission_factor,
-      project_emissions_tco2e = 0,
-      emission_reductions_tco2e = baseline_emissions_tco2e - project_emissions_tco2e
-    )
+  grid <- grid[order(grid$user_id, grid$monitoring_period), , drop = FALSE]
+
+  month_offset <- grid$monitoring_period - 1L
+  grid$year <- start_year + ((start_month - 1L + month_offset) %/% 12L)
+  grid$month <- ((start_month - 1L + month_offset) %% 12L) + 1L
+  grid$day <- sample.int(28L, size = nrow(grid), replace = TRUE)
+  grid$monitoring_date <- as.Date(sprintf("%04d-%02d-%02d", grid$year, grid$month, grid$day))
+  grid$monitoring_label <- sprintf("%04d-%02d", grid$year, grid$month)
+
+  generation_draws <- stats::rnorm(
+    n = nrow(grid),
+    mean = mean_generation_kwh / n_periods,
+    sd = sd_generation_kwh / sqrt(n_periods)
+  )
+
+  grid$generation_kwh <- pmax(generation_draws, 0)
+  grid$grid_emission_factor <- grid_emission_factor
+  grid$baseline_generation_kwh <- grid$generation_kwh
+  grid$baseline_emissions_tco2e <- grid$baseline_generation_kwh * grid$grid_emission_factor
+  grid$project_emissions_tco2e <- 0
+  grid$emission_reductions_tco2e <- grid$baseline_emissions_tco2e - grid$project_emissions_tco2e
+
+  tibble::as_tibble(grid)
 }

@@ -64,6 +64,36 @@ aggregate_monitoring_periods <- function(generation_data,
                                          grid_factor_col = "grid_emission_factor",
                                          project_col = "project_emissions_tco2e") {
   data_tbl <- tibble::as_tibble(generation_data)
+
+  generation_sym <- if (is.character(generation_col)) {
+    if (length(generation_col) != 1) {
+      stop("`generation_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(generation_col)
+  } else {
+    rlang::ensym(generation_col)
+  }
+  grid_factor_sym <- if (is.character(grid_factor_col)) {
+    if (length(grid_factor_col) != 1) {
+      stop("`grid_factor_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(grid_factor_col)
+  } else {
+    rlang::ensym(grid_factor_col)
+  }
+  project_sym <- if (is.character(project_col)) {
+    if (length(project_col) != 1) {
+      stop("`project_col` must be a single column name.", call. = FALSE)
+    }
+    rlang::sym(project_col)
+  } else {
+    rlang::ensym(project_col)
+  }
+
+  generation_col <- rlang::as_string(generation_sym)
+  grid_factor_col <- rlang::as_string(grid_factor_sym)
+  project_col <- rlang::as_string(project_sym)
+
   keys <- unique(c(group_cols, monitoring_cols))
   required_cols <- unique(c(keys, generation_col, grid_factor_col, project_col))
   missing_cols <- setdiff(required_cols, names(data_tbl))
@@ -86,8 +116,8 @@ aggregate_monitoring_periods <- function(generation_data,
   grid_and_project <- data_tbl |>
     dplyr::group_by(dplyr::across(dplyr::all_of(keys))) |>
     dplyr::summarise(
-      !!grid_factor_col := dplyr::first(rlang::.data[[grid_factor_col]]),
-      !!project_col := sum(rlang::.data[[project_col]], na.rm = TRUE),
+      !!grid_factor_sym := dplyr::first(!!grid_factor_sym),
+      !!project_sym := sum(!!project_sym, na.rm = TRUE),
       .groups = "drop"
     )
 
