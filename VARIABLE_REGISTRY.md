@@ -21,3 +21,16 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | PE_{y} | Project emissions | Emissions from the project technology (tCO2e) | Typically assumed zero |
 | ER_{y} | Emission reductions | Difference between baseline and project emissions (tCO2e) | Equation (4) |
 | EF_{grid} | Grid emission factor | Emission factor representing displaced electricity (tCO2e/kWh) | Derived from national data |
+
+### Methodology: AMS-I.B
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| FC_{i,y} | Fuel consumption | Quantity of fossil fuel consumed by baseline equipment (L or kg) | Index \(i\) for fuel type |
+| NCV_{i} | Net calorific value | Energy content of fuel \(i\) (MJ per unit) | Used to convert fuel to energy |
+| Q_{BL,y} | Baseline energy | Fossil energy demand for the mechanical service (MJ) | Equation (1) |
+| EF_{BL} | Baseline emission factor | Emission factor applied to baseline energy (tCO2e/MJ) | Derived from IPCC defaults |
+| Q_{PR,y} | Project fossil energy | Residual fossil energy consumption after project implementation (MJ) | Optional input |
+| BE_{y} | Baseline emissions | Product of \(Q_{BL,y}\) and \(EF_{BL}\) (tCO2e) | Equation (2) |
+| PE_{y} | Project emissions | Product of \(Q_{PR,y}\) and project emission factor (tCO2e) | Equation (3) |
+| ER_{y} | Emission reductions | \(BE_{y} - PE_{y}\) (tCO2e) | Equation (4) |
