@@ -68,16 +68,18 @@
 
 - **cdmAmsIa**: Implements AMS-I.A Electricity generation by the user, including equation-level
   helpers, applicability checks, simulation utilities, and documentation.
+- **cdmAmsIb**: Implements AMS-I.B Mechanical energy for the user with tooling for fuel-based
+  baselines, renewable applicability checks, and monitoring aggregation.
 
 ## Development Workflow
 
-From the `cdmAmsIa` directory you can regenerate package documentation and ensure the vignette
-renders with the most recent code by running:
+From the respective package directory (e.g. `cdmAmsIa` or `cdmAmsIb`) you can regenerate package
+documentation and ensure the vignette renders with the most recent code by running:
 
 ```r
 devtools::document()
 devtools::build_vignettes()
 ```
 
-The vignette is compiled into `doc/cdmAmsIa-methodology.html`, which includes the reference tables
-demonstrating the applicability checks, simulation outputs, and workflow summary.
+Built vignettes are written to `vignettes/` and can be rendered with `devtools::build_vignettes()`
+for inclusion in downstream documentation or reports.
