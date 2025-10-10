@@ -1,6 +1,7 @@
 # cdmAmsIf
 
 `cdmAmsIf` implements the Clean Development Mechanism (CDM) small-scale methodology **AMS-I.F Renewable electricity generation for captive use and mini-grids**.
+
 The package follows tidyverse design principles and exposes equation-level helpers, applicability checks, and meta-calculation
 wrappers to reproduce emission reduction estimates for captive renewable systems.
 

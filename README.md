@@ -78,6 +78,8 @@
 - **cdmAmsIf**: Implements AMS-I.F Renewable electricity generation for captive use and mini-grids,
   including updated applicability checks, captive-use aware simulations, and monitoring aggregation tools.
 
+All Type I small-scale methodologies (AMS-I.A through AMS-I.F) now have complete R packages in this repository.
+
 ## Development Workflow
 
 From the respective package directory (e.g. `cdmAmsIa` or `cdmAmsIb`) you can regenerate package
