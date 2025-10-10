@@ -1,0 +1,59 @@
+---
+title: "Implementing AMS-II.H with cdmAmsIIh"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Implementing AMS-II.H with cdmAmsIIh}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(cdmAmsIIh)
+library(dplyr)
+```
+
+## Overview
+
+AMS-II.H covers energy efficiency projects that centralize the provision of utilities (steam, hot water, chilled water) in industrial facilities. The methodology compares the fuel and electricity requirements of decentralized baseline systems against an efficient centralized plant, accounting for auxiliary power and leakage. `cdmAmsIIh` implements each numbered equation in a tidyverse-friendly workflow so analysts can reproduce emission reduction estimates programmatically.
+
+## Simulating Monitoring Data
+
+The package ships with a simulation helper that creates tidy baseline, project, and leakage datasets matching the methodology's structure:
+
+```{r simulate}
+inputs <- simulate_ams_iih_inputs(n_facilities = 2, seed = 123)
+inputs
+```
+
+Each tibble stores facility-level fuel use, emission factors, useful energy output, auxiliary electricity, and leakage placeholders. These structures mirror the inputs required by the equation helpers.
+
+## Running the Meta Workflow
+
+With simulated or measured data in hand, the meta-wrapper chains the numbered equations to compute emission reductions:
+
+```{r meta}
+reductions <- estimate_emission_reductions_ams_iih(
+  baseline_data = inputs$baseline_data,
+  project_data = inputs$project_data,
+  leakage_data = inputs$leakage_data,
+  group_cols = "facility"
+)
+reductions
+```
+
+The output contains baseline emissions, project central and auxiliary emissions, leakage, optional specific energy diagnostics, and final emission reductions for each facility.
+
+## Function Reference
+
+| Equation | Function | Description |
+|----------|----------|-------------|
+| (1) | `calculate_baseline_decentralized_emissions_iih()` | Multiplies baseline fuel use by emission factors and returns optional specific energy diagnostics. |
+| (2) | `calculate_project_central_emissions_iih()` | Computes emissions from the centralized plant and reports project specific energy. |
+| (3) | `calculate_project_auxiliary_electricity_iih()` | Converts auxiliary electricity consumption into emissions using grid factors. |
+| (4) | `calculate_emission_reductions_iih()` | Subtracts project and leakage emissions from baseline totals. |
+
+The helpers interoperate seamlessly with tidyverse pipelines, enabling analysts to substitute measured monitoring data once field campaigns conclude.

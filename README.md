@@ -92,11 +92,15 @@
   including non-renewable biomass accounting, thermal energy conversion, emission reduction workflows,
   leakage aggregation, applicability diagnostics, and simulation datasets for efficient cookstove
   programmes.
+- **cdmAmsIIh**: Implements AMS-II.H centralization of utility provisions for industrial facilities,
+  covering baseline and project emission accounting, auxiliary electricity integration, applicability
+  diagnostics, and simulation utilities for centralized steam and hot-water systems.
 
 All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
 package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities, **cdmAmsIId** for industrial
-energy efficiency and fuel switching measures, **cdmAmsIIe** for building energy efficiency and fuel switching measures, and
-**cdmAmsIIg** for efficiency improvements in thermal applications of non-renewable biomass.
+energy efficiency and fuel switching measures, **cdmAmsIIe** for building energy efficiency and fuel switching measures,
+**cdmAmsIIg** for efficiency improvements in thermal applications of non-renewable biomass, and **cdmAmsIIh** for utility
+centralization projects in industrial facilities.
 
 ## Development Workflow
 
