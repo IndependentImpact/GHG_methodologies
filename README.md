@@ -82,10 +82,13 @@
 - **cdmAmsIIc**: Implements AMS-II.C demand-side energy efficiency activities, delivering applicability
   helpers for technology scope and monitoring, energy savings equations, emission reduction workflows,
   monitoring aggregation, and simulation datasets for specific technology retrofits.
+- **cdmAmsIId**: Implements AMS-II.D industrial energy efficiency and fuel switching measures, translating
+  fossil emission equations, applicability diagnostics, leakage accounting, monitoring aggregation, and
+  simulation tools tailored to industrial thermal systems.
 
-All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The first Type II
-package, **cdmAmsIIc**, is likewise fully documented and released, covering demand-side energy efficiency activities for specific
-technologies under AMS-II.C.
+All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
+package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities and **cdmAmsIId** for industrial
+energy efficiency and fuel switching measures.
 
 ## Development Workflow
 

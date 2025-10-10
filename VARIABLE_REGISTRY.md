@@ -97,3 +97,18 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | ER_{mp} | Emission reductions | Product of energy savings and emission factor \(ES_{mp} \times EF_{displ}\) (tCO2e) | Equation (4) |
 | Tech_{set} | Technology catalogue | Set of eligible demand-side technologies (lighting, motors, HVAC, refrigeration, etc.) | Applicability condition |
 | Mon_{approach} | Monitoring approach | Monitoring methodology used (continuous metering, periodic sampling, calibrated nameplate) | Applicability condition |
+
+### Methodology: AMS-II.D
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| FC_{BL,i,mp} | Baseline fuel consumption | Quantity of fossil fuel \(i\) consumed by baseline equipment during monitoring period \(mp\) (mass or volume units) | Input to Equation (1) |
+| NCV_{i} | Net calorific value | Energy content of fuel \(i\) (GJ per unit) | IPCC defaults or measured values |
+| EF_{BL,i} | Baseline emission factor | Carbon dioxide emission factor for fuel \(i\) (tCO2e/GJ) | IPCC defaults or laboratory data |
+| \eta_{BL} | Baseline efficiency | Thermal efficiency of the baseline equipment (fraction) | Adjusts baseline energy use |
+| FC_{PR,i,mp} | Project fuel consumption | Quantity of fossil fuel \(i\) consumed by the project system in monitoring period \(mp\) | Input to Equation (2) |
+| EF_{PR,i} | Project emission factor | Emission factor for project fuel mix (tCO2e/GJ) | Reflects fuel switching |
+| \eta_{PR} | Project efficiency | Thermal efficiency of the improved system (fraction) | Captures efficiency gains |
+| E_{elec,mp} | Indirect electricity emissions | Emissions from auxiliary electricity use in monitoring period \(mp\) (tCO2e) | Optional addition to Equation (2) |
+| LE_{mp} | Leakage emissions | Emissions from market effects or displaced fuels during monitoring period \(mp\) (tCO2e) | Equation (3) |
+| ER_{mp} | Emission reductions | Net emission reductions \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Equation (4) |
