@@ -1,0 +1,59 @@
+---
+title: "Implementing AMS-II.Q with cdmAmsIIq"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Implementing AMS-II.Q with cdmAmsIIq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(cdmAmsIIq)
+library(dplyr)
+```
+
+## Overview
+
+AMS-II.Q covers commercial building projects that combine energy efficiency upgrades with onsite energy supply. The methodology compares baseline energy consumption against post-retrofit demand, accounts for onsite fuels, and deducts leakage to quantify emission reductions. `cdmAmsIIq` implements each numbered equation in a tidyverse-friendly workflow so analysts can reproduce the calculation transparently.
+
+## Simulating Monitoring Data
+
+The package ships with a simulation helper that creates tidy baseline, project, and leakage datasets matching the methodology's structure:
+
+```{r simulate}
+inputs <- simulate_ams_iiq_inputs(n_buildings = 2, seed = 123)
+inputs
+```
+
+Each tibble stores building-level energy use, emission factors, delivered service output, onsite energy consumption, and leakage placeholders. These structures mirror the inputs required by the equation helpers.
+
+## Running the Meta Workflow
+
+With simulated or measured data in hand, the meta-wrapper chains the numbered equations to compute emission reductions:
+
+```{r meta}
+reductions <- estimate_emission_reductions_ams_iiq(
+  baseline_data = inputs$baseline_data,
+  project_data = inputs$project_data,
+  leakage_data = inputs$leakage_data,
+  group_cols = "building_id"
+)
+reductions
+```
+
+The output contains baseline emissions, project grid and onsite emissions, leakage, optional energy intensity diagnostics, and final emission reductions for each building.
+
+## Function Reference
+
+| Equation | Function | Description |
+|----------|----------|-------------|
+| (1) | `calculate_baseline_building_emissions_iiq()` | Multiplies baseline energy use by emission factors and returns optional intensity diagnostics. |
+| (2) | `calculate_project_building_emissions_iiq()` | Computes emissions from post-retrofit energy consumption and reports project intensity. |
+| (3) | `calculate_project_onsite_energy_emissions_iiq()` | Converts onsite energy supply into emissions using monitored factors. |
+| (4) | `calculate_emission_reductions_iiq()` | Subtracts project and leakage emissions from baseline totals. |
+
+The helpers interoperate seamlessly with tidyverse pipelines, enabling analysts to substitute measured monitoring data once field campaigns conclude.

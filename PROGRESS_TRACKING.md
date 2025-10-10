@@ -17,6 +17,7 @@ This document tracks the progress of each methodology package in the repository.
 | AMS-II.F | Yes | Completed |
 | AMS-II.G | Yes | Completed |
 | AMS-II.H | Yes | Completed |
+| AMS-II.Q | Yes | Completed |
 
 ## Status Legend
 - **Not Started** – No development work has begun.

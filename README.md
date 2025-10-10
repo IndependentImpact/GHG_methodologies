@@ -95,12 +95,15 @@
 - **cdmAmsIIh**: Implements AMS-II.H centralization of utility provisions for industrial facilities,
   covering baseline and project emission accounting, auxiliary electricity integration, applicability
   diagnostics, and simulation utilities for centralized steam and hot-water systems.
+- **cdmAmsIIq**: Implements AMS-II.Q commercial building efficiency and onsite supply projects, providing
+  baseline and project emission workflows, service coverage applicability checks, energy intensity diagnostics,
+  and simulation utilities for multi-building portfolios.
 
 All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
 package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities, **cdmAmsIId** for industrial
 energy efficiency and fuel switching measures, **cdmAmsIIe** for building energy efficiency and fuel switching measures,
-**cdmAmsIIg** for efficiency improvements in thermal applications of non-renewable biomass, and **cdmAmsIIh** for utility
-centralization projects in industrial facilities.
+**cdmAmsIIg** for efficiency improvements in thermal applications of non-renewable biomass, **cdmAmsIIh** for utility
+centralization projects in industrial facilities, and **cdmAmsIIq** for commercial building efficiency and onsite supply projects.
 
 ## Development Workflow
 
