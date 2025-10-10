@@ -112,3 +112,16 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | E_{elec,mp} | Indirect electricity emissions | Emissions from auxiliary electricity use in monitoring period \(mp\) (tCO2e) | Optional addition to Equation (2) |
 | LE_{mp} | Leakage emissions | Emissions from market effects or displaced fuels during monitoring period \(mp\) (tCO2e) | Equation (3) |
 | ER_{mp} | Emission reductions | Net emission reductions \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Equation (4) |
+
+### Methodology: AMS-II.E
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| E_{BL,b,y}^{heat} | Baseline thermal emissions | Emissions from baseline thermal fuels for building \(b\) in year \(y\) (tCO2e) | Sum over fuels and end-uses |
+| E_{BL,b,y}^{elec} | Baseline electricity emissions | Emissions from baseline electricity demand for building \(b\) in year \(y\) (tCO2e) | Uses grid emission factor |
+| E_{BL,b,y}^{CO2} | Total baseline emissions | Combined baseline emissions \(E_{BL,b,y}^{heat} + E_{BL,b,y}^{elec}\) (tCO2e) | Equation (1) |
+| E_{PR,b,y}^{heat} | Project thermal emissions | Emissions from project thermal fuels for building \(b\) in year \(y\) (tCO2e) | Equation (2) component |
+| E_{PR,b,y}^{elec} | Project electricity emissions | Emissions from project electricity demand for building \(b\) in year \(y\) (tCO2e) | Includes auxiliary loads |
+| E_{PR,b,y}^{CO2} | Total project emissions | Sum of project thermal and electricity emissions (tCO2e) | Equation (2) |
+| LE_{b,y} | Leakage emissions | Leakage associated with fuel supply chains for building \(b\) in year \(y\) (tCO2e) | Equation (3) |
+| ER_{b,y} | Emission reductions | Net emission reductions \(E_{BL,b,y}^{CO2} - E_{PR,b,y}^{CO2} - LE_{b,y}\) (tCO2e) | Equation (4) |
