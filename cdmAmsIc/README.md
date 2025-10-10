@@ -32,3 +32,36 @@ if (applicable) {
 ```
 
 For a full walk-through see the vignette in `vignettes/cdmAmsIc-methodology.Rmd`.
+
+## Applicability Conditions
+
+Projects must satisfy core AMS-I.C requirements before emission reductions can be claimed. Use the
+package helpers to document each criterion:
+
+- `check_applicability_thermal_capacity()` – verifies the system remains under the 45 MWth
+  small-scale threshold for Type I activities.
+- `check_applicability_renewable_supply()` – confirms that renewable sources supply the majority
+  of useful heat delivered by the system.
+- `check_applicability_fossil_displacement()` – ensures the project displaces a meaningful share of
+  fossil-fuel-derived thermal energy in the baseline scenario.
+
+## Key Equations
+
+`cdmAmsIc` translates the numbered equations from AMS-I.C into composable R functions:
+
+| Equation | Function | Description |
+|----------|----------|-------------|
+| (1) | `calculate_baseline_thermal_output()` | Sums useful thermal energy delivered during the baseline period. |
+| (2) | `calculate_baseline_emissions()` | Applies the baseline emission factor to thermal output to estimate displaced fossil emissions. |
+| (3) | `calculate_project_emissions()` | Estimates fossil emissions from auxiliary or backup heat use in the project scenario. |
+| (4) | `calculate_emission_reductions()` | Derives emission reductions by subtracting project emissions from baseline emissions. |
+
+The meta-wrapper `estimate_emission_reductions_ams_ic()` chains these helpers together for
+tidyverse-friendly datasets.
+
+## Monitoring and Simulation Utilities
+
+- `aggregate_monitoring_periods()` summarises measured data across reporting periods while
+  preserving facility-level identifiers and emission factors.
+- `simulate_ams_ic_dataset()` generates example datasets with monitoring metadata to support tests,
+  demos, and onboarding.
