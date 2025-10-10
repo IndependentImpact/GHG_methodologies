@@ -9,7 +9,7 @@ This document tracks the progress of each methodology package in the repository.
 | AMS-I.C | Yes | Completed |
 | AMS-I.D | Yes | Completed |
 | AMS-I.E | Yes | Completed |
-| AMS-I.F | Yes | In Progress |
+| AMS-I.F | Yes | Completed |
 
 ## Status Legend
 - **Not Started** – No development work has begun.

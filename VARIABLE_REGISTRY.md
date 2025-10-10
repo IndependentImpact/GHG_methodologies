@@ -72,3 +72,16 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | EF_{PR} | Project emission factor | Emission factor associated with project fossil energy (tCO2e/MJ) | Often zero for fully renewable systems |
 | PE_{p,y} | Project emissions | Emissions from project fossil energy (tCO2e) | Equation (4) |
 | ER_{p,y} | Emission reductions | Difference between \(BE_{p,y}\) and \(PE_{p,y}\) (tCO2e) | Equation (5) |
+
+### Methodology: AMS-I.F
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{BL,mp} | Baseline electricity supply | Electricity delivered to captive users or the mini-grid in monitoring period \(mp\) (MWh) | Equation (1) |
+| EF_{BL} | Baseline emission factor | Emission factor representing fossil electricity displaced by the project (tCO2e/MWh) | Host country grid or captive diesel fleet |
+| E_{BL,mp}^{CO2} | Baseline emissions | Product of \(Q_{BL,mp}\) and \(EF_{BL}\) (tCO2e) | Equation (2) |
+| EF_{PR} | Project emission factor | Emission factor for auxiliary/project fossil electricity (tCO2e/MWh) | Captures backup generators |
+| E_{PR,mp}^{CO2} | Project emissions | Fossil emissions during the project monitoring period (tCO2e) | Equation (3) |
+| ER_{mp} | Emission reductions | Net emission reductions for monitoring period \(mp\) (tCO2e) | Equation (4) |
+| f_{ren} | Renewable supply fraction | Share of electricity supplied from renewable sources (dimensionless) | Applicability condition |
+| f_{cap} | Captive use share | Fraction of generation consumed within the captive system or mini-grid (dimensionless) | Applicability condition |

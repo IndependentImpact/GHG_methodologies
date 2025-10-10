@@ -1,4 +1,5 @@
-# cdmAmsIf 0.0.1
+# cdmAmsIf 0.1.0
 
-* Initial scaffolding for the AMS-I.F methodology package, including captive
-  mini-grid applicability checks, equation helpers, simulation utilities, and documentation skeletons.
+* Completed the AMS-I.F implementation with validated applicability helpers,
+  equation-level calculators, monitoring aggregation, simulation utilities,
+  and accompanying vignette and documentation.
