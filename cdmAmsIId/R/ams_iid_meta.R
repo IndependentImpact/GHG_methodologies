@@ -118,10 +118,20 @@ aggregate_monitoring_periods <- function(monitoring_data,
   }
 
   numeric_cols <- if (is.null(summarise_cols)) {
-    names(dplyr::select(data_tbl, where(is.numeric)))
+    names(
+      data_tbl |>
+        dplyr::ungroup() |>
+        dplyr::select(where(is.numeric))
+    )
   } else {
     summarise_cols
   }
+
+  if (!is.null(group_cols) && length(group_cols) > 0) {
+    numeric_cols <- setdiff(numeric_cols, group_cols)
+  }
+  numeric_cols <- setdiff(numeric_cols, rlang::as_string(period_sym))
+  numeric_cols <- setdiff(numeric_cols, rlang::as_string(output_sym))
 
   data_tbl |>
     dplyr::summarise(

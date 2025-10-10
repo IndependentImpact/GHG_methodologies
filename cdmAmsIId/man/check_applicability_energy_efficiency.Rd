@@ -11,7 +11,7 @@ check_applicability_energy_efficiency(
   efficiency_col = "baseline_efficiency",
   project_fuel_col = "project_fuel_quantity",
   project_efficiency_col = "project_efficiency",
-  tolerance = 0.01
+  tolerance = 0.1
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ check_applicability_energy_efficiency(
 
 \item{project_efficiency_col}{Project column storing equipment efficiency.}
 
-\item{tolerance}{Minimum fractional reduction in specific fuel consumption that must be achieved to satisfy the applicability condition.}
+\item{tolerance}{Minimum fractional reduction in specific fuel consumption (fuel input per unit of baseline useful energy output) that must be achieved to satisfy the applicability condition.}
 }
 \value{
 Logical scalar indicating whether the criterion is met.
