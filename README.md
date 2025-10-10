@@ -75,6 +75,8 @@
   aggregation utilities.
 - **cdmAmsId**: Implements AMS-I.D Renewable electricity generation for a mini-grid with
   applicability checks, electricity supply equations, monitoring aggregation, and simulation helpers.
+- **cdmAmsIf**: Implements AMS-I.F Renewable electricity generation for captive use and mini-grids,
+  including updated applicability checks, captive-use aware simulations, and monitoring aggregation tools.
 
 ## Development Workflow
 
