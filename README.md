@@ -70,6 +70,9 @@
   helpers, applicability checks, simulation utilities, and documentation.
 - **cdmAmsIb**: Implements AMS-I.B Mechanical energy for the user with tooling for fuel-based
   baselines, renewable applicability checks, and monitoring aggregation.
+- **cdmAmsIc**: Implements AMS-I.C Thermal energy production with or without electricity, covering
+  baseline heat equations, project emission adjustments, applicability conditions, and monitoring
+  aggregation utilities.
 
 ## Development Workflow
 

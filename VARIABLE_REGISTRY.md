@@ -34,3 +34,14 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | BE_{y} | Baseline emissions | Product of \(Q_{BL,y}\) and \(EF_{BL}\) (tCO2e) | Equation (2) |
 | PE_{y} | Project emissions | Product of \(Q_{PR,y}\) and project emission factor (tCO2e) | Equation (3) |
 | ER_{y} | Emission reductions | \(BE_{y} - PE_{y}\) (tCO2e) | Equation (4) |
+
+### Methodology: AMS-I.C
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{BL,mp} | Baseline thermal output | Useful thermal energy delivered in monitoring period \(mp\) (MWhth) | Equation (1) |
+| EF_{BL} | Baseline emission factor | Emission factor for displaced fossil heat (tCO2e/MWhth) | Host country or AMS default |
+| E_{BL,mp}^{CO2} | Baseline emissions | Product of \(Q_{BL,mp}\) and \(EF_{BL}\) (tCO2e) | Equation (2) |
+| EF_{PR} | Project emission factor | Emission factor for auxiliary fossil heat (tCO2e/MWhth) | Optional, often zero |
+| E_{PR,mp}^{CO2} | Project emissions | Fossil emissions during the project (tCO2e) | Equation (3) |
+| ER_{mp} | Emission reductions | \(E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\) (tCO2e) | Equation (4) |
