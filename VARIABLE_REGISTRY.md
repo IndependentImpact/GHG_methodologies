@@ -85,3 +85,15 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | ER_{mp} | Emission reductions | Net emission reductions for monitoring period \(mp\) (tCO2e) | Equation (4) |
 | f_{ren} | Renewable supply fraction | Share of electricity supplied from renewable sources (dimensionless) | Applicability condition |
 | f_{cap} | Captive use share | Fraction of generation consumed within the captive system or mini-grid (dimensionless) | Applicability condition |
+
+### Methodology: AMS-II.C
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{BL,mp} | Baseline energy consumption | Energy consumed by the baseline technology in monitoring period \(mp\) (MWh) | Equation (1) |
+| Q_{PR,mp} | Project energy consumption | Energy consumed by the efficient technology in monitoring period \(mp\) (MWh) | Equation (2) |
+| ES_{mp} | Energy savings | Difference between baseline and project energy \(Q_{BL,mp} - Q_{PR,mp}\) (MWh) | Equation (3) |
+| EF_{displ} | Displaced emission factor | Emission factor for the displaced electricity or fuel (tCO2e/MWh) | Derived from grid or fuel data |
+| ER_{mp} | Emission reductions | Product of energy savings and emission factor \(ES_{mp} \times EF_{displ}\) (tCO2e) | Equation (4) |
+| Tech_{set} | Technology catalogue | Set of eligible demand-side technologies (lighting, motors, HVAC, refrigeration, etc.) | Applicability condition |
+| Mon_{approach} | Monitoring approach | Monitoring methodology used (continuous metering, periodic sampling, calibrated nameplate) | Applicability condition |
