@@ -1,0 +1,157 @@
+---
+title: "AMS-II.F Methodology Walkthrough"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{AMS-II.F Methodology Walkthrough}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This vignette demonstrates how to reproduce the AMS-II.F calculations using
+`cdmAmsIIf`. The methodology covers agricultural energy efficiency and fuel
+switching projects that reduce fossil fuel use in processing, irrigation, or
+cooling systems. The core steps include estimating baseline emissions,
+calculating project emissions, accounting for leakage, and deriving net emission
+reductions.
+
+# Applicability Checks
+
+```{r applicability}
+library(cdmAmsIIf)
+
+baseline <- tibble::tibble(
+  baseline_total_energy_mwh = c(220, 195),
+  baseline_fuel_energy_gj = c(320, 180),
+  baseline_fuel_emission_factor_tco2_per_gj = c(0.07, 0.072),
+  service_level_indicator = c(420, 380)
+)
+project <- tibble::tibble(
+  project_total_energy_mwh = c(150, 138),
+  project_fuel_energy_gj = c(210, 120),
+  project_fuel_emission_factor_tco2_per_gj = c(0.045, 0.05),
+  service_level_indicator = c(420, 380)
+)
+monitoring <- tibble::tibble(
+  project_total_energy_mwh = c(12.5, 11.2),
+  service_level_indicator = c(0.35, 0.32),
+  operating_hours = c(220, 215)
+)
+
+applicability <- assess_ams_iif_applicability(
+  baseline_data = baseline,
+  project_data = project,
+  monitoring_data = monitoring,
+  intensity_args = list(energy_col = "baseline_total_energy_mwh",
+                        project_energy_col = "project_total_energy_mwh",
+                        output_col = "service_level_indicator"),
+  fuel_switch_args = list(energy_col = "baseline_fuel_energy_gj",
+                          emission_factor_col = "baseline_fuel_emission_factor_tco2_per_gj",
+                          project_energy_col = "project_fuel_energy_gj",
+                          project_emission_factor_col = "project_fuel_emission_factor_tco2_per_gj")
+)
+applicability
+```
+
+# Simulated Monitoring Data
+
+```{r simulation}
+set.seed(2024)
+monitoring_periods <- simulate_ams_iif_dataset(n_facilities = 3, n_periods = 4)
+head(monitoring_periods)
+```
+
+The helper `aggregate_monitoring_periods_iif()` collapses multi-period records to
+an annual summary used for reporting and equation-level calculations.
+
+```{r aggregation}
+annual_monitoring <- aggregate_monitoring_periods_iif(
+  monitoring_periods,
+  period_col = monitoring_label,
+  group_cols = "facility_id"
+)
+annual_monitoring
+```
+
+# Equation-Level Calculations
+
+```{r equations}
+baseline_emissions <- calculate_baseline_agricultural_emissions(
+  annual_monitoring,
+  group_cols = "facility_id"
+)
+project_emissions <- calculate_project_agricultural_emissions(
+  annual_monitoring,
+  group_cols = "facility_id"
+)
+leakage_emissions <- calculate_leakage_emissions_iif(
+  annual_monitoring,
+  group_cols = "facility_id",
+  leakage_col = "leakage_emissions_tco2e"
+)
+
+baseline_emissions
+project_emissions
+leakage_emissions
+```
+
+```{r reductions}
+emission_reductions <- calculate_emission_reductions_iif(
+  baseline_emissions,
+  project_emissions,
+  leakage_emissions,
+  group_cols = "facility_id"
+)
+emission_reductions
+```
+
+# Meta-Workflow
+
+```{r meta}
+meta_reductions <- estimate_emission_reductions_ams_iif(
+  baseline_data = annual_monitoring,
+  project_data = annual_monitoring,
+  leakage_data = annual_monitoring,
+  group_cols = "facility_id",
+  leakage_args = list(leakage_col = "leakage_emissions_tco2e")
+)
+meta_reductions
+```
+
+# Function Reference
+
+```{r reference, results = 'asis'}
+library(dplyr)
+reference_table <- tibble::tibble(
+  Equation = paste0("(", 1:4, ")"),
+  Function = c(
+    "`calculate_baseline_agricultural_emissions()`",
+    "`calculate_project_agricultural_emissions()`",
+    "`calculate_leakage_emissions_iif()`",
+    "`calculate_emission_reductions_iif()`"
+  ),
+  Description = c(
+    "Baseline fossil fuel and electricity emissions",
+    "Project fossil fuel and electricity emissions",
+    "Leakage emissions across the supply chain",
+    "Net emission reductions"
+  )
+)
+knitr::kable(reference_table)
+```
+
+```{mermaid}
+flowchart TD
+  A[Simulated/monitored data] --> B[calculate_baseline_agricultural_emissions]
+  A --> C[calculate_project_agricultural_emissions]
+  A --> D[calculate_leakage_emissions_iif]
+  B --> E[calculate_emission_reductions_iif]
+  C --> E
+  D --> E
+  A --> F[estimate_emission_reductions_ams_iif]
+```
