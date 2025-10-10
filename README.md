@@ -83,7 +83,9 @@
   helpers for technology scope and monitoring, energy savings equations, emission reduction workflows,
   monitoring aggregation, and simulation datasets for specific technology retrofits.
 
-All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository.
+All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The first Type II
+package, **cdmAmsIIc**, is likewise fully documented and released, covering demand-side energy efficiency activities for specific
+technologies under AMS-II.C.
 
 ## Development Workflow
 
