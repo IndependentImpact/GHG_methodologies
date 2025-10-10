@@ -144,3 +144,15 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | EF_{PR} | Project emission factor | Emission factor applied to project thermal energy (tCO2e/MJ) | Typically identical to baseline fuel |
 | LE_{p,y} | Leakage emissions | Emissions associated with biomass supply chain leakage (tCO2e) | Equation (5) |
 | ER_{p,y} | Emission reductions | Net emission reductions \(BE_{p,y} - PE_{p,y} - LE_{p,y}\) (tCO2e) | Equation (6) |
+
+### Methodology: AMS-II.Q
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| E_{BL,b,y}^{CO2} | Baseline building emissions | Emissions from baseline electricity or fossil energy use for building \(b\) in year \(y\) (tCO2e) | Equation (1) |
+| I_{BL,b} | Baseline energy intensity | Baseline energy per unit of building service output (MWh per service unit) | Diagnostic from Equation (1) |
+| E_{PR,b,y}^{grid} | Project grid emissions | Emissions from post-retrofit grid or delivered energy for building \(b\) in year \(y\) (tCO2e) | Equation (2) |
+| I_{PR,b} | Project energy intensity | Project energy per unit of service output (MWh per service unit) | Diagnostic from Equation (2) |
+| E_{PR,b,y}^{onsite} | Onsite supply emissions | Emissions from onsite fossil energy supply operated in the project scenario (tCO2e) | Equation (3) |
+| LE_{b,y} | Leakage emissions | Emissions from project leakage sources such as auxiliary fossil fuels (tCO2e) | Methodology Section 7 |
+| ER_{b,y} | Emission reductions | Net emission reductions \(E_{BL,b,y}^{CO2} - E_{PR,b,y}^{grid} - E_{PR,b,y}^{onsite} - LE_{b,y}\) (tCO2e) | Equation (4) |
