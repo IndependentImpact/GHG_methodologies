@@ -77,8 +77,10 @@
   applicability checks, electricity supply equations, monitoring aggregation, and simulation helpers.
 - **cdmAmsIf**: Implements AMS-I.F Renewable electricity generation for captive use and mini-grids,
   including updated applicability checks, captive-use aware simulations, and monitoring aggregation tools.
+- **cdmAmsIj**: Implements AMS-I.J Solar water heating systems with solar-specific applicability checks,
+  thermal energy equations, auxiliary energy accounting, monitoring aggregation, and simulation utilities.
 
-All Type I small-scale methodologies (AMS-I.A through AMS-I.F) now have complete R packages in this repository.
+All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository.
 
 ## Development Workflow
 
