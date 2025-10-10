@@ -94,11 +94,9 @@ estimate_emission_reductions_ams_ib <- function(fuel_data,
   }
 
   if (length(keys) > 0) {
-    result <- dplyr::left_join(result, baseline_energy, by = keys)
-    result <- dplyr::left_join(result, project_energy_tbl, by = keys)
-  } else {
-    result <- dplyr::bind_cols(result, baseline_energy)
-    result <- dplyr::bind_cols(result, project_energy_tbl)
+    result <- result |>
+      dplyr::relocate(dplyr::all_of(keys), .before = dplyr::everything()) |>
+      dplyr::arrange(dplyr::across(dplyr::all_of(keys)))
   }
 
   result

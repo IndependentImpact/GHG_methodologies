@@ -53,5 +53,40 @@ test_that("meta-function matches manual workflow", {
     group_cols = "machine_id"
   )
 
+  expect_equal(
+    sort(names(wrapper)),
+    sort(c(
+      "machine_id",
+      "baseline_energy_mj",
+      "baseline_emissions_tco2e",
+      "project_energy_mj",
+      "project_emissions_tco2e",
+      "emission_reductions_tco2e"
+    ))
+  )
   expect_equal(wrapper$emission_reductions_tco2e, manual$emission_reductions_tco2e)
+})
+
+test_that("meta-function handles ungrouped inputs without duplicate columns", {
+  data <- tibble::tibble(
+    fuel_consumption = c(100, 120, 150),
+    net_calorific_value = c(43, 43, 42)
+  )
+
+  wrapper <- estimate_emission_reductions_ams_ib(
+    fuel_data = data,
+    emission_factor = 0.00007
+  )
+
+  expect_false(any(grepl("\\.x$|\\.y$", names(wrapper))))
+  expect_setequal(
+    names(wrapper),
+    c(
+      "baseline_energy_mj",
+      "baseline_emissions_tco2e",
+      "project_energy_mj",
+      "project_emissions_tco2e",
+      "emission_reductions_tco2e"
+    )
+  )
 })
