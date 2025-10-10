@@ -88,10 +88,15 @@
 - **cdmAmsIIe**: Implements AMS-II.E building energy efficiency and fuel switching measures, covering
   baseline and project emission accounting for thermal and electrical end-uses, applicability diagnostics
   for building portfolios, monitoring aggregation helpers, and scenario simulation utilities.
+- **cdmAmsIIg**: Implements AMS-II.G energy efficiency in thermal applications of non-renewable biomass,
+  including non-renewable biomass accounting, thermal energy conversion, emission reduction workflows,
+  leakage aggregation, applicability diagnostics, and simulation datasets for efficient cookstove
+  programmes.
 
 All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
 package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities, **cdmAmsIId** for industrial
-energy efficiency and fuel switching measures, and **cdmAmsIIe** for building energy efficiency and fuel switching measures.
+energy efficiency and fuel switching measures, **cdmAmsIIe** for building energy efficiency and fuel switching measures, and
+**cdmAmsIIg** for efficiency improvements in thermal applications of non-renewable biomass.
 
 ## Development Workflow
 

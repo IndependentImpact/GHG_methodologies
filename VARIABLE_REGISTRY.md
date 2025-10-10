@@ -125,3 +125,22 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | E_{PR,b,y}^{CO2} | Total project emissions | Sum of project thermal and electricity emissions (tCO2e) | Equation (2) |
 | LE_{b,y} | Leakage emissions | Leakage associated with fuel supply chains for building \(b\) in year \(y\) (tCO2e) | Equation (3) |
 | ER_{b,y} | Emission reductions | Net emission reductions \(E_{BL,b,y}^{CO2} - E_{PR,b,y}^{CO2} - LE_{b,y}\) (tCO2e) | Equation (4) |
+
+### Methodology: AMS-II.G
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| B_{BL,p,y} | Baseline biomass consumption | Quantity of biomass consumed in the baseline for project activity \(p\) in year \(y\) (tonnes) | Monitoring input |
+| f_{NRB,BL,p,y} | Baseline non-renewable fraction | Share of baseline biomass that is non-renewable (dimensionless) | Derived from surveys or studies |
+| NRB_{BL,p,y} | Baseline non-renewable biomass | Product of \(B_{BL,p,y}\) and \(f_{NRB,BL,p,y}\) (tonnes) | Equation (1) |
+| NCV_{BL} | Baseline net calorific value | Energy content of baseline biomass (MJ/tonne) | Laboratory or literature values |
+| Q_{BL,p,y} | Baseline thermal energy | \(NRB_{BL,p,y} \times NCV_{BL}\) (MJ) | Equation (2) |
+| EF_{BL} | Baseline emission factor | Emission factor applied to baseline thermal energy (tCO2e/MJ) | IPCC defaults or national data |
+| B_{PR,p,y} | Project biomass consumption | Biomass consumed by the efficient technology for project activity \(p\) in year \(y\) (tonnes) | Monitoring input |
+| f_{NRB,PR,p,y} | Project non-renewable fraction | Share of project biomass that is non-renewable (dimensionless) | Derived from surveys or monitoring |
+| NRB_{PR,p,y} | Project non-renewable biomass | Product of \(B_{PR,p,y}\) and \(f_{NRB,PR,p,y}\) (tonnes) | Equation (3) |
+| NCV_{PR} | Project net calorific value | Energy content of project biomass (MJ/tonne) | Monitoring or literature values |
+| Q_{PR,p,y} | Project thermal energy | \(NRB_{PR,p,y} \times NCV_{PR}\) (MJ) | Equation (3) |
+| EF_{PR} | Project emission factor | Emission factor applied to project thermal energy (tCO2e/MJ) | Typically identical to baseline fuel |
+| LE_{p,y} | Leakage emissions | Emissions associated with biomass supply chain leakage (tCO2e) | Equation (5) |
+| ER_{p,y} | Emission reductions | Net emission reductions \(BE_{p,y} - PE_{p,y} - LE_{p,y}\) (tCO2e) | Equation (6) |

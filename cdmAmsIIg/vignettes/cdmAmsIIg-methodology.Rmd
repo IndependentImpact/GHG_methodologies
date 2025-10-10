@@ -1,0 +1,76 @@
+---
+title: "Implementing AMS-II.G with cdmAmsIIg"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Implementing AMS-II.G with cdmAmsIIg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(cdmAmsIIg)
+library(dplyr)
+```
+
+## Overview
+
+AMS-II.G covers energy efficiency measures in thermal applications of non-renewable biomass such as institutional and household cookstove programmes. The methodology quantifies baseline emissions from displaced non-renewable biomass, subtracts project emissions, and accounts for leakage associated with biomass supply chains. `cdmAmsIIg` implements each numbered equation in a tidyverse-friendly workflow so analysts can reproduce emission reduction estimates programmatically.
+
+## Simulating Monitoring Data
+
+The package ships with a simulation helper that creates tidy monitoring data matching the methodology's structure:
+
+```{r simulate}
+monitoring <- simulate_ams_iig_dataset(n_sites = 2, n_periods = 3, seed = 123)
+monitoring
+```
+
+Each row represents a site-period observation with baseline and project biomass consumption, non-renewable fractions, net calorific values, emission factors, and leakage placeholders. Monitoring metadata (site identifiers, dates, and service level indicators) support aggregation and QA workflows.
+
+## Aggregating Monitoring Periods
+
+Field campaigns often report results annually even when monitoring occurs monthly. Use `aggregate_monitoring_periods_iig()` to roll monitoring observations to reporting periods:
+
+```{r aggregate}
+reporting <- aggregate_monitoring_periods_iig(
+  monitoring,
+  group_cols = "site_id",
+  period_cols = c("year", "month")
+)
+reporting
+```
+
+The aggregation step sums biomass consumption, computes weighted-average non-renewable fractions, retains emission factors, and aggregates leakage, producing an analysis-ready dataset.
+
+## Applying the Equation Helpers
+
+With aggregated data in hand, the numbered equation helpers can be composed to replicate AMS-II.G calculations. The meta-wrapper `estimate_emission_reductions_ams_iig()` orchestrates the full workflow:
+
+```{r meta}
+reductions <- estimate_emission_reductions_ams_iig(
+  baseline_data = reporting,
+  project_data = reporting,
+  leakage_data = reporting,
+  group_cols = c("site_id", "year", "month")
+)
+reductions
+```
+
+The output contains baseline and project non-renewable biomass, thermal energy, emissions, leakage, and final emission reductions for each site-period.
+
+## Function Reference
+
+| Equation | Function | Description |
+|----------|----------|-------------|
+| (1) | `calculate_baseline_non_renewable_biomass_iig()` | Applies the baseline non-renewable fraction to biomass consumption. |
+| (2) | `calculate_baseline_thermal_energy_iig()` | Converts baseline non-renewable biomass into thermal energy via the NCV. |
+| (3) | `calculate_project_thermal_energy_iig()` | Converts project non-renewable biomass into thermal energy. |
+| (4) | `calculate_emissions_from_energy_iig()` | Multiplies thermal energy by emission factors to obtain emissions. |
+| (5) | `calculate_leakage_emissions_iig()` | Aggregates leakage emissions by group. |
+| (6) | `calculate_emission_reductions_iig()` | Computes net emission reductions by subtracting project and leakage emissions. |
+
+The helper functions are designed to interoperate seamlessly with tidyverse pipelines, enabling analysts to swap in measured data once field campaigns conclude.
