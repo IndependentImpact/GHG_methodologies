@@ -11,8 +11,9 @@
 #' @param efficiency_col Baseline column storing equipment efficiency.
 #' @param project_fuel_col Project column storing fuel quantities.
 #' @param project_efficiency_col Project column storing equipment efficiency.
-#' @param tolerance Minimum fractional reduction in specific fuel consumption that
-#'   must be achieved to satisfy the applicability condition. Defaults to 1%.
+#' @param tolerance Minimum fractional reduction in specific fuel consumption
+#'   (fuel input per unit of baseline useful energy output) that must be
+#'   achieved to satisfy the applicability condition. Defaults to 10%.
 #' @return A logical scalar indicating whether the criterion is met.
 #' @examples
 #' baseline <- tibble::tibble(baseline_fuel_quantity = 1200, baseline_efficiency = 0.72)
@@ -25,7 +26,7 @@ check_applicability_energy_efficiency <- function(baseline_data,
                                                   efficiency_col = "baseline_efficiency",
                                                   project_fuel_col = "project_fuel_quantity",
                                                   project_efficiency_col = "project_efficiency",
-                                                  tolerance = 0.01) {
+                                                  tolerance = 0.1) {
   baseline_tbl <- dplyr::as_tibble(baseline_data)
   project_tbl <- dplyr::as_tibble(project_data)
 
@@ -34,8 +35,13 @@ check_applicability_energy_efficiency <- function(baseline_data,
     stop("Efficiencies must be positive for applicability checks.", call. = FALSE)
   }
 
-  specific_baseline <- mean(baseline_tbl[[fuel_col]] / baseline_tbl[[efficiency_col]], na.rm = TRUE)
-  specific_project <- mean(project_tbl[[project_fuel_col]] / project_tbl[[project_efficiency_col]], na.rm = TRUE)
+  baseline_output <- sum(baseline_tbl[[fuel_col]] * baseline_tbl[[efficiency_col]], na.rm = TRUE)
+  if (!is.finite(baseline_output) || baseline_output <= 0) {
+    stop("Baseline useful energy output must be positive for applicability checks.", call. = FALSE)
+  }
+
+  specific_baseline <- sum(baseline_tbl[[fuel_col]], na.rm = TRUE) / baseline_output
+  specific_project <- sum(project_tbl[[project_fuel_col]], na.rm = TRUE) / baseline_output
 
   reduction <- specific_baseline - specific_project
   reduction_fraction <- reduction / specific_baseline
