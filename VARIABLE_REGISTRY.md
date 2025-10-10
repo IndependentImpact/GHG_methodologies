@@ -45,3 +45,14 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | EF_{PR} | Project emission factor | Emission factor for auxiliary fossil heat (tCO2e/MWhth) | Optional, often zero |
 | E_{PR,mp}^{CO2} | Project emissions | Fossil emissions during the project (tCO2e) | Equation (3) |
 | ER_{mp} | Emission reductions | \(E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\) (tCO2e) | Equation (4) |
+
+### Methodology: AMS-I.D
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{BL,mp} | Baseline electricity supply | Electricity delivered to the captive mini-grid in monitoring period \(mp\) (MWh) | Equation (1) |
+| EF_{BL} | Baseline emission factor | Emission factor for displaced fossil electricity (tCO2e/MWh) | Host country grid or diesel baseline |
+| E_{BL,mp}^{CO2} | Baseline emissions | Product of \(Q_{BL,mp}\) and \(EF_{BL}\) (tCO2e) | Equation (2) |
+| EF_{PR} | Project emission factor | Emission factor for auxiliary fossil generation (tCO2e/MWh) | Optional, often low |
+| E_{PR,mp}^{CO2} | Project emissions | Fossil emissions from project backup generation (tCO2e) | Equation (3) |
+| ER_{mp} | Emission reductions | \(E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\) (tCO2e) | Equation (4) |

@@ -73,6 +73,8 @@
 - **cdmAmsIc**: Implements AMS-I.C Thermal energy production with or without electricity, covering
   baseline heat equations, project emission adjustments, applicability conditions, and monitoring
   aggregation utilities.
+- **cdmAmsId**: Implements AMS-I.D Renewable electricity generation for a mini-grid with
+  applicability checks, electricity supply equations, monitoring aggregation, and simulation helpers.
 
 ## Development Workflow
 
