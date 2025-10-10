@@ -5,7 +5,7 @@ This document tracks the progress of each methodology package in the repository.
 | Methodology Number | Development Started? | Current Status |
 |--------------------|----------------------|----------------|
 | AMS-I.A | Yes | Completed |
-| AMS-I.B | Yes | In Progress |
+| AMS-I.B | Yes | Completed |
 
 ## Status Legend
 - **Not Started** – No development work has begun.
