@@ -1,76 +1,215 @@
 ---
-title: "Implementing AMS-II.G with cdmAmsIIg"
+title: "AMS-II.G Methodology Walkthrough"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Implementing AMS-II.G with cdmAmsIIg}
+  %\VignetteIndexEntry{AMS-II.G Methodology Walkthrough}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This vignette demonstrates how to reproduce the AMS-II.G calculations using
+`cdmAmsIIg`. The methodology covers cookstove and thermal energy efficiency
+programmes that reduce the consumption of non-renewable biomass. The workflow
+applies non-renewable biomass fractions, converts resulting quantities to
+thermal energy, multiplies by emission factors, and accounts for any leakage to
+produce emission reductions.
+
+# Applicability Checks
+
+```{r applicability}
 library(cdmAmsIIg)
-library(dplyr)
-```
 
-## Overview
-
-AMS-II.G covers energy efficiency measures in thermal applications of non-renewable biomass such as institutional and household cookstove programmes. The methodology quantifies baseline emissions from displaced non-renewable biomass, subtracts project emissions, and accounts for leakage associated with biomass supply chains. `cdmAmsIIg` implements each numbered equation in a tidyverse-friendly workflow so analysts can reproduce emission reduction estimates programmatically.
-
-## Simulating Monitoring Data
-
-The package ships with a simulation helper that creates tidy monitoring data matching the methodology's structure:
-
-```{r simulate}
-monitoring <- simulate_ams_iig_dataset(n_sites = 2, n_periods = 3, seed = 123)
-monitoring
-```
-
-Each row represents a site-period observation with baseline and project biomass consumption, non-renewable fractions, net calorific values, emission factors, and leakage placeholders. Monitoring metadata (site identifiers, dates, and service level indicators) support aggregation and QA workflows.
-
-## Aggregating Monitoring Periods
-
-Field campaigns often report results annually even when monitoring occurs monthly. Use `aggregate_monitoring_periods_iig()` to roll monitoring observations to reporting periods:
-
-```{r aggregate}
-reporting <- aggregate_monitoring_periods_iig(
-  monitoring,
-  group_cols = "site_id",
-  period_cols = c("year", "month")
+baseline_example <- tibble::tibble(
+  baseline_biomass_consumption_tonnes = c(12, 14),
+  baseline_non_renewable_fraction = c(0.84, 0.88)
 )
-reporting
+project_example <- tibble::tibble(
+  project_biomass_consumption_tonnes = c(7.2, 8.0),
+  project_non_renewable_fraction = c(0.42, 0.39)
+)
+monitoring_example <- tibble::tibble(
+  baseline_biomass_consumption_tonnes = 12,
+  baseline_non_renewable_fraction = 0.85,
+  baseline_net_calorific_value_mj_per_tonne = 15.2,
+  baseline_emission_factor_tco2_per_mj = 0.00009,
+  project_biomass_consumption_tonnes = 7.4,
+  project_non_renewable_fraction = 0.4,
+  project_net_calorific_value_mj_per_tonne = 15.3,
+  project_emission_factor_tco2_per_mj = 0.00005
+)
+
+check_applicability_efficiency_improvement_iig(baseline_example, project_example)
+check_applicability_fraction_bounds_iig(monitoring_example)
+check_applicability_monitoring_iig(monitoring_example)
 ```
 
-The aggregation step sums biomass consumption, computes weighted-average non-renewable fractions, retains emission factors, and aggregates leakage, producing an analysis-ready dataset.
+# Simulated Dataset
 
-## Applying the Equation Helpers
+```{r simulation}
+set.seed(123)
+example_data <- simulate_ams_iig_dataset(n_sites = 3, n_periods = 4, seed = 123)
+knitr::kable(
+  head(example_data),
+  format = "html",
+  digits = 3
+)
+```
 
-With aggregated data in hand, the numbered equation helpers can be composed to replicate AMS-II.G calculations. The meta-wrapper `estimate_emission_reductions_ams_iig()` orchestrates the full workflow:
+The simulated monitoring data include site identifiers, period labels, baseline
+and project biomass consumption, non-renewable fractions, net calorific values,
+emission factors, leakage placeholders, and a simple service-level indicator.
+
+# Equation Walkthrough
+
+```{r equations}
+baseline_nrb <- calculate_baseline_non_renewable_biomass_iig(
+  example_data,
+  group_cols = c("site_id", "monitoring_label")
+)
+project_nrb <- calculate_project_non_renewable_biomass_iig(
+  example_data,
+  group_cols = c("site_id", "monitoring_label")
+)
+baseline_energy <- calculate_baseline_thermal_energy_iig(
+  baseline_nrb,
+  baseline_data = example_data,
+  group_cols = c("site_id", "monitoring_label")
+)
+project_energy <- calculate_project_thermal_energy_iig(
+  project_nrb,
+  project_data = example_data,
+  group_cols = c("site_id", "monitoring_label")
+)
+baseline_emissions <- calculate_emissions_from_energy_iig(
+  baseline_energy,
+  energy_col = "baseline_thermal_energy_mj",
+  factor_data = example_data,
+  emission_factor_col = "baseline_emission_factor_tco2_per_mj",
+  group_cols = c("site_id", "monitoring_label"),
+  output_col = "baseline_emissions_tco2e"
+)
+project_emissions <- calculate_emissions_from_energy_iig(
+  project_energy,
+  energy_col = "project_thermal_energy_mj",
+  factor_data = example_data,
+  emission_factor_col = "project_emission_factor_tco2_per_mj",
+  group_cols = c("site_id", "monitoring_label"),
+  output_col = "project_emissions_tco2e"
+)
+leakage_emissions <- calculate_leakage_emissions_iig(
+  example_data,
+  group_cols = c("site_id", "monitoring_label"),
+  leakage_col = "leakage_emissions_tco2e"
+)
+emission_reductions <- calculate_emission_reductions_iig(
+  baseline_emissions,
+  project_emissions,
+  leakage_emissions,
+  group_cols = c("site_id", "monitoring_label")
+)
+
+knitr::kable(head(emission_reductions), format = "html", digits = 4)
+```
+
+# Monitoring Period Aggregation
+
+```{r monitoring}
+period_summary <- aggregate_monitoring_periods_iig(
+  monitoring_data = example_data,
+  group_cols = "site_id",
+  period_cols = c("monitoring_label")
+)
+
+knitr::kable(head(period_summary), format = "html", digits = 4)
+```
+
+# Meta-Function
 
 ```{r meta}
-reductions <- estimate_emission_reductions_ams_iig(
-  baseline_data = reporting,
-  project_data = reporting,
-  leakage_data = reporting,
-  group_cols = c("site_id", "year", "month")
+estimate_emission_reductions_ams_iig(
+  baseline_data = example_data,
+  project_data = example_data,
+  leakage_data = example_data,
+  group_cols = c("site_id", "monitoring_label")
 )
-reductions
 ```
 
-The output contains baseline and project non-renewable biomass, thermal energy, emissions, leakage, and final emission reductions for each site-period.
+# Function Reference
 
-## Function Reference
+```{r reference}
+function_reference <- tibble::tibble(
+  Function = c(
+    "`calculate_baseline_non_renewable_biomass_iig()`",
+    "`calculate_project_non_renewable_biomass_iig()`",
+    "`calculate_baseline_thermal_energy_iig()`",
+    "`calculate_project_thermal_energy_iig()`",
+    "`calculate_emissions_from_energy_iig()`",
+    "`calculate_leakage_emissions_iig()`",
+    "`calculate_emission_reductions_iig()`",
+    "`aggregate_monitoring_periods_iig()`",
+    "`estimate_emission_reductions_ams_iig()`",
+    "`simulate_ams_iig_dataset()`"
+  ),
+  Signature = c(
+    "`calculate_baseline_non_renewable_biomass_iig(baseline_data, consumption_col = \"baseline_biomass_consumption_tonnes\", fraction_col = \"baseline_non_renewable_fraction\", group_cols = NULL, output_col = \"baseline_non_renewable_biomass_tonnes\")`",
+    "`calculate_project_non_renewable_biomass_iig(project_data, project_consumption_col = \"project_biomass_consumption_tonnes\", project_fraction_col = \"project_non_renewable_fraction\", group_cols = NULL, output_col = \"project_non_renewable_biomass_tonnes\")`",
+    "`calculate_baseline_thermal_energy_iig(non_renewable_biomass, biomass_col = \"baseline_non_renewable_biomass_tonnes\", baseline_data, ncv_col = \"baseline_net_calorific_value_mj_per_tonne\", group_cols = NULL, output_col = \"baseline_thermal_energy_mj\")`",
+    "`calculate_project_thermal_energy_iig(non_renewable_biomass, biomass_col = \"project_non_renewable_biomass_tonnes\", project_data, ncv_col = \"project_net_calorific_value_mj_per_tonne\", group_cols = NULL, output_col = \"project_thermal_energy_mj\")`",
+    "`calculate_emissions_from_energy_iig(energy_data, energy_col = \"baseline_thermal_energy_mj\", factor_data, emission_factor_col = \"baseline_emission_factor_tco2_per_mj\", group_cols = NULL, output_col = \"baseline_emissions_tco2e\")`",
+    "`calculate_leakage_emissions_iig(leakage_data = NULL, leakage_col = \"leakage_emissions_tco2e\", group_cols = NULL, output_col = \"leakage_emissions_tco2e\")`",
+    "`calculate_emission_reductions_iig(baseline_emissions, project_emissions, leakage_emissions = NULL, group_cols = NULL, output_col = \"emission_reductions_tco2e\")`",
+    "`aggregate_monitoring_periods_iig(monitoring_data, group_cols = \"site_id\", period_cols = c(\"year\", \"month\"), baseline_consumption_col = \"baseline_biomass_consumption_tonnes\", baseline_fraction_col = \"baseline_non_renewable_fraction\", baseline_ncv_col = \"baseline_net_calorific_value_mj_per_tonne\", baseline_emission_factor_col = \"baseline_emission_factor_tco2_per_mj\", project_consumption_col = \"project_biomass_consumption_tonnes\", project_fraction_col = \"project_non_renewable_fraction\", project_ncv_col = \"project_net_calorific_value_mj_per_tonne\", project_emission_factor_col = \"project_emission_factor_tco2_per_mj\", leakage_col = \"leakage_emissions_tco2e\")`",
+    "`estimate_emission_reductions_ams_iig(baseline_data, project_data, leakage_data = NULL, group_cols = NULL, baseline_consumption_col = \"baseline_biomass_consumption_tonnes\", baseline_fraction_col = \"baseline_non_renewable_fraction\", baseline_ncv_col = \"baseline_net_calorific_value_mj_per_tonne\", baseline_emission_factor_col = \"baseline_emission_factor_tco2_per_mj\", project_consumption_col = \"project_biomass_consumption_tonnes\", project_fraction_col = \"project_non_renewable_fraction\", project_ncv_col = \"project_net_calorific_value_mj_per_tonne\", project_emission_factor_col = \"project_emission_factor_tco2_per_mj\", leakage_col = \"leakage_emissions_tco2e\")`",
+    "`simulate_ams_iig_dataset(n_sites = 5, n_periods = 4, start_year = 2024, start_month = 1, seed = NULL, baseline_consumption_mean = 14, efficiency_gain = 0.45, baseline_fraction_mean = 0.85, project_fraction_mean = 0.4)`"
+  ),
+  Purpose = c(
+    "Applies the non-renewable fraction to baseline biomass consumption.",
+    "Applies project non-renewable fractions to monitored biomass use.",
+    "Converts baseline non-renewable biomass into thermal energy.",
+    "Converts project non-renewable biomass into thermal energy.",
+    "Derives emissions from thermal energy using the relevant factors.",
+    "Summarises leakage emissions associated with biomass supply chains.",
+    "Computes net emission reductions from baseline, project, and leakage inputs.",
+    "Aggregates monitoring data to reporting periods with derived quantities.",
+    "Meta-function orchestrating the AMS-II.G equation helpers.",
+    "Generates representative monitoring datasets for testing and demos."
+  )
+)
 
-| Equation | Function | Description |
-|----------|----------|-------------|
-| (1) | `calculate_baseline_non_renewable_biomass_iig()` | Applies the baseline non-renewable fraction to biomass consumption. |
-| (2) | `calculate_baseline_thermal_energy_iig()` | Converts baseline non-renewable biomass into thermal energy via the NCV. |
-| (3) | `calculate_project_thermal_energy_iig()` | Converts project non-renewable biomass into thermal energy. |
-| (4) | `calculate_emissions_from_energy_iig()` | Multiplies thermal energy by emission factors to obtain emissions. |
-| (5) | `calculate_leakage_emissions_iig()` | Aggregates leakage emissions by group. |
-| (6) | `calculate_emission_reductions_iig()` | Computes net emission reductions by subtracting project and leakage emissions. |
+knitr::kable(function_reference, format = "html", escape = FALSE)
+```
 
-The helper functions are designed to interoperate seamlessly with tidyverse pipelines, enabling analysts to swap in measured data once field campaigns conclude.
+# Workflow Overview
+
+```{r workflow-overview, echo = FALSE}
+workflow_steps <- tibble::tibble(
+  Step = c(
+    "Input biomass monitoring data",
+    "calculate_baseline_non_renewable_biomass_iig",
+    "calculate_project_non_renewable_biomass_iig",
+    "calculate_baseline_thermal_energy_iig",
+    "calculate_project_thermal_energy_iig",
+    "calculate_emissions_from_energy_iig",
+    "calculate_emission_reductions_iig",
+    "estimate_emission_reductions_ams_iig"
+  ),
+  Purpose = c(
+    "Collect baseline, project, and leakage parameters for each site-period.",
+    "Translate baseline biomass use into non-renewable quantities.",
+    "Translate project biomass use into non-renewable quantities.",
+    "Convert baseline non-renewable biomass into thermal energy.",
+    "Convert project non-renewable biomass into thermal energy.",
+    "Multiply energy terms by emission factors to obtain emissions.",
+    "Combine baseline, project, and leakage emissions into reductions.",
+    "Return a tidy tibble with emission reductions and supporting diagnostics."
+  )
+)
+
+knitr::kable(workflow_steps, format = "html", escape = FALSE)
+```

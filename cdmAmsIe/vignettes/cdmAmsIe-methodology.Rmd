@@ -99,6 +99,16 @@ function_reference <- tibble::tibble(
     "`estimate_emission_reductions_ams_ie()`",
     "`simulate_ams_ie_dataset()`"
   ),
+  Signature = c(
+    "`calculate_non_renewable_biomass(biomass_data, consumption_col = \"biomass_consumption_tonnes\", fraction = 1, fraction_col = \"non_renewable_fraction\", group_cols = NULL, output_col = \"non_renewable_biomass_tonnes\")`",
+    "`calculate_baseline_energy_content(non_renewable_biomass, biomass_col = \"non_renewable_biomass_tonnes\", ncv, output_col = \"baseline_energy_mj\")`",
+    "`calculate_baseline_emissions(baseline_energy, emission_factor, energy_col = \"baseline_energy_mj\", output_col = \"baseline_emissions_tco2e\")`",
+    "`calculate_project_emissions(project_energy, project_emission_factor, energy_col = \"project_energy_mj\", output_col = \"project_emissions_tco2e\")`",
+    "`calculate_emission_reductions(baseline_emissions, project_emissions, baseline_col = \"baseline_emissions_tco2e\", project_col = \"project_emissions_tco2e\", output_col = \"emission_reductions_tco2e\")`",
+    "`aggregate_monitoring_periods(biomass_data, monitoring_cols = c(\"year\", \"month\"), group_cols = \"user_id\", consumption_col = \"biomass_consumption_tonnes\", fraction_col = \"non_renewable_fraction\", ncv_col = \"net_calorific_value\", emission_factor_col = \"emission_factor\", project_energy_col = \"project_energy_mj\")`",
+    "`estimate_emission_reductions_ams_ie(biomass_data, group_cols = NULL, ncv = 15, emission_factor, project_energy_col = \"project_energy_mj\", project_emission_factor = 0, project_emission_factor_col = NULL)`",
+    "`simulate_ams_ie_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_biomass_tonnes = 22, sd_biomass_tonnes = 4, emission_factor = 0.00009)`"
+  ),
   Purpose = c(
     "Applies the non-renewable fraction to baseline biomass consumption.",
     "Converts non-renewable biomass into thermal energy using the NCV.",

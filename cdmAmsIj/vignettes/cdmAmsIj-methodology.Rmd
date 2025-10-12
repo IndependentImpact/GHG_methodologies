@@ -110,15 +110,6 @@ function_reference <- tibble::tibble(
     "`estimate_emission_reductions_ams_ij(thermal_data, baseline_emission_factor, auxiliary_emission_factor = 0, group_cols = NULL)`",
     "`simulate_ams_ij_dataset(n_sites = 10, n_periods = 12, start_year = 2023, start_month = 1, mean_useful_heat_mwh = 360, sd_useful_heat_mwh = 55, baseline_emission_factor = 0.22, auxiliary_emission_factor = 0.18)`"
   ),
-  `Equation (LaTeX)` = c(
-    "\\(Q_{useful,mp} = \\sum_{i} H_{i,mp}\\)",
-    "\\(E_{BL,mp}^{CO2} = Q_{useful,mp} \\times EF_{BL}\\)",
-    "\\(E_{PR,mp}^{CO2} = Q_{aux,mp} \\times EF_{PR}\\)",
-    "\\(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\\)",
-    "\\(ER_{mp}^{agg} = \\sum_{i} ER_{i,mp}\\)",
-    "\\(ER_{total} = \\sum_{mp} ER_{mp}\\)",
-    "\\(H_{i,mp} \\sim \\mathcal{N}(\\mu_{H}/P, \\sigma_{H}/\\sqrt{P})\\)"
-  ),
   Purpose = c(
     "Summed useful solar thermal output for each group or monitoring period.",
     "Baseline emissions derived from displaced conventional water heating.",
@@ -131,4 +122,29 @@ function_reference <- tibble::tibble(
 )
 
 knitr::kable(function_reference, format = "html", escape = FALSE)
+```
+
+# Workflow Overview
+
+```{r workflow-overview, echo = FALSE}
+workflow_steps <- tibble::tibble(
+  Step = c(
+    "Input solar thermal monitoring data",
+    "calculate_useful_thermal_output",
+    "calculate_baseline_emissions",
+    "calculate_project_emissions_auxiliary",
+    "calculate_emission_reductions",
+    "estimate_emission_reductions_ams_ij"
+  ),
+  Purpose = c(
+    "Collect monitoring period, useful heat, auxiliary energy, and emission factor metrics.",
+    "Summarise useful solar thermal output for each site or reporting period.",
+    "Apply baseline emission factors to displaced conventional energy use.",
+    "Convert auxiliary energy consumption into project emissions.",
+    "Compare baseline and project totals to obtain emission reductions.",
+    "Return a tidy tibble with reductions and supporting diagnostics."
+  )
+)
+
+knitr::kable(workflow_steps, format = "html", escape = FALSE)
 ```

@@ -89,26 +89,63 @@ wrapper_results <- estimate_emission_reductions_ams_iic(
 knitr::kable(wrapper_results, format = "html", digits = 3)
 ```
 
-# Function Interdependencies
+# Function Reference
 
-```{mermaid}
-flowchart TD
-  A[calculate_baseline_energy_consumption] --> C[calculate_energy_savings]
-  B[calculate_project_energy_consumption] --> C
-  C --> D[calculate_emission_reductions]
-  D --> E[estimate_emission_reductions_ams_iic]
+```{r reference}
+function_reference <- tibble::tibble(
+  Function = c(
+    "`calculate_baseline_energy_consumption()`",
+    "`calculate_project_energy_consumption()`",
+    "`calculate_energy_savings()`",
+    "`calculate_emission_reductions()`",
+    "`aggregate_monitoring_periods()`",
+    "`estimate_emission_reductions_ams_iic()`",
+    "`simulate_ams_iic_dataset()`"
+  ),
+  Signature = c(
+    "`calculate_baseline_energy_consumption(baseline_data, energy_col = \"baseline_energy_mwh\", group_cols = NULL, output_col = \"baseline_energy_mwh\")`",
+    "`calculate_project_energy_consumption(project_data, energy_col = \"project_energy_mwh\", group_cols = NULL, output_col = \"project_energy_mwh\")`",
+    "`calculate_energy_savings(baseline_energy, project_energy, baseline_col = \"baseline_energy_mwh\", project_col = \"project_energy_mwh\", output_col = \"energy_savings_mwh\")`",
+    "`calculate_emission_reductions(energy_savings, emission_factor, savings_col = \"energy_savings_mwh\", output_col = \"emission_reductions_tco2e\")`",
+    "`aggregate_monitoring_periods(efficiency_data, monitoring_cols = c(\"year\", \"month\"), group_cols = \"site_id\", baseline_energy_col = \"baseline_energy_mwh\", project_energy_col = \"project_energy_mwh\", emission_factor_col = \"emission_factor_tco2e_mwh\")`",
+    "`estimate_emission_reductions_ams_iic(baseline_data, project_data, emission_factor, group_cols = NULL, baseline_energy_col = \"baseline_energy_mwh\", project_energy_col = \"project_energy_mwh\")`",
+    "`simulate_ams_iic_dataset(n_sites = 8, n_periods = 12, start_year = 2023, start_month = 1, baseline_energy_mean = 120, project_energy_mean = 75, emission_factor = 0.62)`"
+  ),
+  Purpose = c(
+    "Aggregates baseline energy consumption prior to efficiency upgrades.",
+    "Summarises monitored project energy use for efficient technologies.",
+    "Computes energy savings as the difference between baseline and project energy.",
+    "Converts energy savings to emission reductions using emission factors.",
+    "Rolls monitoring data to reporting periods with energy and emission summaries.",
+    "High-level wrapper composing baseline, project, and reduction helpers.",
+    "Generates representative efficiency datasets for demonstrations and tests."
+  )
+)
+
+knitr::kable(function_reference, format = "html", escape = FALSE)
 ```
 
-# Function Reference Table
+# Workflow Overview
 
-```{r reference-table}
-library(dplyr)
-reference <- tibble::tribble(
-  ~Equation, ~Function, ~Description,
-  "(1)", "calculate_baseline_energy_consumption()", "Aggregates baseline energy consumption prior to retrofits.",
-  "(2)", "calculate_project_energy_consumption()", "Aggregates monitored project energy use of efficient technology.",
-  "(3)", "calculate_energy_savings()", "Computes energy savings as baseline minus project energy.",
-  "(4)", "calculate_emission_reductions()", "Converts energy savings to emission reductions using emission factors."
+```{r workflow-overview, echo = FALSE}
+workflow_steps <- tibble::tibble(
+  Step = c(
+    "Input efficiency monitoring data",
+    "calculate_baseline_energy_consumption",
+    "calculate_project_energy_consumption",
+    "calculate_energy_savings",
+    "calculate_emission_reductions",
+    "estimate_emission_reductions_ams_iic"
+  ),
+  Purpose = c(
+    "Collect site-level baseline and project energy measurements.",
+    "Aggregate baseline energy consumption prior to retrofits.",
+    "Aggregate project energy consumption after retrofits.",
+    "Compute savings that feed subsequent emission calculations.",
+    "Convert energy savings to emission reductions using emission factors.",
+    "Return a tidy tibble with reductions and supporting diagnostics."
+  )
 )
-knitr::kable(reference, format = "html")
+
+knitr::kable(workflow_steps, format = "html", escape = FALSE)
 ```

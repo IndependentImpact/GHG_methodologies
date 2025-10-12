@@ -107,15 +107,6 @@ function_reference <- tibble::tibble(
     "`estimate_emission_reductions_ams_ic(thermal_data, baseline_emission_factor, project_emission_factor = 0, group_cols = NULL)`",
     "`simulate_ams_ic_dataset(n_facilities = 10, n_periods = 12, start_year = 2023, start_month = 1, mean_thermal_mwh = 12000, sd_thermal_mwh = 1800, baseline_emission_factor = 0.27, project_emission_factor = 0.01)`"
   ),
-  `Equation (LaTeX)` = c(
-    "\\(Q_{BL,mp} = \\sum_{i} H_{i,mp}\\)",
-    "\\(E_{BL,mp}^{CO2} = Q_{BL,mp} \\times EF_{BL}\\)",
-    "\\(E_{PR,mp}^{CO2} = Q_{BL,mp} \\times EF_{PR}\\)",
-    "\\(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\\)",
-    "\\(ER_{mp}^{agg} = \\sum_{i} ER_{i,mp}\\)",
-    "\\(ER_{total} = \\sum_{mp} ER_{mp}\\)",
-    "\\(H_{i,mp} \\sim \\mathcal{N}(\\mu_{H}/P, \\sigma_{H}/\\sqrt{P})\\)"
-  ),
   Purpose = c(
     "Summed baseline thermal output for each group or monitoring period.",
     "Baseline emissions using the displaced fossil heat factor.",
