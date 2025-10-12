@@ -156,3 +156,145 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | E_{PR,b,y}^{onsite} | Onsite supply emissions | Emissions from onsite fossil energy supply operated in the project scenario (tCO2e) | Equation (3) |
 | LE_{b,y} | Leakage emissions | Emissions from project leakage sources such as auxiliary fossil fuels (tCO2e) | Methodology Section 7 |
 | ER_{b,y} | Emission reductions | Net emission reductions \(E_{BL,b,y}^{CO2} - E_{PR,b,y}^{grid} - E_{PR,b,y}^{onsite} - LE_{b,y}\) (tCO2e) | Equation (4) |
+
+### Methodology: AMS-I.J
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{useful,mp} | Useful thermal output | Useful thermal energy delivered by the solar water heating system during monitoring period \(mp\) (MWhth) | Equation (1) output column `useful_thermal_output_mwh` |
+| EF_{BL} | Baseline emission factor | Emission factor representing displaced fossil or electric water heating (tCO2e/MWhth) | Applied in Equation (2) |
+| E_{BL,mp}^{CO2} | Baseline emissions | \(Q_{useful,mp} \times EF_{BL}\) (tCO2e) | Column `baseline_emissions_tco2e` |
+| Q_{aux,mp} | Auxiliary energy use | Fossil or electric auxiliary energy consumed under the project (MWhth) | Summed in Equation (3) input column `auxiliary_energy_mwh` |
+| EF_{PR} | Project emission factor | Emission factor applied to auxiliary energy (tCO2e/MWhth) | Grid or fuel specific |
+| E_{PR,mp}^{CO2} | Project emissions | \(Q_{aux,mp} \times EF_{PR}\) (tCO2e) | Column `project_emissions_tco2e` |
+| ER_{mp} | Emission reductions | \(E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\) (tCO2e) | Equation (4) column `emission_reductions_tco2e` |
+
+### Methodology: AMS-II.F
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| F_{BL,mp} | Baseline fossil fuel energy | Fossil fuel energy demand for agricultural processing during monitoring period \(mp\) (GJ) | Column `baseline_fuel_energy_gj` |
+| EF_{BL}^{fuel} | Baseline fossil fuel emission factor | Emission factor applied to baseline fossil fuel use (tCO2e/GJ) | Column `baseline_fuel_emission_factor_tco2_per_gj` |
+| E_{BL,mp}^{fuel} | Baseline fossil fuel emissions | \(F_{BL,mp} \times EF_{BL}^{fuel}\) (tCO2e) | Summed in Equation (1) |
+| Q_{BL,mp}^{elec} | Baseline electricity consumption | Electricity displaced by the project in monitoring period \(mp\) (MWh) | Column `baseline_electricity_mwh` |
+| EF_{BL}^{elec} | Baseline electricity emission factor | Emission factor for baseline electricity use (tCO2e/MWh) | Column `baseline_electricity_emission_factor_tco2_per_mwh` |
+| BE_{mp} | Total baseline emissions | Sum of fossil and electricity emissions (tCO2e) | Column `baseline_emissions_tco2e` |
+| F_{PR,mp} | Project fossil fuel energy | Fossil energy consumed in the project scenario (GJ) | Column `project_fuel_energy_gj` |
+| EF_{PR}^{fuel} | Project fossil fuel emission factor | Emission factor for project fossil energy (tCO2e/GJ) | Column `project_fuel_emission_factor_tco2_per_gj` |
+| Q_{PR,mp}^{elec} | Project electricity use | Electricity consumed by the improved system (MWh) | Column `project_electricity_mwh` |
+| EF_{PR}^{elec} | Project electricity emission factor | Emission factor for project electricity (tCO2e/MWh) | Column `project_electricity_emission_factor_tco2_per_mwh` |
+| PE_{mp} | Project emissions | Sum of project fossil and electricity emissions (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{mp} | Leakage emissions | Emissions from transport, displaced fuels, or other leakage sources (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{mp} | Emission reductions | \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Column `emission_reductions_tco2e` |
+
+### Methodology: AMS-II.H
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| F_{BL,mp} | Baseline decentralized fuel use | Fuel consumed by decentralized utility equipment (GJ) | Column `baseline_fuel_use_gj` |
+| EF_{BL} | Baseline emission factor | Emission factor for decentralized fuel (tCO2e/GJ) | Column `baseline_emission_factor_tco2_per_gj` |
+| Q_{BL,mp}^{use} | Useful output from baseline | Thermal or chilled output delivered by baseline equipment (GJ) | Column `baseline_useful_output_gj` |
+| SE_{BL} | Baseline specific energy | Ratio of baseline fuel to useful output (GJ/GJ) | Column `baseline_specific_energy_gj_per_gj` |
+| F_{PR,mp} | Project central fuel use | Fuel consumed by centralized utility system (GJ) | Column `project_fuel_use_gj` |
+| EF_{PR} | Project emission factor | Emission factor for centralized fuel (tCO2e/GJ) | Column `project_emission_factor_tco2_per_gj` |
+| Q_{PR,mp}^{use} | Useful output from project | Thermal or chilled output delivered centrally (GJ) | Column `project_useful_output_gj` |
+| SE_{PR} | Project specific energy | Ratio of project fuel to useful output (GJ/GJ) | Column `project_specific_energy_gj_per_gj` |
+| Q_{aux,mp}^{elec} | Auxiliary electricity use | Electricity required for pumps, controls, or distribution (MWh) | Column `project_auxiliary_electricity_mwh` |
+| EF_{grid} | Grid emission factor | Emission factor for auxiliary electricity (tCO2e/MWh) | Column `project_electricity_emission_factor_tco2_per_mwh` |
+| PE_{mp} | Project emissions | Combined centralized and auxiliary emissions (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{mp} | Leakage emissions | Emissions associated with fuel supply chains or offsite effects (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{mp} | Emission reductions | \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Column `emission_reductions_tco2e` |
+
+### Methodology: AMS-III.A
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| N_{BL} | Baseline synthetic nitrogen use | Mass of synthetic nitrogen applied in the baseline (kg N) | Column `synthetic_n_applied_kg` |
+| EF_{prod} | Production emission factor | Upstream emission factor for synthetic fertilizer production (tCO2e/kg N) | Column `production_ef_tco2_per_kg` |
+| EF_{field} | Field emission factor | Direct soil emission factor for applied nitrogen (tCO2e/kg N) | Column `field_ef_tco2_per_kg` |
+| BE_{y} | Baseline emissions | \(N_{BL} \times (EF_{prod} + EF_{field})\) (tCO2e) | Column `baseline_emissions_tco2e` |
+| N_{PR} | Project residual nitrogen | Synthetic nitrogen still applied under the project (kg N) | Column `synthetic_n_applied_kg` in project dataset |
+| PE_{fert,y} | Project fertilizer emissions | Residual fertilizer emissions (tCO2e) | Column `project_fertilizer_emissions_tco2e` |
+| R_{inoc} | Inoculant application rate | Mass of inoculant applied per hectare (kg/ha) | Column `inoculant_rate_kg_per_ha` |
+| A_{legume} | Legume area | Area of legume cultivation (ha) | Column `legume_area_ha` |
+| EF_{inoc} | Inoculant emission factor | Lifecycle emission factor for inoculant (tCO2e/kg) | Column `inoculant_ef_tco2_per_kg` |
+| PE_{inoc,y} | Inoculant emissions | \(R_{inoc} \times A_{legume} \times EF_{inoc}\) (tCO2e) | Column `project_inoculant_emissions_tco2e` |
+| LE_{y} | Leakage emissions | Emissions from displaced fertilizer use or other leakage (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{y} | Emission reductions | \(BE_{y} - (PE_{fert,y} + PE_{inoc,y}) - LE_{y}\) (tCO2e) | Column `emission_reductions_tco2e` |
+
+### Methodology: AMS-III.D
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| VS | Volatile solids generation | Volatile solids excreted per animal (kg VS/day) | Column `volatile_solids_kg_per_day` |
+| B_{0} | Methane producing potential | Methane generation potential (m\(^3\) CH\(_4\)/kg VS) | Column `methane_potential_m3_per_kg_vs` |
+| MCF_{BL} | Baseline methane conversion factor | Fraction of methane produced under baseline management | Column `baseline_mcf_fraction` |
+| d | Monitoring days | Number of days represented by the record | Column `days_in_period` |
+| BE_{y} | Baseline emissions | Methane generated under baseline converted to tCO2e | Column `baseline_emissions_tco2e` |
+| MCF_{PR} | Project methane conversion factor | Fraction of methane produced under project conditions | Column `project_mcf_fraction` |
+| η_{cap} | Capture efficiency | Fraction of methane captured by the recovery system | Column `capture_efficiency_fraction` |
+| η_{dest} | Destruction efficiency | Fraction of captured methane destroyed | Column `destruction_efficiency_fraction` |
+| PE_{y} | Project emissions | Residual methane after capture/destruction (tCO2e) | Column `project_emissions_tco2e` |
+| MD_{y} | Methane destroyed | Methane recovered and destroyed (tCO2e) | Column `recovered_methane_tco2e` |
+| LE_{y} | Leakage emissions | Emissions from displaced manure management (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{y} | Emission reductions | \(BE_{y} - PE_{y} + MD_{y} - LE_{y}\) (tCO2e) | Column `emission_reductions_tco2e` |
+
+### Methodology: AMS-III.E
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| M_{BL} | Baseline biomass quantity | Biomass subject to anaerobic decay in the baseline (tonnes) | Column `biomass_tonnes` |
+| B_{0} | Methane generation potential | Methane potential per tonne of biomass (m\(^3\)/tonne) | Column `methane_potential_m3_per_tonne` |
+| f_{anaer} | Anaerobic decay fraction | Fraction of biomass expected to decay anaerobically | Column `anaerobic_decay_fraction` |
+| d | Monitoring days | Number of days represented in the period | Column `days_in_period` |
+| BE_{y} | Baseline emissions | Methane from unmanaged decay converted to tCO2e | Column `baseline_emissions_tco2e` |
+| M_{PR} | Treated biomass | Biomass treated under the project (tonnes) | Column `treated_biomass_tonnes` |
+| f_{slip} | Methane slip fraction | Fraction of methane not destroyed by the treatment | Column `methane_slip_fraction` |
+| Q_{aux} | Auxiliary fuel consumption | Auxiliary fossil fuel energy supporting treatment (TJ) | Column `auxiliary_fuel_consumption_tj` |
+| EF_{aux} | Auxiliary fuel emission factor | Emission factor for auxiliary fuel (tCO2e/TJ) | Column `auxiliary_fuel_ef_tco2_per_tj` |
+| Q_{backup} | Backup fossil use | Backup fossil fuel consumed when applicable (TJ) | Column `fossil_backup_consumption_tj` |
+| EF_{backup} | Backup emission factor | Emission factor for backup fuel (tCO2e/TJ) | Column `fossil_backup_ef_tco2_per_tj` |
+| PE_{y} | Project emissions | Methane slip plus auxiliary and backup emissions (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{y} | Leakage emissions | Transport and alternative use emissions (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{y} | Emission reductions | \(BE_{y} - PE_{y} - LE_{y}\) (tCO2e) | Column `net_emission_reductions_tco2e` |
+
+### Methodology: AMS-III.F
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| W_{BL} | Baseline waste mass | Compostable waste subject to anaerobic decay (tonnes) | Column `waste_tonnes` |
+| DOC | Degradable organic carbon fraction | Fraction of carbon in waste that is degradable | Column `doc_fraction` |
+| DOC_f | Fraction of DOC that decomposes | Portion of DOC that actually degrades | Column `docf_fraction` |
+| MCF_{BL} | Baseline methane correction factor | Methane correction factor for unmanaged disposal | Column `baseline_mcf_fraction` |
+| OX_{BL} | Oxidation factor | Fraction of methane oxidised in baseline conditions | Column `oxidation_factor` |
+| BE_{y} | Baseline emissions | Methane generation converted to tCO2e | Column `baseline_emissions_tco2e` |
+| W_{PR} | Composted waste mass | Waste processed under controlled composting (tonnes) | Column `composted_waste_tonnes` |
+| MCF_{PR} | Project methane correction factor | Methane correction factor achieved by composting | Column `compost_mcf_fraction` |
+| OX_{PR} | Project oxidation factor | Oxidation factor within the compost matrix | Column `compost_oxidation_fraction` |
+| E_{elec} | Project electricity use | Electricity consumed by the facility (MWh) | Column `electricity_mwh` |
+| EF_{elec} | Electricity emission factor | Grid emission factor for electricity (tCO2e/MWh) | Column `grid_ef_tco2_per_mwh` |
+| E_{fuel} | Fossil fuel consumption | Fossil fuel used for mobile equipment (units or energy) | Column `diesel_litres` |
+| EF_{fuel} | Fossil fuel emission factor | Emission factor for fossil fuel input (tCO2e per unit) | Column `diesel_ef_tco2_per_litre` |
+| PE_{y} | Project emissions | Residual methane plus energy use emissions (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{y} | Leakage emissions | Transport, residual waste, minus displaced fertilizer emissions (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{y} | Emission reductions | \(BE_{y} - PE_{y} - LE_{y}\) (tCO2e) | Column `net_emission_reductions_tco2e` |
+
+### Methodology: AMS-III.G
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| W_{disp} | Waste disposed | Mass of waste entering the landfill (tonnes) | Column `waste_disposed_tonnes` |
+| L_{0} | Methane generation potential | Methane potential per tonne of waste (m\(^3\)/tonne) | Column `methane_generation_potential_m3_per_tonne` |
+| η_{BL}^{col} | Baseline collection efficiency | Fraction of methane recovered in the baseline | Column `baseline_collection_efficiency_fraction` |
+| OX_{BL} | Baseline oxidation fraction | Fraction of methane oxidised in landfill cover | Column `oxidation_fraction` |
+| BE_{y} | Baseline emissions | Methane emitted without the project (tCO2e) | Column `baseline_emissions_tco2e` |
+| η_{PR}^{col} | Project collection efficiency | Fraction of methane captured under the project | Column `project_collection_efficiency_fraction` |
+| η_{dest} | Destruction efficiency | Fraction of captured methane destroyed | Column `destruction_efficiency_fraction` |
+| OX_{PR} | Project oxidation fraction | Fraction of uncaptured methane oxidised | Column `oxidation_fraction` in project dataset |
+| E_{elec} | Electricity consumption | Electricity required for gas recovery (MWh) | Column `electricity_consumption_mwh` |
+| EF_{elec} | Electricity emission factor | Grid emission factor applied to electricity (tCO2e/MWh) | Column `electricity_ef_tco2_per_mwh` |
+| E_{diesel} | Diesel consumption | Diesel used by onsite equipment (litres) | Column `diesel_consumption_litres` |
+| EF_{diesel} | Diesel emission factor | Emission factor for diesel (tCO2e/litre) | Column `diesel_ef_tco2_per_litre` |
+| PE_{y} | Project emissions | Residual methane plus onsite energy emissions (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{y} | Leakage emissions | Transport, residual waste, minus exported energy credits (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{y} | Emission reductions | \(BE_{y} - PE_{y} - LE_{y}\) (tCO2e) | Column `net_emission_reductions_tco2e` |
