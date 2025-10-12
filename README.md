@@ -98,6 +98,10 @@
 - **cdmAmsIIq**: Implements AMS-II.Q commercial building efficiency and onsite supply projects, providing
   baseline and project emission workflows, service coverage applicability checks, energy intensity diagnostics,
   and simulation utilities for multi-building portfolios.
+- **cdmAmsIIIa**: Implements AMS-III.A nitrogen fertiliser offsetting with inoculants, including soil emission accounting, applicability diagnostics, and simulation utilities.
+- **cdmAmsIIId**: Implements AMS-III.D manure methane recovery with equation helpers, monitoring aggregation, applicability checks, and simulation datasets.
+- **cdmAmsIIIe**: Implements AMS-III.E biomass decay avoidance via thermal/mechanical treatment with applicability diagnostics, emissions accounting, and simulation helpers.
+- **cdmAmsIIIf**: Implements AMS-III.F avoidance of methane emissions through composting, providing waste characterisation diagnostics, composting equation helpers, leakage accounting, and simulation utilities.
 
 All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
 package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities, **cdmAmsIId** for industrial
