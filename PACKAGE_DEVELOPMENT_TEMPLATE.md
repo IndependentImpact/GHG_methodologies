@@ -41,13 +41,19 @@ This repository hosts a collection of R packages implementing CDM methodologies.
 - Document simulation parameters and default values, emphasising tidyverse compatibility.
 
 ## 7. Vignettes
-- Create a vignette (`vignettes/<package>-methodology.Rmd`) that includes:
-  - A narrative description of the methodology and its data requirements.
-  - A walkthrough using the simulated dataset and all equation-level functions plus the meta-function.
-  - A section demonstrating monitoring-period aggregation and the accompanying helper function.
-  - A diagram (e.g. Mermaid flowchart) showing function interdependencies and data flow.
-  - A function reference table linking to documentation. Format tabular output using `knitr::kable()` or `gt::gt()` and pair
-    each numbered equation with its LaTeX form alongside the function signature that implements it.
+- Create a vignette (`vignettes/<package>-methodology.Rmd`) that mirrors the AMS-I.A example. The structure must include, in
+  order:
+  1. **Introduction** — narrative description of the methodology and its data requirements.
+  2. **Applicability Checks** — runnable examples for each applicability helper.
+  3. **Simulated Dataset** — generation of the package's simulated data with `knitr::kable()` output.
+  4. **Equation Walkthrough** — sequential execution of the equation-level helpers.
+  5. **Monitoring Period Aggregation** — demonstration of `aggregate_monitoring_periods()` or the package-specific wrapper.
+  6. **Meta-Function** — call to the high-level estimator tying the helpers together.
+  7. **Function Reference** — a table with exactly three columns (`Function`, `Signature`, `Purpose`) rendered via
+     `knitr::kable()`.
+  8. **Workflow Overview** — a tabular summary of the end-to-end steps.
+- Optional diagrams (e.g. Mermaid flowcharts) can be included in the workflow section but should not replace the required
+  subsections.
 
 ## 8. Workflow Checklist
 1. Generate the package skeleton with `usethis::create_package()`.

@@ -96,15 +96,6 @@ function_reference <- tibble::tibble(
     "`estimate_emission_reductions_ams_ia(generation_data, grid_emission_factor, project_emission_factor = 0, group_cols = NULL)`",
     "`simulate_ams_ia_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_generation_kwh = 15000, sd_generation_kwh = 2000, grid_emission_factor = 0.75)`"
   ),
-  `Equation (LaTeX)` = c(
-    "\\(E_{BL,mp} = \\sum_{i} G_{i,mp}\\)",
-    "\\(E_{BL,mp}^{CO2} = E_{BL,mp} \\times EF_{grid}\\)",
-    "\\(E_{PR,mp}^{CO2} = E_{BL,mp} \\times EF_{PR}\\)",
-    "\\(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\\)",
-    "\\(ER_{mp}^{agg} = \\sum_{i} ER_{i,mp}\\)",
-    "\\(ER_{total} = \\sum_{mp} ER_{mp}\\)",
-    "\\(G_{i,mp} \\sim \\mathcal{N}(\\mu_{G}/P, \\sigma_{G}/\\sqrt{P})\\)"
-  ),
   Purpose = c(
     "Summed baseline generation for each group or monitoring period.",
     "Baseline emissions using the applicable grid factor.",

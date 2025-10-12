@@ -102,15 +102,6 @@ function_reference <- tibble::tibble(
     "`estimate_emission_reductions_ams_ib(fuel_data, consumption_col = \"fuel_consumption\", ncv_col = \"net_calorific_value\", group_cols = NULL, emission_factor, project_energy_col = NULL, project_emission_factor = 0)`",
     "`simulate_ams_ib_dataset(n_machines = 15, n_periods = 12, start_year = 2023, start_month = 1, mean_service_mj = 48000, sd_service_mj = 6000, emission_factor = 0.00007, project_fossil_share = 0.05)`"
   ),
-  `Equation (LaTeX)` = c(
-    "\\(Q_{BL,mp} = \\sum_{i} FC_{i,mp} \\times NCV_i\\)",
-    "\\(E_{BL,mp}^{CO2} = Q_{BL,mp} \\times EF_{BL}\\)",
-    "\\(E_{PR,mp}^{CO2} = Q_{PR,mp} \\times EF_{PR}\\)",
-    "\\(ER_{mp} = E_{BL,mp}^{CO2} - E_{PR,mp}^{CO2}\\)",
-    "\\(ER_{mp}^{agg} = \\sum_{i} ER_{i,mp}\\)",
-    "\\(ER_{total} = \\sum_{mp} ER_{mp}\\)",
-    "\\(FC_{i,mp} = Q_{BL,mp} / NCV_i\\)"
-  ),
   Purpose = c(
     "Convert baseline fuel consumption into mechanical energy.",
     "Calculate baseline emissions using fossil fuel factors.",
