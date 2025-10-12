@@ -103,6 +103,7 @@
 - **cdmAmsIIIe**: Implements AMS-III.E biomass decay avoidance via thermal/mechanical treatment with applicability diagnostics, emissions accounting, and simulation helpers.
 - **cdmAmsIIIf**: Implements AMS-III.F avoidance of methane emissions through composting, providing waste characterisation diagnostics, composting equation helpers, leakage accounting, and simulation utilities.
 - **cdmAmsIIIh**: Implements AMS-III.H methane recovery in wastewater treatment with applicability diagnostics, COD-based emission accounting, leakage aggregation, monitoring helpers, and simulation utilities for anaerobic treatment systems.
+- **cdmAmsIIIaj**: Implements AMS-III.AJ recovery and recycling of materials from solid wastes with material quality diagnostics, recycling emissions calculators, monitoring aggregation, and simulation utilities for recycling programmes.
 
 All Type I small-scale methodologies (AMS-I.A through AMS-I.J) now have complete R packages in this repository. The Type II
 package suite currently includes **cdmAmsIIc** for demand-side energy efficiency activities, **cdmAmsIId** for industrial
