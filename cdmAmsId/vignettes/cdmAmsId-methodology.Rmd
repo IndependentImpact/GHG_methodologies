@@ -112,12 +112,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_id_dataset(n_grids = 10, n_periods = 12, start_year = 2023, start_month = 1, mean_supply_mwh = 18000, sd_supply_mwh = 2500, baseline_emission_factor = 0.7, project_emission_factor = 0.02)`"
   ),
   Purpose = c(
-    "Summed baseline electricity supply for each group or monitoring period.",
-    "Baseline emissions derived from fossil electricity emission factors.",
-    "Project emissions reflecting auxiliary fossil generation.",
-    "Emission reductions obtained from the difference between baseline and project emissions.",
-    "Monitoring-period aggregation consistent with methodology equations.",
-    "Meta-calculation wrapper chaining the equation helpers.",
+    "Summed baseline electricity supply for each group or monitoring period.<br>\\(E^{BL}_y = \\sum_i E_{i,y}\\)",
+    "Baseline emissions derived from fossil electricity emission factors.<br>\\(BE_y = E^{BL}_y \\times EF^{BL}\\)",
+    "Project emissions reflecting auxiliary fossil generation.<br>\\(PE_y = E^{BL}_y \\times EF^{PR}\\)",
+    "Emission reductions obtained from the difference between baseline and project emissions.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Monitoring-period aggregation consistent with methodology equations.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Meta-calculation wrapper chaining the equation helpers.<br>\\(ER_y = BE_y - PE_y\\)",
     "Data generator for examples, testing, and onboarding."
   )
 )

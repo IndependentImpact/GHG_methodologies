@@ -157,11 +157,11 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iih_inputs(n_facilities = 4, seed = NULL, baseline_fuel_mean = 4200, central_efficiency_gain = 0.35, electricity_intensity = 0.045, leakage_fraction = 0.02)`"
   ),
   Purpose = c(
-    "Summarises decentralized baseline fuel use and emissions, optionally reporting specific energy.",
-    "Quantifies emissions from the centralized utility system implemented by the project.",
-    "Converts auxiliary electricity consumption into project emissions using grid factors.",
-    "Combines baseline, project, and leakage emissions to obtain net reductions.",
-    "Meta-function chaining the AMS-II.H equation helpers into a tidy workflow.",
+    "Summarises decentralized baseline fuel use and emissions, optionally reporting specific energy.<br>\\(BE_y = \\sum_i FC^{BL}_{i,y} \\times EF^{BL}_{i,y}\\)",
+    "Quantifies emissions from the centralized utility system implemented by the project.<br>\\(PE^{central}_y = \\sum_i FC^{PR}_{i,y} \\times EF^{PR}_{i,y}\\)",
+    "Converts auxiliary electricity consumption into project emissions using grid factors.<br>\\(PE^{aux}_y = \\sum_i EC^{aux}_{i,y} \\times EF^{grid}_{i,y}\\)",
+    "Combines baseline, project, and leakage emissions to obtain net reductions.<br>\\(ER_y = BE_y - (PE^{central}_y + PE^{aux}_y + LE_y)\\)",
+    "Meta-function chaining the AMS-II.H equation helpers into a tidy workflow.<br>\\(ER_y = BE_y - (PE^{central}_y + PE^{aux}_y + LE_y)\\)",
     "Generates representative baseline, project, and leakage datasets for demonstrations and tests."
   )
 )

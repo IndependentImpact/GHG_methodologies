@@ -114,13 +114,13 @@ function_reference <- tibble::tibble(
     "`simulate_ams_ie_dataset(n_users = 20, n_periods = 12, start_year = 2023, start_month = 1, mean_biomass_tonnes = 22, sd_biomass_tonnes = 4, emission_factor = 0.00009)`"
   ),
   Purpose = c(
-    "Applies the non-renewable fraction to baseline biomass consumption.",
-    "Converts non-renewable biomass into thermal energy using the NCV.",
-    "Multiplies baseline energy by the baseline emission factor.",
-    "Converts residual fossil energy into project emissions.",
-    "Subtracts project emissions from baseline emissions to obtain reductions.",
-    "Aggregates monitoring data by entity and reporting period.",
-    "Chains the equation helpers into a tidyverse-friendly workflow.",
+    "Applies the non-renewable fraction to baseline biomass consumption.<br>\\(NRB_y = \\sum_i B_{i,y} \\times f^{NR}_{i,y}\\)",
+    "Converts non-renewable biomass into thermal energy using the NCV.<br>\\(E^{BL}_y = NRB_y \\times NCV_y\\)",
+    "Multiplies baseline energy by the baseline emission factor.<br>\\(BE_y = E^{BL}_y \\times EF^{BL}_y\\)",
+    "Converts residual fossil energy into project emissions.<br>\\(PE_y = \\sum_i E^{PR}_{i,y} \\times EF^{PR}_{i,y}\\)",
+    "Subtracts project emissions from baseline emissions to obtain reductions.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Aggregates monitoring data by entity and reporting period.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Chains the equation helpers into a tidyverse-friendly workflow.<br>\\(ER_y = BE_y - PE_y\\)",
     "Generates synthetic monitoring data for examples and tests."
   )
 )

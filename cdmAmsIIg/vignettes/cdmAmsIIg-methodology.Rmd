@@ -173,15 +173,15 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iig_dataset(n_sites = 5, n_periods = 4, start_year = 2024, start_month = 1, seed = NULL, baseline_consumption_mean = 14, efficiency_gain = 0.45, baseline_fraction_mean = 0.85, project_fraction_mean = 0.4)`"
   ),
   Purpose = c(
-    "Applies the non-renewable fraction to baseline biomass consumption.",
-    "Applies project non-renewable fractions to monitored biomass use.",
-    "Converts baseline non-renewable biomass into thermal energy.",
-    "Converts project non-renewable biomass into thermal energy.",
-    "Derives emissions from thermal energy using the relevant factors.",
-    "Summarises leakage emissions associated with biomass supply chains.",
-    "Computes net emission reductions from baseline, project, and leakage inputs.",
-    "Aggregates monitoring data to reporting periods with derived quantities.",
-    "Meta-function orchestrating the AMS-II.G equation helpers.",
+    "Applies the non-renewable fraction to baseline biomass consumption.<br>\\(NRB^{BL}_y = \\sum_i FC^{BL}_{i,y} \\times f^{NR}_{i,y}\\)",
+    "Applies project non-renewable fractions to monitored biomass use.<br>\\(NRB^{PR}_y = \\sum_i FC^{PR}_{i,y} \\times f^{NR}_{i,y}\\)",
+    "Converts baseline non-renewable biomass into thermal energy.<br>\\(E^{BL}_y = NRB^{BL}_y \\times NCV^{BL}_y\\)",
+    "Converts project non-renewable biomass into thermal energy.<br>\\(E^{PR}_y = NRB^{PR}_y \\times NCV^{PR}_y\\)",
+    "Derives emissions from thermal energy using the relevant factors.<br>\\(EM_y = \\sum_i E_{i,y} \\times EF_{i,y}\\)",
+    "Summarises leakage emissions associated with biomass supply chains.<br>\\(LE_y = \\sum_i LE_{i,y}\\)",
+    "Computes net emission reductions from baseline, project, and leakage inputs.<br>\\(ER_y = BE_y - PE_y - LE_y\\)",
+    "Aggregates monitoring data to reporting periods with derived quantities.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y} - LE_{p,y}\\)",
+    "Meta-function orchestrating the AMS-II.G equation helpers.<br>\\(ER_y = BE_y - PE_y - LE_y\\)",
     "Generates representative monitoring datasets for testing and demos."
   )
 )
