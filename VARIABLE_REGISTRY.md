@@ -102,16 +102,19 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 
 | Symbol | Variable Name | Definition | Notes |
 |--------|---------------|------------|-------|
-| FC_{BL,i,mp} | Baseline fuel consumption | Quantity of fossil fuel \(i\) consumed by baseline equipment during monitoring period \(mp\) (mass or volume units) | Input to Equation (1) |
-| NCV_{i} | Net calorific value | Energy content of fuel \(i\) (GJ per unit) | IPCC defaults or measured values |
-| EF_{BL,i} | Baseline emission factor | Carbon dioxide emission factor for fuel \(i\) (tCO2e/GJ) | IPCC defaults or laboratory data |
-| \eta_{BL} | Baseline efficiency | Thermal efficiency of the baseline equipment (fraction) | Adjusts baseline energy use |
-| FC_{PR,i,mp} | Project fuel consumption | Quantity of fossil fuel \(i\) consumed by the project system in monitoring period \(mp\) | Input to Equation (2) |
-| EF_{PR,i} | Project emission factor | Emission factor for project fuel mix (tCO2e/GJ) | Reflects fuel switching |
-| \eta_{PR} | Project efficiency | Thermal efficiency of the improved system (fraction) | Captures efficiency gains |
-| E_{elec,mp} | Indirect electricity emissions | Emissions from auxiliary electricity use in monitoring period \(mp\) (tCO2e) | Optional addition to Equation (2) |
-| LE_{mp} | Leakage emissions | Emissions from market effects or displaced fuels during monitoring period \(mp\) (tCO2e) | Equation (3) |
-| ER_{mp} | Emission reductions | Net emission reductions \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Equation (4) |
+| FC_{BL,i,mp} | Baseline fuel consumption | Quantity of fossil fuel \(i\) consumed by baseline equipment during monitoring period \(mp\) (mass or volume units) | Column `baseline_fuel_quantity` |
+| NCV_{i} | Net calorific value | Energy content of fuel \(i\) (GJ per unit) | Column `baseline_ncv_gj_per_unit` |
+| EF_{BL,i} | Baseline emission factor | Carbon dioxide emission factor for fuel \(i\) (tCO2e/GJ) | Column `baseline_emission_factor_tco2_per_gj` |
+| \eta_{BL} | Baseline efficiency | Thermal efficiency of the baseline equipment (fraction) | Column `baseline_efficiency` |
+| BE_{mp} | Baseline emissions | \(FC_{BL,i,mp} \times NCV_{i} \times EF_{BL,i} / \eta_{BL}\) (tCO2e) | Column `baseline_emissions_tco2e` |
+| FC_{PR,i,mp} | Project fuel consumption | Quantity of fossil fuel \(i\) consumed by the project system in monitoring period \(mp\) | Column `project_fuel_quantity` |
+| NCV_{PR,i} | Project net calorific value | Energy content of project fuel \(i\) (GJ per unit) | Column `project_ncv_gj_per_unit` |
+| EF_{PR,i} | Project emission factor | Emission factor for project fuel mix (tCO2e/GJ) | Column `project_emission_factor_tco2_per_gj` |
+| \eta_{PR} | Project efficiency | Thermal efficiency of the improved system (fraction) | Column `project_efficiency` |
+| E_{elec,mp} | Indirect electricity emissions | Emissions from auxiliary electricity use in monitoring period \(mp\) (tCO2e) | Column `electricity_emissions_tco2e` (optional) |
+| PE_{mp} | Project emissions | Fossil and indirect electricity emissions under the project (tCO2e) | Column `project_emissions_tco2e` |
+| LE_{mp} | Leakage emissions | Emissions from market effects or displaced fuels during monitoring period \(mp\) (tCO2e) | Column `leakage_emissions_tco2e` |
+| ER_{mp} | Emission reductions | Net emission reductions \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Column `emission_reductions_tco2e` |
 
 ### Methodology: AMS-II.E
 
