@@ -152,12 +152,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iif_dataset(n_facilities = 6, n_periods = 12, start_year = 2023, start_month = 1, baseline_electricity_mean = 140, baseline_fuel_mean = 420, electricity_savings = 0.22, fuel_savings = 0.38, fuel_switch_reduction = 0.35)`"
   ),
   Purpose = c(
-    "Aggregates baseline fossil fuel and electricity use into emissions.",
-    "Summarises project energy use into comparable emission totals.",
-    "Collects leakage emissions associated with agricultural interventions.",
-    "Computes emission reductions from baseline, project, and leakage components.",
-    "Rolls monitoring data to reporting periods for downstream analysis.",
-    "Wrapper orchestrating the baseline, project, leakage, and reduction helpers.",
+    "Aggregates baseline fossil fuel and electricity use into emissions.<br>\\(BE_y = \\sum_i Fuel^{BL}_{i,y} \\times EF^{fuel,BL}_{i,y} + \\sum_i E^{el,BL}_{i,y} \\times EF^{el,BL}_{i,y}\\)",
+    "Summarises project energy use into comparable emission totals.<br>\\(PE_y = \\sum_i Fuel^{PR}_{i,y} \\times EF^{fuel,PR}_{i,y} + \\sum_i E^{el,PR}_{i,y} \\times EF^{el,PR}_{i,y}\\)",
+    "Collects leakage emissions associated with agricultural interventions.<br>\\(LE_y = \\sum_i LE_{i,y}\\)",
+    "Computes emission reductions from baseline, project, and leakage components.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
+    "Rolls monitoring data to reporting periods for downstream analysis.<br>\\(ER_{p,y} = BE_{p,y} - (PE_{p,y} + LE_{p,y})\\)",
+    "Wrapper orchestrating the baseline, project, leakage, and reduction helpers.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
     "Generates representative agricultural monitoring datasets for demos and tests."
   )
 )

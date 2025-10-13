@@ -107,12 +107,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_ib_dataset(n_machines = 15, n_periods = 12, start_year = 2023, start_month = 1, mean_service_mj = 48000, sd_service_mj = 6000, emission_factor = 0.00007, project_fossil_share = 0.05)`"
   ),
   Purpose = c(
-    "Convert baseline fuel consumption into mechanical energy.",
-    "Calculate baseline emissions using fossil fuel factors.",
-    "Estimate project emissions from any residual fossil use.",
-    "Compute emission reductions by differencing baselines and project values.",
-    "Aggregate monitoring data to reporting periods.",
-    "Provide a wrapper returning emission reductions and supporting columns.",
+    "Convert baseline fuel consumption into mechanical energy.<br>\\(E^{BL}_y = \\sum_i FC^{BL}_{i,y} \\times NCV^{BL}_{i,y}\\)",
+    "Calculate baseline emissions using fossil fuel factors.<br>\\(BE_y = E^{BL}_y \\times EF^{BL}_y\\)",
+    "Estimate project emissions from any residual fossil use.<br>\\(PE_y = \\sum_i E^{PR}_{i,y} \\times EF^{PR}_{i,y}\\)",
+    "Compute emission reductions by differencing baselines and project values.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Aggregate monitoring data to reporting periods.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Provide a wrapper returning emission reductions and supporting columns.<br>\\(ER_y = BE_y - PE_y\\)",
     "Generate representative monitoring data for demonstrations and tests."
   )
 )

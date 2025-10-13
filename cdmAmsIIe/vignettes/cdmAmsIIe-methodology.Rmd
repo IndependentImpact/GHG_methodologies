@@ -141,12 +141,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iie_dataset(n_buildings = 10, n_periods = 12, start_year = 2023, start_month = 1, seed = NULL)`"
   ),
   Purpose = c(
-    "Aggregates baseline thermal and electricity energy into emissions.",
-    "Summarises project thermal and electricity emissions after interventions.",
-    "Collects leakage emissions associated with the building project activity.",
-    "Combines baseline, project, and leakage totals to compute net reductions.",
-    "Rolls monitoring data to the reporting periods for analysis.",
-    "High-level wrapper orchestrating baseline, project, and leakage helpers.",
+    "Aggregates baseline thermal and electricity energy into emissions.<br>\\(BE_y = \\sum_i Q^{th,BL}_{i,y} \\times EF^{th,BL}_{i,y} + \\sum_i E^{el,BL}_{i,y} \\times EF^{el,BL}_{i,y}\\)",
+    "Summarises project thermal and electricity emissions after interventions.<br>\\(PE_y = \\sum_i Q^{th,PR}_{i,y} \\times EF^{th,PR}_{i,y} + \\sum_i E^{el,PR}_{i,y} \\times EF^{el,PR}_{i,y}\\)",
+    "Collects leakage emissions associated with the building project activity.<br>\\(LE_y = \\sum_i LE_{i,y}\\)",
+    "Combines baseline, project, and leakage totals to compute net reductions.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
+    "Rolls monitoring data to the reporting periods for analysis.<br>\\(ER_{p,y} = BE_{p,y} - (PE_{p,y} + LE_{p,y})\\)",
+    "High-level wrapper orchestrating baseline, project, and leakage helpers.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
     "Generates representative building datasets for demonstrations and tests."
   )
 )

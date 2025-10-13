@@ -116,12 +116,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iic_dataset(n_sites = 8, n_periods = 12, start_year = 2023, start_month = 1, baseline_energy_mean = 120, project_energy_mean = 75, emission_factor = 0.62)`"
   ),
   Purpose = c(
-    "Aggregates baseline energy consumption prior to efficiency upgrades.",
-    "Summarises monitored project energy use for efficient technologies.",
-    "Computes energy savings as the difference between baseline and project energy.",
-    "Converts energy savings to emission reductions using emission factors.",
-    "Rolls monitoring data to reporting periods with energy and emission summaries.",
-    "High-level wrapper composing baseline, project, and reduction helpers.",
+    "Aggregates baseline energy consumption prior to efficiency upgrades.<br>\\(E_{BL,y} = \\sum_i E_{BL,i,y}\\)",
+    "Summarises monitored project energy use for efficient technologies.<br>\\(E_{PR,y} = \\sum_i E_{PR,i,y}\\)",
+    "Computes energy savings as the difference between baseline and project energy.<br>\\(ES_y = E_{BL,y} - E_{PR,y}\\)",
+    "Converts energy savings to emission reductions using emission factors.<br>\\(ER_y = ES_y \\times EF_y\\)",
+    "Rolls monitoring data to reporting periods with energy and emission summaries.<br>\\(ER_{p,y} = (\\sum_i E_{BL,i,p,y} - \\sum_i E_{PR,i,p,y}) \\times EF_{p,y}\\)",
+    "High-level wrapper composing baseline, project, and reduction helpers.<br>\\(ER_y = (E_{BL,y} - E_{PR,y}) \\times EF_y\\)",
     "Generates representative efficiency datasets for demonstrations and tests."
   )
 )

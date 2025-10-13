@@ -137,12 +137,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iid_dataset(n_facilities = 10, n_periods = 12, start_year = 2023, start_month = 1, seed = NULL)`"
   ),
   Purpose = c(
-    "Aggregates baseline fossil fuel use into emissions adjusted for system efficiency.",
-    "Summarises project fossil emissions including auxiliary electricity where applicable.",
-    "Collects leakage emissions associated with the efficiency intervention.",
-    "Combines baseline, project, and leakage totals to compute net emission reductions.",
-    "Rolls monitoring data up to reporting periods for downstream analysis.",
-    "High-level wrapper orchestrating baseline, project, and leakage calculations.",
+    "Aggregates baseline fossil fuel use into emissions adjusted for system efficiency.<br>\\(BE_y = \\sum_i \\frac{FC^{BL}_{i,y} \\times NCV^{BL}_{i,y} \\times EF^{BL}_{i,y}}{\\eta^{BL}_{i,y}}\\)",
+    "Summarises project fossil emissions including auxiliary electricity where applicable.<br>\\(PE_y = \\sum_i \\frac{FC^{PR}_{i,y} \\times NCV^{PR}_{i,y} \\times EF^{PR}_{i,y}}{\\eta^{PR}_{i,y}} + ELEC_y\\)",
+    "Collects leakage emissions associated with the efficiency intervention.<br>\\(LE_y = \\sum_i LE_{i,y}\\)",
+    "Combines baseline, project, and leakage totals to compute net emission reductions.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
+    "Rolls monitoring data up to reporting periods for downstream analysis.<br>\\(ER_{p,y} = BE_{p,y} - (PE_{p,y} + LE_{p,y})\\)",
+    "High-level wrapper orchestrating baseline, project, and leakage calculations.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)",
     "Generates representative monitoring data for demonstrations and tests."
   )
 )

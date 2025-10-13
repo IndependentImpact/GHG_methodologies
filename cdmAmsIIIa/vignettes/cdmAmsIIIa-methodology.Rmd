@@ -143,16 +143,16 @@ reference <- tibble::tribble(
   "check_applicability_legume_share_iiia", "(data, legume_area_col, total_area_col, min_legume_share, group_cols)", "Verify legumes dominate the cropping pattern.",
   "check_applicability_inoculant_registration_iiia", "(data, registration_col, group_cols)", "Ensure inoculants meet regulatory standards.",
   "check_applicability_monitoring_practices_iiia", "(data, monitoring_unit_cols, min_periods)", "Confirm monitoring spans the minimum periods.",
-  "calculate_baseline_fertilizer_emissions_iiia", "(data, fertilizer_use_col, production_emission_factor_col, field_emission_factor_col, group_cols)", "Baseline emissions from synthetic nitrogen use.",
-  "calculate_project_residual_fertilizer_emissions_iiia", "(data, fertilizer_use_col, production_emission_factor_col, field_emission_factor_col, group_cols)", "Project residual fertilizer emissions.",
-  "calculate_project_inoculant_emissions_iiia", "(data, inoculant_rate_col, area_planted_col, inoculant_emission_factor_col, group_cols)", "Project inoculant emissions.",
-  "calculate_leakage_emissions_iiia", "(data, leakage_col, group_cols)", "Aggregate leakage emissions.",
-  "calculate_emission_reductions_iiia", "(baseline_emissions, project_emissions, leakage_emissions, group_cols)", "Net emission reductions.",
-  "aggregate_monitoring_periods_iiia", "(data, group_cols, monitoring_col)", "Summarise monitoring data across periods.",
-  "estimate_emission_reductions_ams_iiia", "(baseline_data, project_data, leakage_data, group_cols, ...)", "Run the AMS-III.A workflow."
+  "calculate_baseline_fertilizer_emissions_iiia", "(data, fertilizer_use_col, production_emission_factor_col, field_emission_factor_col, group_cols)", "Baseline emissions from synthetic nitrogen use.<br>\\(BE_y = \\sum_i N_{i,y} \\times (EF^{prod}_{i,y} + EF^{field}_{i,y})\\)",
+  "calculate_project_residual_fertilizer_emissions_iiia", "(data, fertilizer_use_col, production_emission_factor_col, field_emission_factor_col, group_cols)", "Project residual fertilizer emissions.<br>\\(PE^{fert}_y = \\sum_i N^{proj}_{i,y} \\times (EF^{prod}_{i,y} + EF^{field}_{i,y})\\)",
+  "calculate_project_inoculant_emissions_iiia", "(data, inoculant_rate_col, area_planted_col, inoculant_emission_factor_col, group_cols)", "Project inoculant emissions.<br>\\(PE^{inoc}_y = \\sum_i R_{i,y} \\times A_{i,y} \\times EF^{inoc}_{i,y}\\)",
+  "calculate_leakage_emissions_iiia", "(data, leakage_col, group_cols)", "Aggregate leakage emissions.<br>\\(LE_y = \\sum_i LE_{i,y}\\)",
+  "calculate_emission_reductions_iiia", "(baseline_emissions, project_emissions, leakage_emissions, group_cols)", "Net emission reductions.<br>\\(ER_y = BE_y - (PE^{fert}_y + PE^{inoc}_y + LE_y)\\)",
+  "aggregate_monitoring_periods_iiia", "(data, group_cols, monitoring_col)", "Summarise monitoring data across periods.<br>\\(ER_{p,y} = BE_{p,y} - (PE_{p,y} + LE_{p,y})\\)",
+  "estimate_emission_reductions_ams_iiia", "(baseline_data, project_data, leakage_data, group_cols, ...)", "Run the AMS-III.A workflow.<br>\\(ER_y = BE_y - (PE_y + LE_y)\\)"
 )
 
-quiet_kable(reference)
+quiet_kable(reference, escape = FALSE)
 ```
 
 ## Workflow Overview

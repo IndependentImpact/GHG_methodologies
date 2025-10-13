@@ -112,12 +112,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_ic_dataset(n_facilities = 10, n_periods = 12, start_year = 2023, start_month = 1, mean_thermal_mwh = 12000, sd_thermal_mwh = 1800, baseline_emission_factor = 0.27, project_emission_factor = 0.01)`"
   ),
   Purpose = c(
-    "Summed baseline thermal output for each group or monitoring period.",
-    "Baseline emissions using the displaced fossil heat factor.",
-    "Project emissions representing auxiliary fossil energy use.",
-    "Emission reductions for each monitoring period.",
-    "Aggregates monitoring data to reporting periods.",
-    "Meta-calculation composing the core equations.",
+    "Summed baseline thermal output for each group or monitoring period.<br>\\(Q^{BL}_y = \\sum_i Q_{i,y}\\)",
+    "Baseline emissions using the displaced fossil heat factor.<br>\\(BE_y = Q^{BL}_y \\times EF^{BL}\\)",
+    "Project emissions representing auxiliary fossil energy use.<br>\\(PE_y = Q^{BL}_y \\times EF^{PR}\\)",
+    "Emission reductions for each monitoring period.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Aggregates monitoring data to reporting periods.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Meta-calculation composing the core equations.<br>\\(ER_y = BE_y - PE_y\\)",
     "Simulation with monitoring metadata for testing and demos."
   )
 )

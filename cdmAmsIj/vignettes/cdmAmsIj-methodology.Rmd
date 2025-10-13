@@ -115,12 +115,12 @@ function_reference <- tibble::tibble(
     "`simulate_ams_ij_dataset(n_sites = 10, n_periods = 12, start_year = 2023, start_month = 1, mean_useful_heat_mwh = 360, sd_useful_heat_mwh = 55, baseline_emission_factor = 0.22, auxiliary_emission_factor = 0.18)`"
   ),
   Purpose = c(
-    "Summed useful solar thermal output for each group or monitoring period.",
-    "Baseline emissions derived from displaced conventional water heating.",
-    "Project emissions reflecting auxiliary heating energy.",
-    "Emission reductions obtained from the difference between baseline and project emissions.",
-    "Monitoring-period aggregation consistent with methodology equations.",
-    "Meta-calculation wrapper chaining the equation helpers.",
+    "Summed useful solar thermal output for each group or monitoring period.<br>\\(Q^{useful}_y = \\sum_i Q_{i,y}\\)",
+    "Baseline emissions derived from displaced conventional water heating.<br>\\(BE_y = Q^{useful}_y \\times EF^{BL}\\)",
+    "Project emissions reflecting auxiliary heating energy.<br>\\(PE_y = \\sum_i AUX_{i,y} \\times EF^{aux}_{i,y}\\)",
+    "Emission reductions obtained from the difference between baseline and project emissions.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Monitoring-period aggregation consistent with methodology equations.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Meta-calculation wrapper chaining the equation helpers.<br>\\(ER_y = BE_y - PE_y\\)",
     "Data generator for examples, testing, and onboarding."
   )
 )

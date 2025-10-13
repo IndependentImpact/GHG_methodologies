@@ -110,12 +110,12 @@ function_reference <- tibble::tibble(
     "\\(G_{i,mp} \\sim \\mathcal{N}(\\mu_{G}/P, \\sigma_{G}/\\sqrt{P})\\)"
   ),
   Purpose = c(
-    "Summed baseline generation for each group or monitoring period.",
-    "Baseline emissions using the applicable grid factor.",
-    "Project emissions (typically zero for AMS-I.A).",
-    "Emission reductions for each monitoring period.",
-    "Aggregates monitoring data to reporting periods.",
-    "Meta-calculation composing the core equations.",
+    "Summed baseline generation for each group or monitoring period.<br>\\(E^{BL}_y = \\sum_i E_{i,y}\\)",
+    "Baseline emissions using the applicable grid factor.<br>\\(BE_y = E^{BL}_y \\times EF^{grid}\\)",
+    "Project emissions (typically zero for AMS-I.A).<br>\\(PE_y = E^{BL}_y \\times EF^{PR}\\)",
+    "Emission reductions for each monitoring period.<br>\\(ER_y = BE_y - PE_y\\)",
+    "Aggregates monitoring data to reporting periods.<br>\\(ER_{p,y} = BE_{p,y} - PE_{p,y}\\)",
+    "Meta-calculation composing the core equations.<br>\\(ER_y = BE_y - PE_y\\)",
     "DeclareDesign-based simulation with temporal monitoring metadata."
   )
 )

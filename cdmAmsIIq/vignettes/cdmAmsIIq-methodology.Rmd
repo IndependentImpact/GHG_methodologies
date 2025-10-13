@@ -157,11 +157,11 @@ function_reference <- tibble::tibble(
     "`simulate_ams_iiq_inputs(n_buildings = 4, seed = NULL)`"
   ),
   Purpose = c(
-    "Aggregates baseline commercial building energy use into emissions and intensity diagnostics.",
-    "Summarises post-retrofit grid energy emissions and energy intensity.",
-    "Converts onsite energy supply into project emissions.",
-    "Combines baseline, project, and leakage emissions to obtain net reductions.",
-    "Meta-function chaining the AMS-II.Q equation helpers into a tidy workflow.",
+    "Aggregates baseline commercial building energy use into emissions and intensity diagnostics.<br>\\(BE_y = \\sum_i EC^{BL}_{i,y} \\times EF^{BL}_{i,y}\\)",
+    "Summarises post-retrofit grid energy emissions and energy intensity.<br>\\(PE^{grid}_y = \\sum_i EC^{PR}_{i,y} \\times EF^{PR}_{i,y}\\)",
+    "Converts onsite energy supply into project emissions.<br>\\(PE^{onsite}_y = \\sum_i ONS_{i,y} \\times EF^{onsite}_{i,y}\\)",
+    "Combines baseline, project, and leakage emissions to obtain net reductions.<br>\\(ER_y = BE_y - (PE^{grid}_y + PE^{onsite}_y + LE_y)\\)",
+    "Meta-function chaining the AMS-II.Q equation helpers into a tidy workflow.<br>\\(ER_y = BE_y - (PE^{grid}_y + PE^{onsite}_y + LE_y)\\)",
     "Generates representative baseline, project, and leakage datasets for demonstrations and tests."
   )
 )
