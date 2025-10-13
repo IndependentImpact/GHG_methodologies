@@ -10,6 +10,10 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 # Introduction
 
@@ -63,7 +67,7 @@ applicability
 ```{r simulation}
 set.seed(2024)
 example_data <- simulate_ams_iif_dataset(n_facilities = 3, n_periods = 4)
-knitr::kable(
+quiet_kable(
   head(example_data),
   format = "html",
   digits = 3
@@ -98,7 +102,7 @@ emission_reductions <- calculate_emission_reductions_iif(
   group_cols = c("facility_id", "monitoring_label")
 )
 
-knitr::kable(head(emission_reductions), format = "html", digits = 3)
+quiet_kable(head(emission_reductions), format = "html", digits = 3)
 ```
 
 # Monitoring Period Aggregation
@@ -110,7 +114,7 @@ period_summary <- aggregate_monitoring_periods_iif(
   group_cols = "facility_id"
 )
 
-knitr::kable(period_summary, format = "html", digits = 3)
+quiet_kable(period_summary, format = "html", digits = 3)
 ```
 
 # Meta-Function
@@ -158,7 +162,7 @@ function_reference <- tibble::tibble(
   )
 )
 
-knitr::kable(function_reference, format = "html", escape = FALSE)
+quiet_kable(function_reference, format = "html", escape = FALSE)
 ```
 
 # Workflow Overview
@@ -183,5 +187,5 @@ workflow_steps <- tibble::tibble(
   )
 )
 
-knitr::kable(workflow_steps, format = "html", escape = FALSE)
+quiet_kable(workflow_steps, format = "html", escape = FALSE)
 ```

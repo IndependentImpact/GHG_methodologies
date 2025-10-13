@@ -10,6 +10,10 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 # Introduction
 
@@ -33,7 +37,7 @@ check_applicability_project_renewable_fraction(renewable_fraction = 0.95)
 ```{r simulation}
 set.seed(123)
 example_data <- simulate_ams_ie_dataset(n_users = 4, n_periods = 6, start_year = 2024)
-knitr::kable(
+quiet_kable(
   head(example_data),
   format = "html",
   digits = 3
@@ -62,14 +66,14 @@ project_emissions <- calculate_project_emissions(
   project_emission_factor = 0.00009
 )
 emission_reductions <- calculate_emission_reductions(baseline_emissions, project_emissions)
-knitr::kable(head(emission_reductions), format = "html", digits = 3)
+quiet_kable(head(emission_reductions), format = "html", digits = 3)
 ```
 
 # Monitoring Period Aggregation
 
 ```{r monitoring}
 period_summary <- aggregate_monitoring_periods(example_data)
-knitr::kable(head(period_summary), format = "html", digits = 3)
+quiet_kable(head(period_summary), format = "html", digits = 3)
 ```
 
 # Meta-Function
@@ -121,5 +125,5 @@ function_reference <- tibble::tibble(
   )
 )
 
-knitr::kable(function_reference, format = "html", escape = FALSE)
+quiet_kable(function_reference, format = "html", escape = FALSE)
 ```

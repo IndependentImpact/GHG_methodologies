@@ -10,6 +10,10 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 # Introduction
 
@@ -33,7 +37,7 @@ check_applicability_service_displacement(fossil_service_share = 0.8)
 ```{r simulation}
 set.seed(123)
 example_data <- simulate_ams_ib_dataset(n_machines = 6, n_periods = 4, start_year = 2024, start_month = 10)
-knitr::kable(
+quiet_kable(
   head(example_data),
   format = "html",
   digits = 2
@@ -55,7 +59,7 @@ project_energy <- tibble::tibble(
 )
 project_emis <- calculate_project_emissions(project_energy, project_emission_factor = 0)
 emission_reductions <- calculate_emission_reductions(baseline_emis, project_emis)
-knitr::kable(head(emission_reductions), format = "html", digits = 4)
+quiet_kable(head(emission_reductions), format = "html", digits = 4)
 ```
 
 # Monitoring Period Aggregation
@@ -67,7 +71,7 @@ period_summary <- aggregate_monitoring_periods(
   group_cols = "machine_id"
 )
 
-knitr::kable(head(period_summary), format = "html", digits = 4)
+quiet_kable(head(period_summary), format = "html", digits = 4)
 ```
 
 # Meta-Function
@@ -113,7 +117,7 @@ function_reference <- tibble::tibble(
   )
 )
 
-knitr::kable(function_reference, format = "html", escape = FALSE)
+quiet_kable(function_reference, format = "html", escape = FALSE)
 ```
 
 # Workflow Overview
@@ -138,5 +142,5 @@ workflow_steps <- tibble::tibble(
   )
 )
 
-knitr::kable(workflow_steps, format = "html", escape = FALSE)
+quiet_kable(workflow_steps, format = "html", escape = FALSE)
 ```

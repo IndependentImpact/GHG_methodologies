@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 # Introduction
 
@@ -129,7 +133,7 @@ tibble::tibble(
     "Generates simulated datasets for analysis and testing."
   )
 ) %>%
-  knitr::kable()
+  quiet_kable()
 ```
 
 # Workflow Overview
@@ -143,5 +147,5 @@ tibble::tribble(
   "Aggregation", "Aggregate monitoring data to reporting periods as required.",
   "Meta", "Call `estimate_emission_reductions_ams_iiiaj()` to produce net results."
 ) %>%
-  knitr::kable()
+  quiet_kable()
 ```

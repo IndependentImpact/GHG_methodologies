@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
 library(cdmAmsIIId)
 library(dplyr)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 ## Introduction
 
@@ -34,7 +38,7 @@ tibble::tibble(
   controls = check_applicability_leakage_control_iiid(monitoring, group_cols = "farm_id")$leakage_controls_applicable
 ) |>
   tidyr::pivot_longer(everything(), names_to = "criterion", values_to = "applicable") |>
-  knitr::kable(caption = "Applicability outcomes for each AMS-III.D criterion")
+  quiet_kable(caption = "Applicability outcomes for each AMS-III.D criterion")
 ```
 
 ## Simulated Dataset
@@ -43,7 +47,7 @@ The simulated dataset provides methane generation parameters and monitoring meta
 
 ```{r simulated-data}
 head(monitoring) |>
-  knitr::kable(caption = "Excerpt of simulated AMS-III.D monitoring data")
+  quiet_kable(caption = "Excerpt of simulated AMS-III.D monitoring data")
 ```
 
 ## Equation Walkthrough
@@ -66,7 +70,7 @@ list(
 ) |>
   purrr::imap_dfr(~ dplyr::mutate(.x, component = .y), .id = NULL) |>
   dplyr::relocate(component) |>
-  knitr::kable(caption = "Equation-level outputs across components")
+  quiet_kable(caption = "Equation-level outputs across components")
 ```
 
 ## Monitoring Period Aggregation
@@ -75,7 +79,7 @@ When working with period-level data, use `aggregate_monitoring_periods_iiid()` t
 
 ```{r aggregation}
 aggregate_monitoring_periods_iiid(monitoring, group_cols = "farm_id") |>
-  knitr::kable(caption = "Aggregated monitoring data by farm")
+  quiet_kable(caption = "Aggregated monitoring data by farm")
 ```
 
 ## Meta-Function
@@ -92,7 +96,7 @@ reductions <- estimate_emission_reductions_ams_iiid(
 )
 
 reductions |>
-  knitr::kable(caption = "Net emission reductions from AMS-III.D workflow")
+  quiet_kable(caption = "Net emission reductions from AMS-III.D workflow")
 ```
 
 ## Function Reference
@@ -112,7 +116,7 @@ reference <- tibble::tribble(
   "estimate_emission_reductions_ams_iiid", "(baseline_data, project_data, recovery_data, leakage_data, group_cols)", "Meta-estimator for AMS-III.D"
 )
 
-knitr::kable(reference)
+quiet_kable(reference)
 ```
 
 ## Workflow Overview
@@ -127,5 +131,5 @@ overview <- tibble::tribble(
   "5", "Compose results into emission reductions.", "estimate_emission_reductions_ams_iiid()"
 )
 
-knitr::kable(overview, caption = "High-level AMS-III.D workflow")
+quiet_kable(overview, caption = "High-level AMS-III.D workflow")
 ```

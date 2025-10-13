@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
 library(cdmAmsIIIa)
 library(dplyr)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 ## Introduction
 
@@ -54,7 +58,7 @@ The package provides a simulation utility to prototype workflows and tests.
 ```{r simulation}
 monitoring |> 
   select(farm_id, monitoring_period, baseline_synthetic_n_kg, project_synthetic_n_kg, inoculant_rate_kg_per_ha, legume_area_ha, leakage_emissions_tco2e) |> 
-  knitr::kable()
+  quiet_kable()
 ```
 
 ## Equation Walkthrough
@@ -148,7 +152,7 @@ reference <- tibble::tribble(
   "estimate_emission_reductions_ams_iiia", "(baseline_data, project_data, leakage_data, group_cols, ...)", "Run the AMS-III.A workflow."
 )
 
-knitr::kable(reference)
+quiet_kable(reference)
 ```
 
 ## Workflow Overview
@@ -163,6 +167,6 @@ workflow <- tibble::tribble(
   "5", "Aggregate monitoring periods to reporting units and compute net emission reductions with the meta helper."
 )
 
-knitr::kable(workflow)
+quiet_kable(workflow)
 ```
 
