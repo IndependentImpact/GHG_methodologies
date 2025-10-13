@@ -129,10 +129,11 @@ recycling (**cdmAmsIIIaj**).
 
 ## Development Workflow
 
-From the respective package directory (e.g. `cdmAmsIa` or `cdmAmsIb`) you can regenerate package
-documentation and ensure the vignette renders with the most recent code by running:
+From the respective package directory (e.g. `cdmAmsIa` or `cdmAmsIb`) you can rebuild the package,
+regenerate documentation, and ensure the vignette renders with the most recent code by running:
 
 ```r
+devtools::build()
 devtools::document()
 devtools::build_vignettes()
 ```
@@ -142,13 +143,14 @@ for inclusion in downstream documentation or reports.
 
 When you need to refresh documentation and vignettes for every package at once, run the
 following helper from the repository root. It locates all directories that start with
-`cdmA`, switches into each package, regenerates documentation, rebuilds vignettes, and then
-returns to the repository root so the next package can be processed:
+`cdmA`, switches into each package, rebuilds the package, regenerates documentation, rebuilds
+vignettes, and then returns to the repository root so the next package can be processed:
 
 ```r
 dirs <- list.files(pattern = "^cdmA", full.names = TRUE)
 purrr::map(dirs, ~{
   setwd(.x)
+  devtools::build()
   devtools::document()
   devtools::build_vignettes()
   setwd("~/GHG_methodologies/")
