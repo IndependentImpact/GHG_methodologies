@@ -139,3 +139,21 @@ devtools::build_vignettes()
 
 Built vignettes are written to `vignettes/` and can be rendered with `devtools::build_vignettes()`
 for inclusion in downstream documentation or reports.
+
+When you need to refresh documentation and vignettes for every package at once, run the
+following helper from the repository root. It locates all directories that start with
+`cdmA`, switches into each package, regenerates documentation, rebuilds vignettes, and then
+returns to the repository root so the next package can be processed:
+
+```r
+dirs <- list.files(pattern = "^cdmA", full.names = TRUE)
+purrr::map(dirs, ~{
+  setwd(.x)
+  devtools::document()
+  devtools::build_vignettes()
+  setwd("~/GHG_methodologies/")
+})
+```
+
+If you prefer not to rely on **purrr**, replace `purrr::map()` with `lapply()` while keeping the
+same side-effect workflow.
