@@ -10,6 +10,10 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r kable-helper, include = FALSE}
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
+```
+
 
 # Introduction
 
@@ -54,7 +58,7 @@ check_applicability_monitoring_iig(monitoring_example)
 ```{r simulation}
 set.seed(123)
 example_data <- simulate_ams_iig_dataset(n_sites = 3, n_periods = 4, seed = 123)
-knitr::kable(
+quiet_kable(
   head(example_data),
   format = "html",
   digits = 3
@@ -114,7 +118,7 @@ emission_reductions <- calculate_emission_reductions_iig(
   group_cols = c("site_id", "monitoring_label")
 )
 
-knitr::kable(head(emission_reductions), format = "html", digits = 4)
+quiet_kable(head(emission_reductions), format = "html", digits = 4)
 ```
 
 # Monitoring Period Aggregation
@@ -126,7 +130,7 @@ period_summary <- aggregate_monitoring_periods_iig(
   period_cols = c("monitoring_label")
 )
 
-knitr::kable(head(period_summary), format = "html", digits = 4)
+quiet_kable(head(period_summary), format = "html", digits = 4)
 ```
 
 # Meta-Function
@@ -182,7 +186,7 @@ function_reference <- tibble::tibble(
   )
 )
 
-knitr::kable(function_reference, format = "html", escape = FALSE)
+quiet_kable(function_reference, format = "html", escape = FALSE)
 ```
 
 # Workflow Overview
@@ -211,5 +215,5 @@ workflow_steps <- tibble::tibble(
   )
 )
 
-knitr::kable(workflow_steps, format = "html", escape = FALSE)
+quiet_kable(workflow_steps, format = "html", escape = FALSE)
 ```

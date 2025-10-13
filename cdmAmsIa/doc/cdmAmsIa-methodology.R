@@ -1,5 +1,6 @@
 ## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE)
+quiet_kable <- function(...) suppressWarnings(knitr::kable(...))
 
 ## ----applicability------------------------------------------------------------
 library(cdmAmsIa)
@@ -9,7 +10,7 @@ check_applicability_distributed_generation(fossil_fraction_baseline = 0.85)
 ## ----simulation---------------------------------------------------------------
 set.seed(123)
 example_data <- simulate_ams_ia_dataset(n_users = 6, n_periods = 4, start_year = 2024, start_month = 10)
-knitr::kable(
+quiet_kable(
   head(example_data),
   format = "html",
   digits = 2
@@ -20,7 +21,7 @@ baseline_gen <- calculate_baseline_generation(example_data, group_cols = "user_i
 baseline_emis <- calculate_baseline_emissions(baseline_gen, grid_emission_factor = 0.75)
 project_emis <- calculate_project_emissions(baseline_gen)
 emission_reductions <- calculate_emission_reductions(baseline_emis, project_emis)
-knitr::kable(head(emission_reductions), format = "html", digits = 2)
+quiet_kable(head(emission_reductions), format = "html", digits = 2)
 
 ## ----monitoring---------------------------------------------------------------
 period_summary <- aggregate_monitoring_periods(
@@ -29,7 +30,7 @@ period_summary <- aggregate_monitoring_periods(
   group_cols = "user_id"
 )
 
-knitr::kable(head(period_summary), format = "html", digits = 2)
+quiet_kable(head(period_summary), format = "html", digits = 2)
 
 ## ----meta---------------------------------------------------------------------
 estimate_emission_reductions_ams_ia(
@@ -78,7 +79,7 @@ function_reference <- tibble::tibble(
   )
 )
 
-knitr::kable(function_reference, format = "html", escape = FALSE)
+quiet_kable(function_reference, format = "html", escape = FALSE)
 
 ## ----workflow-overview, echo = FALSE------------------------------------------
 workflow_steps <- tibble::tibble(
@@ -100,5 +101,5 @@ workflow_steps <- tibble::tibble(
   )
 )
 
-knitr::kable(workflow_steps, format = "html", escape = FALSE)
+quiet_kable(workflow_steps, format = "html", escape = FALSE)
 
