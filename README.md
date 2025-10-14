@@ -146,6 +146,9 @@ recycling (**cdmAmsIIIaj**).
 - **cdmAcm0001**: Implements ACM0001 landfill gas flaring and utilisation, providing methane accounting helpers with oxidation
   adjustments, methane destruction reporting in tonnes and tonnes CO2e, applicability checks for landfill management and gas
   collection systems, monitoring aggregation, and simulation utilities tailored to landfill gas capture projects.
+- **cdmAcm0006**: Implements ACM0006 electricity and heat generation from biomass with applicability diagnostics for biomass
+  dominance, baseline and project emission calculators covering combined heat and power outputs, leakage helpers, monitoring
+  aggregation workflows, and simulation utilities for biomass-fuelled plants.
 
 ## Development Workflow
 
