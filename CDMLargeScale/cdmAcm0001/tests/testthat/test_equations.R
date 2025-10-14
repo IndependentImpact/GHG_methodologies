@@ -3,7 +3,9 @@ test_that("methane volume conversion follows ACM0001 default density", {
 })
 
 test_that("baseline, project, leakage, and reductions chain correctly", {
-  baseline <- calculate_baseline_emissions_acm0001(6000, baseline_capture_efficiency = 0.1)
+  baseline <- calculate_baseline_emissions_acm0001(6000,
+                                                   baseline_capture_efficiency = 0.1,
+                                                   oxidation_fraction = 0.05)
   project <- calculate_project_emissions_acm0001(4500, 0.9,
                                                  auxiliary_fuel_tj = 0.02,
                                                  auxiliary_ef_t_per_tj = 74,
@@ -15,6 +17,21 @@ test_that("baseline, project, leakage, and reductions chain correctly", {
   expect_gt(baseline, project)
   expect_gte(leakage, 0)
   expect_equal(reductions, baseline - project - leakage)
+})
+
+test_that("oxidation fraction reduces baseline emissions", {
+  no_oxidation <- calculate_baseline_emissions_acm0001(5000, oxidation_fraction = 0)
+  with_oxidation <- calculate_baseline_emissions_acm0001(5000, oxidation_fraction = 0.1)
+
+  expect_lt(with_oxidation, no_oxidation)
+})
+
+test_that("methane destruction helpers align", {
+  destroyed_t <- calculate_methane_destroyed_acm0001(4000, 0.85)
+  destroyed_co2e <- calculate_methane_destruction_co2e_acm0001(4000, 0.85)
+
+  expect_gt(destroyed_t, 0)
+  expect_equal(destroyed_co2e, destroyed_t * 28)
 })
 
 test_that("aggregate_monitoring_periods summarises landfill gas data", {
@@ -38,6 +55,7 @@ test_that("aggregate_monitoring_periods summarises landfill gas data", {
   expect_equal(nrow(summary), 2)
   expect_true(all(summary$baseline_emissions > summary$project_emissions))
   expect_true(all(summary$emission_reductions > 0))
+  expect_true(all(summary$methane_destroyed_t >= 0))
 })
 
 test_that("estimate_emission_reductions_acm0001 matches aggregated totals", {

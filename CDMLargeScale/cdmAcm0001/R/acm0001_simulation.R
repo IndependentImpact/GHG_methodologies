@@ -30,6 +30,7 @@ simulate_acm0001_dataset <- function(n_periods = 12, seed = NULL) {
   auxiliary_fuel <- stats::rnorm(n_periods, mean = 0.02, sd = 0.005)
   electricity_imports <- stats::rnorm(n_periods, mean = 15, sd = 5)
   leakage_fraction <- stats::rnorm(n_periods, mean = 0.03, sd = 0.01)
+  oxidation_fraction <- stats::rnorm(n_periods, mean = 0.05, sd = 0.02)
 
   tibble::tibble(
     period = sprintf("Period %02d", period),
@@ -42,6 +43,7 @@ simulate_acm0001_dataset <- function(n_periods = 12, seed = NULL) {
     electricity_import_mwh = pmax(electricity_imports, 0),
     import_ef_t_per_mwh = 0.75,
     leakage_fraction = pmin(pmax(leakage_fraction, 0), 0.2),
+    oxidation_fraction = pmin(pmax(oxidation_fraction, 0), 0.5),
     methane_density_t_per_m3 = 0.000716,
     gwp_ch4 = 28
   )
