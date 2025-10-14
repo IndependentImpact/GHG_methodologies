@@ -1,4 +1,5 @@
-# cdmAcm0002 0.0.1
+# cdmAcm0002 0.1.0
 
-* Initial scaffolding for the ACM0002 methodology package, including applicability
-  checks, equation helpers, simulation utilities, tests, and documentation skeleton.
+* First complete release of the ACM0002 methodology package with validated
+  applicability checks, calculation helpers, monitoring aggregation, simulation
+  utilities, and a reproducible documentation set.
