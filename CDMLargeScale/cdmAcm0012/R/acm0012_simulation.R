@@ -1,7 +1,7 @@
 #' Simulate ACM0012 monitoring data
 #'
 #' Generates synthetic monitoring records for waste energy recovery projects
-#' covered by ACM0012 using `DeclareDesign`. The simulation produces inputs for
+#' covered by ACM0012 using base R random generation. The simulation produces inputs for
 #' baseline, project, leakage, and applicability helper functions.
 #'
 #' @param n_periods Integer number of monitoring periods to simulate. Defaults
@@ -33,8 +33,9 @@ simulate_acm0012_dataset <- function(n_periods = 12,
     set.seed(as.integer(seed))
   }
 
-  design <- DeclareDesign::declare_model(
-    N = n_periods * observations_per_period,
+  N <- n_periods * observations_per_period
+
+  monitoring_data <- tibble::tibble(
     period = rep(sprintf("Period %02d", seq_len(n_periods)), each = observations_per_period),
     electricity_export_mwh = pmax(stats::rnorm(N, mean = 85, sd = 12), 0),
     baseline_grid_ef_t_per_mwh = pmax(stats::rnorm(N, mean = 0.82, sd = 0.04), 0.6),
@@ -54,10 +55,7 @@ simulate_acm0012_dataset <- function(n_periods = 12,
     measurement_uncertainty = stats::runif(N, min = 0.005, max = 0.02),
     baseline_operating_hours = pmax(stats::rnorm(N, mean = 7800, sd = 200), 7000),
     project_operating_hours = pmax(stats::rnorm(N, mean = 7600, sd = 180), 7000)
-  )
-
-  monitoring_data <- DeclareDesign::draw_data(design) |>
-    tibble::as_tibble() |>
+  ) |>
     dplyr::mutate(
       waste_energy_fraction = pmin(pmax(waste_energy_fraction, 0), 1),
       measurement_uncertainty = pmin(pmax(measurement_uncertainty, 0), 0.05)

@@ -9,6 +9,6 @@ test_that("baseline continuation requires similar operating hours", {
 })
 
 test_that("metering uncertainty must be below 1.5%", {
-  expect_true(check_metering_uncertainty_acm0012(c(0.01, 0.015)))
-  expect_false(check_metering_uncertainty_acm0012(0.02))
+  expect_true(all(check_metering_uncertainty_acm0012(c(0.01, 0.015))))
+  expect_false(any(check_metering_uncertainty_acm0012(0.02)))
 })

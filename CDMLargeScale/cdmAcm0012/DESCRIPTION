@@ -12,7 +12,6 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
 Imports:
-    DeclareDesign,
     dplyr,
     glue,
     purrr,
