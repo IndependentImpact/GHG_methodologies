@@ -187,3 +187,15 @@ purrr::map(pkg_dirs, ~{
 
 If you prefer not to rely on **purrr**, replace `purrr::map()` with `lapply()` while keeping the
 same side-effect workflow.
+
+To exercise the unit tests for all Large-Scale (ACM) packages in one step, execute the
+helper script from the repository root:
+
+```bash
+Rscript CDMLargeScale/run_tests.R
+```
+
+The script iterates over each `cdmAcm` package and invokes `testthat::test_local()` so the
+package code is loaded before the `tests/testthat` suite runs. The command exits with a
+non-zero status if any package fails, making it suitable for continuous integration
+pipelines.
