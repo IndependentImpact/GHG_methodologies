@@ -18,13 +18,20 @@ aggregate_monitoring_periods_acm0010 <- function(data, period_col = "period") {
     rlang::abort(sprintf("Column `%s` not found in `data`.", period_col))
   }
 
+  period_sym <- rlang::sym(period_col)
+
   data |>
-    dplyr::group_by(rlang::.data[[period_col]]) |>
+    dplyr::group_by(!!period_sym) |>
     dplyr::summarise(
-      baseline_emissions_tco2e = sum(rlang::.data$baseline_emissions_tco2e, na.rm = TRUE),
-      project_emissions_tco2e = sum(rlang::.data$project_emissions_tco2e, na.rm = TRUE),
-      leakage_emissions_tco2e = sum(rlang::.data$leakage_emissions_tco2e, na.rm = TRUE),
-      net_emission_reductions_tco2e = sum(rlang::.data$net_emission_reductions_tco2e, na.rm = TRUE),
+      dplyr::across(
+        c(
+          baseline_emissions_tco2e,
+          project_emissions_tco2e,
+          leakage_emissions_tco2e,
+          net_emission_reductions_tco2e
+        ),
+        ~ sum(.x, na.rm = TRUE)
+      ),
       .groups = "drop"
     )
 }
