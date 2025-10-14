@@ -54,6 +54,15 @@
 
 **Master index (official):** Approved SSC methodologies — https://cdm.unfccc.int/methodologies/SSCmethodologies/approved
 
+## Repository Structure
+
+- `CDMSmallScale/` — installable packages implementing the approved small-scale
+  (AMS) methodologies. Each package retains the existing tidyverse-aligned
+  tooling and documentation.
+- `CDMLargeScale/` — installable packages for consolidated large-scale (ACM)
+  methodologies. The first package in this series is `cdmAcm0002`, covering
+  grid-connected renewable electricity generation.
+
 ## Repository Packages
 
 ### Type I — Renewable energy for small-scale users
@@ -129,7 +138,8 @@ recycling (**cdmAmsIIIaj**).
 
 ## Development Workflow
 
-From the respective package directory (e.g. `cdmAmsIa` or `cdmAmsIb`) you can rebuild the package,
+From the respective package directory (e.g. `CDMSmallScale/cdmAmsIa` or
+`CDMLargeScale/cdmAcm0002`) you can rebuild the package,
 regenerate documentation, and ensure the vignette renders with the most recent code by running:
 
 ```r
@@ -142,13 +152,17 @@ Built vignettes are written to `vignettes/` and can be rendered with `devtools::
 for inclusion in downstream documentation or reports.
 
 When you need to refresh documentation and vignettes for every package at once, run the
-following helper from the repository root. It locates all directories that start with
-`cdmA`, switches into each package, rebuilds the package, regenerates documentation, rebuilds
-vignettes, and then returns to the repository root so the next package can be processed:
+following helper from the repository root. It locates all `CDM*` directories, then walks
+into each package directory that starts with `cdmA`, rebuilds the package, regenerates
+documentation, rebuilds vignettes, and then returns to the repository root so the next
+package can be processed:
 
 ```r
-dirs <- list.files(pattern = "^cdmA", full.names = TRUE)
-purrr::map(dirs, ~{
+group_dirs <- list.files(pattern = "^CDM", full.names = TRUE)
+pkg_dirs <- purrr::map(group_dirs, ~list.files(.x, pattern = "^cdmA", full.names = TRUE))
+pkg_dirs <- unlist(pkg_dirs, use.names = FALSE)
+
+purrr::map(pkg_dirs, ~{
   setwd(.x)
   devtools::build()
   devtools::document()
