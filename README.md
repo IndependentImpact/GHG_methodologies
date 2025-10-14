@@ -143,6 +143,9 @@ recycling (**cdmAmsIIIaj**).
 - **cdmAcm0002**: Implements ACM0002 grid-connected electricity generation from renewable sources, including consolidated
   baseline emission factors, project emission workflows, leakage accounting, monitoring aggregation, and simulation utilities
   designed for large-scale renewable power plants.
+- **cdmAcm0001**: Implements ACM0001 landfill gas flaring and utilisation, providing methane accounting helpers, applicability
+  checks for landfill management and gas collection systems, monitoring aggregation, and simulation utilities tailored to
+  landfill gas capture projects.
 
 ## Development Workflow
 
