@@ -301,3 +301,19 @@ Include any relevant notes about units, data sources, or calculation nuances in 
 | PE_{y} | Project emissions | Residual methane plus onsite energy emissions (tCO2e) | Column `project_emissions_tco2e` |
 | LE_{y} | Leakage emissions | Transport, residual waste, minus exported energy credits (tCO2e) | Column `leakage_emissions_tco2e` |
 | ER_{y} | Emission reductions | \(BE_{y} - PE_{y} - LE_{y}\) (tCO2e) | Column `net_emission_reductions_tco2e` |
+
+### Methodology: ACM0001
+
+| Symbol | Variable Name | Definition | Notes |
+|--------|---------------|------------|-------|
+| Q_{gen,mp} | Methane generation | Methane generated in monitoring period \(mp\) (m\(^3\)) | Column `methane_generation_m3` |
+| f_{BL} | Baseline capture efficiency | Fraction of methane captured in the baseline scenario (dimensionless) | Column `baseline_capture_efficiency` |
+| OX_{mp} | Oxidation fraction | Fraction of methane oxidised in landfill cover during monitoring period \(mp\) | Column `oxidation_fraction` |
+| Q_{cap,mp} | Methane captured | Methane captured under the project in monitoring period \(mp\) (m\(^3\)) | Column `methane_captured_m3` |
+| \eta_{dest} | Destruction efficiency | Fraction of captured methane destroyed (dimensionless) | Column `destruction_efficiency` |
+| BE_{mp} | Baseline emissions | Baseline emissions from methane release (tCO2e) | Column `baseline_emissions` |
+| PE_{mp} | Project emissions | Project emissions from methane slip and auxiliary energy (tCO2e) | Column `project_emissions` |
+| LE_{mp} | Leakage emissions | Leakage emissions attributable to the project (tCO2e) | Column `leakage_emissions` |
+| MD_{mp} | Methane destroyed | Methane mass destroyed in monitoring period \(mp\) (t CH\(_4\)) | Column `methane_destroyed_t` |
+| MD_{mp}^{CO2e} | Methane destruction (CO2e) | Methane destruction expressed as CO2e (tCO2e) | Column `methane_destroyed_co2e` |
+| ER_{mp} | Emission reductions | Net emission reductions \(BE_{mp} - PE_{mp} - LE_{mp}\) (tCO2e) | Column `emission_reductions` |

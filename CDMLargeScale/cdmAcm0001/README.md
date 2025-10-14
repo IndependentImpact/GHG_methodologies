@@ -23,4 +23,6 @@ if (check_applicability_landfill_management("sanitary", TRUE) &&
 }
 ```
 
-For a full walk-through see the vignette in `vignettes/cdmAcm0001-methodology.Rmd`.
+The period summaries now include methane destruction expressed in tonnes and
+tonnes of CO2e, alongside oxidation-adjusted baseline emissions. For a full
+walk-through see the vignette in `vignettes/cdmAcm0001-methodology.Rmd`.

@@ -37,7 +37,8 @@ aggregate_monitoring_periods <- function(monitoring_data) {
 
   defaults <- list(
     methane_density_t_per_m3 = 0.000716,
-    gwp_ch4 = 28
+    gwp_ch4 = 28,
+    oxidation_fraction = 0
   )
 
   for (nm in names(defaults)) {
@@ -52,6 +53,7 @@ aggregate_monitoring_periods <- function(monitoring_data) {
       baseline_emissions = calculate_baseline_emissions_acm0001(
         methane_generation_m3,
         baseline_capture_efficiency,
+        oxidation_fraction,
         methane_density_t_per_m3,
         gwp_ch4
       ),
@@ -68,6 +70,17 @@ aggregate_monitoring_periods <- function(monitoring_data) {
       leakage_emissions = calculate_leakage_emissions_acm0001(
         leakage_fraction,
         methane_captured_m3,
+        methane_density_t_per_m3,
+        gwp_ch4
+      ),
+      methane_destroyed_t = calculate_methane_destroyed_acm0001(
+        methane_captured_m3,
+        destruction_efficiency,
+        methane_density_t_per_m3
+      ),
+      methane_destroyed_co2e = calculate_methane_destruction_co2e_acm0001(
+        methane_captured_m3,
+        destruction_efficiency,
         methane_density_t_per_m3,
         gwp_ch4
       ),
@@ -88,11 +101,14 @@ aggregate_monitoring_periods <- function(monitoring_data) {
       electricity_import_mwh = sum(electricity_import_mwh, na.rm = TRUE),
       import_ef_t_per_mwh = mean(import_ef_t_per_mwh, na.rm = TRUE),
       leakage_fraction = mean(leakage_fraction, na.rm = TRUE),
+      oxidation_fraction = mean(oxidation_fraction, na.rm = TRUE),
       methane_density_t_per_m3 = mean(methane_density_t_per_m3, na.rm = TRUE),
       gwp_ch4 = mean(gwp_ch4, na.rm = TRUE),
       baseline_emissions = sum(baseline_emissions, na.rm = TRUE),
       project_emissions = sum(project_emissions, na.rm = TRUE),
       leakage_emissions = sum(leakage_emissions, na.rm = TRUE),
+      methane_destroyed_t = sum(methane_destroyed_t, na.rm = TRUE),
+      methane_destroyed_co2e = sum(methane_destroyed_co2e, na.rm = TRUE),
       emission_reductions = sum(emission_reductions, na.rm = TRUE),
       .groups = "drop"
     )
@@ -119,6 +135,8 @@ estimate_emission_reductions_acm0001 <- function(monitoring_data) {
       total_baseline_emissions = sum(baseline_emissions, na.rm = TRUE),
       total_project_emissions = sum(project_emissions, na.rm = TRUE),
       total_leakage_emissions = sum(leakage_emissions, na.rm = TRUE),
+      total_methane_destroyed_t = sum(methane_destroyed_t, na.rm = TRUE),
+      total_methane_destroyed_co2e = sum(methane_destroyed_co2e, na.rm = TRUE),
       total_emission_reductions = sum(emission_reductions, na.rm = TRUE),
       .groups = "drop"
     ) |>
