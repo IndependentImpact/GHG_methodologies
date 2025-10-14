@@ -27,6 +27,7 @@ This document tracks the progress of each methodology package in the repository.
 | AMS-III.AJ | Yes | Completed |
 | ACM0002 | Yes | Completed |
 | ACM0001 | Yes | Completed |
+| ACM0012 | Yes | Completed |
 
 ## Status Legend
 - **Not Started** – No development work has begun.
