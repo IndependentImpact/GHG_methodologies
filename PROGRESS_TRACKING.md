@@ -29,6 +29,7 @@ This document tracks the progress of each methodology package in the repository.
 | ACM0001 | Yes | Completed |
 | ACM0012 | Yes | Completed |
 | ACM0006 | Yes | Completed |
+| ACM0008 | Yes | Completed |
 
 ## Status Legend
 - **Not Started** – No development work has begun.
