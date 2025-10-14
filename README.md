@@ -149,6 +149,9 @@ recycling (**cdmAmsIIIaj**).
 - **cdmAcm0006**: Implements ACM0006 electricity and heat generation from biomass with applicability diagnostics for biomass
   dominance, baseline and project emission calculators covering combined heat and power outputs, leakage helpers, monitoring
   aggregation workflows, and simulation utilities for biomass-fuelled plants.
+- **cdmAcm0019**: Implements ACM0019 nitrous oxide abatement from nitric acid production, delivering applicability diagnostics,
+  emission factor converters, monitoring aggregation helpers, and simulation utilities for secondary and tertiary abatement
+  systems.
 
 ## Development Workflow
 
