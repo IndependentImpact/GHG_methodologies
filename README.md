@@ -65,7 +65,9 @@
 
 ## Repository Packages
 
-### Type I — Renewable energy for small-scale users
+### CDMSmallScale
+
+#### Type I — Renewable energy for small-scale users
 
 - **cdmAmsIa**: Implements AMS-I.A electricity generation by the user, including equation-level
   helpers, applicability checks, simulation utilities, and documentation.
@@ -84,7 +86,7 @@
 - **cdmAmsIj**: Implements AMS-I.J solar water heating systems with solar-specific applicability checks,
   thermal energy equations, auxiliary energy accounting, monitoring aggregation, and simulation utilities.
 
-### Type II — Energy efficiency and demand-side measures
+#### Type II — Energy efficiency and demand-side measures
 
 - **cdmAmsIIc**: Implements AMS-II.C demand-side energy efficiency activities, delivering applicability
   helpers for technology scope and monitoring, energy savings equations, emission reduction workflows,
@@ -109,7 +111,7 @@
   baseline and project emission workflows, service coverage applicability checks, energy intensity diagnostics,
   and simulation utilities for multi-building portfolios.
 
-### Type III — Methane, waste, and other project activities
+#### Type III — Methane, waste, and other project activities
 
 - **cdmAmsIIIa**: Implements AMS-III.A nitrogen fertiliser offsetting with inoculants, including soil
   emission accounting, applicability diagnostics, and simulation utilities.
@@ -135,6 +137,12 @@ The Type II package suite covers demand-side efficiency for specific technologie
 nitrogen fertiliser offsetting (**cdmAmsIIIa**), manure methane recovery (**cdmAmsIIId**), biomass decay avoidance (**cdmAmsIIIe**),
 composting (**cdmAmsIIIf**), landfill gas recovery (**cdmAmsIIIg**), wastewater methane recovery (**cdmAmsIIIh**), and materials
 recycling (**cdmAmsIIIaj**).
+
+### CDMLargeScale
+
+- **cdmAcm0002**: Implements ACM0002 grid-connected electricity generation from renewable sources, including consolidated
+  baseline emission factors, project emission workflows, leakage accounting, monitoring aggregation, and simulation utilities
+  designed for large-scale renewable power plants.
 
 ## Development Workflow
 
