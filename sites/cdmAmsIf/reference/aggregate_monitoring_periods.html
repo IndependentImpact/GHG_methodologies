@@ -91,17 +91,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_ams_if_dataset.html">simulate_ams_if_dataset</a></span><span class="op">(</span>n_grids <span class="op">=</span> <span class="fl">2</span>, n_periods <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   grid_id  year month baseline_emissions_tco2e project_emissions_tco2e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> grid_1   <span style="text-decoration: underline;">2</span>023     1                    <span style="text-decoration: underline;">3</span>640.                   104. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> grid_1   <span style="text-decoration: underline;">2</span>023     2                    <span style="text-decoration: underline;">4</span>955.                   142. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> grid_1   <span style="text-decoration: underline;">2</span>023     3                    <span style="text-decoration: underline;">3</span>255.                    93.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> grid_2   <span style="text-decoration: underline;">2</span>023     1                    <span style="text-decoration: underline;">3</span>729.                   107. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> grid_2   <span style="text-decoration: underline;">2</span>023     2                    <span style="text-decoration: underline;">3</span>334.                    95.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> grid_2   <span style="text-decoration: underline;">2</span>023     3                    <span style="text-decoration: underline;">2</span>659.                    76.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: emission_reductions_tco2e &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   baseline_electricity_mwh &lt;dbl&gt;, baseline_emission_factor &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>

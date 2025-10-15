@@ -82,11 +82,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">supply</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>baseline_electricity_mwh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">400</span>, <span class="fl">520</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">calculate_baseline_emissions</span><span class="op">(</span><span class="va">supply</span>, baseline_emission_factor <span class="op">=</span> <span class="fl">0.72</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   baseline_electricity_mwh baseline_emissions_tco2e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                      400                     288 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>                      520                     374.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_output` must contain `useful_thermal_output_mwh`.</span>
 </code></pre></div>
     </div>
   </div>
