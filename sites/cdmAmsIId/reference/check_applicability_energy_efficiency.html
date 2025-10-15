@@ -110,7 +110,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">baseline</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>baseline_fuel_quantity <span class="op">=</span> <span class="fl">1200</span>, baseline_efficiency <span class="op">=</span> <span class="fl">0.72</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">project</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>project_fuel_quantity <span class="op">=</span> <span class="fl">950</span>, project_efficiency <span class="op">=</span> <span class="fl">0.84</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_applicability_energy_efficiency</span><span class="op">(</span><span class="va">baseline</span>, <span class="va">project</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `service_col` must be present in both baseline and project data.</span>
 </code></pre></div>
     </div>
   </div>
