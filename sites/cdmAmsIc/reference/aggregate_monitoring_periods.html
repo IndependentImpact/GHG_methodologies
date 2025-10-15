@@ -104,17 +104,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_ams_ic_dataset.html">simulate_ams_ic_dataset</a></span><span class="op">(</span>n_facilities <span class="op">=</span> <span class="fl">2</span>, n_periods <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   facility_id  year month baseline_emissions_tco2e project_emissions_tco2e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> facility_1   <span style="text-decoration: underline;">2</span>023     1                     925.                    34.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> facility_1   <span style="text-decoration: underline;">2</span>023     2                    <span style="text-decoration: underline;">1</span>290.                    47.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> facility_1   <span style="text-decoration: underline;">2</span>023     3                     818.                    30.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> facility_2   <span style="text-decoration: underline;">2</span>023     1                     949.                    35.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> facility_2   <span style="text-decoration: underline;">2</span>023     2                     839.                    31.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> facility_2   <span style="text-decoration: underline;">2</span>023     3                     652.                    24.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: emission_reductions_tco2e &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   baseline_thermal_output_mwh &lt;dbl&gt;, baseline_emission_factor &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>
