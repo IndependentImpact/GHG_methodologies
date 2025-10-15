@@ -16,6 +16,12 @@ suppressPackageStartupMessages({
   if (!requireNamespace("cli", quietly = TRUE)) {
     stop("The 'cli' package is required. Install it with install.packages('cli').", call. = FALSE)
   }
+  if (!requireNamespace("withr", quietly = TRUE)) {
+    stop("The 'withr' package is required. Install it with install.packages('withr').", call. = FALSE)
+  }
+  if (!requireNamespace("pkgbuild", quietly = TRUE)) {
+    stop("The 'pkgbuild' package is required. Install it with install.packages('pkgbuild').", call. = FALSE)
+  }
 })
 
 source(fs::path("tools", "list_packages.R"))
@@ -52,11 +58,26 @@ if (fs::dir_exists(local_site_dir)) {
 }
 fs::dir_create(local_site_dir)
 
-pkgdown::build_site(
-  pkg = pkg_dir,
-  preview = FALSE,
-  override = list(destination = local_site_dir)
-)
+temp_lib_dir <- fs::path(tempdir(), glue::glue("pkgdown-lib-{pkg_name}"))
+if (!fs::dir_exists(temp_lib_dir)) {
+  fs::dir_create(temp_lib_dir)
+}
+
+withr::with_libpaths(temp_lib_dir, action = "prefix", {
+  cli::cli_inform("Installing {pkg_name} into temporary library for pkgdown build")
+  pkgbuild::install(
+    pkg = pkg_dir,
+    dest_path = temp_lib_dir,
+    clean = TRUE,
+    quiet = TRUE
+  )
+
+  pkgdown::build_site(
+    pkg = pkg_dir,
+    preview = FALSE,
+    override = list(destination = local_site_dir)
+  )
+})
 
 should_deploy <- (
   Sys.getenv("GITHUB_REF") == "refs/heads/main" &&
