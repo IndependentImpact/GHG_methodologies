@@ -51,15 +51,143 @@ pkg_info <- purrr::map(pkg_dirs, function(pkg_dir) {
 })
 
 build_index_html <- function(pkg_info) {
-  pkg_names <- purrr::map_chr(pkg_info, "name")
-  pkg_info <- pkg_info[order(tolower(pkg_names))]
-  now <- format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")
+  escape_html <- function(text) {
+    text <- gsub("&", "&amp;", text, fixed = TRUE)
+    text <- gsub("<", "&lt;", text, fixed = TRUE)
+    text <- gsub(">", "&gt;", text, fixed = TRUE)
+    text <- gsub("\"", "&quot;", text, fixed = TRUE)
+    gsub("'", "&#39;", text, fixed = TRUE)
+  }
 
-  items <- purrr::map_chr(pkg_info, function(info) {
-    glue::glue(
-      "      <li>\n        <a href=\"sites/{info$name}/\">{info$name}</a>\n        <span class=\"package-path\">{info$dir}</span>\n      </li>"
+  extract_method_code <- function(title, description) {
+    candidates <- c(title, description)
+    for (candidate in candidates) {
+      if (is.na(candidate) || candidate == "") {
+        next
+      }
+
+      acm_match <- regexpr("ACM[0-9]{4}", candidate, perl = TRUE)
+      if (acm_match != -1) {
+        return(regmatches(candidate, acm_match))
+      }
+
+      ams_match <- regexpr("AMS-[IVX]+\.[A-Z]+", candidate, perl = TRUE)
+      if (ams_match != -1) {
+        return(regmatches(candidate, ams_match))
+      }
+    }
+
+    NA_character_
+  }
+
+  extract_method_label <- function(description) {
+    if (is.na(description) || description == "") {
+      return(NA_character_)
+    }
+
+    quote_match <- regexpr('\"([^\"]+)\"', description, perl = TRUE)
+    if (quote_match == -1) {
+      return(NA_character_)
+    }
+
+    gsub('"', '', regmatches(description, quote_match), fixed = TRUE)
+  }
+
+  normalise_space <- function(text) {
+    gsub("\\s+", " ", text)
+  }
+
+  pkg_entries <- purrr::map(pkg_info, function(info) {
+    desc_path <- fs::path(info$abs_dir, "DESCRIPTION")
+    fields <- read.dcf(desc_path, fields = c("Title", "Description"))
+    title <- fields[1, "Title"]
+    description <- fields[1, "Description"]
+    description <- normalise_space(description)
+
+    if (grepl("CDMLargeScale", info$dir, fixed = TRUE)) {
+      scale <- "large-scale"
+    } else if (grepl("CDMSmallScale", info$dir, fixed = TRUE)) {
+      scale <- "small-scale"
+    } else {
+      scale <- "other"
+    }
+
+    method_code <- extract_method_code(title, description)
+    method_label <- extract_method_label(description)
+
+    scale_phrase <- if (scale %in% c("large-scale", "small-scale")) {
+      glue::glue("{scale} methodology")
+    } else {
+      "methodology"
+    }
+
+    summary <- if (!is.na(method_code) && !is.na(method_label)) {
+      glue::glue(
+        "{info$name} implements the Clean Development Mechanism (CDM) {scale_phrase} {method_code} {method_label}."
+      )
+    } else if (!is.na(method_code)) {
+      glue::glue(
+        "{info$name} implements the Clean Development Mechanism (CDM) {scale_phrase} {method_code}."
+      )
+    } else {
+      glue::glue(
+        "{info$name} provides tooling for the Clean Development Mechanism (CDM) {scale_phrase}."
+      )
+    }
+
+    list(
+      scale = scale,
+      name = info$name,
+      dir = info$dir,
+      code = method_code,
+      summary = normalise_space(summary)
     )
   })
+
+  pkg_entries <- pkg_entries[order(tolower(purrr::map_chr(pkg_entries, "name")))]
+  now <- format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")
+
+  section_order <- c("large-scale", "small-scale", "other")
+  section_titles <- c(
+    "large-scale" = "Large-scale methodologies (ACM)",
+    "small-scale" = "Small-scale methodologies (AMS)",
+    "other" = "Other packages"
+  )
+
+  section_content <- purrr::map(section_order, function(section) {
+    section_entries <- purrr::keep(pkg_entries, ~.x$scale == section)
+    if (length(section_entries) == 0) {
+      return(NULL)
+    }
+
+    items <- purrr::map_chr(section_entries, function(entry) {
+      code_badge <- if (!is.na(entry$code)) {
+        glue::glue("<span class=\"package-code\">{escape_html(entry$code)}</span>")
+      } else {
+        ""
+      }
+
+      glue::glue(
+        "      <li>\n        <div class=\"package-header\">\n          <a href=\"sites/{escape_html(entry$name)}/\">{escape_html(entry$name)}</a>\n          {code_badge}\n        </div>\n        <p class=\"package-summary\">{escape_html(entry$summary)}</p>\n        <span class=\"package-path\">{escape_html(entry$dir)}</span>\n      </li>"
+      )
+    })
+
+    c(
+      glue::glue("    <section>"),
+      glue::glue("      <h2>{section_titles[[section]]}</h2>"),
+      "      <ul>",
+      items,
+      "      </ul>",
+      "    </section>"
+    )
+  })
+
+  section_content <- purrr::compact(section_content)
+  section_content <- if (length(section_content) == 0) {
+    character()
+  } else {
+    unlist(section_content, use.names = FALSE)
+  }
 
   c(
     "<!DOCTYPE html>",
@@ -70,24 +198,27 @@ build_index_html <- function(pkg_info) {
     "  <title>GHG Methodologies pkgdown sites</title>",
     "  <style>",
     "    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 2rem; background: #f7f7f7; color: #222; }",
-    "    main { max-width: 960px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }",
+    "    main { max-width: 1024px; margin: 0 auto; background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }",
     "    h1 { font-size: 2.25rem; margin-bottom: 0.5rem; }",
+    "    h2 { margin-top: 2.5rem; font-size: 1.5rem; border-bottom: 1px solid #e5e5e5; padding-bottom: 0.5rem; }",
     "    p.meta { color: #555; margin-top: 0; }",
-    "    ul { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }",
-    "    li { background: #fafafa; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1rem 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }",
+    "    section:first-of-type h2 { margin-top: 2rem; }",
+    "    ul { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }",
+    "    li { background: #fafafa; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.1rem 1.35rem; transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; gap: 0.75rem; }",
     "    li:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08); }",
-    "    a { color: #005a9c; font-weight: 600; text-decoration: none; display: block; margin-bottom: 0.5rem; }",
+    "    .package-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }",
+    "    a { color: #005a9c; font-weight: 600; text-decoration: none; font-size: 1.1rem; flex-grow: 1; }",
     "    a:hover, a:focus { text-decoration: underline; }",
-    "    .package-path { display: inline-block; font-family: 'Fira Code', 'Source Code Pro', monospace; font-size: 0.875rem; color: #555; background: #eef2f7; padding: 0.15rem 0.5rem; border-radius: 6px; }",
+    "    .package-code { display: inline-block; font-size: 0.85rem; font-weight: 600; color: #1a1a1a; background: #e3ecf7; border: 1px solid #c6d8f0; border-radius: 999px; padding: 0.2rem 0.6rem; letter-spacing: 0.03em; }",
+    "    .package-summary { margin: 0; color: #333; line-height: 1.45; }",
+    "    .package-path { display: inline-block; font-family: 'Fira Code', 'Source Code Pro', monospace; font-size: 0.85rem; color: #555; background: #eef2f7; padding: 0.2rem 0.55rem; border-radius: 6px; align-self: flex-start; }",
     "  </style>",
     "</head>",
     "<body>",
     "  <main>",
     "    <h1>GHG Methodologies pkgdown sites</h1>",
     glue::glue("    <p class=\"meta\">Last updated {now}. Links point to each package's pkgdown site on GitHub Pages.</p>"),
-    "    <ul>",
-    items,
-    "    </ul>",
+    section_content,
     "  </main>",
     "</body>",
     "</html>"
