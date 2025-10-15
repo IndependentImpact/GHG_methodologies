@@ -155,6 +155,9 @@ recycling (**cdmAmsIIIaj**).
 - **cdmAcm0019**: Implements ACM0019 nitrous oxide abatement from nitric acid production, delivering applicability diagnostics,
   emission factor converters, monitoring aggregation helpers, and simulation utilities for secondary and tertiary abatement
   systems.
+- **cdmAcm0013**: Implements ACM0013 efficient fossil-fuel power generation with applicability diagnostics, baseline and project
+  emission calculators, leakage aggregation, monitoring helpers, and simulation utilities for lower-emission grid-connected
+  plants.
 
 ## Development Workflow
 
