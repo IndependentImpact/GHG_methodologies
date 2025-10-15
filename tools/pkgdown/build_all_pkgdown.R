@@ -22,6 +22,9 @@ suppressPackageStartupMessages({
   if (!requireNamespace("pkgbuild", quietly = TRUE)) {
     stop("The 'pkgbuild' package is required. Install it with install.packages('pkgbuild').", call. = FALSE)
   }
+  if (!requireNamespace("withr", quietly = TRUE)) {
+    stop("The 'withr' package is required. Install it with install.packages('withr').", call. = FALSE)
+  }
 })
 
 source(fs::path("tools", "list_packages.R"))
@@ -44,9 +47,20 @@ purrr::walk(pkg_dirs, function(pkg_dir) {
     quiet = TRUE
   )
 
-  if (fs::file_exists(pkg_tarball)) {
-    fs::file_delete(pkg_tarball)
+  temp_lib <- fs::path(tempdir(), glue::glue("lib-{pkg_name}"))
+
+  if (fs::dir_exists(temp_lib)) {
+    fs::dir_delete(temp_lib)
   }
+  fs::dir_create(temp_lib)
+
+  utils::install.packages(
+    pkg_tarball,
+    repos = NULL,
+    type = "source",
+    lib = temp_lib,
+    quiet = TRUE
+  )
 
   cli::cli_inform("Building pkgdown site for {pkg_name} ({pkg_dir})")
 
@@ -57,19 +71,29 @@ purrr::walk(pkg_dirs, function(pkg_dir) {
   }
   fs::dir_create(local_site_dir)
 
-  pkgdown::build_site(
-    pkg = abs_pkg_dir,
-    override = list(destination = local_site_dir),
-    preview = FALSE
-  )
+  withr::with_libpaths(temp_lib, action = "prefix", {
+    pkgdown::build_site(
+      pkg = abs_pkg_dir,
+      override = list(destination = local_site_dir),
+      preview = FALSE
+    )
 
-  pkgdown::deploy_to_branch(
-    pkg = abs_pkg_dir,
-    branch = "gh-pages",
-    subdir = fs::path("sites", pkg_name),
-    clean = FALSE,
-    commit_message = glue::glue("Build pkgdown for {pkg_name}")
-  )
+    pkgdown::deploy_to_branch(
+      pkg = abs_pkg_dir,
+      branch = "gh-pages",
+      subdir = fs::path("sites", pkg_name),
+      clean = FALSE,
+      commit_message = glue::glue("Build pkgdown for {pkg_name}")
+    )
+  })
+
+  if (fs::dir_exists(temp_lib)) {
+    fs::dir_delete(temp_lib)
+  }
+
+  if (fs::file_exists(pkg_tarball)) {
+    fs::file_delete(pkg_tarball)
+  }
 })
 
 cli::cli_inform("All pkgdown sites built and deployed.")
