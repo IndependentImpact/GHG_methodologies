@@ -1,7 +1,0 @@
----
-title: "ACM0002 Methodology Walkthrough"
-output: html_document
----
-
-This document is a pre-built version of the ACM0002 vignette. To regenerate,
-run `devtools::build_vignettes()` from the package root.

@@ -62,6 +62,9 @@
 - `CDMLargeScale/` — installable packages for consolidated large-scale (ACM)
   methodologies. The first package in this series is `cdmAcm0002`, covering
   grid-connected renewable electricity generation.
+- Every package now stores its long-form methodology walkthrough in
+  `vignettes/`, making the repository ready for pkgdown site generation without
+  conflicting with the default `docs/` output directory.
 
 ## Repository Packages
 

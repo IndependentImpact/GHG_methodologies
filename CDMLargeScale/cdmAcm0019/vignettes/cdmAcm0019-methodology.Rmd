@@ -1,9 +1,11 @@
 ---
 title: "ACM0019 Nitric Acid Abatement Workflow"
-author: "OpenAI Assistant"
-output:
-  rmarkdown::html_document:
-    df_print: tibble
+author: "Independent Impact"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ACM0019 Nitric Acid Abatement Workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}

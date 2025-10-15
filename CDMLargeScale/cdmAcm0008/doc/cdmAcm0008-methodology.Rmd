@@ -1,7 +1,0 @@
----
-title: "ACM0008 Methodology Walkthrough"
-author: "Independent Impact"
-output: html_document
----
-
-This document mirrors the vignette `vignettes/cdmAcm0008-methodology.Rmd` and is provided for pkgdown site generation.
