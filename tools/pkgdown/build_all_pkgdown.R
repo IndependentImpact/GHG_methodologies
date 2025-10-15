@@ -19,6 +19,9 @@ suppressPackageStartupMessages({
   if (!requireNamespace("cli", quietly = TRUE)) {
     stop("The 'cli' package is required. Install it with install.packages('cli').", call. = FALSE)
   }
+  if (!requireNamespace("pkgbuild", quietly = TRUE)) {
+    stop("The 'pkgbuild' package is required. Install it with install.packages('pkgbuild').", call. = FALSE)
+  }
 })
 
 source(fs::path("tools", "list_packages.R"))
@@ -33,6 +36,18 @@ if (length(pkg_dirs) == 0) {
 purrr::walk(pkg_dirs, function(pkg_dir) {
   abs_pkg_dir <- fs::path(root, pkg_dir)
   pkg_name <- read.dcf(fs::path(abs_pkg_dir, "DESCRIPTION"), "Package")[1, 1]
+  cli::cli_inform("Building source package for {pkg_name} ({pkg_dir})")
+
+  pkg_tarball <- pkgbuild::build(
+    path = abs_pkg_dir,
+    dest_path = tempdir(),
+    quiet = TRUE
+  )
+
+  if (fs::file_exists(pkg_tarball)) {
+    fs::file_delete(pkg_tarball)
+  }
+
   cli::cli_inform("Building pkgdown site for {pkg_name} ({pkg_dir})")
 
   local_site_dir <- fs::path(tempdir(), glue::glue("pkgdown-site-{pkg_name}"))
