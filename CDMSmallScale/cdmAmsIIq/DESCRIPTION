@@ -1,8 +1,8 @@
 Package: cdmAmsIIq
 Title: Implementation of CDM Small-Scale Methodology AMS-II.Q
 Version: 0.0.1
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
-Author: OpenAI Assistant [aut, cre]
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
+Author: Christiaan Pauw [aut, cre]
 Maintainer: OpenAI Assistant <assistant@independentimpact.org>
 Description: Provides tidyverse-aligned tooling to implement the Clean Development Mechanism
     small-scale methodology AMS-II.Q "Energy efficiency and/or energy supply projects in commercial buildings"

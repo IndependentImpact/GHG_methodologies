@@ -1,7 +1,7 @@
 Package: cdmAcm0008
 Title: Implementation of CDM Large-Scale Methodology ACM0008
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Supplies tidyverse-centric tooling to reproduce the consolidated Clean Development Mechanism methodology ACM0008 "Consolidated methodology for coal mine methane projects". The package contains helpers for applicability checks, equation-level computations, monitoring-period aggregation, and end-to-end emission reduction estimation alongside data simulation utilities tailored to methane capture and oxidation systems in underground coal mines.
 License: MIT + file LICENSE
 Encoding: UTF-8

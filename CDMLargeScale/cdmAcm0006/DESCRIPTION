@@ -1,7 +1,7 @@
 Package: cdmAcm0006
 Title: Implementation of CDM Large-Scale Methodology ACM0006
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling to implement the Clean Development Mechanism
     large-scale methodology ACM0006 "Electricity and heat generation from biomass".
     Functions translate numbered equations, applicability conditions, and calculation workflows

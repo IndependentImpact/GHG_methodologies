@@ -1,7 +1,7 @@
 Package: cdmAmsIIIe
 Title: Implementation of CDM Small-Scale Methodology AMS-III.E
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling to implement the Clean Development Mechanism
     small-scale methodology AMS-III.E "Avoidance of methane production from decay of biomass".
     Functions translate key equations, applicability conditions, simulation utilities, and
