@@ -1,0 +1,6 @@
+pandoc: '3.4'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  cdmAmsIIId-methodology: cdmAmsIIId-methodology.html
+last_built: 2025-10-15T13:32Z
