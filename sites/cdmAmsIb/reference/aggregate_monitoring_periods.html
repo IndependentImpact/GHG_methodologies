@@ -109,17 +109,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_ams_ib_dataset.html">simulate_ams_ib_dataset</a></span><span class="op">(</span>n_machines <span class="op">=</span> <span class="fl">2</span>, n_periods <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   machine_id  year month baseline_energy_mj emission_factor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> machine_1   <span style="text-decoration: underline;">2</span>023     1             <span style="text-decoration: underline;">14</span>081.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> machine_1   <span style="text-decoration: underline;">2</span>023     2             <span style="text-decoration: underline;">18</span>588.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> machine_1   <span style="text-decoration: underline;">2</span>023     3             <span style="text-decoration: underline;">12</span>762.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> machine_2   <span style="text-decoration: underline;">2</span>023     1             <span style="text-decoration: underline;">14</span>384.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> machine_2   <span style="text-decoration: underline;">2</span>023     2             <span style="text-decoration: underline;">13</span>031.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> machine_2   <span style="text-decoration: underline;">2</span>023     3             <span style="text-decoration: underline;">10</span>718.         0.000<span style="text-decoration: underline;">07</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: baseline_emissions_tco2e &lt;dbl&gt;, project_energy_mj &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_emissions_tco2e &lt;dbl&gt;, emission_reductions_tco2e &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>
