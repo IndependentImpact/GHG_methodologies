@@ -104,10 +104,7 @@
 <span class="r-in"><span>  service_level_indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.32</span>, <span class="fl">0.31</span>, <span class="fl">0.33</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">monitoring</span>, period_col <span class="op">=</span> <span class="va">month</span>, group_cols <span class="op">=</span> <span class="st">"building_id"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   building_id monitoring_period project_total_energy_mwh service_level_indicator</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Office_A    Jan, Feb, Mar                         29.5                    0.96</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in aggregate_monitoring_periods(monitoring, period_col = month,     group_cols = "building_id"):</span> unused argument (period_col = month)</span>
 </code></pre></div>
     </div>
   </div>
