@@ -91,11 +91,7 @@ flexibility by allowing a non-zero factor when auxiliary fossil fuel use is repo
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">baseline</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>baseline_generation_kwh <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">3000</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">calculate_project_emissions</span><span class="op">(</span><span class="va">baseline</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   baseline_generation_kwh project_emissions_tco2e</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                    <span style="text-decoration: underline;">2</span>000                       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>                    <span style="text-decoration: underline;">3</span>000                       0</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `baseline_supply` must contain `baseline_electricity_mwh`.</span>
 </code></pre></div>
     </div>
   </div>
