@@ -143,7 +143,7 @@ monitoring spans at least three periods per management unit.</p>
 tests.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">monitoring</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">farm_id</span>, <span class="va">monitoring_period</span>, <span class="va">baseline_synthetic_n_kg</span>, <span class="va">project_synthetic_n_kg</span>, <span class="va">inoculant_rate_kg_per_ha</span>, <span class="va">legume_area_ha</span>, <span class="va">leakage_emissions_tco2e</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">farm_id</span>, <span class="va">monitoring_period</span>, <span class="va">baseline_synthetic_n_kg</span>, <span class="va">project_synthetic_n_kg</span>, <span class="va">inoculant_rate_kg_per_ha</span>, <span class="va">legume_area_ha</span>, <span class="va">leakage_emissions_tco2e</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">quiet_kable</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: 'xfun::attr()' is deprecated.</span></span>
 <span><span class="co">#&gt; Use 'xfun::attr2()' instead.</span></span>
@@ -324,7 +324,7 @@ residual fertilizer and inoculant emissions, and finally leakage.</p>
 emission reductions.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">period_results</span> <span class="op">&lt;-</span> <span class="va">monitoring</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    baseline_emissions_tco2e <span class="op">=</span> <span class="va">baseline_synthetic_n_kg</span> <span class="op">*</span> <span class="op">(</span><span class="va">baseline_production_ef_tco2_per_kg</span> <span class="op">+</span> <span class="va">baseline_field_ef_tco2_per_kg</span><span class="op">)</span>,</span>
 <span>    project_fertilizer_emissions_tco2e <span class="op">=</span> <span class="va">project_synthetic_n_kg</span> <span class="op">*</span> <span class="op">(</span><span class="va">project_production_ef_tco2_per_kg</span> <span class="op">+</span> <span class="va">project_field_ef_tco2_per_kg</span><span class="op">)</span>,</span>
 <span>    project_inoculant_emissions_tco2e <span class="op">=</span> <span class="va">inoculant_rate_kg_per_ha</span> <span class="op">*</span> <span class="va">legume_area_ha</span> <span class="op">*</span> <span class="va">inoculant_ef_tco2_per_kg</span></span>
