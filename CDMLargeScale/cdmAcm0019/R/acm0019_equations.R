@@ -128,7 +128,7 @@ calculate_net_emission_reductions_acm0019 <- function(baseline_emissions_tco2e,
 
   target_length <- max(lengths(numeric_inputs))
   purrr::iwalk(numeric_inputs, function(x, nm) {
-    if (!target_length %in% c(length(x), 1)) {
+    if (!length(x) %in% c(1, target_length)) {
       rlang::abort(paste0("`", nm, "` must have length 1 or match the longest input."))
     }
   })
