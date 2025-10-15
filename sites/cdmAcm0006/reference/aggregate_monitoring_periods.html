@@ -77,18 +77,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_acm0006_dataset.html">simulate_acm0006_dataset</a></span><span class="op">(</span><span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   period    heat_output_tj electricity_output_mwh baseline_heat_ef</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Period 01           8.79                   324.             72.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Period 02           8.52                   532.             75.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Period 03           9.75                   426.             80.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: baseline_electricity_ef &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   auxiliary_fossil_tj &lt;dbl&gt;, auxiliary_fossil_ef &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   electricity_import_mwh &lt;dbl&gt;, import_emission_factor &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   biomass_transport_tkm &lt;dbl&gt;, transport_emission_factor &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   leakage_fraction &lt;dbl&gt;, baseline_emissions &lt;dbl&gt;, project_emissions &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   leakage_emissions &lt;dbl&gt;, emission_reductions &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>
