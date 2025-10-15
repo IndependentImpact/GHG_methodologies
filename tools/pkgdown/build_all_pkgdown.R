@@ -97,38 +97,82 @@ build_index_html <- function(pkg_info) {
 update_pkgdown_index <- function(root, pkg_info) {
   cli::cli_inform("Updating pkgdown index page")
 
-  clone_dir <- fs::path(tempdir(), "gh-pages-index")
+  worktree_dir <- fs::path(tempdir(), "gh-pages-index")
 
-  if (fs::dir_exists(clone_dir)) {
-    fs::dir_delete(clone_dir)
+  if (fs::dir_exists(worktree_dir)) {
+    fs::dir_delete(worktree_dir)
   }
 
-  repo <- tryCatch(
-    gert::git_clone(root, path = clone_dir, branch = "gh-pages"),
+  worktree_created <- FALSE
+
+  cleanup_worktree <- function() {
+    if (worktree_created) {
+      try(
+        withr::with_dir(
+          root,
+          system2(
+            "git",
+            c("worktree", "remove", "--force", worktree_dir),
+            stdout = FALSE,
+            stderr = FALSE
+          )
+        ),
+        silent = TRUE
+      )
+    }
+
+    if (fs::dir_exists(worktree_dir)) {
+      try(fs::dir_delete(worktree_dir), silent = TRUE)
+    }
+  }
+
+  on.exit(cleanup_worktree(), add = TRUE)
+
+  add_result <- tryCatch(
+    withr::with_dir(
+      root,
+      system2(
+        "git",
+        c("worktree", "add", worktree_dir, "gh-pages"),
+        stdout = TRUE,
+        stderr = TRUE
+      )
+    ),
     error = function(err) {
-      cli::cli_warn("Skipping index update because the 'gh-pages' branch could not be cloned: {err$message}")
+      cli::cli_warn("Skipping index update because the 'gh-pages' worktree could not be created: {err$message}")
       return(NULL)
     }
   )
 
-  if (is.null(repo)) {
+  if (is.null(add_result)) {
     return(invisible(NULL))
   }
 
+  status_code <- attr(add_result, "status")
+
+  if (!is.null(status_code) && status_code != 0) {
+    cli::cli_warn(
+      "Skipping index update because the 'gh-pages' worktree could not be created: {paste(add_result, collapse = '\n')}"
+    )
+    return(invisible(NULL))
+  }
+
+  worktree_created <- TRUE
+
   index_html <- build_index_html(pkg_info)
-  index_path <- fs::path(clone_dir, "index.html")
+  index_path <- fs::path(worktree_dir, "index.html")
   writeLines(index_html, index_path)
 
-  if (nrow(gert::git_status(repo = clone_dir)) == 0) {
+  if (nrow(gert::git_status(repo = worktree_dir)) == 0) {
     cli::cli_inform("Index page already up to date")
     return(invisible(NULL))
   }
 
-  gert::git_add(repo = clone_dir, files = "index.html")
+  gert::git_add(repo = worktree_dir, files = "index.html")
 
   committed <- tryCatch(
     {
-      gert::git_commit(repo = clone_dir, message = "Update pkgdown index")
+      gert::git_commit(repo = worktree_dir, message = "Update pkgdown index")
       TRUE
     },
     error = function(err) {
@@ -141,8 +185,21 @@ update_pkgdown_index <- function(root, pkg_info) {
     return(invisible(NULL))
   }
 
+  remotes <- tryCatch(
+    gert::git_remote_list(repo = worktree_dir),
+    error = function(err) {
+      cli::cli_warn("Unable to list git remotes for pushing: {err$message}")
+      return(data.frame())
+    }
+  )
+
+  if (nrow(remotes) == 0) {
+    cli::cli_inform("No git remotes configured; skipping push of index update")
+    return(invisible(NULL))
+  }
+
   tryCatch(
-    gert::git_push(repo = clone_dir),
+    gert::git_push(repo = worktree_dir),
     error = function(err) {
       cli::cli_warn("Failed to push index update: {err$message}")
     }
