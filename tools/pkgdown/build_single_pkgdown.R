@@ -67,11 +67,9 @@ if (should_deploy) {
   cli::cli_inform("Deploying pkgdown site for {pkg_name} to gh-pages")
   pkgdown::deploy_to_branch(
     pkg = pkg_dir,
-    site_dir = local_site_dir,
     branch = "gh-pages",
-    dest_dir = fs::path("sites", pkg_name),
+    subdir = fs::path("sites", pkg_name),
     clean = FALSE,
-    new_process = FALSE,
     commit_message = glue::glue("Build pkgdown for {pkg_name}")
   )
 } else {
