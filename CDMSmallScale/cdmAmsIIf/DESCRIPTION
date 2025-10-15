@@ -1,7 +1,7 @@
 Package: cdmAmsIIf
 Title: Implementation of CDM Small-Scale Methodology AMS-II.F
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling to implement the Clean Development Mechanism
     small-scale methodology AMS-II.F "Energy efficiency and fuel switching measures for agricultural facilities".
     Functions translate numbered equations, applicability conditions, and calculation workflows

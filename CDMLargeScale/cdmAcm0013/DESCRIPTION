@@ -1,7 +1,7 @@
 Package: cdmAcm0013
 Title: Implementation of CDM Large-Scale Methodology ACM0013
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling to operationalise the Clean Development Mechanism methodology ACM0013 "New grid-connected fossil fuel plants using a less greenhouse gas intensive technology". The package exposes applicability checks, equation-level helpers, monitoring-period aggregation, simulation utilities, and a meta-estimator that reproduces greenhouse gas accounting for efficient fossil-fuel power projects displacing more carbon intensive generation on the grid.
 License: MIT + file LICENSE
 Encoding: UTF-8

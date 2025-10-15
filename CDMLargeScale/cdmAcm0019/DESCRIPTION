@@ -1,7 +1,7 @@
 Package: cdmAcm0019
 Title: Implementation of CDM Large-Scale Methodology ACM0019
 Version: 0.1.0
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling for the Clean Development Mechanism consolidated methodology ACM0019 "N2O abatement from nitric acid production". The package delivers applicability helpers, equation-level calculators, monitoring aggregation workflows, simulation utilities, and high-level estimators covering nitric acid plants deploying secondary or tertiary abatement technologies.
 License: MIT + file LICENSE
 Encoding: UTF-8

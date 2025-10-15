@@ -1,7 +1,7 @@
 Package: cdmAmsIIh
 Title: Implementation of CDM Small-Scale Methodology AMS-II.H
 Version: 0.0.1
-Authors@R: c(person(given = "OpenAI", family = "Assistant", email = "assistant@independentimpact.org", role = c("aut", "cre")))
+Authors@R: c(person(given = "Christiaan", family = "Pauw", email = "christiaan.pauw@gmal.com", role = c("aut", "cre")))
 Description: Provides tidyverse-aligned tooling to implement the Clean Development Mechanism
     small-scale methodology AMS-II.H "Energy efficiency via centralization of utility provisions"
     for industrial facilities. Functions translate numbered equations,
