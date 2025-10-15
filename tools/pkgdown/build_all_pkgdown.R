@@ -30,12 +30,12 @@ if (length(pkg_dirs) == 0) {
   cli::cli_abort("No packages were discovered in the repository.")
 }
 
-local_site_dir <- fs::path(tempdir(), "pkgdown-site")
-
 purrr::walk(pkg_dirs, function(pkg_dir) {
   abs_pkg_dir <- fs::path(root, pkg_dir)
   pkg_name <- read.dcf(fs::path(abs_pkg_dir, "DESCRIPTION"), "Package")[1, 1]
   cli::cli_inform("Building pkgdown site for {pkg_name} ({pkg_dir})")
+
+  local_site_dir <- fs::path(tempdir(), glue::glue("pkgdown-site-{pkg_name}"))
 
   if (fs::dir_exists(local_site_dir)) {
     fs::dir_delete(local_site_dir)
@@ -50,11 +50,9 @@ purrr::walk(pkg_dirs, function(pkg_dir) {
 
   pkgdown::deploy_to_branch(
     pkg = abs_pkg_dir,
-    site_dir = local_site_dir,
     branch = "gh-pages",
-    dest_dir = fs::path("sites", pkg_name),
+    subdir = fs::path("sites", pkg_name),
     clean = FALSE,
-    new_process = FALSE,
     commit_message = glue::glue("Build pkgdown for {pkg_name}")
   )
 })
