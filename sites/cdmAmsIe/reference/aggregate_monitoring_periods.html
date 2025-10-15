@@ -107,17 +107,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">monitoring</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_ams_ie_dataset.html">simulate_ams_ie_dataset</a></span><span class="op">(</span>n_users <span class="op">=</span> <span class="fl">2</span>, n_periods <span class="op">=</span> <span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">monitoring</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   user_id  year month non_renewable_biomass_tonnes baseline_energy_mj</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> user-1   <span style="text-decoration: underline;">2</span>024     3                        10.0                169.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> user-1   <span style="text-decoration: underline;">2</span>025     3                        13.4                175.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> user-1   <span style="text-decoration: underline;">2</span>026    10                         8.10               118.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> user-2   <span style="text-decoration: underline;">2</span>024     3                        11.2                173.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> user-2   <span style="text-decoration: underline;">2</span>025     3                        11.2                177.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> user-2   <span style="text-decoration: underline;">2</span>026    10                         8.74               122.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: baseline_emissions_tco2e &lt;dbl&gt;, project_energy_mj &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_emissions_tco2e &lt;dbl&gt;, emission_reductions_tco2e &lt;dbl&gt;</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>

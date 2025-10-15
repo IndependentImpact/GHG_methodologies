@@ -155,10 +155,11 @@
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu">calculate_baseline_energy_content</span><span class="op">(</span><span class="va">non_renewable</span>, ncv <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">emissions</span> <span class="op">&lt;-</span> <span class="fu">calculate_baseline_emissions</span><span class="op">(</span><span class="va">energy</span>, emission_factor <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in calculate_baseline_emissions(energy, emission_factor = 1e-04):</span> unused argument (emission_factor = 1e-04)</span>
 <span class="r-in"><span><span class="va">project</span> <span class="op">&lt;-</span> <span class="fu">calculate_project_emissions</span><span class="op">(</span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>project_energy_mj <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">120</span><span class="op">)</span><span class="op">)</span>, <span class="fl">0.00009</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in rlang::ensym(energy_col):</span> Can't convert to a symbol.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `baseline_supply` must contain `baseline_electricity_mwh`.</span>
 <span class="r-in"><span><span class="fu">calculate_emission_reductions</span><span class="op">(</span><span class="va">emissions</span>, <span class="va">project</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'project' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'emissions' not found</span>
 </code></pre></div>
     </div>
   </div>
