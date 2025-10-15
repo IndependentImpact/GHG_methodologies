@@ -1,0 +1,6 @@
+pandoc: '3.4'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  cdmAcm0002-methodology: cdmAcm0002-methodology.html
+last_built: 2025-10-15T13:20Z
