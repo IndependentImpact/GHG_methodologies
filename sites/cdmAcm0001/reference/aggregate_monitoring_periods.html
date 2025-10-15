@@ -84,19 +84,7 @@ and emission reduction workflow, including methane destruction mass and CO2e.</p
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_acm0001_dataset.html">simulate_acm0001_dataset</a></span><span class="op">(</span><span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   period    methane_generation_m3 baseline_capture_efficie…¹ methane_captured_m3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Period 01                 <span style="text-decoration: underline;">5</span>185.                    0.003<span style="text-decoration: underline;">74</span>               <span style="text-decoration: underline;">1</span>460.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Period 02                 <span style="text-decoration: underline;">4</span>218.                    0.097<span style="text-decoration: underline;">4</span>                <span style="text-decoration: underline;">1</span>140.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Period 03                 <span style="text-decoration: underline;">4</span>682.                    0.043<span style="text-decoration: underline;">2</span>                <span style="text-decoration: underline;">1</span>146.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​baseline_capture_efficiency</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more variables: destruction_efficiency &lt;dbl&gt;, auxiliary_fuel_tj &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   auxiliary_ef_t_per_tj &lt;dbl&gt;, electricity_import_mwh &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   import_ef_t_per_mwh &lt;dbl&gt;, leakage_fraction &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   oxidation_fraction &lt;dbl&gt;, methane_density_t_per_m3 &lt;dbl&gt;, gwp_ch4 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   baseline_emissions &lt;dbl&gt;, project_emissions &lt;dbl&gt;, leakage_emissions &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   methane_destroyed_t &lt;dbl&gt;, methane_destroyed_co2e &lt;dbl&gt;, …</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 </code></pre></div>
     </div>
   </div>
