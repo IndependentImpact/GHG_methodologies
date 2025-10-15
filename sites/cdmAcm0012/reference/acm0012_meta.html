@@ -80,6 +80,7 @@ emission reduction estimates.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_acm0012_dataset.html">simulate_acm0012_dataset</a></span><span class="op">(</span><span class="fl">2</span>, observations_per_period <span class="op">=</span> <span class="fl">3</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">period_summary</span> <span class="op">&lt;-</span> <span class="fu">aggregate_monitoring_periods</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> `useful_energy_col` must be present in `thermal_data`.</span>
 <span class="r-in"><span><span class="fu">estimate_emission_reductions_acm0012</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   total_electricity_export_mwh total_thermal_export_gj total_baseline_emissions</span>
