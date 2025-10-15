@@ -66,4 +66,17 @@ This repository hosts a collection of R packages implementing CDM methodologies.
 8. Update README, NEWS, and pkgdown configuration as needed.
 9. Commit changes and open a PR summarising updates.
 
+## 9. pkgdown Publishing Pipeline
+- Use the shared automation in `tools/pkgdown/` to scaffold and publish documentation sites for every methodology package.
+- Run `Rscript tools/pkgdown/scaffold_pkgdown_yml.R` (set `PKGDOWN_GITHUB_ORG` in your environment first) to generate or refresh
+  each package's `_pkgdown.yml` from the repository template.
+- Add pkgdown metadata to `DESCRIPTION` (e.g. `pkgdown` and `whisker` in `Suggests`) and include the pkgdown status badge in the
+  package `README`.
+- For local QA, execute `Rscript tools/pkgdown/preview_all_pkgdown.R` to render every site into `docs/<package>/`.
+- The GitHub Actions workflow `.github/workflows/pkgdown-matrix.yml` automatically runs `tools/pkgdown/build_single_pkgdown.R`
+  for each package on pushes to `main`, publishing the rendered site to the shared `gh-pages` branch at
+  `https://<org>.github.io/GHG_methodologies/sites/<package>/`.
+- Trigger manual rebuilds with `gh workflow run pkgdown-matrix --ref main` when you need to regenerate a site outside the
+  normal push workflow.
+
 Adhering to this template ensures every CDM methodology package remains consistent, well-documented, and immediately usable by analysts working within the tidyverse ecosystem.
