@@ -71,7 +71,7 @@ build_index_html <- function(pkg_info) {
         return(regmatches(candidate, acm_match))
       }
 
-      ams_match <- regexpr("AMS-[IVX]+\.[A-Z]+", candidate, perl = TRUE)
+      ams_match <- regexpr("AMS-[IVX]+\\.[A-Z]+", candidate, perl = TRUE)
       if (ams_match != -1) {
         return(regmatches(candidate, ams_match))
       }
