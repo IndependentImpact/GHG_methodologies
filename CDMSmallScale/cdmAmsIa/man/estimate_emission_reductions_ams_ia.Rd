@@ -37,7 +37,7 @@ when \code{validate_applicability = TRUE}.}
 \code{project_id} is a character IRI.}
 
 \item{concept_triples}{Optional CDM concept triples data frame passed to
-\code{\link[shapeR:materialise_skos_hierarchy]{shapeR::materialise_skos_hierarchy()}}. Defaults to
+\code{shapeR::materialise_skos_hierarchy()}. Defaults to
 \code{\link[=read_cdm_concept_triples]{read_cdm_concept_triples()}}.}
 }
 \value{

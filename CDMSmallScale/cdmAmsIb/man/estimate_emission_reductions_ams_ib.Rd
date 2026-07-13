@@ -11,7 +11,11 @@ estimate_emission_reductions_ams_ib(
   group_cols = NULL,
   emission_factor,
   project_energy_col = NULL,
-  project_emission_factor = 0
+  project_emission_factor = 0,
+  validate_applicability = FALSE,
+  project_id = NULL,
+  fluree_conn = NULL,
+  concept_triples = NULL
 )
 }
 \arguments{
@@ -28,12 +32,25 @@ estimate_emission_reductions_ams_ib(
 \item{project_energy_col}{Optional column name containing residual project fossil energy in MJ.}
 
 \item{project_emission_factor}{Project emission factor in tCO2e/MJ (default 0).}
+
+\item{validate_applicability}{Logical. When \code{TRUE}, runs semantic
+applicability checks before calculating. Default \code{FALSE}.}
+
+\item{project_id}{Project IRI (character) or triples data frame. Required
+when \code{validate_applicability = TRUE}.}
+
+\item{fluree_conn}{A connected \code{FlureeInstance} (novaRush). Required when
+\code{project_id} is a character IRI.}
+
+\item{concept_triples}{Optional CDM concept triples data frame passed to
+\code{shapeR::materialise_skos_hierarchy()}.}
 }
 \value{
 A tibble containing baseline energy, baseline emissions, project energy, project emissions, and emission reductions.
 }
 \description{
-Composes the AMS-I.B equation helpers to estimate emission reductions for a dataset describing fossil fuel consumption displaced by a renewable mechanical energy system.
+Composes the AMS-I.B equation helpers to estimate emission reductions for a dataset describing
+fossil fuel consumption displaced by a renewable mechanical energy system.
 }
 \examples{
 fuel <- tibble::tibble(machine_id = c("pump-1", "pump-1", "mill-3"),

@@ -14,11 +14,15 @@ aggregate_monitoring_periods(
 )
 }
 \arguments{
-\item{efficiency_data}{Tibble containing monitoring records with grouping, monitoring period, baseline energy, project energy, and emission factors.}
+\item{efficiency_data}{Tibble containing monitoring records with columns for
+grouping, monitoring period, baseline energy, project energy, and emission
+factors.}
 
-\item{monitoring_cols}{Character vector defining the monitoring-period columns.}
+\item{monitoring_cols}{Character vector defining the monitoring-period columns
+(e.g. \code{c("year", "month")}).}
 
-\item{group_cols}{Character vector defining entity identifiers.}
+\item{group_cols}{Character vector defining entity identifiers (e.g.
+\code{site_id}).}
 
 \item{baseline_energy_col}{Column storing baseline energy in MWh.}
 
@@ -26,9 +30,13 @@ aggregate_monitoring_periods(
 
 \item{emission_factor_col}{Column storing emission factors in tCO2e/MWh.}
 }
-\value{A tibble grouped by entity and monitoring period with baseline energy, project energy, energy savings, and emission reductions.}
+\value{
+A tibble grouped by entity and monitoring period with baseline energy,
+project energy, energy savings, and emission reductions.
+}
 \description{
-Summarises baseline and project energy measurements across monitoring periods and applies emission factors to derive period-level emission reductions.
+Summarises baseline and project energy measurements across monitoring periods
+and applies emission factors to derive period-level emission reductions.
 }
 \examples{
 data <- simulate_ams_iic_dataset(n_sites = 3, n_periods = 4)

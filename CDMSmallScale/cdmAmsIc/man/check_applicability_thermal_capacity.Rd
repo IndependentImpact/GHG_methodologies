@@ -15,7 +15,8 @@ check_applicability_thermal_capacity(capacity_mwth, threshold_mwth = 45)
 Logical indicating whether the capacity condition is satisfied.
 }
 \description{
-Validates the AMS-I.C applicability condition that thermal energy systems remain within the 45 MW thermal small-scale limit established for Type I CDM projects.
+Validates the AMS-I.C applicability condition that thermal energy systems remain
+within the 45 MW thermal small-scale limit established for Type I CDM projects.
 }
 \examples{
 check_applicability_thermal_capacity(capacity_mwth = 10)

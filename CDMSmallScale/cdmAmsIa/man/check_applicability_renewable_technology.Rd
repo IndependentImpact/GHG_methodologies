@@ -19,7 +19,7 @@ columns \code{subject}, \code{predicate}, \code{object} (and optionally \code{da
 \code{data} is a project IRI.}
 
 \item{concept_triples}{Optional CDM concept triples data frame for SKOS
-materialisation. Defaults to \code{\link[=read_cdm_concept_triples]{read_cdm_concept_triples()}}.}
+materialisation. Defaults to \code{\link[cdmSemantic:read_cdm_concept_triples]{cdmSemantic::read_cdm_concept_triples()}}.}
 
 \item{shapes}{Optional \code{sh_shape_graph}. Defaults to
 \code{\link[=read_ams_ia_technology_shapes]{read_ams_ia_technology_shapes()}}.}

@@ -8,7 +8,11 @@ estimate_emission_reductions_ams_ic(
   thermal_data,
   baseline_emission_factor,
   project_emission_factor = 0,
-  group_cols = NULL
+  group_cols = NULL,
+  validate_applicability = FALSE,
+  project_id = NULL,
+  fluree_conn = NULL,
+  concept_triples = NULL
 )
 }
 \arguments{
@@ -19,12 +23,25 @@ estimate_emission_reductions_ams_ic(
 \item{project_emission_factor}{Optional project emission factor in tCO2e/MWhth.}
 
 \item{group_cols}{Optional character vector specifying grouping columns in \code{thermal_data}.}
+
+\item{validate_applicability}{Logical. When \code{TRUE}, runs semantic
+applicability checks before calculating. Default \code{FALSE}.}
+
+\item{project_id}{Project IRI (character) or triples data frame. Required
+when \code{validate_applicability = TRUE}.}
+
+\item{fluree_conn}{A connected \code{FlureeInstance} (novaRush). Required when
+\code{project_id} is a character IRI.}
+
+\item{concept_triples}{Optional CDM concept triples data frame passed to
+\code{shapeR::materialise_skos_hierarchy()}.}
 }
 \value{
 Tibble with baseline thermal output, baseline emissions, project emissions, and emission reductions.
 }
 \description{
-Composes the equation-level helpers to compute emission reductions for datasets capturing useful thermal energy delivered and baseline emission factors.
+Composes the equation-level helpers to compute emission reductions for datasets capturing
+useful thermal energy delivered and baseline emission factors.
 }
 \examples{
 thermal <- tibble::tibble(facility_id = c("A", "B"), thermal_energy_mwh = c(800, 620))

@@ -18,13 +18,17 @@ assess_ams_iie_applicability(
 
 \item{monitoring_data}{Monitoring dataset used for completeness checks.}
 
-\item{evaluate_fuel_switch}{Logical indicating whether to evaluate the fuel switching criterion.}
+\item{evaluate_fuel_switch}{Logical indicating whether to evaluate the fuel
+switching criterion. Set to \code{FALSE} when the project does not involve fuel
+switching.}
 }
 \value{
 A tibble summarising AMS-II.E applicability results.
 }
 \description{
-Combines individual applicability checks into a tidy diagnostics tibble.
+Combines individual applicability checks into a tidy diagnostics tibble. The
+result includes boolean flags for each criterion and an overall indicator that
+all requirements are met.
 }
 \examples{
 baseline <- tibble::tibble(

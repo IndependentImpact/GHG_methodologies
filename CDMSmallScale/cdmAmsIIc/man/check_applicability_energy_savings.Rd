@@ -14,9 +14,13 @@ check_applicability_energy_savings(
 
 \item{threshold_mwh}{Threshold in MWh (default 60 GWh expressed as 60,000 MWh).}
 }
-\value{Logical indicating whether the threshold is respected.}
+\value{
+Logical indicating whether the threshold is respected.
+}
 \description{
-Verifies the AMS-II.C small-scale eligibility criterion that annual energy savings remain within the 60 GWh cap for Type II activities.
+Verifies the AMS-II.C small-scale eligibility criterion that annual energy
+savings remain within the 60 GWh cap for Type II activities. Projects may
+optionally provide a custom threshold should the UNFCCC update the limit.
 }
 \examples{
 check_applicability_energy_savings(annual_energy_savings_mwh = 42000)

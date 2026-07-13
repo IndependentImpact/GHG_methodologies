@@ -18,7 +18,8 @@ check_applicability_fossil_displacement(
 Logical indicating whether the displacement criterion is satisfied.
 }
 \description{
-Confirms the project activity displaces fossil-fuel-based thermal energy by testing the share of baseline heat supplied by fossil resources.
+Confirms the project activity displaces fossil-fuel-based thermal energy by testing
+the share of baseline heat supplied by fossil resources.
 }
 \examples{
 check_applicability_fossil_displacement(fossil_heat_share = 0.8)

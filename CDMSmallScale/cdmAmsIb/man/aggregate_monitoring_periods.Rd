@@ -30,10 +30,12 @@ aggregate_monitoring_periods(
 \item{project_energy_col}{Name of the column storing project fossil energy consumption in MJ.}
 }
 \value{
-A tibble aggregated by entity and monitoring period with baseline energy, baseline emissions, project energy, project emissions, and emission reductions.
+A tibble aggregated by entity and monitoring period with baseline energy, baseline emissions,
+project energy, project emissions, and emission reductions.
 }
 \description{
-Summarises monitoring data across reporting periods, combining baseline fuel consumption and residual project fossil energy to return period-level emission reductions.
+Summarises monitoring data across reporting periods, combining baseline fuel consumption and
+residual project fossil energy to return period-level emission reductions.
 }
 \examples{
 data <- simulate_ams_ib_dataset(n_machines = 2, n_periods = 3)

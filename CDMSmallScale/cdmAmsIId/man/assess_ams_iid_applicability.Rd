@@ -18,13 +18,16 @@ assess_ams_iid_applicability(
 
 \item{monitoring_data}{Monitoring dataset used for completeness checks.}
 
-\item{fuel_switch}{Logical indicating whether the project includes a fuel switching component. If \code{FALSE}, the fuel switching test is skipped.}
+\item{fuel_switch}{Logical indicating whether the project includes a fuel
+switching component. If \code{FALSE}, the fuel switching test is skipped.}
 }
 \value{
 A tibble with one row summarising applicability outcomes.
 }
 \description{
-Combines the individual applicability checks into a single tidy tibble of diagnostics.
+Combines the individual applicability checks into a single tidy tibble of
+diagnostics. The result includes boolean flags for each criterion and an
+overall logical indicating whether all requirements are satisfied.
 }
 \examples{
 baseline <- tibble::tibble(

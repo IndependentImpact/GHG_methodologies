@@ -22,22 +22,26 @@ check_applicability_energy_efficiency(
 
 \item{project_energy_col}{Project column storing total energy consumption (MWh).}
 
-\item{service_col}{Column storing the service proxy (e.g. floor area). Must be present in both datasets.}
+\item{service_col}{Column storing the service proxy (e.g. floor area). Must be
+present in both datasets.}
 
-\item{tolerance}{Minimum fractional reduction in energy intensity required to satisfy the criterion.}
+\item{tolerance}{Minimum fractional reduction in energy intensity required to
+satisfy the criterion. Defaults to 10\%.}
 }
 \value{
-A logical scalar indicating whether the intensity reduction meets the tolerance threshold.
+A logical scalar indicating whether the intensity reduction meets the
+tolerance threshold.
 }
 \description{
-AMS-II.E requires demonstrable reductions in energy intensity for the targeted buildings.
+AMS-II.E requires demonstrable reductions in energy intensity for the targeted
+buildings. This helper compares baseline and project total energy use relative
+to a service output proxy (e.g. conditioned floor area, occupancy, or energy
+service delivered).
 }
 \examples{
 baseline <- tibble::tibble(total_energy_mwh = c(220, 195), service_proxy = c(4.2, 3.9))
 project <- tibble::tibble(total_energy_mwh = c(150, 138), service_proxy = c(4.2, 3.9))
-check_applicability_energy_efficiency(
-  baseline,
-  project,
+check_applicability_energy_efficiency(baseline, project,
   energy_col = "total_energy_mwh",
   project_energy_col = "total_energy_mwh",
   service_col = "service_proxy"

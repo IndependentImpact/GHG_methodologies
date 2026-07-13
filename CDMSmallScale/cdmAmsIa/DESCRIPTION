@@ -11,6 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
 Imports:
+    cdmSemantic,
     dplyr,
     rlang,
     stats,
@@ -20,8 +21,7 @@ Suggests: testthat (>= 3.0.0),
     devtools,
     knitr,
     rmarkdown,
-    shapeR,
-    rdflib
+    shapeR
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)

@@ -4,7 +4,10 @@
 \alias{check_applicability_service_displacement}
 \title{Check AMS-I.B service displacement condition}
 \usage{
-check_applicability_service_displacement(fossil_service_share, minimum_fraction = 0.5)
+check_applicability_service_displacement(
+  fossil_service_share,
+  minimum_fraction = 0.5
+)
 }
 \arguments{
 \item{fossil_service_share}{Share of the baseline mechanical service provided by fossil fuels (0-1).}
@@ -15,7 +18,8 @@ check_applicability_service_displacement(fossil_service_share, minimum_fraction 
 Logical indicating whether the displacement criterion is satisfied.
 }
 \description{
-Confirms that the renewable mechanical system replaces baseline fossil-fuel equipment by assessing the share of service output previously delivered by fossil energy.
+Confirms that the renewable mechanical system replaces baseline fossil-fuel equipment by
+assessing the share of service output previously delivered by fossil energy.
 }
 \examples{
 check_applicability_service_displacement(fossil_service_share = 0.8)

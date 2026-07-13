@@ -16,43 +16,54 @@ estimate_emission_reductions_ams_iid(
 )
 }
 \arguments{
-\item{baseline_data}{Tidy data describing counterfactual fuel consumption and characteristics.}
+\item{baseline_data}{Tidy data describing counterfactual fuel consumption and
+characteristics.}
 
-\item{project_data}{Tidy data describing monitored project fuel consumption and characteristics.}
+\item{project_data}{Tidy data describing monitored project fuel consumption
+and characteristics.}
 
-\item{leakage_data}{Optional tibble of leakage components for the same grouping structure.}
+\item{leakage_data}{Optional tibble of leakage components for the same
+grouping structure as the baseline/project data.}
 
-\item{group_cols}{Character vector of grouping columns common to the datasets.}
+\item{group_cols}{Character vector of grouping columns common to the three
+datasets.}
 
-\item{baseline_args}{Optional list of additional arguments passed to \code{\link{calculate_baseline_fossil_emissions}}.}
+\item{baseline_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_baseline_fossil_emissions]{calculate_baseline_fossil_emissions()}}.}
 
-\item{project_args}{Optional list of additional arguments passed to \code{\link{calculate_project_fossil_emissions}}.}
+\item{project_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_project_fossil_emissions]{calculate_project_fossil_emissions()}}.}
 
-\item{leakage_args}{Optional list of additional arguments passed to \code{\link{calculate_leakage_emissions}}.}
+\item{leakage_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_leakage_emissions]{calculate_leakage_emissions()}}.}
 
-\item{reduction_args}{Optional list of additional arguments passed to \code{\link{estimate_emission_reductions}}.}
+\item{reduction_args}{Optional list of additional arguments passed to
+\code{\link[=estimate_emission_reductions]{estimate_emission_reductions()}}. \code{group_cols} and default column names are
+supplied automatically.}
 }
 \value{
 A tibble with emission reductions and intermediate emission accounts.
 }
 \description{
-This meta-function orchestrates all numbered equations in AMS-II.D to compute annual emission reductions.
+This meta-function orchestrates all numbered equations in AMS-II.D to compute
+annual emission reductions. Users supply baseline and project monitoring data
+together with leakage estimates. The function delegates to
+\code{\link[=calculate_baseline_fossil_emissions]{calculate_baseline_fossil_emissions()}},
+\code{\link[=calculate_project_fossil_emissions]{calculate_project_fossil_emissions()}}, and
+\code{\link[=calculate_leakage_emissions]{calculate_leakage_emissions()}} before combining results with
+\code{\link[=estimate_emission_reductions]{estimate_emission_reductions()}}.
 }
 \examples{
-baseline <- tibble::tibble(
-  unit = "Kiln",
-  baseline_fuel_quantity = 1200,
-  baseline_ncv_gj_per_unit = 0.038,
-  baseline_emission_factor_tco2_per_gj = 0.094,
-  baseline_efficiency = 0.72
-)
-project <- tibble::tibble(
-  unit = "Kiln",
-  project_fuel_quantity = 950,
-  project_ncv_gj_per_unit = 0.038,
-  project_emission_factor_tco2_per_gj = 0.094,
-  project_efficiency = 0.84
-)
+baseline <- tibble::tibble(unit = "Kiln",
+                           baseline_fuel_quantity = 1200,
+                           baseline_ncv_gj_per_unit = 0.038,
+                           baseline_emission_factor_tco2_per_gj = 0.094,
+                           baseline_efficiency = 0.72)
+project <- tibble::tibble(unit = "Kiln",
+                          project_fuel_quantity = 950,
+                          project_ncv_gj_per_unit = 0.038,
+                          project_emission_factor_tco2_per_gj = 0.094,
+                          project_efficiency = 0.84)
 leakage <- tibble::tibble(unit = "Kiln", leakage_emissions_tco2e = 5)
 estimate_emission_reductions_ams_iid(baseline, project, leakage, group_cols = "unit")
 }

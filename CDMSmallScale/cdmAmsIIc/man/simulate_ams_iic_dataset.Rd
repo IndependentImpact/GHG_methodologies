@@ -28,13 +28,19 @@ simulate_ams_iic_dataset(
 
 \item{sd_baseline_mwh}{Standard deviation of baseline energy consumption in MWh.}
 
-\item{savings_fraction}{Expected fractional reduction in energy use from the project technology (0-1).}
+\item{savings_fraction}{Expected fractional reduction in energy use from the
+project technology (0-1).}
 
 \item{emission_factor_tco2e_mwh}{Emission factor applied to the energy savings.}
 }
-\value{A tibble with site identifiers, monitoring metadata, baseline energy, project energy, emission factors, and technology labels.}
+\value{
+A tibble with site identifiers, monitoring metadata, baseline and project
+energy, emission factors, and technology labels.
+}
 \description{
-Generates tidy monitoring data for demand-side energy efficiency projects covered by AMS-II.C.
+Generates tidy monitoring data for demand-side energy efficiency projects
+covered by AMS-II.C. The simulation produces baseline energy, project energy,
+and emission factors for multiple sites across monitoring periods.
 }
 \examples{
 simulate_ams_iic_dataset(n_sites = 4)

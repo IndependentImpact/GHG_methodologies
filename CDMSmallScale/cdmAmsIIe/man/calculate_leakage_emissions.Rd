@@ -18,13 +18,15 @@ calculate_leakage_emissions(
 
 \item{group_cols}{Optional character vector of grouping variables to retain.}
 
-\item{output_col}{Name of the resulting column storing leakage totals.}
+\item{output_col}{Name of the resulting leakage column.}
 }
 \value{
 A tibble with leakage totals.
 }
 \description{
-Equation (3) of AMS-II.E accounts for leakage linked to upstream fuel supply, equipment disposal, or other market effects.
+Equation (3) of AMS-II.E accounts for leakage linked to upstream fuel supply,
+equipment disposal, or other market effects. The helper sums leakage
+components grouped by the requested identifiers.
 }
 \examples{
 leakage <- tibble::tibble(building_id = c("Office_A", "Office_B"),

@@ -24,7 +24,9 @@ calculate_project_emissions(
 A tibble with project emissions in tCO2e.
 }
 \description{
-Computes project emissions for AMS-I.B where auxiliary fossil fuel use may be present (e.g. back-up diesel engines). The default assumes zero emissions when renewable energy fully drives the mechanical system.
+Computes project emissions for AMS-I.B where auxiliary fossil fuel use may be
+present (e.g. back-up diesel engines). The default assumes zero emissions when
+renewable energy fully drives the mechanical system.
 }
 \examples{
 project_energy <- tibble::tibble(project_energy_mj = c(1000, 1200))

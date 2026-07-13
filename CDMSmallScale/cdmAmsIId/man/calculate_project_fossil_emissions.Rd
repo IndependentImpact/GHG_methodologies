@@ -24,19 +24,26 @@ calculate_project_fossil_emissions(
 
 \item{emission_factor_col}{Column with project emission factors (tCO2e per GJ).}
 
-\item{efficiency_col}{Column storing project equipment efficiency (fraction between 0 and 1).}
+\item{efficiency_col}{Column storing project equipment efficiency (fraction
+between 0 and 1).}
 
-\item{electricity_col}{Optional column storing indirect electricity emissions in tCO2e.}
+\item{electricity_col}{Optional column storing indirect electricity emissions
+in tCO2e. If \code{NULL}, the term is omitted.}
 
 \item{group_cols}{Optional character vector of grouping variables to retain.}
 
-\item{output_col}{Name of the resulting emission column.}
+\item{output_col}{Name of the resulting emission column. Defaults to
+\code{"project_emissions_tco2e"}.}
 }
 \value{
 A tibble with grouped project emission totals.
 }
 \description{
-Equation (2) of AMS-II.D quantifies project emissions from the modernised thermal system.
+Equation (2) of AMS-II.D quantifies project emissions from the modernised
+thermal system. It mirrors the baseline formulation but uses monitored fuel
+consumption under project conditions. An optional column for indirect
+electricity emissions can be supplied and will be added to the thermal
+combustion term.
 }
 \examples{
 project <- tibble::tibble(unit = c("Kiln", "Dryer"),
@@ -44,8 +51,7 @@ project <- tibble::tibble(unit = c("Kiln", "Dryer"),
                           ncv = c(0.038, 0.041),
                           ef = c(0.094, 0.094),
                           efficiency = c(0.84, 0.8))
-calculate_project_fossil_emissions(
-  project,
+calculate_project_fossil_emissions(project,
   fuel_col = project_fuel,
   ncv_col = ncv,
   emission_factor_col = ef,

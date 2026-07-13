@@ -16,6 +16,14 @@
 #' @param auxiliary_energy_col Column name storing auxiliary energy consumption
 #'   (default `"auxiliary_energy_mwh"`). Set to `NULL` when auxiliary energy is
 #'   not recorded.
+#' @param validate_applicability Logical. When `TRUE`, runs semantic
+#'   applicability checks before calculating. Default `FALSE`.
+#' @param project_id Project IRI (character) or triples data frame. Required
+#'   when `validate_applicability = TRUE`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `project_id` is a character IRI.
+#' @param concept_triples Optional CDM concept triples data frame passed to
+#'   `shapeR::materialise_skos_hierarchy()`.
 #' @return Tibble with useful thermal output, baseline emissions, project
 #'   emissions, and emission reductions.
 #' @examples
@@ -36,7 +44,38 @@ estimate_emission_reductions_ams_ij <- function(thermal_data,
                                                 auxiliary_emission_factor = 0,
                                                 group_cols = NULL,
                                                 useful_energy_col = "useful_heat_mwh",
-                                                auxiliary_energy_col = "auxiliary_energy_mwh") {
+                                                auxiliary_energy_col = "auxiliary_energy_mwh",
+                                                validate_applicability = FALSE,
+                                                project_id = NULL,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL) {
+  if (validate_applicability) {
+    if (is.null(project_id)) {
+      stop("`project_id` is required when `validate_applicability = TRUE`.",
+           call. = FALSE)
+    }
+    checks <- list(
+      solar_technology = check_applicability_solar_technology(
+        project_id,
+        fluree_conn     = fluree_conn,
+        concept_triples = concept_triples
+      )
+    )
+    failures <- Filter(function(r) !r$conforms, checks)
+    if (length(failures) > 0L) {
+      msgs <- vapply(failures, function(r) {
+        if (!is.null(r$violations) && nrow(r$violations) > 0L)
+          r$violations$message[[1L]]
+        else
+          "(no violation detail available)"
+      }, character(1L))
+      stop(
+        "AMS-I.J applicability check failed. Resolve the following before calculating:\n",
+        paste0("  [", names(msgs), "] ", msgs, collapse = "\n"),
+        call. = FALSE
+      )
+    }
+  }
   data_tbl <- tibble::as_tibble(thermal_data)
 
   internal_group_cols <- group_cols

@@ -51,24 +51,3 @@ read_ams_ia_grid_shapes <- function() {
                 package = "cdmAmsIa", mustWork = TRUE)
   )
 }
-
-#' Load CDM concept scheme as a triples data frame
-#'
-#' Parses the bundled `cdm-concepts.ttl` into a data frame suitable for
-#' `shapeR::materialise_skos_hierarchy()`.
-#'
-#' @return Data frame with columns `subject`, `predicate`, `object`, `datatype`.
-#' @export
-read_cdm_concept_triples <- function() {
-  if (!requireNamespace("rdflib", quietly = TRUE)) {
-    stop("Package 'rdflib' is required to load CDM concept triples.", call. = FALSE)
-  }
-  path <- system.file("concepts", "cdm-concepts.ttl",
-                      package = "cdmAmsIa", mustWork = TRUE)
-  g <- rdflib::rdf_parse(path, format = "turtle")
-  on.exit(rdflib::rdf_free(g))
-  result <- rdflib::rdf_query(g, "SELECT ?s ?p ?o WHERE { ?s ?p ?o }")
-  colnames(result) <- c("subject", "predicate", "object")
-  result$datatype <- NA_character_
-  result
-}

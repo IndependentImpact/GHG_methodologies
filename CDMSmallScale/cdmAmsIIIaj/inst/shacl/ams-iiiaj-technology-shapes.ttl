@@ -1,0 +1,16 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# AMS-III.AJ — technology type applicability shape.
+# Run materialise_skos_hierarchy() before validate_shacl().
+
+cdm:AmsIIIajTechnologyShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "AMS-III.AJ technology type"@en ;
+    sh:property [
+        sh:path <http://w3id.org/aiao#isPerformedWith> ;
+        sh:class <http://independentimpact.org/cdm/MaterialRecovery> ;
+        sh:minCount 1 ;
+        sh:message "AMS-III.AJ condition (a): project must implement a material recovery system for recyclable materials."@en
+    ] .

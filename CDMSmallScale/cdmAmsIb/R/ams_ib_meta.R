@@ -10,6 +10,14 @@
 #' @param emission_factor Baseline emission factor in tCO2e/MJ.
 #' @param project_energy_col Optional column name containing residual project fossil energy in MJ.
 #' @param project_emission_factor Project emission factor in tCO2e/MJ (default 0).
+#' @param validate_applicability Logical. When `TRUE`, runs semantic
+#'   applicability checks before calculating. Default `FALSE`.
+#' @param project_id Project IRI (character) or triples data frame. Required
+#'   when `validate_applicability = TRUE`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `project_id` is a character IRI.
+#' @param concept_triples Optional CDM concept triples data frame passed to
+#'   `shapeR::materialise_skos_hierarchy()`.
 #' @return A tibble containing baseline energy, baseline emissions, project energy, project emissions, and emission reductions.
 #' @examples
 #' fuel <- tibble::tibble(machine_id = c("pump-1", "pump-1", "mill-3"),
@@ -23,7 +31,43 @@ estimate_emission_reductions_ams_ib <- function(fuel_data,
                                                 group_cols = NULL,
                                                 emission_factor,
                                                 project_energy_col = NULL,
-                                                project_emission_factor = 0) {
+                                                project_emission_factor = 0,
+                                                validate_applicability = FALSE,
+                                                project_id = NULL,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL) {
+  if (validate_applicability) {
+    if (is.null(project_id)) {
+      stop("`project_id` is required when `validate_applicability = TRUE`.",
+           call. = FALSE)
+    }
+    checks <- list(
+      renewable_technology = check_applicability_renewable_technology(
+        project_id,
+        fluree_conn     = fluree_conn,
+        concept_triples = concept_triples
+      ),
+      grid_connection = check_applicability_grid_connection(
+        project_id,
+        fluree_conn     = fluree_conn,
+        concept_triples = concept_triples
+      )
+    )
+    failures <- Filter(function(r) !r$conforms, checks)
+    if (length(failures) > 0L) {
+      msgs <- vapply(failures, function(r) {
+        if (!is.null(r$violations) && nrow(r$violations) > 0L)
+          r$violations$message[[1L]]
+        else
+          "(no violation detail available)"
+      }, character(1L))
+      stop(
+        "AMS-I.B applicability check failed. Resolve the following before calculating:\n",
+        paste0("  [", names(msgs), "] ", msgs, collapse = "\n"),
+        call. = FALSE
+      )
+    }
+  }
   keys <- if (is.null(group_cols) || length(group_cols) == 0) character() else unique(group_cols)
 
   baseline_energy <- calculate_baseline_energy_content(

@@ -6,14 +6,8 @@
 \usage{
 check_applicability_technology(
   technology,
-  allowed_technologies = c(
-    "efficient_lighting",
-    "efficient_motors",
-    "hvac_optimization",
-    "refrigeration_efficiency",
-    "variable_speed_drives",
-    "compressed_air_improvement"
-  )
+  allowed_technologies = c("efficient_lighting", "efficient_motors", "hvac_optimization",
+    "refrigeration_efficiency", "variable_speed_drives", "compressed_air_improvement")
 )
 }
 \arguments{
@@ -21,9 +15,14 @@ check_applicability_technology(
 
 \item{allowed_technologies}{Character vector of eligible technologies.}
 }
-\value{Logical indicating whether every technology is permitted.}
+\value{
+Logical indicating whether every technology is permitted.
+}
 \description{
-Ensures that all technologies included in the project belong to the list of measures covered by AMS-II.C.
+Ensures that all technologies included in the project belong to the list of
+measures covered by AMS-II.C. The default catalogue includes efficient
+lighting, motors, HVAC upgrades, refrigeration, and other demand-side
+efficiency interventions.
 }
 \examples{
 check_applicability_technology(c("efficient_lighting", "efficient_motors"))

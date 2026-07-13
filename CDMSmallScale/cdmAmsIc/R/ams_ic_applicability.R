@@ -1,3 +1,4 @@
+
 #' Check AMS-I.C thermal capacity threshold
 #'
 #' Validates the AMS-I.C applicability condition that thermal energy systems remain
@@ -84,4 +85,31 @@ check_applicability_fossil_displacement <- function(fossil_heat_share, minimum_f
   }
 
   fossil_heat_share >= minimum_fraction
+}
+
+#' Check AMS-I.C renewable technology applicability (semantic)
+#'
+#' Validates that the project activity uses a renewable energy technology,
+#' as required by AMS-I.C.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [estimate_emission_reductions_ams_ic()]
+#' @export
+check_applicability_renewable_technology <- function(data,
+                                                     fluree_conn = NULL,
+                                                     concept_triples = NULL,
+                                                     shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_ic_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shapeR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-I.C", "RenewableEnergyTechnology")
 }

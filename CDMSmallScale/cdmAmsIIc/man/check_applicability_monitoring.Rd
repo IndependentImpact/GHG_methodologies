@@ -6,11 +6,8 @@
 \usage{
 check_applicability_monitoring(
   monitoring_approach,
-  allowed_approaches = c(
-    "continuous_metering",
-    "periodic_sampling",
-    "calibrated_nameplate"
-  )
+  allowed_approaches = c("continuous_metering", "periodic_sampling",
+    "calibrated_nameplate")
 )
 }
 \arguments{
@@ -18,9 +15,14 @@ check_applicability_monitoring(
 
 \item{allowed_approaches}{Vector of accepted monitoring approaches.}
 }
-\value{Logical indicating whether the monitoring approach is acceptable.}
+\value{
+Logical indicating whether the monitoring approach is acceptable.
+}
 \description{
-Confirms that the monitoring arrangement adheres to AMS-II.C requirements by validating the stated measurement approach.
+Confirms that the monitoring arrangement adheres to AMS-II.C requirements by
+validating the stated measurement approach. Typical options include continuous
+metering, calibrated sampling campaigns, or manufacturer data corroborated by
+spot measurements.
 }
 \examples{
 check_applicability_monitoring("continuous_metering")

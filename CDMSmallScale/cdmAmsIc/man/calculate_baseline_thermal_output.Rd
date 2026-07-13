@@ -21,7 +21,8 @@ calculate_baseline_thermal_output(
 A tibble with grouping columns (if provided) and a column named \code{baseline_thermal_output_mwh}.
 }
 \description{
-Implements Equation (1) of AMS-I.C by summing the useful thermal energy supplied to end users during the baseline scenario.
+Implements Equation (1) of AMS-I.C by summing the useful thermal energy supplied to
+end users during the baseline scenario.
 }
 \examples{
 thermal <- tibble::tibble(facility_id = c("A", "B"), thermal_energy_mwh = c(800, 620))

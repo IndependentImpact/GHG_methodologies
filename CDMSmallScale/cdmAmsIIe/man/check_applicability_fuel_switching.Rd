@@ -14,9 +14,11 @@ check_applicability_fuel_switching(
 )
 }
 \arguments{
-\item{baseline_data}{Tibble containing baseline thermal energy and emission factors.}
+\item{baseline_data}{Tibble containing baseline thermal energy and emission
+factors.}
 
-\item{project_data}{Tibble containing project thermal energy and emission factors.}
+\item{project_data}{Tibble containing project thermal energy and emission
+factors.}
 
 \item{energy_col}{Baseline column storing thermal energy demand (GJ).}
 
@@ -27,10 +29,14 @@ check_applicability_fuel_switching(
 \item{project_emission_factor_col}{Project column storing emission factors (tCO2e/GJ).}
 }
 \value{
-Logical scalar indicating whether the project fuel mix is lower in emissions than the baseline mix.
+Logical scalar indicating whether the project fuel mix is lower in
+emissions than the baseline mix.
 }
 \description{
-Projects that replace fossil fuels with lower-carbon options must demonstrate that the weighted emission factor of the project fuel mix is below the baseline mix.
+Projects that replace fossil fuels with lower-carbon options must
+demonstrate that the weighted emission factor of the project fuel mix is below
+the baseline mix. This helper evaluates weighted averages using thermal energy
+demand as weights.
 }
 \examples{
 baseline <- tibble::tibble(thermal_energy_gj = c(320, 180), emission_factor_tco2_per_gj = c(0.07, 0.072))

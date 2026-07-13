@@ -18,7 +18,9 @@ check_applicability_renewable_supply(
 Logical indicating whether the renewable supply criterion is met.
 }
 \description{
-Ensures the thermal energy system is predominantly supplied by renewable energy resources such as biomass, solar thermal, or geothermal heat.
+Ensures the thermal energy system is predominantly supplied by renewable energy
+resources such as biomass, solar thermal, or geothermal heat. The helper compares
+the reported renewable share to a user-defined minimum fraction.
 }
 \examples{
 check_applicability_renewable_supply(renewable_fraction = 0.85)

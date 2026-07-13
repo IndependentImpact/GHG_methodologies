@@ -17,23 +17,30 @@ calculate_project_building_emissions(
 \arguments{
 \item{project_data}{A tibble describing monitored project energy use.}
 
-\item{thermal_energy_col}{Column storing project thermal energy demand (GJ). Set to \code{NULL} to omit thermal emissions.}
+\item{thermal_energy_col}{Column storing project thermal energy demand (GJ).
+Set to \code{NULL} to omit thermal emissions.}
 
-\item{thermal_emission_factor_col}{Column storing project thermal emission factors (tCO2e per GJ).}
+\item{thermal_emission_factor_col}{Column storing project thermal emission
+factors (tCO2e per GJ).}
 
 \item{electricity_col}{Column storing project electricity consumption (MWh).}
 
-\item{electricity_emission_factor_col}{Column storing project electricity emission factors (tCO2e per MWh).}
+\item{electricity_emission_factor_col}{Column storing project electricity
+emission factors (tCO2e per MWh).}
 
 \item{group_cols}{Optional character vector of grouping variables to retain.}
 
-\item{output_col}{Name of the resulting emission column.}
+\item{output_col}{Name of the resulting emission column. Defaults to
+\code{"project_emissions_tco2e"}.}
 }
 \value{
 A tibble with grouped project emissions in tCO2e.
 }
 \description{
-Equation (2) of AMS-II.E quantifies project emissions from residual thermal fuel use and electricity demand after efficiency or fuel switching measures.
+Equation (2) of AMS-II.E quantifies project emissions from residual thermal
+fuel use and electricity demand after energy efficiency or fuel switching
+measures are implemented. Inputs mirror
+\code{\link[=calculate_baseline_building_emissions]{calculate_baseline_building_emissions()}} to streamline workflows.
 }
 \examples{
 project <- tibble::tibble(

@@ -14,7 +14,8 @@ aggregate_monitoring_periods(
 )
 }
 \arguments{
-\item{thermal_data}{Tibble containing monitoring observations, including the columns listed in \code{group_cols} and \code{monitoring_cols} plus thermal energy and emission information.}
+\item{thermal_data}{Tibble containing monitoring observations, including the columns listed in
+\code{group_cols} and \code{monitoring_cols} plus thermal energy and emission information.}
 
 \item{monitoring_cols}{Character vector specifying the columns that define a monitoring period.}
 
@@ -27,10 +28,12 @@ aggregate_monitoring_periods(
 \item{project_col}{Name of the project emissions column (aggregated as the sum across the period).}
 }
 \value{
-Tibble aggregated by entity and monitoring period with columns for baseline thermal output, baseline emissions, project emissions, and emission reductions.
+Tibble aggregated by entity and monitoring period with columns for baseline thermal output,
+baseline emissions, project emissions, and emission reductions.
 }
 \description{
-Summarises simulated or observed thermal energy data for each monitoring period, returning baseline thermal output, baseline emissions, project emissions, and emission reductions.
+Summarises simulated or observed thermal energy data for each monitoring period, returning
+baseline thermal output, baseline emissions, project emissions, and emission reductions.
 }
 \examples{
 data <- simulate_ams_ic_dataset(n_facilities = 2, n_periods = 3)

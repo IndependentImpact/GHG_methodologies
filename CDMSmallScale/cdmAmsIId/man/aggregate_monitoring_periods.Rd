@@ -15,19 +15,26 @@ aggregate_monitoring_periods(
 \arguments{
 \item{monitoring_data}{Tibble containing monitoring records.}
 
-\item{period_col}{Column containing the monitoring period label (e.g. month or quarter).}
+\item{period_col}{Column containing the monitoring period label (e.g. month or
+quarter).}
 
-\item{group_cols}{Character vector of columns describing equipment or site groupings.}
+\item{group_cols}{Character vector of columns describing equipment or site
+groupings.}
 
-\item{summarise_cols}{Optional character vector of numeric columns to sum. If \code{NULL}, all numeric columns are aggregated.}
+\item{summarise_cols}{Optional character vector of numeric columns to sum. If
+\code{NULL}, all numeric columns are aggregated.}
 
 \item{output_col}{Name of the column storing the concatenated period labels.}
 }
 \value{
-A tibble aggregated by \code{group_cols} with numeric columns summed over the monitoring period.
+A tibble aggregated by \code{group_cols} with numeric columns summed over
+the monitoring period.
 }
 \description{
-Monitoring data in AMS-II.D projects often arrive at sub-annual cadence. This helper aggregates tidy monitoring records to the project reporting periods, typically annual.
+Monitoring data in AMS-II.D projects often arrive at sub-annual cadence. This
+helper aggregates tidy monitoring records to the project reporting periods,
+typically annual. Aggregation sums all numeric columns, preserving grouping
+identifiers and ordered monitoring boundaries.
 }
 \examples{
 monitoring <- tibble::tibble(
@@ -36,8 +43,7 @@ monitoring <- tibble::tibble(
   project_fuel_quantity = c(80, 75, 70),
   electricity_emissions_tco2e = c(0.5, 0.5, 0.4)
 )
-aggregate_monitoring_periods(
-  monitoring,
+aggregate_monitoring_periods(monitoring,
   period_col = month,
   group_cols = "unit"
 )

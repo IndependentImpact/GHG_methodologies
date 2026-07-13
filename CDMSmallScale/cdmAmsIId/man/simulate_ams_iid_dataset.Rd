@@ -24,19 +24,27 @@ simulate_ams_iid_dataset(
 
 \item{start_month}{Calendar month (1-12) for the first monitoring period.}
 
-\item{baseline_fuel_mean}{Mean baseline fuel consumption per period.}
+\item{baseline_fuel_mean}{Mean baseline fuel consumption per period (in
+physical units consistent with the emission factor inputs).}
 
-\item{baseline_fuel_sd}{Standard deviation of baseline fuel consumption per period.}
+\item{baseline_fuel_sd}{Standard deviation of baseline fuel consumption per
+period.}
 
-\item{efficiency_improvement}{Expected fractional increase in thermal efficiency delivered by the project (0-1).}
+\item{efficiency_improvement}{Expected fractional increase in thermal
+efficiency delivered by the project (0-1).}
 
-\item{fuel_switch_reduction}{Expected fractional reduction in emission factor due to fuel switching (0-1).}
+\item{fuel_switch_reduction}{Expected fractional reduction in emission factor
+due to fuel switching (0-1).}
 }
 \value{
-A tibble containing facility IDs, monitoring metadata, baseline and project parameters, and derived leakage placeholders.
+A tibble containing facility IDs, monitoring metadata, baseline and
+project parameters, and derived leakage placeholders.
 }
 \description{
-Generates tidy monitoring data for industrial facilities implementing energy efficiency and fuel switching measures under AMS-II.D.
+Generates tidy monitoring data for industrial facilities implementing energy
+efficiency and fuel switching measures under AMS-II.D. The simulation creates
+multi-period observations with baseline and project fuel parameters, emission
+factors, efficiencies, leakage placeholders, and monitoring metadata.
 }
 \examples{
 simulate_ams_iid_dataset(n_facilities = 3)

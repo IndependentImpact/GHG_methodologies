@@ -17,23 +17,32 @@ calculate_baseline_building_emissions(
 \arguments{
 \item{baseline_data}{A tibble describing counterfactual building energy use.}
 
-\item{thermal_energy_col}{Column storing baseline thermal energy demand (GJ). Set to \code{NULL} when thermal fuels are not part of the baseline scenario.}
+\item{thermal_energy_col}{Column storing baseline thermal energy demand (GJ).
+Set to \code{NULL} when thermal fuels are not part of the baseline scenario.}
 
-\item{thermal_emission_factor_col}{Column storing thermal emission factors (tCO2e per GJ). Required when \code{thermal_energy_col} is supplied.}
+\item{thermal_emission_factor_col}{Column storing thermal emission factors
+(tCO2e per GJ). Required when \code{thermal_energy_col} is supplied.}
 
-\item{electricity_col}{Column storing baseline electricity consumption (MWh). Set to \code{NULL} to omit electricity emissions.}
+\item{electricity_col}{Column storing baseline electricity consumption (MWh).
+Set to \code{NULL} to omit electricity emissions.}
 
-\item{electricity_emission_factor_col}{Column storing electricity emission factors (tCO2e per MWh). Required when \code{electricity_col} is supplied.}
+\item{electricity_emission_factor_col}{Column storing electricity emission
+factors (tCO2e per MWh). Required when \code{electricity_col} is supplied.}
 
-\item{group_cols}{Optional character vector of grouping variables to retain in the output.}
+\item{group_cols}{Optional character vector of grouping variables to retain in
+the output.}
 
-\item{output_col}{Name of the resulting emission column.}
+\item{output_col}{Name of the resulting emission column. Defaults to
+\code{"baseline_emissions_tco2e"}.}
 }
 \value{
 A tibble with grouped baseline emissions in tCO2e.
 }
 \description{
-Equation (1) of AMS-II.E consolidates baseline greenhouse gas emissions from thermal fuels and electricity consumption in buildings.
+Equation (1) of AMS-II.E consolidates baseline greenhouse gas emissions from
+thermal fuels and electricity consumption in buildings. This function accepts
+tidy baseline data and multiplies each energy stream by its emission factor,
+returning grouped totals in tonnes of CO2e.
 }
 \examples{
 baseline <- tibble::tibble(

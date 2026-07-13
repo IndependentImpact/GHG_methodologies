@@ -20,9 +20,13 @@ calculate_project_energy_consumption(
 
 \item{output_col}{Name of the resulting column storing project energy in MWh.}
 }
-\value{A tibble with grouped project energy totals.}
+\value{
+A tibble with grouped project energy totals.
+}
 \description{
-Implements Equation (2) of AMS-II.C by aggregating the monitored project energy consumption for the efficient technology.
+Implements Equation (2) of AMS-II.C by aggregating the monitored project
+energy consumption for the efficient technology. Inputs mirror
+\code{\link[=calculate_baseline_energy_consumption]{calculate_baseline_energy_consumption()}} to ease piping workflows.
 }
 \examples{
 project <- tibble::tibble(site = c("A", "A", "B"),
