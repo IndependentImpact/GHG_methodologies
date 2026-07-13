@@ -10,7 +10,7 @@
 cdm:TechnologyTypeScheme a skos:ConceptScheme ;
     dct:title "CDM Technology Type Scheme"@en ;
     skos:definition "Classifies energy technologies by their primary fuel source. Used to determine eligibility of the project activity under CDM applicability conditions."@en ;
-    skos:hasTopConcept cdm:RenewableEnergyTechnology, cdm:NonRenewableEnergyTechnology, cdm:EnergyEfficiencyTechnology, cdm:WasteTreatmentTechnology, cdm:AgriculturalMitigationTechnology .
+    skos:hasTopConcept cdm:RenewableEnergyTechnology, cdm:NonRenewableEnergyTechnology, cdm:EnergyEfficiencyTechnology, cdm:WasteTreatmentTechnology, cdm:AgriculturalMitigationTechnology, cdm:IndustrialProcessMitigationTechnology .
 
 cdm:WasteTypeScheme a skos:ConceptScheme ;
     dct:title "CDM Waste Type Scheme"@en ;
@@ -177,6 +177,18 @@ cdm:WastewaterMethaneCapture a skos:Concept ;
     skos:definition "A system that captures methane emitted during anaerobic wastewater treatment, displacing uncontrolled emissions from open ponds or lagoons."@en ;
     skos:broader cdm:MethaneCaptureTechnology .
 
+cdm:CoalMineMethane a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Coal mine methane capture system"@en ;
+    skos:definition "A system that captures methane drained from coal seams or extracted from ventilation air at active or recently closed coal mines, preventing its emission to atmosphere."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:WasteEnergyRecovery a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Waste energy recovery system"@en ;
+    skos:definition "A system that captures and utilises waste heat, waste gas, or waste pressure streams from industrial processes that would otherwise be vented or flared."@en ;
+    skos:broader cdm:WasteTreatmentTechnology .
+
 cdm:AerobicComposting a skos:Concept ;
     skos:inScheme cdm:TechnologyTypeScheme ;
     skos:prefLabel "Aerobic composting system"@en ;
@@ -200,6 +212,18 @@ cdm:BiologicalNitrogenFixation a skos:Concept ;
     skos:prefLabel "Biological nitrogen fixation"@en ;
     skos:definition "The cultivation of inoculated leguminous crops that fix atmospheric nitrogen, displacing synthetic nitrogen fertilizer and its associated N2O emissions."@en ;
     skos:broader cdm:AgriculturalMitigationTechnology .
+
+cdm:IndustrialProcessMitigationTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Industrial process mitigation technology"@en ;
+    skos:definition "A technology that abates non-CO2 greenhouse gases emitted as by-products of industrial chemical processes, such as N2O from nitric or adipic acid production."@en .
+
+cdm:N2OAbatementTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "N2O abatement technology"@en ;
+    skos:definition "A catalytic or thermal abatement system installed in the tail-gas stream of a nitric acid or adipic acid plant to destroy nitrous oxide before it is emitted to atmosphere."@en ;
+    skos:broader cdm:IndustrialProcessMitigationTechnology .
 
 #################################################################
 # EnergySourceScheme concepts

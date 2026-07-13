@@ -1,9 +1,9 @@
 CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
-    skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
+    skip("shaclR not available")
   }
 }
 
@@ -64,7 +64,7 @@ skip_if_no_rdflib <- function() {
 # ---- check_applicability_technology_type ----
 
 test_that("returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EfficientLightingSystem"))
@@ -78,7 +78,7 @@ test_that("returns correct list structure", {
 })
 
 test_that("attestation carries correct methodology and condition labels", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EfficientLightingSystem"))
@@ -89,7 +89,7 @@ test_that("attestation carries correct methodology and condition labels", {
 })
 
 test_that("EfficientLightingSystem (SKOS subtype) passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EfficientLightingSystem"))
@@ -100,7 +100,7 @@ test_that("EfficientLightingSystem (SKOS subtype) passes", {
 })
 
 test_that("EnergyEfficiencyTechnology top concept itself passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -111,7 +111,7 @@ test_that("EnergyEfficiencyTechnology top concept itself passes", {
 })
 
 test_that("RenewableEnergyTechnology (wrong branch) fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
@@ -122,7 +122,7 @@ test_that("RenewableEnergyTechnology (wrong branch) fails", {
 })
 
 test_that("missing aiao:isPerformedWith triple fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   project_iri <- paste0(CDM, "TestProject001")
@@ -139,7 +139,7 @@ test_that("missing aiao:isPerformedWith triple fails", {
 })
 
 test_that("character IRI without fluree_conn raises error matching 'fluree_conn'", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   expect_error(

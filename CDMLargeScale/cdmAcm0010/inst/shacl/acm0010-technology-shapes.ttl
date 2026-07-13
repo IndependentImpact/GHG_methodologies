@@ -1,0 +1,16 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ACM0010 — technology type applicability shape.
+# Run materialise_skos_hierarchy() before validate_shacl().
+
+cdm:Acm0010TechnologyShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "ACM0010 technology type"@en ;
+    sh:property [
+        sh:path <http://w3id.org/aiao#isPerformedWith> ;
+        sh:class <http://independentimpact.org/cdm/ManureMethaneCapture> ;
+        sh:minCount 1 ;
+        sh:message "ACM0010 condition (a): project must implement a manure methane capture system."@en
+    ] .

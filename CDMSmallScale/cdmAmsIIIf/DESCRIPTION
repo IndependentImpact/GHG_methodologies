@@ -14,7 +14,7 @@ Imports:
     cdmSemantic,
     dplyr,
     rlang,
-    shapeR,
+    shaclR,
     stats,
     tibble,
     tidyr

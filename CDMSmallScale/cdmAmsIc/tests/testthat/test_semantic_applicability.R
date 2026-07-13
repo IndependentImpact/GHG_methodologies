@@ -12,8 +12,8 @@ CDM <- "http://independentimpact.org/cdm/"
   do.call(rbind, rows)
 }
 
-skip_if_no_shapeR <- function() {
-  testthat::skip_if_not_installed("shapeR")
+skip_if_no_shaclR <- function() {
+  testthat::skip_if_not_installed("shaclR")
 }
 
 skip_if_no_rdflib <- function() {
@@ -21,7 +21,7 @@ skip_if_no_rdflib <- function() {
 }
 
 test_that("check_applicability_renewable_technology returns correct structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "SolarThermalTechnology"))
@@ -39,7 +39,7 @@ test_that("check_applicability_renewable_technology returns correct structure", 
 })
 
 test_that("SolarPV (skos:broader RenewableEnergyTechnology) passes renewable technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "SolarPV"))
@@ -51,7 +51,7 @@ test_that("SolarPV (skos:broader RenewableEnergyTechnology) passes renewable tec
 })
 
 test_that("NonRenewableEnergyTechnology fails renewable technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"))
@@ -63,7 +63,7 @@ test_that("NonRenewableEnergyTechnology fails renewable technology check", {
 })
 
 test_that("passing IRI without fluree_conn raises error", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
 
   expect_error(
     check_applicability_renewable_technology("http://ex.org/proj"),
@@ -83,7 +83,7 @@ test_that("validate_applicability=FALSE skips semantic checks", {
 })
 
 test_that("validate_applicability=TRUE with passing triples proceeds to calculation", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "SolarPV"))
@@ -103,7 +103,7 @@ test_that("validate_applicability=TRUE with passing triples proceeds to calculat
 })
 
 test_that("validate_applicability=TRUE with failing triples stops with error", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"))

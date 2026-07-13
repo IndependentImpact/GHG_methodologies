@@ -4,7 +4,7 @@
 #' the single return-value constructor used by all `check_applicability_*()`
 #' functions across CDM methodology packages.
 #'
-#' @param shacl_result List returned by `shapeR::validate_shacl()`, containing
+#' @param shacl_result List returned by `shaclR::validate_shacl()`, containing
 #'   `conforms` (logical) and `results` (data frame of violations).
 #' @param data The `data` argument that was passed to the calling
 #'   `check_applicability_*()` function — used to record the project IRI in

@@ -138,9 +138,9 @@ cdm:AmsIaApplicabilityShape a sh:NodeShape ;
   ] .
 ```
 
-SKOS hierarchy traversal: before calling `shapeR::validate_shacl()`, a helper
+SKOS hierarchy traversal: before calling `shaclR::validate_shacl()`, a helper
 materialises `skos:broader*` chains as `rdf:type` triples in the in-memory graph.
-No changes required to `shapeR`.
+No changes required to `shaclR`.
 
 ---
 
@@ -166,7 +166,7 @@ check_applicability_renewable_technology(
 ```r
 list(
   conforms    = TRUE/FALSE,
-  violations  = <data.frame>,   # shapeR validation results
+  violations  = <data.frame>,   # shaclR validation results
   attestation = list(
     project_id   = <IRI>,
     methodology  = "AMS-I.A",
@@ -265,7 +265,7 @@ semantic or quantitative condition fails.
 |---|---|---|
 | 1 | `~/cdmVocabulary/` repo — `cdm.ttl` + `cdm-concepts.ttl` | Nothing |
 | 2 | Update `novaRush` for Fluree v4 API | Nothing |
-| 3 | SKOS hierarchy materialisation helper | `shapeR` (already available) |
+| 3 | SKOS hierarchy materialisation helper | `shaclR` (already available) |
 | 4 | `inst/shacl/` + `inst/concepts/` for pilot packages (`cdmAmsIa`, `cdmAcm0002`) | Step 1 |
 | 5 | `variable_registry_*()` for pilot packages | — |
 | 6 | Redesigned `check_applicability_*()` for pilots | Steps 2, 3, 4 |

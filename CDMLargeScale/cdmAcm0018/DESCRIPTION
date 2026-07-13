@@ -12,8 +12,10 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
 Imports:
+    cdmSemantic,
     dplyr,
     rlang,
+    shaclR,
     stats,
     tibble
 Suggests: testthat (>= 3.0.0),
@@ -24,4 +26,4 @@ Suggests: testthat (>= 3.0.0),
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

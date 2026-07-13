@@ -13,7 +13,7 @@
 #' locally — no Fluree connection required (useful for testing).
 #'
 #' The CDM concept hierarchy is materialised as `rdf:type` triples before SHACL
-#' validation; call `shapeR::materialise_skos_hierarchy()` manually if you need
+#' validation; call `shaclR::materialise_skos_hierarchy()` manually if you need
 #' to inspect the augmented graph.
 #'
 #' @param data Either a single character project IRI or a data frame with
@@ -41,8 +41,8 @@ check_applicability_renewable_technology <- function(data,
   shapes          <- if (is.null(shapes)) read_acm0002_technology_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
 
-  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result    <- shapeR::validate_shacl(augmented, shapes)
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
   cdmSemantic::cdm_make_applicability_result(result, data, "ACM0002", "RenewableEnergyTechnology")
 }
 
@@ -77,8 +77,8 @@ check_applicability_grid_connection <- function(data,
   shapes          <- if (is.null(shapes)) read_acm0002_grid_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
 
-  augmented  <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result     <- shapeR::validate_shacl(augmented, shapes)
+  augmented  <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result     <- shaclR::validate_shacl(augmented, shapes)
   out        <- cdmSemantic::cdm_make_applicability_result(result, data, "ACM0002", "GridConnectedSystem")
 
   if (!is.null(export_share)) {

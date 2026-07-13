@@ -1,9 +1,9 @@
 #' Load the CDM concept scheme as a triples data frame
 #'
 #' Parses the bundled `cdm-concepts.ttl` into a data frame suitable for
-#' `shapeR::materialise_skos_hierarchy()`. Call this once and pass the result
+#' `shaclR::materialise_skos_hierarchy()`. Call this once and pass the result
 #' as `concept_triples` to `cdm_resolve_triples()` or directly to
-#' `shapeR::materialise_skos_hierarchy()`.
+#' `shaclR::materialise_skos_hierarchy()`.
 #'
 #' @return Data frame with columns `subject`, `predicate`, `object`, `datatype`.
 #' @export
@@ -37,9 +37,9 @@ read_cdm_concept_triples <- function() {
 #' @return Data frame with columns `subject`, `predicate`, `object`, `datatype`.
 #' @export
 cdm_resolve_triples <- function(data, fluree_conn) {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
     stop(
-      "Package 'shapeR' is required for semantic applicability checks.",
+      "Package 'shaclR' is required for semantic applicability checks.",
       call. = FALSE
     )
   }

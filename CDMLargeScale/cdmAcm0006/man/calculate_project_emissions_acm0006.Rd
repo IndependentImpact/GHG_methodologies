@@ -16,21 +16,26 @@ calculate_project_emissions_acm0006(
 \arguments{
 \item{auxiliary_fossil_tj}{Auxiliary fossil fuel consumption in terajoules.}
 
-\item{auxiliary_fossil_ef}{Emission factor for auxiliary fuel in tonnes CO2e per terajoule.}
+\item{auxiliary_fossil_ef}{Emission factor for auxiliary fuel in tonnes CO2e
+per terajoule.}
 
-\item{electricity_import_mwh}{Electricity imported from the grid in megawatt-hours.}
+\item{electricity_import_mwh}{Electricity imported from the grid in
+megawatt-hours.}
 
-\item{import_emission_factor}{Emission factor for imported electricity in tonnes CO2e per MWh.}
+\item{import_emission_factor}{Emission factor for imported electricity in
+tonnes CO2e per MWh.}
 
 \item{biomass_transport_tkm}{Biomass transport activity in tonne-kilometres.}
 
-\item{transport_emission_factor}{Emission factor for biomass transport in tonnes CO2e per tonne-kilometre.}
+\item{transport_emission_factor}{Emission factor for biomass transport in
+tonnes CO2e per tonne-kilometre.}
 }
 \value{
 Numeric vector of project emissions in tonnes CO2e.
 }
 \description{
-Aggregates project emissions from auxiliary fossil fuel use, electricity imports, and transport of biomass feedstock.
+Aggregates project emissions from auxiliary fossil fuel use, electricity
+imports, and transport of biomass feedstock.
 }
 \examples{
 calculate_project_emissions_acm0006(0.2, 74, 20, 0.7, 500, 0.0001)

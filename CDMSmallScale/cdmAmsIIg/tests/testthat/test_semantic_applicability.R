@@ -1,9 +1,9 @@
 CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
-    skip("shapeR not installed")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
+    skip("shaclR not installed")
   }
 }
 
@@ -54,7 +54,7 @@ skip_if_no_rdflib <- function() {
 # ---------------------------------------------------------------------------
 
 test_that("check_applicability_technology_type returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -68,7 +68,7 @@ test_that("check_applicability_technology_type returns correct list structure", 
 })
 
 test_that("attestation carries correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -79,7 +79,7 @@ test_that("attestation carries correct methodology and condition", {
 })
 
 test_that("EfficientHVACSystem (SKOS subtype) passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EfficientHVACSystem"))
@@ -89,7 +89,7 @@ test_that("EfficientHVACSystem (SKOS subtype) passes technology check", {
 })
 
 test_that("EnergyEfficiencyTechnology top concept itself passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -99,7 +99,7 @@ test_that("EnergyEfficiencyTechnology top concept itself passes", {
 })
 
 test_that("RenewableEnergyTechnology (wrong branch) fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
@@ -109,7 +109,7 @@ test_that("RenewableEnergyTechnology (wrong branch) fails technology check", {
 })
 
 test_that("missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   project_iri <- paste0(CDM, "TestProject")
@@ -125,7 +125,7 @@ test_that("missing aiao:isPerformedWith triple fails technology check", {
 })
 
 test_that("passing a character IRI without fluree_conn raises error", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   expect_error(
@@ -139,7 +139,7 @@ test_that("passing a character IRI without fluree_conn raises error", {
 # ---------------------------------------------------------------------------
 
 test_that("NonRenewableBiomass passes baseline fuel check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -152,7 +152,7 @@ test_that("NonRenewableBiomass passes baseline fuel check", {
 })
 
 test_that("attestation condition is NonRenewableBiomass", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -165,7 +165,7 @@ test_that("attestation condition is NonRenewableBiomass", {
 })
 
 test_that("RenewableBiomass fails baseline fuel check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -178,7 +178,7 @@ test_that("RenewableBiomass fails baseline fuel check", {
 })
 
 test_that("missing hasBaselineFuelType triple fails baseline fuel check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))

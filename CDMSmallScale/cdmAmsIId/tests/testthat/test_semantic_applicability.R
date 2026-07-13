@@ -1,9 +1,9 @@
 CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
-    skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
+    skip("shaclR not available")
   }
 }
 
@@ -61,7 +61,7 @@ skip_if_no_rdflib <- function() {
 # --- check_applicability_technology_type ---
 
 test_that("check_applicability_technology_type returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientMotorSystem"))
   result  <- check_applicability_technology_type(triples)
@@ -70,7 +70,7 @@ test_that("check_applicability_technology_type returns correct list structure", 
 })
 
 test_that("check_applicability_technology_type attestation has correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientMotorSystem"))
   result  <- check_applicability_technology_type(triples)
@@ -79,7 +79,7 @@ test_that("check_applicability_technology_type attestation has correct methodolo
 })
 
 test_that("EfficientMotorSystem (SKOS subtype) passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientMotorSystem"))
   result  <- check_applicability_technology_type(triples)
@@ -87,7 +87,7 @@ test_that("EfficientMotorSystem (SKOS subtype) passes technology check", {
 })
 
 test_that("EnergyEfficiencyTechnology top concept itself passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -95,7 +95,7 @@ test_that("EnergyEfficiencyTechnology top concept itself passes technology check
 })
 
 test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -103,7 +103,7 @@ test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
 })
 
 test_that("Missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   project_iri <- paste0(CDM, "TestProject")
   triples <- data.frame(
@@ -117,7 +117,7 @@ test_that("Missing aiao:isPerformedWith triple fails technology check", {
 })
 
 test_that("Passing a character IRI without fluree_conn raises error matching 'fluree_conn'", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   expect_error(
     check_applicability_technology_type(paste0(CDM, "SomeProject")),
@@ -128,7 +128,7 @@ test_that("Passing a character IRI without fluree_conn raises error matching 'fl
 # --- check_applicability_facility_type ---
 
 test_that("IndustrialFacility passes facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientMotorSystem"),
@@ -139,7 +139,7 @@ test_that("IndustrialFacility passes facility check", {
 })
 
 test_that("check_applicability_facility_type attestation$condition == 'IndustrialFacility'", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientMotorSystem"),
@@ -150,7 +150,7 @@ test_that("check_applicability_facility_type attestation$condition == 'Industria
 })
 
 test_that("Building fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientMotorSystem"),
@@ -161,7 +161,7 @@ test_that("Building fails facility check", {
 })
 
 test_that("Missing hasFacilityType triple fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientMotorSystem"))
   result  <- check_applicability_facility_type(triples)

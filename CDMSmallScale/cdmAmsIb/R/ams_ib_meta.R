@@ -17,7 +17,7 @@
 #' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
 #'   `project_id` is a character IRI.
 #' @param concept_triples Optional CDM concept triples data frame passed to
-#'   `shapeR::materialise_skos_hierarchy()`.
+#'   `shaclR::materialise_skos_hierarchy()`.
 #' @return A tibble containing baseline energy, baseline emissions, project energy, project emissions, and emission reductions.
 #' @examples
 #' fuel <- tibble::tibble(machine_id = c("pump-1", "pump-1", "mill-3"),

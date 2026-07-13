@@ -200,8 +200,8 @@ check_applicability_technology_type <- function(data,
   triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
   shapes          <- if (is.null(shapes)) read_ams_iiie_technology_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
-  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result    <- shapeR::validate_shacl(augmented, shapes)
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
   cdmSemantic::cdm_make_applicability_result(result, data, "AMS-III.E", "AnaerobicDigestion")
 }
 
@@ -227,7 +227,7 @@ check_applicability_waste_type <- function(data,
   triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
   shapes          <- if (is.null(shapes)) read_ams_iiie_waste_type_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
-  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result    <- shapeR::validate_shacl(augmented, shapes)
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
   cdmSemantic::cdm_make_applicability_result(result, data, "AMS-III.E", "OrganicWaste")
 }

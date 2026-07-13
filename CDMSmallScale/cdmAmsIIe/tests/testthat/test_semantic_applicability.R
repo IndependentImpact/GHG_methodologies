@@ -4,8 +4,8 @@ RDF  <- "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
 PROJECT_IRI <- paste0(CDM, "TestProject001")
 
-skip_if_no_shapeR <- function() {
-  testthat::skip_if_not_installed("shapeR")
+skip_if_no_shaclR <- function() {
+  testthat::skip_if_not_installed("shaclR")
 }
 
 skip_if_no_rdflib <- function() {
@@ -73,7 +73,7 @@ skip_if_no_rdflib <- function() {
 # ---------------------------------------------------------------------------
 
 testthat::test_that("check_applicability_technology_type returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientHVACSystem"),
                            facility_type = paste0(CDM, "ResidentialBuilding"))
@@ -86,7 +86,7 @@ testthat::test_that("check_applicability_technology_type returns correct list st
 })
 
 testthat::test_that("attestation carries correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientHVACSystem"))
   result <- check_applicability_technology_type(triples)
@@ -95,7 +95,7 @@ testthat::test_that("attestation carries correct methodology and condition", {
 })
 
 testthat::test_that("EfficientHVACSystem (SKOS subtype) passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientHVACSystem"))
   result <- check_applicability_technology_type(triples)
@@ -103,7 +103,7 @@ testthat::test_that("EfficientHVACSystem (SKOS subtype) passes technology check"
 })
 
 testthat::test_that("EnergyEfficiencyTechnology top concept itself passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
   result <- check_applicability_technology_type(triples)
@@ -111,7 +111,7 @@ testthat::test_that("EnergyEfficiencyTechnology top concept itself passes", {
 })
 
 testthat::test_that("RenewableEnergyTechnology fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   result <- check_applicability_technology_type(triples)
@@ -119,7 +119,7 @@ testthat::test_that("RenewableEnergyTechnology fails technology check", {
 })
 
 testthat::test_that("missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   RDF <- "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   triples <- data.frame(
@@ -133,7 +133,7 @@ testthat::test_that("missing aiao:isPerformedWith triple fails technology check"
 })
 
 testthat::test_that("character IRI without fluree_conn raises error mentioning fluree_conn", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   testthat::expect_error(
     check_applicability_technology_type(PROJECT_IRI),
@@ -146,7 +146,7 @@ testthat::test_that("character IRI without fluree_conn raises error mentioning f
 # ---------------------------------------------------------------------------
 
 testthat::test_that("ResidentialBuilding passes facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientHVACSystem"),
@@ -157,7 +157,7 @@ testthat::test_that("ResidentialBuilding passes facility check", {
 })
 
 testthat::test_that("attestation$condition is 'Building' for facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientHVACSystem"),
@@ -168,7 +168,7 @@ testthat::test_that("attestation$condition is 'Building' for facility check", {
 })
 
 testthat::test_that("IndustrialFacility fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "EfficientHVACSystem"),
@@ -179,7 +179,7 @@ testthat::test_that("IndustrialFacility fails facility check", {
 })
 
 testthat::test_that("missing hasFacilityType triple fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "EfficientHVACSystem"))
   result <- check_applicability_facility_type(triples)

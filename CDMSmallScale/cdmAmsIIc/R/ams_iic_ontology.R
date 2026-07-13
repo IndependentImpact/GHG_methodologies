@@ -1,8 +1,8 @@
 #' Load AMS-II.C technology applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_ams_iic_technology_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "ams-iic-technology-shapes.ttl",
                 package = "cdmAmsIIc", mustWork = TRUE)
   )

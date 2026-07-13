@@ -17,7 +17,7 @@ CDM <- "http://independentimpact.org/cdm/"
 # ---------------------------------------------------------------------------
 
 test_that("check_applicability_renewable_technology returns conforms, violations, attestation", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "OffGridSystem"))
   result  <- check_applicability_renewable_technology(triples)
   expect_true(is.list(result))
@@ -27,7 +27,7 @@ test_that("check_applicability_renewable_technology returns conforms, violations
 })
 
 test_that("check_applicability_grid_connection returns conforms, violations, attestation", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "OffGridSystem"))
   result  <- check_applicability_grid_connection(triples)
   expect_true(is.list(result))
@@ -41,21 +41,21 @@ test_that("check_applicability_grid_connection returns conforms, violations, att
 # ---------------------------------------------------------------------------
 
 test_that("SolarPV (skos:broader RenewableEnergyTechnology) passes technology check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"))
   result  <- check_applicability_renewable_technology(triples)
   expect_true(result$conforms)
 })
 
 test_that("NonRenewableEnergyTechnology fails technology check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"))
   result  <- check_applicability_renewable_technology(triples)
   expect_false(result$conforms)
 })
 
 test_that("attestation records methodology as AMS-I.D for technology check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"))
   result  <- check_applicability_renewable_technology(triples)
   expect_equal(result$attestation$methodology, "AMS-I.D")
@@ -67,35 +67,35 @@ test_that("attestation records methodology as AMS-I.D for technology check", {
 # ---------------------------------------------------------------------------
 
 test_that("OffGridSystem passes grid connection check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "OffGridSystem"))
   result  <- check_applicability_grid_connection(triples)
   expect_true(result$conforms)
 })
 
 test_that("MiniGridSystem passes grid connection check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "MiniGridSystem"))
   result  <- check_applicability_grid_connection(triples)
   expect_true(result$conforms)
 })
 
 test_that("CaptiveUseSystem passes grid connection check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "CaptiveUseSystem"))
   result  <- check_applicability_grid_connection(triples)
   expect_true(result$conforms)
 })
 
 test_that("GridConnectedSystem fails grid connection check (AMS-I.D requires captive mini-grid)", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "GridConnectedSystem"))
   result  <- check_applicability_grid_connection(triples)
   expect_false(result$conforms)
 })
 
 test_that("missing grid connection type fails grid connection check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   triples <- .make_triples(paste0(CDM, "SolarPV"), grid_type = NULL)
   result  <- check_applicability_grid_connection(triples)
   expect_false(result$conforms)
@@ -106,7 +106,7 @@ test_that("missing grid connection type fails grid connection check", {
 # ---------------------------------------------------------------------------
 
 test_that("IRI data without fluree_conn raises error", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   expect_error(
     check_applicability_renewable_technology("http://ex.org/proj"),
     "fluree_conn"
@@ -114,7 +114,7 @@ test_that("IRI data without fluree_conn raises error", {
 })
 
 test_that("IRI data without fluree_conn raises error for grid check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   expect_error(
     check_applicability_grid_connection("http://ex.org/proj"),
     "fluree_conn"
@@ -148,7 +148,7 @@ test_that("validate_applicability=TRUE without project_id stops immediately", {
 })
 
 test_that("validate_applicability=TRUE with passing triples proceeds to result", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   data    <- tibble::tibble(grid_id = "A", electricity_mwh = 1000)
   triples <- .make_triples(paste0(CDM, "SolarPV"), paste0(CDM, "OffGridSystem"))
   result  <- estimate_emission_reductions_ams_id(
@@ -162,7 +162,7 @@ test_that("validate_applicability=TRUE with passing triples proceeds to result",
 })
 
 test_that("validate_applicability=TRUE with failing triples stops with error", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   data    <- tibble::tibble(grid_id = "A", electricity_mwh = 1000)
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"), paste0(CDM, "GridConnectedSystem"))
   expect_error(

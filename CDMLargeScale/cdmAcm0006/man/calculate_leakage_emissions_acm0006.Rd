@@ -7,15 +7,18 @@
 calculate_leakage_emissions_acm0006(leakage_fraction, baseline_emissions)
 }
 \arguments{
-\item{leakage_fraction}{Numeric vector (0 to 1) representing the fraction of baseline emissions attributed to leakage.}
+\item{leakage_fraction}{Numeric vector (0 to 1) representing the fraction of
+baseline emissions attributed to leakage.}
 
-\item{baseline_emissions}{Baseline emissions associated with the monitoring data in tonnes CO2e.}
+\item{baseline_emissions}{Baseline emissions associated with the monitoring
+data in tonnes CO2e.}
 }
 \value{
 Numeric vector of leakage emissions in tonnes CO2e.
 }
 \description{
-Estimates leakage from competing biomass uses or market shifts by applying a leakage fraction to the baseline emissions.
+Estimates leakage from competing biomass uses or market shifts by applying a
+leakage fraction to the baseline emissions.
 }
 \examples{
 calculate_leakage_emissions_acm0006(0.05, 1000)

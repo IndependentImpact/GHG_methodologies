@@ -7,15 +7,19 @@
 check_applicability_biomass_fraction(biomass_fraction, minimum_fraction = 0.9)
 }
 \arguments{
-\item{biomass_fraction}{Numeric vector giving the biomass contribution to the total fuel mix on an energy basis (between 0 and 1).}
+\item{biomass_fraction}{Numeric vector giving the biomass contribution to
+the total fuel mix on an energy basis (between 0 and 1).}
 
-\item{minimum_fraction}{Numeric value specifying the minimum share of biomass required. Defaults to 0.9.}
+\item{minimum_fraction}{Numeric value specifying the minimum share of
+biomass required. Defaults to 0.9.}
 }
 \value{
-Logical vector indicating whether the biomass share requirement is satisfied.
+Logical vector indicating whether the biomass share requirement is
+satisfied.
 }
 \description{
-Ensures that biomass provides the minimum share of useful energy required by ACM0006 (typically at least 90\% of the thermal input on an energy basis).
+Ensures that biomass provides the minimum share of useful energy required by
+ACM0006 (typically at least 90\% of the thermal input on an energy basis).
 }
 \examples{
 check_applicability_biomass_fraction(0.95)

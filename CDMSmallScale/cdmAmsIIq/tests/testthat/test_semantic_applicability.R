@@ -1,9 +1,9 @@
 CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
-    skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
+    skip("shaclR not available")
   }
 }
 
@@ -73,7 +73,7 @@ skip_if_no_rdflib <- function() {
 # -- check_applicability_technology_type ------------------------------------------
 
 test_that("check_applicability_technology_type returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -84,7 +84,7 @@ test_that("check_applicability_technology_type returns correct list structure", 
 })
 
 test_that("attestation carries correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -95,7 +95,7 @@ test_that("attestation carries correct methodology and condition", {
 })
 
 test_that("EfficientLightingSystem (SKOS subtype) passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EfficientLightingSystem"))
@@ -105,7 +105,7 @@ test_that("EfficientLightingSystem (SKOS subtype) passes technology check", {
 })
 
 test_that("EnergyEfficiencyTechnology top concept passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))
@@ -115,7 +115,7 @@ test_that("EnergyEfficiencyTechnology top concept passes technology check", {
 })
 
 test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
@@ -125,7 +125,7 @@ test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
 })
 
 test_that("missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   project_iri <- paste0(CDM, "TestProjectNoTech")
@@ -141,7 +141,7 @@ test_that("missing aiao:isPerformedWith triple fails technology check", {
 })
 
 test_that("character IRI without fluree_conn raises error mentioning fluree_conn", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   expect_error(
@@ -153,7 +153,7 @@ test_that("character IRI without fluree_conn raises error mentioning fluree_conn
 # -- check_applicability_facility_type --------------------------------------------
 
 test_that("CommercialBuilding passes facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -166,7 +166,7 @@ test_that("CommercialBuilding passes facility check", {
 })
 
 test_that("attestation$condition is CommercialBuilding for facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -179,7 +179,7 @@ test_that("attestation$condition is CommercialBuilding for facility check", {
 })
 
 test_that("IndustrialFacility fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(
@@ -192,7 +192,7 @@ test_that("IndustrialFacility fails facility check", {
 })
 
 test_that("missing hasFacilityType triple fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
 
   triples <- .make_triples(paste0(CDM, "EnergyEfficiencyTechnology"))

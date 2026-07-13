@@ -33,20 +33,20 @@ variable_registry_ams_ia <- function() {
 }
 
 #' Load AMS-I.A technology applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_ams_ia_technology_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "ams-ia-technology-shapes.ttl",
                 package = "cdmAmsIa", mustWork = TRUE)
   )
 }
 
 #' Load AMS-I.A grid connection applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_ams_ia_grid_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "ams-ia-grid-shapes.ttl",
                 package = "cdmAmsIa", mustWork = TRUE)
   )

@@ -69,3 +69,52 @@ check_applicability_baseline_system <- function(baseline_system) {
 
   result
 }
+
+#' Check ACM0010 technology type applicability (semantic)
+#'
+#' Validates that the project activity implements the required technology type.
+#' Uses SHACL validation with SKOS hierarchy materialisation so any subtype of
+#' `cdm:ManureMethaneCapture` is accepted automatically.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object` (and optionally `datatype`).
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @export
+check_applicability_technology_type <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_acm0010_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "ACM0010", "ManureMethaneCapture")
+}
+
+#' Check ACM0010 waste type applicability (semantic)
+#'
+#' Validates that the project waste stream is of the required type.
+#'
+#' @param data Either a single character project IRI or a data frame.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [check_applicability_technology_type()]
+#' @export
+check_applicability_waste_type <- function(data,
+                                           fluree_conn = NULL,
+                                           concept_triples = NULL,
+                                           shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_acm0010_waste_type_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "ACM0010", "AnimalManure")
+}

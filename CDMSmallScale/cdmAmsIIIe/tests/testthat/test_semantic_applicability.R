@@ -2,8 +2,8 @@ CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 RDF  <- "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) testthat::skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) testthat::skip("shaclR not available")
 }
 skip_if_no_rdflib <- function() {
   if (!requireNamespace("rdflib", quietly = TRUE)) testthat::skip("rdflib not available")
@@ -32,7 +32,7 @@ skip_if_no_rdflib <- function() {
 # ---------------------------------------------------------------------------
 
 test_that("check_applicability_technology_type returns list with correct names", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"))
   result  <- check_applicability_technology_type(triples)
@@ -41,7 +41,7 @@ test_that("check_applicability_technology_type returns list with correct names",
 })
 
 test_that("check_applicability_technology_type attestation has correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"))
   result  <- check_applicability_technology_type(triples)
@@ -50,7 +50,7 @@ test_that("check_applicability_technology_type attestation has correct methodolo
 })
 
 test_that("AnaerobicDigestion typed as intermediate node passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"))
   result  <- check_applicability_technology_type(triples)
@@ -58,7 +58,7 @@ test_that("AnaerobicDigestion typed as intermediate node passes technology check
 })
 
 test_that("WasteTreatmentTechnology parent concept fails (shape checks AnaerobicDigestion specifically)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "WasteTreatmentTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -66,7 +66,7 @@ test_that("WasteTreatmentTechnology parent concept fails (shape checks Anaerobic
 })
 
 test_that("RenewableEnergyTechnology fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -74,7 +74,7 @@ test_that("RenewableEnergyTechnology fails technology check", {
 })
 
 test_that("Missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   project_node <- "http://ex.org/proj"
   triples <- data.frame(
@@ -88,7 +88,7 @@ test_that("Missing aiao:isPerformedWith triple fails technology check", {
 })
 
 test_that("Character IRI without fluree_conn raises error mentioning fluree_conn", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   expect_error(
     check_applicability_technology_type("http://ex.org/proj"),
@@ -101,7 +101,7 @@ test_that("Character IRI without fluree_conn raises error mentioning fluree_conn
 # ---------------------------------------------------------------------------
 
 test_that("AgriculturalResidues typed as intermediate waste node passes waste type check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"), paste0(CDM, "AgriculturalResidues"))
   result  <- check_applicability_waste_type(triples)
@@ -109,7 +109,7 @@ test_that("AgriculturalResidues typed as intermediate waste node passes waste ty
 })
 
 test_that("check_applicability_waste_type attestation condition is OrganicWaste", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"), paste0(CDM, "AgriculturalResidues"))
   result  <- check_applicability_waste_type(triples)
@@ -117,7 +117,7 @@ test_that("check_applicability_waste_type attestation condition is OrganicWaste"
 })
 
 test_that("RecyclableMaterial typed as intermediate waste node fails waste type check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"), paste0(CDM, "RecyclableMaterial"))
   result  <- check_applicability_waste_type(triples)
@@ -125,7 +125,7 @@ test_that("RecyclableMaterial typed as intermediate waste node fails waste type 
 })
 
 test_that("Missing hasWasteType triple fails waste type check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AnaerobicDigestion"))
   result  <- check_applicability_waste_type(triples)

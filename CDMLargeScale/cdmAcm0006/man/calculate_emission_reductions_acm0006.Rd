@@ -21,7 +21,8 @@ calculate_emission_reductions_acm0006(
 Numeric vector of emission reductions in tonnes CO2e.
 }
 \description{
-Derives emission reductions by subtracting project and leakage emissions from baseline emissions.
+Derives emission reductions by subtracting project and leakage emissions from
+baseline emissions.
 }
 \examples{
 calculate_emission_reductions_acm0006(1200, 150, 30)

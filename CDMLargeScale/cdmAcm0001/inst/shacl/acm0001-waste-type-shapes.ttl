@@ -1,0 +1,12 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+cdm:Acm0001WasteTypeShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "ACM0001 waste type"@en ;
+    sh:property [
+        sh:path <http://independentimpact.org/cdm/hasWasteType> ;
+        sh:class <http://independentimpact.org/cdm/MunicipalSolidWaste> ;
+        sh:minCount 1 ;
+        sh:message "ACM0001 condition (b): waste stream must be municipal solid waste in a managed landfill."@en
+    ] .

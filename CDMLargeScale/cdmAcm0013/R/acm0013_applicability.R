@@ -62,3 +62,54 @@ check_applicability_acm0013 <- function(data, efficiency_improvement_threshold =
 
   required_flags && emission_factor_check == 1 && average_improvement >= efficiency_improvement_threshold
 }
+
+
+#' Check ACM0013 technology type applicability (semantic)
+#'
+#' Validates that the project activity implements the required technology type.
+#' Uses SHACL validation with SKOS hierarchy materialisation so any subtype of
+#' `cdm:NonRenewableEnergyTechnology` is accepted automatically.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object` (and optionally `datatype`).
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @export
+check_applicability_technology_type <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_acm0013_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "ACM0013", "NonRenewableEnergyTechnology")
+}
+
+
+#' Check ACM0013 grid connection applicability (semantic)
+#'
+#' Validates that the project plant is grid-connected.
+#'
+#' @param data Either a single character project IRI or a data frame.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [check_applicability_technology_type()]
+#' @export
+check_applicability_grid_connection <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_acm0013_grid_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "ACM0013", "GridConnectedSystem")
+}

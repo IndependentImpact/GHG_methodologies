@@ -153,8 +153,8 @@ check_applicability_renewable_technology <- function(data,
   triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
   shapes          <- if (is.null(shapes)) read_ams_if_technology_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
-  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result    <- shapeR::validate_shacl(augmented, shapes)
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
   cdmSemantic::cdm_make_applicability_result(result, data, "AMS-I.F", "RenewableEnergyTechnology")
 }
 
@@ -179,7 +179,7 @@ check_applicability_grid_connection <- function(data,
   triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
   shapes          <- if (is.null(shapes)) read_ams_if_grid_shapes() else shapes
   concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
-  augmented  <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
-  result     <- shapeR::validate_shacl(augmented, shapes)
+  augmented  <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result     <- shaclR::validate_shacl(augmented, shapes)
   cdmSemantic::cdm_make_applicability_result(result, data, "AMS-I.F", "GridConnectionType")
 }

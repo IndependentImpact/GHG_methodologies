@@ -21,7 +21,7 @@ CDM <- "http://independentimpact.org/cdm/"
 }
 
 test_that("check_applicability_renewable_technology returns correct structure", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
 
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   shapes  <- read_ams_ie_technology_shapes()
@@ -36,7 +36,7 @@ test_that("check_applicability_renewable_technology returns correct structure", 
 })
 
 test_that("SolarPV (skos:broader RenewableEnergyTechnology) passes renewable technology check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   skip_if_not_installed("rdflib")
 
   triples         <- .make_triples(paste0(CDM, "SolarPV"))
@@ -50,7 +50,7 @@ test_that("SolarPV (skos:broader RenewableEnergyTechnology) passes renewable tec
 })
 
 test_that("NonRenewableEnergyTechnology fails renewable technology check", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
 
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"))
   shapes  <- read_ams_ie_technology_shapes()
@@ -78,7 +78,7 @@ test_that("validate_applicability = FALSE skips checks", {
 })
 
 test_that("validate_applicability = TRUE with passing triples proceeds", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
   skip_if_not_installed("rdflib")
 
   triples         <- .make_triples(paste0(CDM, "SolarPV"))
@@ -99,7 +99,7 @@ test_that("validate_applicability = TRUE with passing triples proceeds", {
 })
 
 test_that("validate_applicability = TRUE with failing triples stops with error", {
-  skip_if_not_installed("shapeR")
+  skip_if_not_installed("shaclR")
 
   triples <- .make_triples(paste0(CDM, "NonRenewableEnergyTechnology"))
   shapes  <- read_ams_ie_technology_shapes()

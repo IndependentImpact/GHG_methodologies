@@ -1,9 +1,9 @@
 CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) {
-    skip("shapeR not installed")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) {
+    skip("shaclR not installed")
   }
 }
 
@@ -110,7 +110,7 @@ skip_if_no_rdflib <- function() {
 # ---------------------------------------------------------------------------
 
 test_that("check_applicability_technology_type returns correct list structure", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology")
   result <- check_applicability_technology_type(data)
@@ -119,7 +119,7 @@ test_that("check_applicability_technology_type returns correct list structure", 
 })
 
 test_that("attestation fields are correct for technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology")
   result <- check_applicability_technology_type(data)
@@ -128,7 +128,7 @@ test_that("attestation fields are correct for technology check", {
 })
 
 test_that("EfficientMotorSystem (SKOS subtype) passes technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EfficientMotorSystem")
   result <- check_applicability_technology_type(data)
@@ -136,7 +136,7 @@ test_that("EfficientMotorSystem (SKOS subtype) passes technology check", {
 })
 
 test_that("EnergyEfficiencyTechnology top concept itself passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology")
   result <- check_applicability_technology_type(data)
@@ -144,7 +144,7 @@ test_that("EnergyEfficiencyTechnology top concept itself passes", {
 })
 
 test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("RenewableEnergyTechnology")
   result <- check_applicability_technology_type(data)
@@ -152,7 +152,7 @@ test_that("RenewableEnergyTechnology fails technology check (wrong branch)", {
 })
 
 test_that("Missing aiao:isPerformedWith triple fails technology check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples_no_tech()
   result <- check_applicability_technology_type(data)
@@ -171,7 +171,7 @@ test_that("Passing a character IRI without fluree_conn raises error", {
 # ---------------------------------------------------------------------------
 
 test_that("AgriculturalFacility passes facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology", facility_type = "AgriculturalFacility")
   result <- check_applicability_facility_type(data)
@@ -179,7 +179,7 @@ test_that("AgriculturalFacility passes facility check", {
 })
 
 test_that("attestation$condition is AgriculturalFacility", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology", facility_type = "AgriculturalFacility")
   result <- check_applicability_facility_type(data)
@@ -187,7 +187,7 @@ test_that("attestation$condition is AgriculturalFacility", {
 })
 
 test_that("Building fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples("EnergyEfficiencyTechnology", facility_type = "Building")
   result <- check_applicability_facility_type(data)
@@ -195,7 +195,7 @@ test_that("Building fails facility check", {
 })
 
 test_that("Missing hasFacilityType triple fails facility check", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   data   <- .make_triples_no_facility("EnergyEfficiencyTechnology")
   result <- check_applicability_facility_type(data)

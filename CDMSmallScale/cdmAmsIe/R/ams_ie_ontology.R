@@ -1,8 +1,8 @@
 #' Load AMS-I.E technology applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_ams_ie_technology_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "ams-ie-technology-shapes.ttl",
                 package = "cdmAmsIe", mustWork = TRUE)
   )

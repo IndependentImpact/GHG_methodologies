@@ -25,7 +25,7 @@
 #' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
 #'   `project_id` is a character IRI.
 #' @param concept_triples Optional CDM concept triples data frame passed to
-#'   `shapeR::materialise_skos_hierarchy()`. Defaults to
+#'   `shaclR::materialise_skos_hierarchy()`. Defaults to
 #'   [read_cdm_concept_triples()].
 #'
 #' @return A tibble with baseline generation, baseline emissions, project

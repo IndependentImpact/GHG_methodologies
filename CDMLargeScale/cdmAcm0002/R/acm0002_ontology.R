@@ -39,20 +39,20 @@ variable_registry_acm0002 <- function() {
 }
 
 #' Load ACM0002 technology applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_acm0002_technology_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "acm0002-technology-shapes.ttl",
                 package = "cdmAcm0002", mustWork = TRUE)
   )
 }
 
 #' Load ACM0002 grid connection applicability shape
-#' @return A `sh_shape_graph` as returned by [shapeR::read_shacl()].
+#' @return A `sh_shape_graph` as returned by [shaclR::read_shacl()].
 #' @export
 read_acm0002_grid_shapes <- function() {
-  shapeR::read_shacl(
+  shaclR::read_shacl(
     system.file("shacl", "acm0002-grid-shapes.ttl",
                 package = "cdmAcm0002", mustWork = TRUE)
   )

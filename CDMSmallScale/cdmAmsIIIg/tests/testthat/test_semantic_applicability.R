@@ -2,8 +2,8 @@ CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 RDF  <- "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) testthat::skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) testthat::skip("shaclR not available")
 }
 skip_if_no_rdflib <- function() {
   if (!requireNamespace("rdflib", quietly = TRUE)) testthat::skip("rdflib not available")
@@ -32,7 +32,7 @@ skip_if_no_rdflib <- function() {
 # ---------------------------------------------------------------------------
 
 test_that("check_applicability_technology_type returns list with expected names", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "LandfillGasCapture"))
   result  <- check_applicability_technology_type(triples)
@@ -40,7 +40,7 @@ test_that("check_applicability_technology_type returns list with expected names"
 })
 
 test_that("attestation has correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "LandfillGasCapture"))
   result  <- check_applicability_technology_type(triples)
@@ -49,7 +49,7 @@ test_that("attestation has correct methodology and condition", {
 })
 
 test_that("LandfillGasCapture typed as intermediate node passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "LandfillGasCapture"))
   result  <- check_applicability_technology_type(triples)
@@ -57,7 +57,7 @@ test_that("LandfillGasCapture typed as intermediate node passes", {
 })
 
 test_that("WasteTreatmentTechnology parent concept fails (shape checks LandfillGasCapture specifically)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "WasteTreatmentTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -65,7 +65,7 @@ test_that("WasteTreatmentTechnology parent concept fails (shape checks LandfillG
 })
 
 test_that("RenewableEnergyTechnology typed as intermediate node fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -73,7 +73,7 @@ test_that("RenewableEnergyTechnology typed as intermediate node fails", {
 })
 
 test_that("missing aiao:isPerformedWith triple fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   project_node <- "http://ex.org/proj"
   triples <- data.frame(
@@ -87,7 +87,7 @@ test_that("missing aiao:isPerformedWith triple fails", {
 })
 
 test_that("character IRI without fluree_conn raises error matching 'fluree_conn'", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   expect_error(
     check_applicability_technology_type("http://ex.org/proj"),
@@ -100,7 +100,7 @@ test_that("character IRI without fluree_conn raises error matching 'fluree_conn'
 # ---------------------------------------------------------------------------
 
 test_that("MunicipalSolidWaste typed as intermediate waste node passes", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "LandfillGasCapture"),
@@ -111,7 +111,7 @@ test_that("MunicipalSolidWaste typed as intermediate waste node passes", {
 })
 
 test_that("waste type attestation has correct condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "LandfillGasCapture"),
@@ -122,7 +122,7 @@ test_that("waste type attestation has correct condition", {
 })
 
 test_that("RecyclableMaterial typed as intermediate waste node fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(
     paste0(CDM, "LandfillGasCapture"),
@@ -133,7 +133,7 @@ test_that("RecyclableMaterial typed as intermediate waste node fails", {
 })
 
 test_that("missing hasWasteType triple fails", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   project_node <- "http://ex.org/proj"
   triples <- data.frame(

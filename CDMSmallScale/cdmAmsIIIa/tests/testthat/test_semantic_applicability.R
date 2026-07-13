@@ -2,8 +2,8 @@ CDM  <- "http://independentimpact.org/cdm/"
 AIAO <- "http://w3id.org/aiao#"
 RDF  <- "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 
-skip_if_no_shapeR <- function() {
-  if (!requireNamespace("shapeR", quietly = TRUE)) testthat::skip("shapeR not available")
+skip_if_no_shaclR <- function() {
+  if (!requireNamespace("shaclR", quietly = TRUE)) testthat::skip("shaclR not available")
 }
 skip_if_no_rdflib <- function() {
   if (!requireNamespace("rdflib", quietly = TRUE)) testthat::skip("rdflib not available")
@@ -22,7 +22,7 @@ skip_if_no_rdflib <- function() {
 }
 
 test_that("check_applicability_technology_type returns list with correct names", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "BiologicalNitrogenFixation"))
   result  <- check_applicability_technology_type(triples)
@@ -31,7 +31,7 @@ test_that("check_applicability_technology_type returns list with correct names",
 })
 
 test_that("attestation contains correct methodology and condition", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "BiologicalNitrogenFixation"))
   result  <- check_applicability_technology_type(triples)
@@ -40,7 +40,7 @@ test_that("attestation contains correct methodology and condition", {
 })
 
 test_that("BiologicalNitrogenFixation typed node passes validation", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "BiologicalNitrogenFixation"))
   result  <- check_applicability_technology_type(triples)
@@ -48,7 +48,7 @@ test_that("BiologicalNitrogenFixation typed node passes validation", {
 })
 
 test_that("AgriculturalMitigationTechnology parent concept fails (shape checks specific subtype)", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "AgriculturalMitigationTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -56,7 +56,7 @@ test_that("AgriculturalMitigationTechnology parent concept fails (shape checks s
 })
 
 test_that("RenewableEnergyTechnology fails validation", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   triples <- .make_triples(paste0(CDM, "RenewableEnergyTechnology"))
   result  <- check_applicability_technology_type(triples)
@@ -64,7 +64,7 @@ test_that("RenewableEnergyTechnology fails validation", {
 })
 
 test_that("missing aiao:isPerformedWith triple fails validation", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   project_node <- "http://ex.org/proj"
   triples <- data.frame(
@@ -78,7 +78,7 @@ test_that("missing aiao:isPerformedWith triple fails validation", {
 })
 
 test_that("character IRI without fluree_conn raises error mentioning fluree_conn", {
-  skip_if_no_shapeR()
+  skip_if_no_shaclR()
   skip_if_no_rdflib()
   expect_error(
     check_applicability_technology_type("http://ex.org/proj"),
