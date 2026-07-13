@@ -1,0 +1,16 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# AMS-I.A — technology type applicability shape only.
+# Run materialise_skos_hierarchy() before validate_shacl().
+
+cdm:AmsIaTechnologyShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "AMS-I.A renewable technology"@en ;
+    sh:property [
+        sh:path <http://w3id.org/aiao#isPerformedWith> ;
+        sh:class <http://independentimpact.org/cdm/RenewableEnergyTechnology> ;
+        sh:minCount 1 ;
+        sh:message "AMS-I.A condition 2(a): project must use a renewable energy technology. Declare the technology via aiao:isPerformedWith with rdf:type cdm:RenewableEnergyTechnology (directly or via the SKOS hierarchy)."@en
+    ] .

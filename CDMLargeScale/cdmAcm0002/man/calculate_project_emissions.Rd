@@ -4,7 +4,12 @@
 \alias{calculate_project_emissions}
 \title{Calculate project emissions for ACM0002}
 \usage{
-calculate_project_emissions(fossil_fuel_tj, fossil_emission_factor, electricity_import_mwh = 0, import_emission_factor = 0)
+calculate_project_emissions(
+  fossil_fuel_tj,
+  fossil_emission_factor,
+  electricity_import_mwh = 0,
+  import_emission_factor = 0
+)
 }
 \arguments{
 \item{fossil_fuel_tj}{Fossil fuel use in terajoules.}
@@ -13,13 +18,16 @@ calculate_project_emissions(fossil_fuel_tj, fossil_emission_factor, electricity_
 
 \item{electricity_import_mwh}{Electricity imported from the grid in MWh.}
 
-\item{import_emission_factor}{Emission factor for imported electricity in tonnes CO2e per MWh.}
+\item{import_emission_factor}{Emission factor for imported electricity in
+tonnes CO2e per MWh.}
 }
 \value{
 Numeric vector of project emissions in tonnes CO2e.
 }
 \description{
-Computes project emissions from auxiliary fossil fuel consumption and electricity imports for ACM0002 plants.
+Computes project emissions from auxiliary fossil fuel consumption and
+electricity imports, capturing ACM0002's treatment of fossil back-up
+systems.
 }
 \examples{
 calculate_project_emissions(0.1, 74, 10, 0.8)

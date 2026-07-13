@@ -4,18 +4,24 @@
 \alias{calculate_net_electricity_generation}
 \title{Calculate net electricity generation for ACM0002}
 \usage{
-calculate_net_electricity_generation(gross_generation_mwh, auxiliary_consumption_mwh)
+calculate_net_electricity_generation(
+  gross_generation_mwh,
+  auxiliary_consumption_mwh
+)
 }
 \arguments{
-\item{gross_generation_mwh}{Gross electricity generated during the monitoring period in MWh.}
+\item{gross_generation_mwh}{Gross electricity generated during the
+monitoring period in megawatt-hours.}
 
-\item{auxiliary_consumption_mwh}{Auxiliary electricity consumption within the plant in MWh.}
+\item{auxiliary_consumption_mwh}{Auxiliary electricity consumption within
+the plant in megawatt-hours.}
 }
 \value{
 Numeric vector of net electricity exported to the grid.
 }
 \description{
-Computes the net electricity supplied to the grid by subtracting auxiliary consumption from gross generation.
+Computes the net electricity supplied to the grid by subtracting auxiliary
+consumption from gross generation, aligning with ACM0002 equation (1).
 }
 \examples{
 calculate_net_electricity_generation(1000, 50)

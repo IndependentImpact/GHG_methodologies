@@ -1,0 +1,9 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# AMS-I.A does not require methodology-specific SKOS extensions.
+# All concepts referenced by the applicability shapes are defined in
+# ~/cdmVocabulary/cdm-concepts.ttl (namespace http://independentimpact.org/cdm/).
+#
+# Add methodology-specific concepts here if a future revision introduces terms
+# not present in the CDM vocabulary.

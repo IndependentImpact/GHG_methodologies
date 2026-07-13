@@ -7,15 +7,18 @@
 simulate_acm0002_dataset(n_periods = 12, seed = NULL)
 }
 \arguments{
-\item{n_periods}{Number of monitoring periods to simulate.}
+\item{n_periods}{Integer number of monitoring periods to simulate. Defaults
+to 12.}
 
-\item{seed}{Optional seed for reproducible simulation.}
+\item{seed}{Optional integer seed for reproducibility.}
 }
 \value{
 Tibble containing simulated monitoring records.
 }
 \description{
-Generates synthetic monitoring data consistent with ACM0002 requirements, including renewable generation, auxiliary consumption, fossil back-up use, and grid emission factors.
+Generates synthetic monitoring data consistent with ACM0002 requirements,
+including renewable generation, auxiliary consumption, fossil back-up use,
+and grid emission factors.
 }
 \examples{
 simulate_acm0002_dataset(2, seed = 42)

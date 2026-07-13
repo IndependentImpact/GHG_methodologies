@@ -1,3 +1,149 @@
+# Private helpers (identical structure to acm0002_applicability.R) -----------
+
+.resolve_triples <- function(data, fluree_conn) {
+  if (!requireNamespace("shapeR", quietly = TRUE)) {
+    stop(
+      "Package 'shapeR' is required for semantic applicability checks.",
+      call. = FALSE
+    )
+  }
+  if (is.character(data) && length(data) == 1L) {
+    if (is.null(fluree_conn)) {
+      stop(
+        "`fluree_conn` (a connected FlureeInstance) is required when ",
+        "`data` is a project IRI.",
+        call. = FALSE
+      )
+    }
+    .fetch_project_triples(data, fluree_conn)
+  } else if (is.data.frame(data)) {
+    missing_cols <- setdiff(c("subject", "predicate", "object"), names(data))
+    if (length(missing_cols)) {
+      stop(
+        "Triples data frame is missing columns: ",
+        paste(missing_cols, collapse = ", "),
+        call. = FALSE
+      )
+    }
+    data
+  } else {
+    stop("`data` must be a single project IRI or a triples data frame.", call. = FALSE)
+  }
+}
+
+.fetch_project_triples <- function(project_iri, fluree_conn) {
+  sparql <- sprintf(
+    "SELECT ?s ?p ?o WHERE {
+       { BIND(<%s> AS ?s) ?s ?p ?o . }
+       UNION
+       { <%s> ?anyProp ?s . FILTER(isIRI(?s)) ?s ?p ?o . }
+     }",
+    project_iri, project_iri
+  )
+  result <- fluree_conn$sparql(sparql)$send()
+  .sparql_result_to_triples(result)
+}
+
+.sparql_result_to_triples <- function(result) {
+  bindings <- result$results$bindings
+  if (is.null(bindings) || (is.data.frame(bindings) && nrow(bindings) == 0L)) {
+    return(data.frame(
+      subject = character(), predicate = character(),
+      object  = character(), datatype  = character(),
+      stringsAsFactors = FALSE
+    ))
+  }
+  o_dtype <- if (!is.null(bindings$o$datatype)) bindings$o$datatype else
+    rep(NA_character_, nrow(bindings))
+  data.frame(
+    subject = bindings$s$value, predicate = bindings$p$value,
+    object  = bindings$o$value, datatype  = o_dtype,
+    stringsAsFactors = FALSE
+  )
+}
+
+.make_applicability_result <- function(shacl_result, data, methodology, condition) {
+  list(
+    conforms    = shacl_result$conforms,
+    violations  = shacl_result$results,
+    attestation = list(
+      project_id  = if (is.character(data)) data else NA_character_,
+      methodology = methodology,
+      condition   = condition,
+      checked_at  = format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"),
+      prima_facie = shacl_result$conforms
+    )
+  )
+}
+
+# Semantic applicability functions --------------------------------------------
+
+#' Check AMS-I.A renewable technology applicability (semantic)
+#'
+#' Validates that the project activity uses a renewable energy technology, as
+#' required by AMS-I.A condition 2(a). Accepts any subtype of
+#' `cdm:RenewableEnergyTechnology` declared via `aiao:isPerformedWith`.
+#'
+#' When `data` is a character IRI the project description is fetched from
+#' Fluree via `fluree_conn`. When `data` is a triples data frame, validation
+#' runs locally — no Fluree connection required.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object` (and optionally `datatype`).
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame for SKOS
+#'   materialisation. Defaults to [read_cdm_concept_triples()].
+#' @param shapes Optional `sh_shape_graph`. Defaults to
+#'   [read_ams_ia_technology_shapes()].
+#'
+#' @return A list with `conforms` (logical), `violations` (data frame), and
+#'   `attestation` (list of check metadata).
+#' @seealso [check_applicability_grid_connection()],
+#'   [check_applicability_installed_capacity()]
+#' @export
+check_applicability_renewable_technology <- function(data,
+                                                     fluree_conn = NULL,
+                                                     concept_triples = NULL,
+                                                     shapes = NULL) {
+  triples         <- .resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_ia_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) read_cdm_concept_triples() else concept_triples
+
+  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shapeR::validate_shacl(augmented, shapes)
+  .make_applicability_result(result, data, "AMS-I.A", "RenewableEnergyTechnology")
+}
+
+#' Check AMS-I.A grid connection applicability (semantic)
+#'
+#' Validates that the project activity is user-sited (off-grid, captive use, or
+#' mini-grid), as required by AMS-I.A condition 2(b). Grid-connected export
+#' projects must use AMS-I.D or ACM0002.
+#'
+#' @param data Either a single character project IRI or a triples data frame.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a
+#'   project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [check_applicability_renewable_technology()]
+#' @export
+check_applicability_grid_connection <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- .resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_ia_grid_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) read_cdm_concept_triples() else concept_triples
+
+  augmented <- shapeR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shapeR::validate_shacl(augmented, shapes)
+  .make_applicability_result(result, data, "AMS-I.A", "UserSitedConnection")
+}
+
+# Quantitative applicability functions ----------------------------------------
 
 #' Check AMS-I.A installed capacity threshold
 #'

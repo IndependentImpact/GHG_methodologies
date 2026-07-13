@@ -2,25 +2,43 @@
 % Please edit documentation in R/acm0002_applicability.R
 \name{check_applicability_grid_connection}
 \alias{check_applicability_grid_connection}
-\title{Check ACM0002 grid connection status}
+\title{Check ACM0002 grid connection applicability (semantic + optional quantitative)}
 \usage{
-check_applicability_grid_connection(connection_status, export_share = 1, minimum_export = 0.9)
+check_applicability_grid_connection(
+  data,
+  fluree_conn = NULL,
+  concept_triples = NULL,
+  shapes = NULL,
+  export_share = NULL,
+  minimum_export = 0.9
+)
 }
 \arguments{
-\item{connection_status}{Character string describing the interconnection status.}
+\item{data}{Either a single character project IRI or a triples data frame.}
 
-\item{export_share}{Share of net generation exported to the grid (0-1).}
+\item{fluree_conn}{A connected \code{FlureeInstance}. Required when \code{data} is a
+project IRI.}
 
-\item{minimum_export}{Minimum export share required to satisfy ACM0002 (0-1).}
+\item{concept_triples}{Optional CDM concept triples data frame.}
+
+\item{shapes}{Optional \code{sh_shape_graph}.}
+
+\item{export_share}{Optional numeric (0–1). When provided, also checks that
+the share of net generation exported to the grid meets \code{minimum_export}.}
+
+\item{minimum_export}{Numeric threshold for \code{export_share} (default 0.9).}
 }
 \value{
-Logical indicating whether the grid connection applicability condition is satisfied.
+A list with \code{conforms}, \code{violations}, and \code{attestation}. When
+\code{export_share} is supplied and fails the threshold, \code{conforms} is \code{FALSE}
+and the quantitative failure is appended to \code{violations}.
 }
 \description{
-Validates that the renewable power plant is grid-connected and exports a sufficient share of its net electricity to the grid.
+Validates that the project activity is grid-connected, as required by ACM0002
+condition A.4(b). The semantic check confirms the project declares
+\verb{cdm:hasGridConnectionType cdm:GridConnectedSystem}. An optional quantitative
+check on \code{export_share} can be combined in a single call.
 }
-\examples{
-check_applicability_grid_connection("grid-connected", export_share = 0.95)
-check_applicability_grid_connection("isolated", export_share = 0.5)
+\seealso{
+\code{\link[=check_applicability_renewable_technology]{check_applicability_renewable_technology()}}
 }
-\seealso{\code{\link{check_applicability_renewable_technology}}}

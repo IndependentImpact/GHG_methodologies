@@ -8,24 +8,53 @@ estimate_emission_reductions_ams_ia(
   generation_data,
   grid_emission_factor,
   project_emission_factor = 0,
-  group_cols = NULL
+  group_cols = NULL,
+  validate_applicability = FALSE,
+  project_id = NULL,
+  fluree_conn = NULL,
+  concept_triples = NULL
 )
 }
 \arguments{
-\item{generation_data}{Tibble containing user-level electricity generation in kWh.}
+\item{generation_data}{Tibble containing user-level electricity generation
+in kWh.}
 
 \item{grid_emission_factor}{Grid emission factor in tCO2e/kWh.}
 
-\item{project_emission_factor}{Optional project emission factor in tCO2e/kWh.}
+\item{project_emission_factor}{Optional project emission factor in
+tCO2e/kWh.}
 
-\item{group_cols}{Optional character vector specifying grouping columns in \code{generation_data}.}
+\item{group_cols}{Optional character vector specifying grouping columns in
+\code{generation_data}.}
+
+\item{validate_applicability}{Logical. When \code{TRUE}, runs semantic
+applicability checks before calculating. Default \code{FALSE}.}
+
+\item{project_id}{Project IRI (character) or triples data frame. Required
+when \code{validate_applicability = TRUE}.}
+
+\item{fluree_conn}{A connected \code{FlureeInstance} (novaRush). Required when
+\code{project_id} is a character IRI.}
+
+\item{concept_triples}{Optional CDM concept triples data frame passed to
+\code{\link[shapeR:materialise_skos_hierarchy]{shapeR::materialise_skos_hierarchy()}}. Defaults to
+\code{\link[=read_cdm_concept_triples]{read_cdm_concept_triples()}}.}
 }
 \value{
-A tibble with baseline generation, baseline emissions, project emissions, and emission reductions.
+A tibble with baseline generation, baseline emissions, project
+emissions, and emission reductions.
 }
 \description{
-Composes the equation-level functions to compute emission reductions for a dataset describing
-user-level electricity generation and the grid emission factor.
+Composes the equation-level functions to compute emission reductions for a
+dataset describing user-level electricity generation and the grid emission
+factor.
+}
+\details{
+When \code{validate_applicability = TRUE} the function first checks that the
+project satisfies AMS-I.A's semantic applicability conditions (renewable
+technology type and user-sited connection) before proceeding to
+calculations. A connected \link[novaRush:FlureeInstance]{novaRush::FlureeInstance} or a pre-built triples
+data frame must be supplied via \code{project_id}.
 }
 \examples{
 generation <- tibble::tibble(user_id = c("A", "B"), generation_kwh = c(1200, 1500))

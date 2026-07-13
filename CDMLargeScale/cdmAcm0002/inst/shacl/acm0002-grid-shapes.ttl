@@ -1,0 +1,14 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ACM0002 — grid connection applicability shape only.
+
+cdm:Acm0002GridConnectionShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "ACM0002 grid connection"@en ;
+    sh:property [
+        sh:path <http://independentimpact.org/cdm/hasGridConnectionType> ;
+        sh:in ( <http://independentimpact.org/cdm/GridConnectedSystem> ) ;
+        sh:minCount 1 ;
+        sh:message "ACM0002 condition A.4(b): project must be grid-connected. Declare cdm:hasGridConnectionType cdm:GridConnectedSystem."@en
+    ] .
