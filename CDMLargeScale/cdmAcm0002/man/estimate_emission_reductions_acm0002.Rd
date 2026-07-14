@@ -4,16 +4,48 @@
 \alias{estimate_emission_reductions_acm0002}
 \title{Estimate total emission reductions under ACM0002}
 \usage{
-estimate_emission_reductions_acm0002(monitoring_data)
+estimate_emission_reductions_acm0002(
+  monitoring_data,
+  validate_applicability = FALSE,
+  project_id = NULL,
+  fluree_conn = NULL,
+  concept_triples = NULL
+)
 }
 \arguments{
-\item{monitoring_data}{Data frame or tibble containing ACM0002 monitoring observations.}
+\item{monitoring_data}{Data frame or tibble containing monitoring
+observations with at least the following columns:
+\code{period}, \code{gross_generation_mwh}, \code{auxiliary_consumption_mwh},
+\code{combined_margin_ef}, \code{fossil_fuel_tj}, \code{fossil_emission_factor},
+\code{electricity_import_mwh}, \code{import_emission_factor}, and
+\code{leakage_emissions}.}
+
+\item{validate_applicability}{Logical. When \code{TRUE}, runs semantic
+applicability checks before calculating. Default \code{FALSE}.}
+
+\item{project_id}{Project IRI (character) or triples data frame. Required
+when \code{validate_applicability = TRUE}.}
+
+\item{fluree_conn}{A connected \code{FlureeInstance} (novaRush). Required when
+\code{project_id} is a character IRI.}
+
+\item{concept_triples}{Optional CDM concept triples data frame passed to
+\code{shapeR::materialise_skos_hierarchy()}. Defaults to
+\code{\link[=read_cdm_concept_triples]{read_cdm_concept_triples()}}.}
 }
 \value{
-Tibble with total generation, emissions, and emission reductions for the project.
+Tibble with total generation, emissions, and emission reductions.
 }
 \description{
-Applies ACM0002 calculation steps to monitoring data and returns portfolio totals useful for project documentation.
+Applies ACM0002 calculation steps to monitoring data and returns portfolio
+totals useful for project design documents.
+}
+\details{
+When \code{validate_applicability = TRUE} the function first checks that the
+project satisfies ACM0002's semantic applicability conditions (renewable
+technology type and grid connection) before proceeding to calculations. A
+connected \link[novaRush:FlureeInstance]{novaRush::FlureeInstance} or a pre-built triples data frame must
+be supplied via \code{project_id}.
 }
 \examples{
 data <- simulate_acm0002_dataset(6, seed = 2024)

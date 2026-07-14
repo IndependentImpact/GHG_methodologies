@@ -14,13 +14,16 @@ check_applicability_fuel_switching(
 )
 }
 \arguments{
-\item{baseline_data}{Tibble containing baseline fuel quantities and emission factors.}
+\item{baseline_data}{Tibble containing baseline fuel quantities and emission
+factors.}
 
-\item{project_data}{Tibble containing project fuel quantities and emission factors.}
+\item{project_data}{Tibble containing project fuel quantities and emission
+factors.}
 
 \item{fuel_col}{Baseline column storing fuel quantities.}
 
-\item{emission_factor_col}{Baseline column storing emission factors (tCO2e per unit energy).}
+\item{emission_factor_col}{Baseline column storing emission factors (tCO2e per
+unit energy).}
 
 \item{project_fuel_col}{Project column storing fuel quantities.}
 
@@ -30,7 +33,9 @@ check_applicability_fuel_switching(
 Logical scalar indicating whether project emission factors are lower.
 }
 \description{
-Projects that switch to lower-carbon fuels must document that the project fuel mix has a lower emission factor than the baseline mix.
+Projects that switch to lower-carbon fuels must document that the project
+fuel mix has a lower emission factor than the baseline mix. This helper
+compares weighted emission factors.
 }
 \examples{
 baseline <- tibble::tibble(baseline_fuel_quantity = c(800, 400),

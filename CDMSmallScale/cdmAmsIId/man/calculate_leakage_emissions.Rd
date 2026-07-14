@@ -24,7 +24,10 @@ calculate_leakage_emissions(
 A tibble with leakage totals.
 }
 \description{
-Equation (3) of AMS-II.D accounts for leakage associated with displaced fuels or upstream energy market effects.
+Equation (3) of AMS-II.D accounts for leakage associated with displaced fuels
+or upstream energy market effects. The function accepts a tibble with any
+number of leakage components expressed in tCO2e and sums them by the requested
+grouping columns.
 }
 \examples{
 leakage <- tibble::tibble(unit = c("Kiln", "Dryer"),

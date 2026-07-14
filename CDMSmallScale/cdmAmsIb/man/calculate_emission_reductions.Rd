@@ -13,9 +13,11 @@ calculate_emission_reductions(
 )
 }
 \arguments{
-\item{baseline_emissions}{Tibble containing baseline emissions, typically the output from \code{\link[=calculate_baseline_emissions]{calculate_baseline_emissions()}}.}
+\item{baseline_emissions}{Tibble containing baseline emissions, typically the output from
+\code{\link[=calculate_baseline_emissions]{calculate_baseline_emissions()}}.}
 
-\item{project_emissions}{Tibble containing project emissions, typically the output from \code{\link[=calculate_project_emissions]{calculate_project_emissions()}}.}
+\item{project_emissions}{Tibble containing project emissions, typically the output from
+\code{\link[=calculate_project_emissions]{calculate_project_emissions()}}.}
 
 \item{baseline_col}{Name of the baseline emission column.}
 

@@ -6,7 +6,8 @@
 \usage{
 check_applicability_monitoring(
   monitoring_data,
-  required_cols = c("project_total_energy_mwh", "service_level_indicator", "operating_hours")
+  required_cols = c("project_total_energy_mwh", "service_level_indicator",
+    "operating_hours")
 )
 }
 \arguments{
@@ -15,10 +16,13 @@ check_applicability_monitoring(
 \item{required_cols}{Character vector of columns that must be present.}
 }
 \value{
-Logical scalar indicating whether the monitoring dataset satisfies the completeness requirements.
+Logical scalar indicating whether the monitoring dataset satisfies the
+completeness requirements.
 }
 \description{
-AMS-II.E monitoring requires consistent records of project energy use, service indicators, and operating hours.
+AMS-II.E monitoring requires consistent records of project energy use,
+occupancy or service indicators, and operating hours. This helper verifies the
+presence of required columns and ensures they are complete.
 }
 \examples{
 monitoring <- tibble::tibble(

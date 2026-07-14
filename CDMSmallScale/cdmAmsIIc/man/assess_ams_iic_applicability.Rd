@@ -9,19 +9,10 @@ assess_ams_iic_applicability(
   technologies,
   monitoring_approach,
   threshold_mwh = 60000,
-  allowed_technologies = c(
-    "efficient_lighting",
-    "efficient_motors",
-    "hvac_optimization",
-    "refrigeration_efficiency",
-    "variable_speed_drives",
-    "compressed_air_improvement"
-  ),
-  allowed_approaches = c(
-    "continuous_metering",
-    "periodic_sampling",
-    "calibrated_nameplate"
-  )
+  allowed_technologies = c("efficient_lighting", "efficient_motors", "hvac_optimization",
+    "refrigeration_efficiency", "variable_speed_drives", "compressed_air_improvement"),
+  allowed_approaches = c("continuous_metering", "periodic_sampling",
+    "calibrated_nameplate")
 )
 }
 \arguments{
@@ -37,9 +28,13 @@ assess_ams_iic_applicability(
 
 \item{allowed_approaches}{Acceptable monitoring approaches (default provided list).}
 }
-\value{A tibble with each applicability check and whether it passes.}
+\value{
+A tibble with each check and whether it passes.
+}
 \description{
-Aggregates key quantitative applicability checks for AMS-II.C demand-side energy efficiency projects, returning a tidy summary for audit documentation.
+Aggregates key quantitative applicability checks for AMS-II.C demand-side
+energy efficiency projects, returning a tidy summary of results for audit
+documentation.
 }
 \examples{
 assess_ams_iic_applicability(

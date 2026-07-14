@@ -7,13 +7,20 @@
 estimate_emission_reductions_acm0006(monitoring_data)
 }
 \arguments{
-\item{monitoring_data}{Data frame or tibble containing monitoring observations with at least the columns required by \code{aggregate_monitoring_periods()}.}
+\item{monitoring_data}{Data frame or tibble containing monitoring
+observations with at least the following columns: \code{period},
+\code{heat_output_tj}, \code{electricity_output_mwh}, \code{baseline_heat_ef},
+\code{baseline_electricity_ef}, \code{auxiliary_fossil_tj}, \code{auxiliary_fossil_ef},
+\code{electricity_import_mwh}, \code{import_emission_factor},
+\code{biomass_transport_tkm}, \code{transport_emission_factor}, and
+\code{leakage_fraction}.}
 }
 \value{
 Tibble with total emissions accounting for the monitoring dataset.
 }
 \description{
-Aggregates monitoring data to compute total baseline, project, leakage, and emission reductions suitable for project documentation.
+Aggregates monitoring data to compute total baseline, project, leakage, and
+emission reductions suitable for project documentation.
 }
 \examples{
 data <- simulate_acm0006_dataset(4, seed = 99)

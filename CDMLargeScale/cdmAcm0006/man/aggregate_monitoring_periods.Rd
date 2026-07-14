@@ -7,13 +7,20 @@
 aggregate_monitoring_periods(monitoring_data)
 }
 \arguments{
-\item{monitoring_data}{Data frame or tibble containing monitoring observations with at least the following columns: \code{period}, \code{heat_output_tj}, \code{electricity_output_mwh}, \code{baseline_heat_ef}, \code{baseline_electricity_ef}, \code{auxiliary_fossil_tj}, \code{auxiliary_fossil_ef}, \code{electricity_import_mwh}, \code{import_emission_factor}, \code{biomass_transport_tkm}, \code{transport_emission_factor}, and \code{leakage_fraction}.}
+\item{monitoring_data}{Data frame or tibble containing monitoring
+observations with at least the following columns: \code{period},
+\code{heat_output_tj}, \code{electricity_output_mwh}, \code{baseline_heat_ef},
+\code{baseline_electricity_ef}, \code{auxiliary_fossil_tj}, \code{auxiliary_fossil_ef},
+\code{electricity_import_mwh}, \code{import_emission_factor},
+\code{biomass_transport_tkm}, \code{transport_emission_factor}, and
+\code{leakage_fraction}.}
 }
 \value{
 Tibble with period-level totals and emissions outcomes.
 }
 \description{
-Summarises biomass combined heat and power monitoring data into period-level totals following the ACM0006 calculation sequence.
+Summarises biomass combined heat and power monitoring data into period-level
+totals following the ACM0006 calculation sequence.
 }
 \examples{
 data <- simulate_acm0006_dataset(3, seed = 21)

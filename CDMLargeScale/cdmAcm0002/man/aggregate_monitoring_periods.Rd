@@ -7,13 +7,20 @@
 aggregate_monitoring_periods(monitoring_data)
 }
 \arguments{
-\item{monitoring_data}{Data frame or tibble containing ACM0002 monitoring observations.}
+\item{monitoring_data}{Data frame or tibble containing monitoring
+observations with at least the following columns:
+\code{period}, \code{gross_generation_mwh}, \code{auxiliary_consumption_mwh},
+\code{combined_margin_ef}, \code{fossil_fuel_tj}, \code{fossil_emission_factor},
+\code{electricity_import_mwh}, \code{import_emission_factor}, and
+\code{leakage_emissions}.}
 }
 \value{
-Tibble of monitoring period summaries with generation and emissions metrics.
+Tibble summarising each monitoring period with calculated emissions
+and reductions.
 }
 \description{
-Converts raw monitoring observations into period-level summaries with baseline, project, and emission reduction calculations.
+Converts raw monitoring observations into period-level summaries with
+baseline, project, and emission reduction calculations.
 }
 \examples{
 data <- simulate_acm0002_dataset(3, seed = 123)

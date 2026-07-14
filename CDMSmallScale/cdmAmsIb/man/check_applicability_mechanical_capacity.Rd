@@ -15,7 +15,8 @@ check_applicability_mechanical_capacity(capacity_kw, threshold_kw = 15000)
 Logical indicating whether the capacity condition is satisfied.
 }
 \description{
-Validates the AMS-I.B applicability condition that renewable mechanical systems must remain within the 15 MW small-scale threshold.
+Validates the AMS-I.B applicability condition that renewable mechanical systems
+must remain within the 15 MW small-scale threshold.
 }
 \examples{
 check_applicability_mechanical_capacity(capacity_kw = 750)

@@ -1,0 +1,18 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ACM0002 — technology type applicability shape only.
+# Run materialise_skos_hierarchy() before validate_shacl() so that
+# specific technology types (cdm:SolarPV etc.) inherit
+# rdf:type cdm:RenewableEnergyTechnology via the skos:broader chain.
+
+cdm:Acm0002TechnologyShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "ACM0002 renewable technology"@en ;
+    sh:property [
+        sh:path <http://w3id.org/aiao#isPerformedWith> ;
+        sh:class <http://independentimpact.org/cdm/RenewableEnergyTechnology> ;
+        sh:minCount 1 ;
+        sh:message "ACM0002 condition A.4(a): project must implement a renewable energy technology (solar, wind, small hydro, geothermal, or renewable biomass). Declare the technology via aiao:isPerformedWith with rdf:type cdm:RenewableEnergyTechnology (directly or via the SKOS hierarchy)."@en
+    ] .

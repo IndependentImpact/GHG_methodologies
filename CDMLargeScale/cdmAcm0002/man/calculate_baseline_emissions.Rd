@@ -9,13 +9,15 @@ calculate_baseline_emissions(net_electricity_mwh, combined_margin_ef)
 \arguments{
 \item{net_electricity_mwh}{Net electricity delivered to the grid in MWh.}
 
-\item{combined_margin_ef}{Combined margin emission factor in tonnes CO2e per MWh.}
+\item{combined_margin_ef}{Emission factor in tonnes CO2e per MWh for the
+grid's combined margin.}
 }
 \value{
 Numeric vector of baseline emissions in tonnes of CO2e.
 }
 \description{
-Applies the combined margin emission factor to net electricity exported to estimate baseline emissions for ACM0002 projects.
+Applies the combined margin emission factor to net electricity exported to
+estimate baseline emissions per ACM0002.
 }
 \examples{
 calculate_baseline_emissions(950, 0.8)

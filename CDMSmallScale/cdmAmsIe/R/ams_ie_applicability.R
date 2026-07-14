@@ -1,3 +1,4 @@
+
 #' Check that the activity remains within the Type I thermal capacity limit
 #'
 #' AMS-I.E applies to small-scale renewable thermal energy activities. This
@@ -65,4 +66,31 @@ check_applicability_project_renewable_fraction <- function(renewable_fraction,
     stop("`threshold` must be a single numeric value.", call. = FALSE)
   }
   all(renewable_fraction >= threshold, na.rm = TRUE)
+}
+
+#' Check AMS-I.E renewable technology applicability (semantic)
+#'
+#' Validates that the project activity uses a renewable energy technology,
+#' as required by AMS-I.E.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [estimate_emission_reductions_ams_ie()]
+#' @export
+check_applicability_renewable_technology <- function(data,
+                                                     fluree_conn = NULL,
+                                                     concept_triples = NULL,
+                                                     shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_ie_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-I.E", "RenewableEnergyTechnology")
 }

@@ -36,7 +36,9 @@ simulate_ams_ic_dataset(
 A tibble containing facility identifiers, monitoring period metadata, thermal energy, and emissions.
 }
 \description{
-Generates a tidy dataset representing thermal energy production from renewable systems that displace fossil-fuel-based heat generation.
+Generates a tidy dataset representing thermal energy production from renewable systems that
+displace fossil-fuel-based heat generation. The simulation provides monitoring metadata and
+emission outcomes compatible with the package aggregation helpers.
 }
 \examples{
 simulate_ams_ic_dataset(n_facilities = 5)

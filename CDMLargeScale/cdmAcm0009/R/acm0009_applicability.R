@@ -65,3 +65,27 @@ check_applicability_project_fuel <- function(project_fuel) {
   allowed <- c("natural gas", "liquefied natural gas", "lng", "cng", "compressed natural gas")
   tolower(project_fuel) %in% allowed
 }
+
+#' Check ACM0009 baseline fuel applicability (semantic)
+#'
+#' Validates that the baseline fuel is a fossil fuel (coal and/or petroleum products),
+#' confirming the project qualifies as a fuel switch under ACM0009.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @export
+check_applicability_baseline_fuel <- function(data,
+                                              fluree_conn = NULL,
+                                              concept_triples = NULL,
+                                              shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_acm0009_baseline_fuel_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "ACM0009", "FossilFuel")
+}

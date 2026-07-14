@@ -1,0 +1,36 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL applicability shapes for ACM0002
+# (Consolidated baseline methodology for grid-connected electricity generation from
+# renewable sources)
+#
+# These shapes encode the semantic applicability conditions only. Quantitative
+# conditions (nameplate capacity, export share) are handled by the quantitative
+# check_applicability_*() functions in R.
+#
+# Prerequisite: call materialise_skos_hierarchy() before validate_shacl() so that
+# cdm:SolarPV (and other specific technology types) inherit rdf:type
+# cdm:RenewableEnergyTechnology via the skos:broader chain.
+
+cdm:Acm0002TechnologyShape a sh:NodeShape ;
+    sh:targetClass cdm:CDMProjectActivity ;
+    sh:name "ACM0002 renewable technology"@en ;
+    sh:property [
+        sh:path aiao:isPerformedWith ;
+        sh:class <http://independentimpact.org/cdm/RenewableEnergyTechnology> ;
+        sh:minCount 1 ;
+        sh:message "ACM0002 condition A.4(a): the project activity must implement a renewable energy technology (solar, wind, small hydro, geothermal, or renewable biomass). Declare the technology via aiao:isPerformedWith and ensure it has rdf:type cdm:RenewableEnergyTechnology (directly or via the SKOS hierarchy)."@en
+    ] .
+
+cdm:Acm0002GridConnectionShape a sh:NodeShape ;
+    sh:targetClass cdm:CDMProjectActivity ;
+    sh:name "ACM0002 grid connection"@en ;
+    sh:property [
+        sh:path cdm:hasGridConnectionType ;
+        sh:in ( <http://independentimpact.org/cdm/GridConnectedSystem> ) ;
+        sh:minCount 1 ;
+        sh:message "ACM0002 condition A.4(b): the project activity must be grid-connected. Declare cdm:hasGridConnectionType cdm:GridConnectedSystem."@en
+    ] .

@@ -1,0 +1,17 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# AMS-I.F — grid connection applicability shape only.
+
+cdm:AmsIfGridConnectionShape a sh:NodeShape ;
+    sh:targetClass <http://independentimpact.org/cdm/CDMProjectActivity> ;
+    sh:name "AMS-I.F grid connection"@en ;
+    sh:property [
+        sh:path <http://independentimpact.org/cdm/hasGridConnectionType> ;
+        sh:in (
+            <http://independentimpact.org/cdm/CaptiveUseSystem>
+            <http://independentimpact.org/cdm/MiniGridSystem>
+        ) ;
+        sh:minCount 1 ;
+        sh:message "AMS-I.F condition 2(b): project must serve captive or mini-grid consumers (not pure off-grid individual users)."@en
+    ] .

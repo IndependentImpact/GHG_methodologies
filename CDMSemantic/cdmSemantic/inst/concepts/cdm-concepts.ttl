@@ -1,0 +1,557 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# Concept schemes
+#################################################################
+
+cdm:TechnologyTypeScheme a skos:ConceptScheme ;
+    dct:title "CDM Technology Type Scheme"@en ;
+    skos:definition "Classifies energy technologies by their primary fuel source. Used to determine eligibility of the project activity under CDM applicability conditions."@en ;
+    skos:hasTopConcept cdm:RenewableEnergyTechnology, cdm:NonRenewableEnergyTechnology, cdm:EnergyEfficiencyTechnology, cdm:WasteTreatmentTechnology, cdm:AgriculturalMitigationTechnology, cdm:IndustrialProcessMitigationTechnology .
+
+cdm:WasteTypeScheme a skos:ConceptScheme ;
+    dct:title "CDM Waste Type Scheme"@en ;
+    skos:definition "Classifies waste streams and feedstocks processed or diverted by CDM project activities. Used to determine methodology eligibility under AMS-III applicability conditions."@en ;
+    skos:hasTopConcept cdm:OrganicWaste, cdm:RecyclableMaterial .
+
+cdm:EnergySourceScheme a skos:ConceptScheme ;
+    dct:title "CDM Energy Source Scheme"@en ;
+    skos:definition "Classifies fuels and primary energy sources. Used to characterise the baseline energy source being displaced by the project activity."@en ;
+    skos:hasTopConcept cdm:FossilFuel, cdm:BiomassSource .
+
+cdm:FacilityTypeScheme a skos:ConceptScheme ;
+    dct:title "CDM Facility Type Scheme"@en ;
+    skos:definition "Classifies the type of facility at which a CDM project activity is implemented. Used to determine methodology eligibility under applicability conditions."@en ;
+    skos:hasTopConcept cdm:IndustrialFacility, cdm:Building, cdm:AgriculturalFacility, cdm:CentralizedUtilityFacility .
+
+cdm:GridConnectionScheme a skos:ConceptScheme ;
+    dct:title "CDM Grid Connection Scheme"@en ;
+    skos:definition "Classifies project activities by their relationship to the electricity grid."@en ;
+    skos:hasTopConcept cdm:GridConnectedSystem, cdm:OffGridSystem, cdm:MiniGridSystem, cdm:CaptiveUseSystem .
+
+cdm:SectoralScopeScheme a skos:ConceptScheme ;
+    dct:title "CDM Sectoral Scope Scheme"@en ;
+    skos:definition "UNFCCC CDM sectoral scopes 1–15."@en ;
+    skos:hasTopConcept
+        cdm:SectoralScope1, cdm:SectoralScope2, cdm:SectoralScope3,
+        cdm:SectoralScope4, cdm:SectoralScope5, cdm:SectoralScope6,
+        cdm:SectoralScope7, cdm:SectoralScope8, cdm:SectoralScope9,
+        cdm:SectoralScope10, cdm:SectoralScope11, cdm:SectoralScope12,
+        cdm:SectoralScope13, cdm:SectoralScope14, cdm:SectoralScope15 .
+
+cdm:ScaleScheme a skos:ConceptScheme ;
+    dct:title "CDM Scale Scheme"@en ;
+    skos:definition "Distinguishes CDM large-scale from small-scale (AMS) methodologies."@en ;
+    skos:hasTopConcept cdm:LargeScale, cdm:SmallScale .
+
+#################################################################
+# TechnologyTypeScheme concepts
+#################################################################
+
+cdm:RenewableEnergyTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Renewable energy technology"@en ;
+    skos:definition "A technology that generates energy from a renewable source — solar, wind, small hydro, geothermal, or renewable biomass — without material depletion of the resource."@en .
+
+cdm:SolarPV a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Solar photovoltaic system"@en ;
+    skos:definition "A system that converts solar irradiance directly to electricity via the photovoltaic effect."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:SolarThermal a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Solar thermal system"@en ;
+    skos:definition "A system that uses solar energy to produce heat or to drive a thermodynamic cycle for electricity generation."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:WindTurbine a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Wind turbine"@en ;
+    skos:definition "A turbine that converts kinetic energy of wind to electricity."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:SmallHydro a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Small hydropower system"@en ;
+    skos:definition "A run-of-river or reservoir hydropower installation with capacity within the CDM small hydro threshold (typically ≤ 15 MW)."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:GeothermalSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Geothermal system"@en ;
+    skos:definition "A system that extracts thermal energy from the Earth to generate electricity or provide heat."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:RenewableBiomassSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Renewable biomass energy system"@en ;
+    skos:definition "A combustion or conversion system that uses renewable biomass as fuel, with no or negligible fossil co-firing."@en ;
+    skos:broader cdm:RenewableEnergyTechnology .
+
+cdm:NonRenewableEnergyTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Non-renewable energy technology"@en ;
+    skos:definition "A technology that generates energy primarily from fossil fuels or other non-renewable sources."@en .
+
+cdm:EnergyEfficiencyTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Energy efficiency technology"@en ;
+    skos:definition "A technology that reduces energy consumption per unit of service delivered, without switching primary fuel source. Used in AMS-II methodologies."@en .
+
+cdm:EfficientLightingSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Efficient lighting system"@en ;
+    skos:definition "A lighting installation (LED, CFL, or other high-efficacy technology) that reduces electrical energy consumption relative to the baseline lighting."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:EfficientMotorSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Efficient motor system"@en ;
+    skos:definition "An electric motor or motor-driven system with higher efficiency class than the baseline, reducing electrical energy consumption."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:EfficientHVACSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Efficient HVAC system"@en ;
+    skos:definition "A heating, ventilation, and air-conditioning system with higher efficiency than the baseline, reducing energy consumption for space conditioning."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:EfficientRefrigerationSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Efficient refrigeration system"@en ;
+    skos:definition "A refrigeration or cold-storage system with higher coefficient of performance than the baseline."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:VariableSpeedDriveSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Variable speed drive system"@en ;
+    skos:definition "A power electronics system that adjusts motor speed to match load demand, reducing energy consumption in pump, fan, or compressor applications."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:CompressedAirSystem a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Efficient compressed air system"@en ;
+    skos:definition "A compressed air generation or distribution system with reduced leakage, improved compressor efficiency, or optimised pressure, reducing electrical energy consumption."@en ;
+    skos:broader cdm:EnergyEfficiencyTechnology .
+
+cdm:WasteTreatmentTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Waste treatment technology"@en ;
+    skos:definition "A technology that treats, recovers energy from, or diverts waste streams to avoid GHG emissions. Used in AMS-III methodologies."@en .
+
+cdm:MethaneCaptureTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Methane capture technology"@en ;
+    skos:definition "A technology that captures and utilises or destroys methane that would otherwise be released from the decomposition of organic waste."@en ;
+    skos:broader cdm:WasteTreatmentTechnology .
+
+cdm:ManureMethaneCapture a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Manure methane capture system"@en ;
+    skos:definition "A system that captures biogas from anaerobic decomposition of animal manure, displacing uncontrolled methane emissions from lagoons or open storage."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:AnaerobicDigestion a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Anaerobic digestion system"@en ;
+    skos:definition "A biological process that breaks down organic matter in the absence of oxygen to produce biogas, applied to agricultural residues, food waste, or municipal organic waste."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:LandfillGasCapture a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Landfill gas capture system"@en ;
+    skos:definition "A system of wells, pipes, and collection infrastructure that extracts methane-rich gas from decomposing solid waste in a landfill."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:WastewaterMethaneCapture a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Wastewater methane capture system"@en ;
+    skos:definition "A system that captures methane emitted during anaerobic wastewater treatment, displacing uncontrolled emissions from open ponds or lagoons."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:CoalMineMethane a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Coal mine methane capture system"@en ;
+    skos:definition "A system that captures methane drained from coal seams or extracted from ventilation air at active or recently closed coal mines, preventing its emission to atmosphere."@en ;
+    skos:broader cdm:MethaneCaptureTechnology .
+
+cdm:WasteEnergyRecovery a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Waste energy recovery system"@en ;
+    skos:definition "A system that captures and utilises waste heat, waste gas, or waste pressure streams from industrial processes that would otherwise be vented or flared."@en ;
+    skos:broader cdm:WasteTreatmentTechnology .
+
+cdm:AerobicComposting a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Aerobic composting system"@en ;
+    skos:definition "A controlled biological process that decomposes organic waste under aerobic conditions, diverting waste from anaerobic disposal and avoiding methane generation."@en ;
+    skos:broader cdm:WasteTreatmentTechnology .
+
+cdm:MaterialRecovery a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Material recovery system"@en ;
+    skos:definition "A system that collects, sorts, and processes recyclable materials (paper, plastics, metals, glass) for reuse, diverting them from landfill or incineration."@en ;
+    skos:broader cdm:WasteTreatmentTechnology .
+
+cdm:AgriculturalMitigationTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Agricultural mitigation technology"@en ;
+    skos:definition "An agricultural practice or technology that reduces GHG emissions from crop or livestock production, without being primarily a waste treatment or energy technology."@en .
+
+cdm:BiologicalNitrogenFixation a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Biological nitrogen fixation"@en ;
+    skos:definition "The cultivation of inoculated leguminous crops that fix atmospheric nitrogen, displacing synthetic nitrogen fertilizer and its associated N2O emissions."@en ;
+    skos:broader cdm:AgriculturalMitigationTechnology .
+
+cdm:IndustrialProcessMitigationTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:topConceptOf cdm:TechnologyTypeScheme ;
+    skos:prefLabel "Industrial process mitigation technology"@en ;
+    skos:definition "A technology that abates non-CO2 greenhouse gases emitted as by-products of industrial chemical processes, such as N2O from nitric or adipic acid production."@en .
+
+cdm:N2OAbatementTechnology a skos:Concept ;
+    skos:inScheme cdm:TechnologyTypeScheme ;
+    skos:prefLabel "N2O abatement technology"@en ;
+    skos:definition "A catalytic or thermal abatement system installed in the tail-gas stream of a nitric acid or adipic acid plant to destroy nitrous oxide before it is emitted to atmosphere."@en ;
+    skos:broader cdm:IndustrialProcessMitigationTechnology .
+
+#################################################################
+# EnergySourceScheme concepts
+#################################################################
+
+cdm:FossilFuel a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:topConceptOf cdm:EnergySourceScheme ;
+    skos:prefLabel "Fossil fuel"@en ;
+    skos:definition "A carbon-based fuel derived from ancient organic material — coal, petroleum, or natural gas — whose combustion releases sequestered carbon."@en .
+
+cdm:NaturalGas a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Natural gas"@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:Coal a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Coal"@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:Diesel a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Diesel"@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:HeavyFuelOil a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Heavy fuel oil"@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:LPG a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Liquefied petroleum gas"@en ;
+    skos:altLabel "LPG"@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:Kerosene a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Kerosene"@en ;
+    skos:altLabel "Paraffin"@en ;
+    skos:definition "A liquid fossil fuel used for lighting, cooking, and small-scale heating. Commonly displaced by AMS-II.C and AMS-II.Q lighting projects."@en ;
+    skos:broader cdm:FossilFuel .
+
+cdm:BiomassSource a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:topConceptOf cdm:EnergySourceScheme ;
+    skos:prefLabel "Biomass source"@en ;
+    skos:definition "A biological material used as fuel. Renewable biomass is considered carbon-neutral under CDM rules; non-renewable biomass is not."@en .
+
+cdm:RenewableBiomass a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Renewable biomass"@en ;
+    skos:broader cdm:BiomassSource .
+
+cdm:NonRenewableBiomass a skos:Concept ;
+    skos:inScheme cdm:EnergySourceScheme ;
+    skos:prefLabel "Non-renewable biomass"@en ;
+    skos:broader cdm:BiomassSource .
+
+#################################################################
+# GridConnectionScheme concepts
+#################################################################
+
+cdm:GridConnectedSystem a skos:Concept ;
+    skos:inScheme cdm:GridConnectionScheme ;
+    skos:topConceptOf cdm:GridConnectionScheme ;
+    skos:prefLabel "Grid-connected system"@en ;
+    skos:definition "A generation system electrically connected to a national or regional electricity grid and exporting electricity to that grid."@en .
+
+cdm:OffGridSystem a skos:Concept ;
+    skos:inScheme cdm:GridConnectionScheme ;
+    skos:topConceptOf cdm:GridConnectionScheme ;
+    skos:prefLabel "Off-grid system"@en ;
+    skos:definition "A standalone generation system with no connection to a national or regional electricity grid."@en .
+
+cdm:MiniGridSystem a skos:Concept ;
+    skos:inScheme cdm:GridConnectionScheme ;
+    skos:topConceptOf cdm:GridConnectionScheme ;
+    skos:prefLabel "Mini-grid system"@en ;
+    skos:definition "A local distribution network serving a defined community, not connected to the national grid."@en .
+
+cdm:CaptiveUseSystem a skos:Concept ;
+    skos:inScheme cdm:GridConnectionScheme ;
+    skos:topConceptOf cdm:GridConnectionScheme ;
+    skos:prefLabel "Captive use system"@en ;
+    skos:definition "A generation system whose output is consumed entirely on-site by the owner, with no export to a third-party grid or network."@en .
+
+#################################################################
+# FacilityTypeScheme concepts
+#################################################################
+
+cdm:IndustrialFacility a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:topConceptOf cdm:FacilityTypeScheme ;
+    skos:prefLabel "Industrial facility"@en ;
+    skos:definition "A site engaged in manufacturing, processing, or industrial production activities. Relevant for AMS-II.D energy efficiency improvements in industry."@en .
+
+cdm:Building a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:topConceptOf cdm:FacilityTypeScheme ;
+    skos:prefLabel "Building"@en ;
+    skos:definition "An enclosed structure used for residential, commercial, or public purposes. Relevant for AMS-II.E, II.Q, and related building energy efficiency methodologies."@en .
+
+cdm:ResidentialBuilding a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:prefLabel "Residential building"@en ;
+    skos:definition "A dwelling or multi-unit residential structure used primarily for human habitation."@en ;
+    skos:broader cdm:Building .
+
+cdm:CommercialBuilding a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:prefLabel "Commercial building"@en ;
+    skos:definition "A building used for commercial activities including retail, offices, hospitality, and services."@en ;
+    skos:broader cdm:Building .
+
+cdm:PublicBuilding a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:prefLabel "Public building"@en ;
+    skos:definition "A building owned or operated by government or public institutions, including schools, hospitals, and government offices."@en ;
+    skos:broader cdm:Building .
+
+cdm:AgriculturalFacility a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:topConceptOf cdm:FacilityTypeScheme ;
+    skos:prefLabel "Agricultural facility"@en ;
+    skos:definition "A site used for crop production, livestock rearing, or agricultural processing. Relevant for AMS-II.F energy efficiency in agriculture."@en .
+
+cdm:CentralizedUtilityFacility a skos:Concept ;
+    skos:inScheme cdm:FacilityTypeScheme ;
+    skos:topConceptOf cdm:FacilityTypeScheme ;
+    skos:prefLabel "Centralized utility facility"@en ;
+    skos:definition "A facility providing centralized energy services (electricity, heat, cooling) to multiple end users. Relevant for AMS-II.H and district energy efficiency methodologies."@en .
+
+#################################################################
+# WasteTypeScheme concepts
+#################################################################
+
+cdm:OrganicWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:topConceptOf cdm:WasteTypeScheme ;
+    skos:prefLabel "Organic waste"@en ;
+    skos:definition "Biodegradable waste material of biological origin that can generate methane under anaerobic conditions. Includes manure, agricultural residues, municipal organic waste, wastewater, and solid waste with significant biodegradable content."@en .
+
+cdm:AnimalManure a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Animal manure"@en ;
+    skos:definition "Livestock excreta and associated bedding material managed in anaerobic lagoons, liquid slurry stores, or uncovered digesters, generating methane under baseline conditions."@en ;
+    skos:broader cdm:OrganicWaste .
+
+cdm:AgriculturalResidues a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Agricultural residues"@en ;
+    skos:definition "Crop residues, harvest waste, and agro-industrial by-products that would otherwise decompose anaerobically, releasing methane. Eligible feedstock under AMS-III.E."@en ;
+    skos:broader cdm:OrganicWaste .
+
+cdm:MunicipalOrganicWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Municipal organic waste"@en ;
+    skos:definition "Source-segregated organic fractions of municipal solid waste, including food scraps, garden waste, and other biodegradable materials suitable for composting or anaerobic digestion."@en ;
+    skos:broader cdm:OrganicWaste .
+
+cdm:MunicipalSolidWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Municipal solid waste"@en ;
+    skos:definition "Unsorted or mixed solid waste disposed of in landfills, containing a biodegradable fraction that generates methane under anaerobic decomposition."@en ;
+    skos:broader cdm:OrganicWaste .
+
+cdm:Wastewater a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Wastewater"@en ;
+    skos:definition "Liquid waste with significant organic load (measured as BOD or COD) that is treated in anaerobic systems, generating methane under baseline conditions."@en ;
+    skos:broader cdm:OrganicWaste .
+
+cdm:IndustrialWastewater a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Industrial wastewater"@en ;
+    skos:definition "High-strength wastewater generated by industrial processes, typically with COD concentrations well above the AMS-III.H minimum threshold."@en ;
+    skos:broader cdm:Wastewater .
+
+cdm:AgroindustrialWastewater a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Agro-industrial wastewater"@en ;
+    skos:definition "Wastewater from food processing, beverage production, or other agro-industrial operations, characterised by high organic load and suitability for anaerobic treatment."@en ;
+    skos:broader cdm:Wastewater .
+
+cdm:DomesticWastewater a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Domestic wastewater"@en ;
+    skos:definition "Wastewater from residential or municipal sources, treated in anaerobic systems where methane recovery is technically feasible."@en ;
+    skos:broader cdm:Wastewater .
+
+cdm:RecyclableMaterial a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:topConceptOf cdm:WasteTypeScheme ;
+    skos:prefLabel "Recyclable material"@en ;
+    skos:definition "Waste materials that can be collected, sorted, and reprocessed into secondary raw materials, diverting them from landfill or incineration."@en .
+
+cdm:PaperWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Paper and cardboard waste"@en ;
+    skos:definition "Used paper, cardboard, and paper-based packaging suitable for recycling into secondary paper fibre."@en ;
+    skos:broader cdm:RecyclableMaterial .
+
+cdm:PlasticWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Plastic waste"@en ;
+    skos:definition "Post-consumer plastic materials suitable for mechanical or chemical recycling."@en ;
+    skos:broader cdm:RecyclableMaterial .
+
+cdm:MetalScrap a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Metal scrap"@en ;
+    skos:definition "Ferrous and non-ferrous metal scrap suitable for smelting and reuse as secondary metal."@en ;
+    skos:broader cdm:RecyclableMaterial .
+
+cdm:GlassWaste a skos:Concept ;
+    skos:inScheme cdm:WasteTypeScheme ;
+    skos:prefLabel "Glass waste"@en ;
+    skos:definition "Used glass containers and flat glass suitable for cullet production and remelting."@en ;
+    skos:broader cdm:RecyclableMaterial .
+
+#################################################################
+# SectoralScopeScheme concepts
+#################################################################
+
+cdm:SectoralScope1 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Energy industries (renewable/non-renewable sources)"@en ;
+    skos:notation "1" .
+
+cdm:SectoralScope2 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Energy distribution"@en ;
+    skos:notation "2" .
+
+cdm:SectoralScope3 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Energy demand"@en ;
+    skos:notation "3" .
+
+cdm:SectoralScope4 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Manufacturing industries"@en ;
+    skos:notation "4" .
+
+cdm:SectoralScope5 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Chemical industry"@en ;
+    skos:notation "5" .
+
+cdm:SectoralScope6 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Construction"@en ;
+    skos:notation "6" .
+
+cdm:SectoralScope7 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Transport"@en ;
+    skos:notation "7" .
+
+cdm:SectoralScope8 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Mining/mineral production"@en ;
+    skos:notation "8" .
+
+cdm:SectoralScope9 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Metal production"@en ;
+    skos:notation "9" .
+
+cdm:SectoralScope10 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Fugitive emissions from fuels (solid, oil, and gas)"@en ;
+    skos:notation "10" .
+
+cdm:SectoralScope11 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Fugitive emissions from production and consumption of halocarbons and sulphur hexafluoride"@en ;
+    skos:notation "11" .
+
+cdm:SectoralScope12 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Solvents use"@en ;
+    skos:notation "12" .
+
+cdm:SectoralScope13 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Waste handling and disposal"@en ;
+    skos:notation "13" .
+
+cdm:SectoralScope14 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Afforestation and reforestation"@en ;
+    skos:notation "14" .
+
+cdm:SectoralScope15 a skos:Concept ;
+    skos:inScheme cdm:SectoralScopeScheme ;
+    skos:topConceptOf cdm:SectoralScopeScheme ;
+    skos:prefLabel "Agriculture"@en ;
+    skos:notation "15" .
+
+#################################################################
+# ScaleScheme concepts
+#################################################################
+
+cdm:LargeScale a skos:Concept ;
+    skos:inScheme cdm:ScaleScheme ;
+    skos:topConceptOf cdm:ScaleScheme ;
+    skos:prefLabel "Large-scale CDM"@en ;
+    skos:definition "CDM project activity governed by large-scale baseline and monitoring methodologies (ACM, AM, AMS category thresholds exceeded)."@en .
+
+cdm:SmallScale a skos:Concept ;
+    skos:inScheme cdm:ScaleScheme ;
+    skos:topConceptOf cdm:ScaleScheme ;
+    skos:prefLabel "Small-scale CDM"@en ;
+    skos:definition "CDM project activity governed by AMS (approved small-scale) methodologies, meeting the capacity or emissions thresholds defined in the AMS appendix."@en .

@@ -17,23 +17,35 @@ calculate_baseline_fossil_emissions(
 \arguments{
 \item{baseline_data}{A tibble describing counterfactual fuel consumption.}
 
-\item{fuel_col}{Column storing the baseline fuel quantity (in mass or volume units consistent with \code{ncv_col}).}
+\item{fuel_col}{Column storing the baseline fuel quantity (in mass or volume
+units consistent with \code{ncv_col}).}
 
 \item{ncv_col}{Column storing the net calorific value (GJ per unit).}
 
-\item{emission_factor_col}{Column storing the CO2 emission factor (tCO2e per GJ).}
+\item{emission_factor_col}{Column storing the CO2 emission factor (tCO2e per
+GJ).}
 
-\item{efficiency_col}{Column storing the thermal efficiency of the baseline equipment (fraction between 0 and 1).}
+\item{efficiency_col}{Column storing the thermal efficiency of the baseline
+equipment (fraction between 0 and 1).}
 
-\item{group_cols}{Optional character vector of grouping variables that should be retained in the output.}
+\item{group_cols}{Optional character vector of grouping variables that should
+be retained in the output.}
 
-\item{output_col}{Name of the resulting emission column.}
+\item{output_col}{Name of the resulting emission column. Defaults to
+\code{"baseline_emissions_tco2e"}.}
 }
 \value{
-A tibble with the requested grouping columns and the baseline emission totals.
+A tibble with the requested grouping columns and the baseline
+emission totals.
 }
 \description{
-Equation (1) of AMS-II.D expresses baseline emissions from fossil fuel use in the absence of the project activity.
+Equation (1) of AMS-II.D expresses baseline emissions from fossil fuel use in
+the absence of the project activity. Emissions are derived from the quantity
+of fuel that would have been consumed without the efficiency improvement,
+multiplied by the fuel's net calorific value (NCV), the carbon dioxide
+emission factor, and adjusted by the efficiency of the baseline equipment.
+The function accepts tidy input data and returns grouped totals in tonnes of
+CO2e.
 }
 \examples{
 baseline <- tibble::tibble(unit = c("Kiln", "Dryer"),
@@ -41,8 +53,7 @@ baseline <- tibble::tibble(unit = c("Kiln", "Dryer"),
                            ncv = c(0.038, 0.041),
                            ef = c(0.094, 0.094),
                            efficiency = c(0.72, 0.68))
-calculate_baseline_fossil_emissions(
-  baseline,
+calculate_baseline_fossil_emissions(baseline,
   fuel_col = baseline_fuel,
   ncv_col = ncv,
   emission_factor_col = ef,

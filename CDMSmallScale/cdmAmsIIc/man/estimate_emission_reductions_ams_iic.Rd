@@ -18,17 +18,24 @@ estimate_emission_reductions_ams_iic(
 
 \item{project_data}{Tibble containing project energy observations.}
 
-\item{emission_factor}{Numeric scalar or vector of emission factors in tCO2e/MWh.}
+\item{emission_factor}{Numeric scalar or vector of emission factors in
+tCO2e/MWh applied to the energy savings.}
 
-\item{group_cols}{Optional character vector of grouping columns shared between baseline and project data.}
+\item{group_cols}{Optional character vector of grouping columns shared between
+baseline and project data.}
 
 \item{baseline_energy_col}{Column name storing baseline energy values.}
 
 \item{project_energy_col}{Column name storing project energy values.}
 }
-\value{A tibble containing baseline energy, project energy, energy savings, and emission reductions.}
+\value{
+A tibble containing baseline energy, project energy, energy savings,
+and emission reductions.
+}
 \description{
-Chains the AMS-II.C equation helpers to compute emission reductions for demand-side efficiency projects.
+Chains the AMS-II.C equation helpers to compute emission reductions for demand
+side efficiency projects. Provide baseline and project energy observations (in
+MWh) along with the emission factor for the displaced electricity or fuel.
 }
 \examples{
 baseline <- tibble::tibble(site = c("A", "B"), baseline_energy_mwh = c(46, 28))

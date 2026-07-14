@@ -4,20 +4,25 @@
 \alias{calculate_emission_reductions}
 \title{Calculate emission reductions for ACM0002}
 \usage{
-calculate_emission_reductions(baseline_emissions, project_emissions, leakage_emissions = 0)
+calculate_emission_reductions(
+  baseline_emissions,
+  project_emissions,
+  leakage_emissions = 0
+)
 }
 \arguments{
 \item{baseline_emissions}{Baseline emissions in tonnes CO2e.}
 
 \item{project_emissions}{Project emissions in tonnes CO2e.}
 
-\item{leakage_emissions}{Leakage emissions in tonnes CO2e.}
+\item{leakage_emissions}{Leakage emissions in tonnes CO2e. Defaults to zero.}
 }
 \value{
 Numeric vector of emission reductions in tonnes CO2e.
 }
 \description{
-Derives emission reductions by subtracting project and leakage emissions from baseline emissions for ACM0002 projects.
+Derives emission reductions by subtracting project and leakage emissions
+from baseline emissions.
 }
 \examples{
 calculate_emission_reductions(800, 25, 5)

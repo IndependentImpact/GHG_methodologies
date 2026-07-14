@@ -27,13 +27,18 @@ check_applicability_energy_efficiency(
 
 \item{project_efficiency_col}{Project column storing equipment efficiency.}
 
-\item{tolerance}{Minimum fractional reduction in specific fuel consumption (fuel input per unit of baseline useful energy output) that must be achieved to satisfy the applicability condition.}
+\item{tolerance}{Minimum fractional reduction in specific fuel consumption
+(fuel input per unit of baseline useful energy output) that must be
+achieved to satisfy the applicability condition. Defaults to 10\%.}
 }
 \value{
-Logical scalar indicating whether the criterion is met.
+A logical scalar indicating whether the criterion is met.
 }
 \description{
-AMS-II.D requires that project equipment delivers measurable energy savings relative to the baseline.
+AMS-II.D requires that project equipment delivers measurable energy savings
+relative to the baseline. This helper compares baseline and project fuel use
+(after efficiency adjustments) to confirm that the project scenario reduces
+specific fuel consumption.
 }
 \examples{
 baseline <- tibble::tibble(baseline_fuel_quantity = 1200, baseline_efficiency = 0.72)

@@ -24,19 +24,16 @@ calculate_baseline_energy_content(
 \item{output_col}{Name of the resulting column containing baseline energy in MJ.}
 }
 \value{
-A tibble containing grouping columns (if supplied) and a column named \code{output_col}
-with baseline energy in MJ.
+A tibble containing grouping columns (if supplied) and a column named \code{output_col} with
+baseline energy in MJ.
 }
 \description{
-Implements Equation (1) of AMS-I.B by converting baseline fossil fuel consumption into energy
-delivered to the mechanical equipment.
+Implements Equation (1) of AMS-I.B by converting baseline fossil fuel
+consumption into energy delivered to the mechanical equipment.
 }
 \examples{
 data <- tibble::tibble(machine_id = c("pump-1", "pump-1", "mill-3"),
                        fuel_consumption = c(200, 180, 150),
                        net_calorific_value = c(43, 43, 42))
 calculate_baseline_energy_content(data)
-}
-\seealso{
-\code{\link[=calculate_baseline_emissions]{calculate_baseline_emissions()}}
 }

@@ -16,7 +16,8 @@ calculate_baseline_emissions(
 
 \item{energy_col}{Name of the column containing baseline energy in MJ.}
 
-\item{emission_factor}{Baseline emission factor in tCO2e/MJ. Supply either a single value applied to all rows or a vector matching the number of rows.}
+\item{emission_factor}{Baseline emission factor in tCO2e/MJ. Supply either a single value
+applied to all rows or a vector matching the number of rows.}
 
 \item{output_col}{Name of the resulting column containing baseline emissions in tCO2e.}
 }
@@ -24,7 +25,8 @@ calculate_baseline_emissions(
 A tibble with baseline emissions in tCO2e.
 }
 \description{
-Implements Equation (2) of AMS-I.B by multiplying the baseline energy content by the applicable fossil fuel emission factor.
+Implements Equation (2) of AMS-I.B by multiplying the baseline energy content by
+the appropriate emission factor representing fossil fuel combustion.
 }
 \examples{
 baseline_energy <- tibble::tibble(baseline_energy_mj = c(10000, 12000))

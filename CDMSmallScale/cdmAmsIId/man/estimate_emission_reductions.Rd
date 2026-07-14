@@ -16,11 +16,13 @@ estimate_emission_reductions(
 )
 }
 \arguments{
-\item{baseline_emissions}{Tibble produced by \code{\link{calculate_baseline_fossil_emissions}}.}
+\item{baseline_emissions}{Tibble produced by
+\code{\link[=calculate_baseline_fossil_emissions]{calculate_baseline_fossil_emissions()}}.}
 
-\item{project_emissions}{Tibble produced by \code{\link{calculate_project_fossil_emissions}}.}
+\item{project_emissions}{Tibble produced by
+\code{\link[=calculate_project_fossil_emissions]{calculate_project_fossil_emissions()}}.}
 
-\item{leakage_emissions}{Tibble produced by \code{\link{calculate_leakage_emissions}}.}
+\item{leakage_emissions}{Tibble produced by \code{\link[=calculate_leakage_emissions]{calculate_leakage_emissions()}}.}
 
 \item{baseline_col}{Column storing baseline emissions in the baseline tibble.}
 
@@ -28,15 +30,18 @@ estimate_emission_reductions(
 
 \item{leakage_col}{Column storing leakage emissions in the leakage tibble.}
 
-\item{group_cols}{Character vector of columns used for joining the tables.}
+\item{group_cols}{Character vector of columns used for joining the three
+tables. When \code{NULL}, a single-row tibble is assumed.}
 
 \item{output_col}{Name of the resulting emission reduction column.}
 }
 \value{
-A tibble with the union of grouping columns and an emission reduction column.
+A tibble with the union of grouping columns and an emission reduction
+column.
 }
 \description{
-Equation (4) combines baseline emissions, project emissions, and leakage to produce annual emission reductions for AMS-II.D project activities.
+Equation (4) combines baseline emissions, project emissions, and leakage to
+produce annual emission reductions for AMS-II.D project activities.
 }
 \examples{
 baseline <- tibble::tibble(unit = "Kiln", baseline_emissions_tco2e = 120)

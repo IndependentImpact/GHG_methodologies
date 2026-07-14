@@ -13,9 +13,11 @@ calculate_energy_savings(
 )
 }
 \arguments{
-\item{baseline_energy}{Tibble produced by \code{calculate_baseline_energy_consumption()}.}
+\item{baseline_energy}{Tibble created by
+\code{\link[=calculate_baseline_energy_consumption]{calculate_baseline_energy_consumption()}}.}
 
-\item{project_energy}{Tibble produced by \code{calculate_project_energy_consumption()}.}
+\item{project_energy}{Tibble created by
+\code{\link[=calculate_project_energy_consumption]{calculate_project_energy_consumption()}}.}
 
 \item{baseline_col}{Column name storing baseline energy in \code{baseline_energy}.}
 
@@ -23,9 +25,14 @@ calculate_energy_savings(
 
 \item{output_col}{Name of the resulting column storing energy savings in MWh.}
 }
-\value{A tibble containing the union of grouping columns and energy savings in MWh.}
+\value{
+A tibble with the union of grouping columns and an energy savings
+column.
+}
 \description{
-Implements Equation (3) of AMS-II.C by subtracting project energy consumption from baseline energy consumption.
+Implements Equation (3) of AMS-II.C by subtracting project energy consumption
+from baseline consumption. The function joins baseline and project data on the
+specified grouping columns.
 }
 \examples{
 baseline <- tibble::tibble(site = c("A", "B"), baseline_energy_mwh = c(46, 28))

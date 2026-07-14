@@ -1,0 +1,41 @@
+@prefix cdm:  <http://independentimpact.org/cdm/> .
+@prefix aiao: <http://w3id.org/aiao#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# SHACL applicability shapes for AMS-I.A
+# (Electricity generation by the user)
+#
+# AMS-I.A applies to user-sited renewable electricity generation. The generated
+# electricity is consumed on-site or via a local network — it is not exported to
+# a national or regional grid (that case falls under AMS-I.D or ACM0002).
+#
+# These shapes encode the semantic applicability conditions only. Quantitative
+# conditions (installed capacity ≤ 15 MW, renewable fraction) are handled by the
+# quantitative check_applicability_*() functions in R.
+#
+# Prerequisite: call materialise_skos_hierarchy() before validate_shacl().
+
+cdm:AmsIaTechnologyShape a sh:NodeShape ;
+    sh:targetClass cdm:CDMProjectActivity ;
+    sh:name "AMS-I.A renewable technology"@en ;
+    sh:property [
+        sh:path aiao:isPerformedWith ;
+        sh:class <http://independentimpact.org/cdm/RenewableEnergyTechnology> ;
+        sh:minCount 1 ;
+        sh:message "AMS-I.A condition 2(a): the project activity must use a renewable energy technology. Declare the technology via aiao:isPerformedWith and ensure it has rdf:type cdm:RenewableEnergyTechnology (directly or via the SKOS hierarchy)."@en
+    ] .
+
+cdm:AmsIaGridConnectionShape a sh:NodeShape ;
+    sh:targetClass cdm:CDMProjectActivity ;
+    sh:name "AMS-I.A user-sited connection"@en ;
+    sh:property [
+        sh:path cdm:hasGridConnectionType ;
+        sh:in (
+            <http://independentimpact.org/cdm/OffGridSystem>
+            <http://independentimpact.org/cdm/CaptiveUseSystem>
+            <http://independentimpact.org/cdm/MiniGridSystem>
+        ) ;
+        sh:minCount 1 ;
+        sh:message "AMS-I.A condition 2(b): the project must be user-sited (off-grid, captive use, or mini-grid). Grid-connected export projects should use AMS-I.D or ACM0002. Declare cdm:hasGridConnectionType with one of: cdm:OffGridSystem, cdm:CaptiveUseSystem, cdm:MiniGridSystem."@en
+    ] .

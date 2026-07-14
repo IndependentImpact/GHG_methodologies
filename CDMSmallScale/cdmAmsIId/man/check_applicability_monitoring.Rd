@@ -15,10 +15,14 @@ check_applicability_monitoring(
 \item{required_cols}{Character vector of columns that must be present.}
 }
 \value{
-Logical scalar indicating whether the monitoring dataset meets the minimum completeness requirements.
+Logical scalar indicating whether the monitoring dataset meets the
+minimum completeness requirements.
 }
 \description{
-AMS-II.D stipulates specific monitoring parameters, including records of fuel consumption, equipment utilisation, and thermal output.
+AMS-II.D stipulates specific monitoring parameters, including records of fuel
+consumption, equipment utilisation, and thermal output. This helper verifies
+that required columns exist in a monitoring tibble and are free of missing
+values.
 }
 \examples{
 monitoring <- tibble::tibble(

@@ -16,18 +16,24 @@ calculate_baseline_energy_consumption(
 
 \item{energy_col}{Column name holding baseline energy use in MWh.}
 
-\item{group_cols}{Optional character vector of grouping columns to preserve in the output.}
+\item{group_cols}{Optional character vector of grouping columns to preserve in
+the output.}
 
 \item{output_col}{Name of the resulting column storing baseline energy in MWh.}
 }
-\value{A tibble with grouped baseline energy totals.}
+\value{
+A tibble with grouping columns (if provided) and a column named
+\code{output_col}.
+}
 \description{
-Implements Equation (1) of AMS-II.C by aggregating the baseline energy consumption for the
-retrofit boundary. The helper accepts tidy input data and returns grouped totals expressed
-in megawatt-hours (MWh).
+Implements Equation (1) of AMS-II.C by aggregating the baseline energy
+consumption for the equipment or process being retrofitted. The function
+accepts tidy input data and returns grouped totals expressed in megawatt-hours
+(MWh).
 }
 \examples{
 baseline <- tibble::tibble(site = c("A", "A", "B"),
+                           appliance = c("Lighting", "HVAC", "Lighting"),
                            baseline_energy_mwh = c(12, 34, 28))
 calculate_baseline_energy_consumption(baseline, group_cols = "site")
 }

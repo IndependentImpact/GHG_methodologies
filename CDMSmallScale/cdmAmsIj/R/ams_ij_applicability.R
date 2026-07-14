@@ -1,3 +1,4 @@
+
 #' Check AMS-I.J solar thermal capacity threshold
 #'
 #' Validates the AMS-I.J applicability condition that small-scale solar water
@@ -134,4 +135,31 @@ assess_ams_ij_applicability <- function(capacity_mwth,
       check_applicability_backup_fraction(backup_fraction, backup_maximum_fraction)
     )
   )
+}
+
+#' Check AMS-I.J solar technology applicability (semantic)
+#'
+#' Validates that the project activity implements a solar thermal technology
+#' (solar water heating), as required by AMS-I.J.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [estimate_emission_reductions_ams_ij()]
+#' @export
+check_applicability_solar_technology <- function(data,
+                                                  fluree_conn = NULL,
+                                                  concept_triples = NULL,
+                                                  shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_ij_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-I.J", "SolarThermal")
 }

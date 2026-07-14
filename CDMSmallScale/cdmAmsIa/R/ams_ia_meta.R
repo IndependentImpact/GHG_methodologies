@@ -1,14 +1,35 @@
 
 #' Estimate emission reductions under AMS-I.A
 #'
-#' Composes the equation-level functions to compute emission reductions for a dataset describing
-#' user-level electricity generation and the grid emission factor.
+#' Composes the equation-level functions to compute emission reductions for a
+#' dataset describing user-level electricity generation and the grid emission
+#' factor.
 #'
-#' @param generation_data Tibble containing user-level electricity generation in kWh.
+#' When `validate_applicability = TRUE` the function first checks that the
+#' project satisfies AMS-I.A's semantic applicability conditions (renewable
+#' technology type and user-sited connection) before proceeding to
+#' calculations. A connected [novaRush::FlureeInstance] or a pre-built triples
+#' data frame must be supplied via `project_id`.
+#'
+#' @param generation_data Tibble containing user-level electricity generation
+#'   in kWh.
 #' @param grid_emission_factor Grid emission factor in tCO2e/kWh.
-#' @param project_emission_factor Optional project emission factor in tCO2e/kWh.
-#' @param group_cols Optional character vector specifying grouping columns in `generation_data`.
-#' @return A tibble with baseline generation, baseline emissions, project emissions, and emission reductions.
+#' @param project_emission_factor Optional project emission factor in
+#'   tCO2e/kWh.
+#' @param group_cols Optional character vector specifying grouping columns in
+#'   `generation_data`.
+#' @param validate_applicability Logical. When `TRUE`, runs semantic
+#'   applicability checks before calculating. Default `FALSE`.
+#' @param project_id Project IRI (character) or triples data frame. Required
+#'   when `validate_applicability = TRUE`.
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `project_id` is a character IRI.
+#' @param concept_triples Optional CDM concept triples data frame passed to
+#'   `shaclR::materialise_skos_hierarchy()`. Defaults to
+#'   [read_cdm_concept_triples()].
+#'
+#' @return A tibble with baseline generation, baseline emissions, project
+#'   emissions, and emission reductions.
 #' @examples
 #' generation <- tibble::tibble(user_id = c("A", "B"), generation_kwh = c(1200, 1500))
 #' estimate_emission_reductions_ams_ia(generation, grid_emission_factor = 0.8)
@@ -16,7 +37,44 @@
 estimate_emission_reductions_ams_ia <- function(generation_data,
                                                 grid_emission_factor,
                                                 project_emission_factor = 0,
-                                                group_cols = NULL) {
+                                                group_cols = NULL,
+                                                validate_applicability = FALSE,
+                                                project_id = NULL,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL) {
+  if (validate_applicability) {
+    if (is.null(project_id)) {
+      stop("`project_id` is required when `validate_applicability = TRUE`.",
+           call. = FALSE)
+    }
+    checks <- list(
+      renewable_technology = check_applicability_renewable_technology(
+        project_id,
+        fluree_conn     = fluree_conn,
+        concept_triples = concept_triples
+      ),
+      grid_connection = check_applicability_grid_connection(
+        project_id,
+        fluree_conn     = fluree_conn,
+        concept_triples = concept_triples
+      )
+    )
+    failures <- Filter(function(r) !r$conforms, checks)
+    if (length(failures) > 0L) {
+      msgs <- vapply(failures, function(r) {
+        if (!is.null(r$violations) && nrow(r$violations) > 0L) {
+          r$violations$message[[1L]]
+        } else {
+          "(no violation detail available)"
+        }
+      }, character(1L))
+      stop(
+        "AMS-I.A applicability check failed. Resolve the following before calculating:\n",
+        paste0("  [", names(msgs), "] ", msgs, collapse = "\n"),
+        call. = FALSE
+      )
+    }
+  }
   baseline_generation <- calculate_baseline_generation(
     generation_data = generation_data,
     group_cols = group_cols

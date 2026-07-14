@@ -1,0 +1,22 @@
+Package: cdmSemantic
+Title: Shared Semantic Utilities for CDM Methodology Packages
+Version: 0.1.0
+Authors@R:
+    person("Independent Impact", role = c("aut", "cre"),
+           email = "info@independentimpact.org")
+Description: Provides shared utilities for semantic applicability checking
+    across CDM methodology R packages. Bundles the CDM SKOS concept scheme
+    (cdm-concepts.ttl) and exports helper functions for resolving project
+    triples (from Fluree or local data frames), materialising the SKOS
+    hierarchy, and building standardised applicability result lists.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    shaclR
+Suggests:
+    rdflib,
+    novaRush,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

@@ -2,22 +2,52 @@
 % Please edit documentation in R/acm0002_applicability.R
 \name{check_applicability_renewable_technology}
 \alias{check_applicability_renewable_technology}
-\title{Check ACM0002 renewable technology eligibility}
+\title{Check ACM0002 renewable technology applicability (semantic)}
 \usage{
-check_applicability_renewable_technology(technology, allowed = c("wind", "solar", "hydro", "geothermal", "biomass"))
+check_applicability_renewable_technology(
+  data,
+  fluree_conn = NULL,
+  concept_triples = NULL,
+  shapes = NULL
+)
 }
 \arguments{
-\item{technology}{Character string describing the primary energy source.}
+\item{data}{Either a single character project IRI or a data frame with
+columns \code{subject}, \code{predicate}, \code{object} (and optionally \code{datatype}).}
 
-\item{allowed}{Character vector of admissible technologies.}
+\item{fluree_conn}{A connected \code{FlureeInstance} (novaRush). Required when
+\code{data} is a project IRI.}
+
+\item{concept_triples}{Optional data frame of CDM concept scheme triples for
+SKOS hierarchy materialisation. Defaults to \code{\link[=read_cdm_concept_triples]{read_cdm_concept_triples()}}.}
+
+\item{shapes}{Optional \code{sh_shape_graph}. Defaults to
+\code{\link[=read_acm0002_technology_shapes]{read_acm0002_technology_shapes()}}.}
 }
 \value{
-Logical indicating whether the technology is eligible under ACM0002.
+A list with:
+\describe{
+\item{\code{conforms}}{Logical — \code{TRUE} if the condition is met.}
+\item{\code{violations}}{Data frame of SHACL violation details (empty when \code{conforms = TRUE}).}
+\item{\code{attestation}}{List of check metadata (project_id, methodology, condition, checked_at, prima_facie).}
+}
 }
 \description{
-Confirms that the generating technology is among the renewable sources covered by ACM0002.
+Validates that the project activity implements a renewable energy technology,
+as required by ACM0002 condition A.4(a). Uses SHACL validation against the
+CDM concept scheme so any subtype of \code{cdm:RenewableEnergyTechnology}
+(SolarPV, WindTurbine, SmallHydro, GeothermalSystem, RenewableBiomassSystem)
+is accepted automatically.
 }
-\examples{
-check_applicability_renewable_technology("wind")
-check_applicability_renewable_technology("coal")
+\details{
+When \code{data} is a character IRI the project description is fetched from Fluree
+via \code{fluree_conn}. When \code{data} is a triples data frame, validation runs
+locally — no Fluree connection required (useful for testing).
+
+The CDM concept hierarchy is materialised as \code{rdf:type} triples before SHACL
+validation; call \code{shapeR::materialise_skos_hierarchy()} manually if you need
+to inspect the augmented graph.
+}
+\seealso{
+\code{\link[=check_applicability_grid_connection]{check_applicability_grid_connection()}}, \code{\link[=variable_registry_acm0002]{variable_registry_acm0002()}}
 }

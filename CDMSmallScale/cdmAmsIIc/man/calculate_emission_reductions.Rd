@@ -12,17 +12,20 @@ calculate_emission_reductions(
 )
 }
 \arguments{
-\item{energy_savings}{Tibble produced by \code{calculate_energy_savings()}.}
+\item{energy_savings}{Tibble produced by \code{\link[=calculate_energy_savings]{calculate_energy_savings()}}.}
 
 \item{savings_col}{Column containing energy savings in MWh.}
 
-\item{emission_factor}{Emission factor in tonnes CO2e per MWh (scalar or vector).}
+\item{emission_factor}{Emission factor in tonnes CO2e per MWh.}
 
 \item{output_col}{Name of the resulting emission reduction column.}
 }
-\value{A tibble with emission reductions in tCO2e.}
+\value{
+A tibble with emission reductions in tCO2e.
+}
 \description{
-Implements Equation (4) of AMS-II.C by multiplying energy savings by the relevant emission factor for the displaced energy carrier.
+Implements Equation (4) of AMS-II.C by multiplying energy savings by the
+relevant emission factor for the displaced energy carrier.
 }
 \examples{
 savings <- tibble::tibble(site = c("A", "B"), energy_savings_mwh = c(22, 10))

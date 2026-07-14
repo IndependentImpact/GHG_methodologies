@@ -7,7 +7,8 @@
 simulate_acm0006_dataset(n_periods = 12, seed = NULL)
 }
 \arguments{
-\item{n_periods}{Integer number of monitoring periods to simulate. Defaults to 12.}
+\item{n_periods}{Integer number of monitoring periods to simulate. Defaults
+to 12.}
 
 \item{seed}{Optional integer seed for reproducibility.}
 }
@@ -15,7 +16,8 @@ simulate_acm0006_dataset(n_periods = 12, seed = NULL)
 Tibble containing simulated monitoring records.
 }
 \description{
-Generates synthetic monitoring data for biomass-based combined heat and power systems addressed by ACM0006.
+Generates synthetic monitoring data for biomass-based combined heat and power
+systems addressed by ACM0006.
 }
 \examples{
 simulate_acm0006_dataset(2, seed = 42)

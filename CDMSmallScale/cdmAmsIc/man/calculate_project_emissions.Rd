@@ -18,10 +18,10 @@ calculate_project_emissions(
 \item{output_col}{Name of the resulting emission column.}
 }
 \value{
-A tibble with the project emission column.
+Tibble with the project emission column.
 }
 \description{
-Estimates project emissions associated with auxiliary fossil fuel use or backup boilers under AMS-I.C.
+Estimates project emissions associated with auxiliary fossil fuel use or backup boilers.
 }
 \examples{
 output <- tibble::tibble(baseline_thermal_output_mwh = c(500, 620))

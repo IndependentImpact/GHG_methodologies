@@ -235,3 +235,66 @@ assess_ams_iif_applicability <- function(baseline_data,
     is_met = c(intensity_result, fuel_switch_result, monitoring_result)
   )
 }
+
+#' Check AMS-II.F energy efficiency technology applicability (semantic)
+#'
+#' Validates that the project activity implements an energy efficiency technology,
+#' as required by AMS-II.F condition (a). Uses SHACL validation against the
+#' CDM concept scheme so any subtype of `cdm:EnergyEfficiencyTechnology`
+#' (EfficientLightingSystem, EfficientMotorSystem, EfficientHVACSystem, etc.)
+#' is accepted automatically.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object` (and optionally `datatype`).
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame for SKOS
+#'   hierarchy materialisation. Defaults to [cdmSemantic::read_cdm_concept_triples()].
+#' @param shapes Optional `sh_shape_graph`. Defaults to
+#'   [read_ams_iif_technology_shapes()].
+#'
+#' @return A list with:
+#' \describe{
+#'   \item{`conforms`}{Logical — `TRUE` if the condition is met.}
+#'   \item{`violations`}{Data frame of SHACL violation details.}
+#'   \item{`attestation`}{List of check metadata.}
+#' }
+#' @export
+check_applicability_technology_type <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_iif_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-II.F", "EnergyEfficiencyTechnology")
+}
+
+#' Check AMS-II.F facility type applicability (semantic)
+#'
+#' Validates that the project activity is implemented at a agricultural facility,
+#' as required by AMS-II.F condition (b).
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a
+#'   project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [check_applicability_technology_type()]
+#' @export
+check_applicability_facility_type <- function(data,
+                                              fluree_conn = NULL,
+                                              concept_triples = NULL,
+                                              shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_iif_facility_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-II.F", "AgriculturalFacility")
+}

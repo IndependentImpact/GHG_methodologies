@@ -16,27 +16,42 @@ estimate_emission_reductions_ams_iie(
 )
 }
 \arguments{
-\item{baseline_data}{Tidy baseline dataset describing counterfactual building energy use.}
+\item{baseline_data}{Tidy baseline dataset describing counterfactual building
+energy use.}
 
-\item{project_data}{Tidy project dataset describing monitored building energy use.}
+\item{project_data}{Tidy project dataset describing monitored building energy
+use.}
 
-\item{leakage_data}{Optional tibble of leakage components with the same grouping structure as the baseline/project data.}
+\item{leakage_data}{Optional tibble of leakage components with the same
+grouping structure as the baseline/project data.}
 
-\item{group_cols}{Character vector of grouping columns common to the supplied datasets.}
+\item{group_cols}{Character vector of grouping columns common to the supplied
+datasets.}
 
-\item{baseline_args}{Optional list of additional arguments passed to \code{\link{calculate_baseline_building_emissions}}.}
+\item{baseline_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_baseline_building_emissions]{calculate_baseline_building_emissions()}}.}
 
-\item{project_args}{Optional list of additional arguments passed to \code{\link{calculate_project_building_emissions}}.}
+\item{project_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_project_building_emissions]{calculate_project_building_emissions()}}.}
 
-\item{leakage_args}{Optional list of additional arguments passed to \code{\link{calculate_leakage_emissions}}.}
+\item{leakage_args}{Optional list of additional arguments passed to
+\code{\link[=calculate_leakage_emissions]{calculate_leakage_emissions()}}.}
 
-\item{reduction_args}{Optional list of arguments forwarded to \code{\link{estimate_emission_reductions}}. \code{group_cols} is added automatically.}
+\item{reduction_args}{Optional list of arguments forwarded to
+\code{\link[=estimate_emission_reductions]{estimate_emission_reductions()}}. \code{group_cols} is added automatically.}
 }
 \value{
-A tibble containing baseline, project, leakage, and emission reduction totals by the requested grouping structure.
+A tibble containing baseline, project, leakage, and emission reduction
+totals by the requested grouping structure.
 }
 \description{
-This meta-function orchestrates the numbered equations of AMS-II.E to compute annual emission reductions for building energy efficiency and fuel switching projects.
+This meta-function orchestrates the numbered equations of AMS-II.E to compute
+annual emission reductions for building energy efficiency and fuel switching
+projects. Users provide baseline and project datasets describing thermal and
+electrical energy use along with optional leakage estimates. The helper
+delegates to \code{\link[=calculate_baseline_building_emissions]{calculate_baseline_building_emissions()}},
+\code{\link[=calculate_project_building_emissions]{calculate_project_building_emissions()}}, and \code{\link[=calculate_leakage_emissions]{calculate_leakage_emissions()}}
+before combining the results with \code{\link[=estimate_emission_reductions]{estimate_emission_reductions()}}.
 }
 \examples{
 baseline <- tibble::tibble(

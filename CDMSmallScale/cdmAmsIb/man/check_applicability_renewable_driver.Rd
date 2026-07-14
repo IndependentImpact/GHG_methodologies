@@ -4,7 +4,10 @@
 \alias{check_applicability_renewable_driver}
 \title{Check AMS-I.B renewable energy driver}
 \usage{
-check_applicability_renewable_driver(renewable_fraction, minimum_fraction = 0.9)
+check_applicability_renewable_driver(
+  renewable_fraction,
+  minimum_fraction = 0.9
+)
 }
 \arguments{
 \item{renewable_fraction}{Share of mechanical energy provided by renewable sources (0-1).}
@@ -15,7 +18,9 @@ check_applicability_renewable_driver(renewable_fraction, minimum_fraction = 0.9)
 Logical indicating whether the renewable energy driver criterion is met.
 }
 \description{
-Ensures the mechanical equipment is predominantly driven by renewable energy sources such as wind, water, or sustainably harvested biomass.
+Ensures the mechanical equipment is predominantly driven by renewable energy sources
+such as wind, water, or sustainably harvested biomass. The helper verifies the reported
+renewable share against a user-supplied minimum fraction.
 }
 \examples{
 check_applicability_renewable_driver(renewable_fraction = 0.95)

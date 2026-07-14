@@ -11,7 +11,7 @@ simulate_ams_ib_dataset(
   start_month = 1,
   mean_service_mj = 48000,
   sd_service_mj = 6000,
-  emission_factor = 0.00007,
+  emission_factor = 7e-05,
   project_fossil_share = 0.05
 )
 }
@@ -36,7 +36,8 @@ simulate_ams_ib_dataset(
 A tibble containing monitoring metadata, baseline fuel characteristics, and emission outcomes.
 }
 \description{
-Generates a tidy dataset representing mechanical energy services delivered by renewable systems that displace fossil fuel-based equipment.
+Generates a tidy dataset representing mechanical energy services (e.g. water pumping or milling)
+delivered by renewable systems that displace fossil fuel-based equipment.
 }
 \examples{
 simulate_ams_ib_dataset(n_machines = 5)

@@ -11,9 +11,9 @@ calculate_baseline_emissions(
 )
 }
 \arguments{
-\item{baseline_output}{A tibble produced by \code{\link[=calculate_baseline_thermal_output]{calculate_baseline_thermal_output()}}.}
+\item{baseline_output}{Tibble produced by \code{\link[=calculate_baseline_thermal_output]{calculate_baseline_thermal_output()}}.}
 
-\item{baseline_emission_factor}{Baseline emission factor in tCO2e/MWhth. Provide either a single value applied to all rows or a vector matching the number of rows in \code{baseline_output}.}
+\item{baseline_emission_factor}{Baseline emission factor in tCO2e/MWhth.}
 
 \item{output_col}{Name of the resulting emission column.}
 }
@@ -21,7 +21,8 @@ calculate_baseline_emissions(
 The input tibble with a column named \code{output_col} containing baseline emissions in tCO2e.
 }
 \description{
-Applies Equation (2) of AMS-I.C by multiplying baseline thermal output by the baseline emission factor representing displaced fossil heat production.
+Applies Equation (2) of AMS-I.C by multiplying baseline thermal output by the
+baseline emission factor representing displaced fossil fuel heat production.
 }
 \examples{
 output <- tibble::tibble(baseline_thermal_output_mwh = c(500, 620))

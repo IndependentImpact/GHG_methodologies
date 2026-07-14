@@ -25,21 +25,31 @@ simulate_ams_iie_dataset(
 
 \item{start_month}{Calendar month (1-12) for the first monitoring period.}
 
-\item{baseline_electricity_mean}{Mean baseline electricity consumption per period (MWh).}
+\item{baseline_electricity_mean}{Mean baseline electricity consumption per
+period (MWh).}
 
-\item{baseline_thermal_mean}{Mean baseline thermal energy demand per period (GJ).}
+\item{baseline_thermal_mean}{Mean baseline thermal energy demand per period
+(GJ).}
 
-\item{electricity_savings}{Expected fractional reduction in electricity demand under the project (0-1).}
+\item{electricity_savings}{Expected fractional reduction in electricity demand
+under the project (0-1).}
 
-\item{thermal_savings}{Expected fractional reduction in thermal demand under the project (0-1).}
+\item{thermal_savings}{Expected fractional reduction in thermal demand under
+the project (0-1).}
 
-\item{fuel_switch_reduction}{Expected fractional reduction in thermal emission factors due to fuel switching (0-1).}
+\item{fuel_switch_reduction}{Expected fractional reduction in thermal emission
+factors due to fuel switching (0-1).}
 }
 \value{
-A tibble containing building IDs, monitoring metadata, baseline and project energy parameters, service indicators, and leakage placeholders.
+A tibble containing building IDs, monitoring metadata, baseline and
+project energy parameters, service indicators, and leakage placeholders.
 }
 \description{
-Generates tidy monitoring data for building portfolios implementing energy efficiency and fuel switching measures under AMS-II.E.
+Generates tidy monitoring data for building portfolios implementing energy
+efficiency and fuel switching measures under AMS-II.E. The simulation produces
+multi-period observations with baseline and project thermal and electrical
+energy parameters, emission factors, service indicators, leakage placeholders,
+and monitoring metadata.
 }
 \examples{
 simulate_ams_iie_dataset(n_buildings = 3)

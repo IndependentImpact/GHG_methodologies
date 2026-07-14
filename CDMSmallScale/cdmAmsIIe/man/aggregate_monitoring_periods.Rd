@@ -15,19 +15,24 @@ aggregate_monitoring_periods(
 \arguments{
 \item{monitoring_data}{Tibble containing monitoring records.}
 
-\item{period_col}{Column containing the monitoring period label (e.g. month or quarter).}
+\item{period_col}{Column containing the monitoring period label (e.g. month or
+quarter).}
 
 \item{group_cols}{Character vector of columns describing building identifiers.}
 
-\item{summarise_cols}{Optional character vector of numeric columns to sum. If \code{NULL}, all numeric columns are aggregated.}
+\item{summarise_cols}{Optional character vector of numeric columns to sum. If
+\code{NULL}, all numeric columns are aggregated.}
 
 \item{output_col}{Name of the column storing the concatenated period labels.}
 }
 \value{
-A tibble aggregated by \code{group_cols} with numeric columns summed over the monitoring period.
+A tibble aggregated by \code{group_cols} with numeric columns summed across
+the monitoring periods.
 }
 \description{
-Building monitoring data are often recorded monthly or quarterly. This helper aggregates tidy monitoring records to the reporting period (typically annual).
+Building monitoring data are often recorded monthly or quarterly. This helper
+aggregates tidy monitoring records to the reporting period (typically annual)
+while summing numeric columns such as energy consumption and service proxies.
 }
 \examples{
 monitoring <- tibble::tibble(

@@ -161,6 +161,61 @@ check_applicability_monitoring_plan_iiiaj <- function(data,
   ))
 }
 
+#' Check AMS-III.AJ technology type applicability (semantic)
+#'
+#' Validates that the project activity implements the required technology type,
+#' as required by AMS-III.AJ condition (a). Uses SHACL validation against
+#' the CDM concept scheme so any SKOS subtype of
+#' `cdm:MaterialRecovery` is accepted automatically.
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object` (and optionally `datatype`).
+#' @param fluree_conn A connected `FlureeInstance` (novaRush). Required when
+#'   `data` is a project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @export
+check_applicability_technology_type <- function(data,
+                                                fluree_conn = NULL,
+                                                concept_triples = NULL,
+                                                shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_iiiaj_technology_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-III.AJ", "MaterialRecovery")
+}
+
+#' Check AMS-III.AJ waste type applicability (semantic)
+#'
+#' Validates that the project waste stream is of the required type,
+#' as required by AMS-III.AJ condition (b).
+#'
+#' @param data Either a single character project IRI or a data frame with
+#'   columns `subject`, `predicate`, `object`.
+#' @param fluree_conn A connected `FlureeInstance`. Required when `data` is a
+#'   project IRI.
+#' @param concept_triples Optional CDM concept triples data frame.
+#' @param shapes Optional `sh_shape_graph`.
+#'
+#' @return A list with `conforms`, `violations`, and `attestation`.
+#' @seealso [check_applicability_technology_type()]
+#' @export
+check_applicability_waste_type <- function(data,
+                                           fluree_conn = NULL,
+                                           concept_triples = NULL,
+                                           shapes = NULL) {
+  triples         <- cdmSemantic::cdm_resolve_triples(data, fluree_conn)
+  shapes          <- if (is.null(shapes)) read_ams_iiiaj_waste_type_shapes() else shapes
+  concept_triples <- if (is.null(concept_triples)) cdmSemantic::read_cdm_concept_triples() else concept_triples
+  augmented <- shaclR::materialise_skos_hierarchy(triples, concept_triples)
+  result    <- shaclR::validate_shacl(augmented, shapes)
+  cdmSemantic::cdm_make_applicability_result(result, data, "AMS-III.AJ", "RecyclableMaterial")
+}
+
 summarise_applicability <- function(data, group_cols, mapping) {
   summaries <- purrr::imap(mapping, function(column, output_name) {
     column_sym <- rlang::sym(column)
